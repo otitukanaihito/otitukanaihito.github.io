@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>オチつかないカンパニー - 業務効率化・AI活用コンサルティング</title>
+    <meta name="description" content="精神科現場経験とITスキルを掛け合わせ、実用的で心に寄り添う解決策を提案します。業務効率化、AI活用、ナレッジ管理支援。">
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'GA_MEASUREMENT_ID', {
+        'anonymize_ip': true,
+        'cookie_flags': 'SameSite=None;Secure'
+      });
+    </script>
+    
+    <!-- アフィリエイトトラッキング用スクリプト -->
+    <script>
+      function trackAffiliateClick(productName, affiliateType) {
+        gtag('event', 'click', {
+          'event_category': 'affiliate',
+          'event_label': productName,
+          'custom_parameter': affiliateType
+        });
+      }
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    animation: {
+                        'blob': 'blob 7s infinite',
+                    },
+                    keyframes: {
+                        blob: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        html { scroll-behavior: smooth; }
+        .animation-delay-2000 { animation-delay: 2s; }
+        .animation-delay-4000 { animation-delay: 4s; }
+    </style>
+</head>
+<body class="bg-white font-sans antialiased">
+    <!-- ヘッダー -->
+    <header class="bg-white/80 backdrop-blur-md shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="text-2xl font-black tracking-wider text-gray-900">
+                OCHITSUKANAI COMPANY
+            </div>
+                         <nav class="hidden md:flex items-center space-x-6">
+                 <a href="#blog" class="text-gray-700 hover:text-indigo-600 transition-colors duration-300">ブログ</a>
+                 <a href="#affiliate" class="text-gray-700 hover:text-indigo-600 transition-colors duration-300">おすすめツール</a>
+                 <a href="#services" class="text-gray-700 hover:text-indigo-600 transition-colors duration-300">サービス</a>
+                 <a href="#about" class="text-gray-700 hover:text-indigo-600 transition-colors duration-300">プロフィール</a>
+                 <a href="#contact" class="text-gray-700 hover:text-indigo-600 transition-colors duration-300">お問い合わせ</a>
+             </nav>
+            <div class="md:hidden">
+                <button onclick="toggleMenu()" class="text-gray-700">
+                    <svg id="menu-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                    <svg id="close-icon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="md:hidden bg-white px-6 pb-4 hidden">
+                         <nav class="flex flex-col space-y-4">
+                 <a href="#blog" class="text-gray-700 hover:text-indigo-600">ブログ</a>
+                 <a href="#affiliate" class="text-gray-700 hover:text-indigo-600">おすすめツール</a>
+                 <a href="#services" class="text-gray-700 hover:text-indigo-600">サービス</a>
+                 <a href="#about" class="text-gray-700 hover:text-indigo-600">プロフィール</a>
+                 <a href="#contact" class="text-gray-700 hover:text-indigo-600">お問い合わせ</a>
+             </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- ヒーローセクション -->
+        <section class="relative bg-gray-900 text-white overflow-hidden">
+            <div class="absolute inset-0 bg-gradient-to-br from-gray-800 via-gray-900 to-black"></div>
+            <div class="absolute top-0 left-0 w-72 h-72 bg-indigo-600 rounded-full mix-blend-lighten filter blur-xl opacity-70 animate-blob"></div>
+            <div class="absolute top-0 right-0 w-72 h-72 bg-purple-600 rounded-full mix-blend-lighten filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
+            <div class="absolute bottom-20 left-20 w-72 h-72 bg-pink-600 rounded-full mix-blend-lighten filter blur-xl opacity-70 animate-blob animation-delay-4000"></div>
+            
+            <div class="relative container mx-auto px-6 text-center py-24 md:py-32">
+                <h1 class="text-4xl md:text-6xl font-extrabold tracking-tighter leading-tight drop-shadow-lg">
+                    その<span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-400">『オチつかない』</span>課題、<br>テクノロジーで最適化します。
+                </h1>
+                <p class="mt-6 text-lg text-gray-300 max-w-2xl mx-auto">
+                    精神科の現場経験とITスキルを掛け合わせ、実用的で心に寄り添う解決策を提案します。
+                </p>
+                                 <div class="mt-10 flex justify-center gap-4 flex-wrap">
+                     <a href="#blog" class="bg-gradient-to-r from-indigo-500 to-purple-500 text-white px-8 py-3 rounded-full text-lg font-bold shadow-2xl transform hover:scale-105 transition-all duration-300">
+                         ブログを読む
+                     </a>
+                     <a href="#about" class="bg-white/10 backdrop-blur-sm border border-white/20 text-white px-8 py-3 rounded-full text-lg font-bold shadow-2xl transform hover:scale-105 hover:bg-white/20 transition-all duration-300">
+                         プロフィールを見る
+                     </a>
+                 </div>
+            </div>
+        </section>
+
+        <!-- お悩みセクション -->
+        <section class="py-20 bg-gray-100">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">こんなお悩みありませんか？</h2>
+                <p class="text-gray-600 mb-16 max-w-2xl mx-auto">一つでも当てはまれば、オチツカナイカンパニーがお力になれるかもしれません。</p>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="bg-white/60 backdrop-blur-md p-8 rounded-2xl shadow-lg border border-gray-200/50 transform hover:-translate-y-2 transition-transform duration-300">
+                        <div class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600 mb-5 inline-block">
+                            <svg class="w-9 h-9" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                                <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-800">日々の事務作業に忙殺されている</h3>
+                    </div>
+                    <div class="bg-white/60 backdrop-blur-md p-8 rounded-2xl shadow-lg border border-gray-200/50 transform hover:-translate-y-2 transition-transform duration-300">
+                        <div class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600 mb-5 inline-block">
+                            <svg class="w-9 h-9" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.23 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.98-3A2.5 2.5 0 0 1 9.5 2Z"></path>
+                                <path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.23 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-1.98-3A2.5 2.5 0 0 0 14.5 2Z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-800">知識や情報がチーム内で散在している</h3>
+                    </div>
+                    <div class="bg-white/60 backdrop-blur-md p-8 rounded-2xl shadow-lg border border-gray-200/50 transform hover:-translate-y-2 transition-transform duration-300">
+                        <div class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600 mb-5 inline-block">
+                            <svg class="w-9 h-9" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <polyline points="16 18 22 12 16 6"></polyline>
+                                <polyline points="8 6 2 12 8 18"></polyline>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-800">ITやAIの導入がなかなか進まない</h3>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- サービスセクション -->
+        <section id="services" class="py-20 bg-gray-900 text-white">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-3xl md:text-4xl font-bold mb-16">提供サービス</h2>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="bg-gray-800/50 p-8 rounded-2xl text-left border border-gray-700 hover:border-indigo-500 transition-all duration-300 transform hover:scale-105">
+                        <div class="text-indigo-400 mb-4">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                                <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">業務効率化コンサル</h3>
+                        <p class="text-gray-400 mb-6">現場の無駄を洗い出し、最適な業務フローを設計します。</p>
+                        <a href="#contact" class="text-indigo-400 font-semibold hover:text-indigo-300 flex items-center transition-colors">
+                            詳しく見る
+                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </a>
+                    </div>
+                    <div class="bg-gray-800/50 p-8 rounded-2xl text-left border border-gray-700 hover:border-indigo-500 transition-all duration-300 transform hover:scale-105">
+                        <div class="text-indigo-400 mb-4">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.23 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.98-3A2.5 2.5 0 0 1 9.5 2Z"></path>
+                                <path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.23 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-1.98-3A2.5 2.5 0 0 0 14.5 2Z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">AI活用サービス</h3>
+                        <p class="text-gray-400 mb-6">ChatGPT等を業務に導入し、生産性を飛躍的に向上させます。</p>
+                        <a href="#contact" class="text-indigo-400 font-semibold hover:text-indigo-300 flex items-center transition-colors">
+                            詳しく見る
+                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </a>
+                    </div>
+                    <div class="bg-gray-800/50 p-8 rounded-2xl text-left border border-gray-700 hover:border-indigo-500 transition-all duration-300 transform hover:scale-105">
+                        <div class="text-indigo-400 mb-4">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">ナレッジ管理支援</h3>
+                        <p class="text-gray-400 mb-6">Obsidian等を活用し、組織や個人の知識を資産に変えます。</p>
+                        <a href="#contact" class="text-indigo-400 font-semibold hover:text-indigo-300 flex items-center transition-colors">
+                            詳しく見る
+                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </a>
+                    </div>
+                    <div class="bg-gray-800/50 p-8 rounded-2xl text-left border border-gray-700 hover:border-indigo-500 transition-all duration-300 transform hover:scale-105">
+                        <div class="text-indigo-400 mb-4">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+                                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">教育・研修サービス</h3>
+                        <p class="text-gray-400 mb-6">ITスキルやシステム思考を学ぶための研修や講座を提供します。</p>
+                        <a href="#contact" class="text-indigo-400 font-semibold hover:text-indigo-300 flex items-center transition-colors">
+                            詳しく見る
+                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </a>
+                    </div>
+                    <div class="bg-gray-800/50 p-8 rounded-2xl text-left border border-gray-700 hover:border-indigo-500 transition-all duration-300 transform hover:scale-105">
+                        <div class="text-indigo-400 mb-4">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <polyline points="16 18 22 12 16 6"></polyline>
+                                <polyline points="8 6 2 12 8 18"></polyline>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">システム開発</h3>
+                        <p class="text-gray-400 mb-6">GASやPythonを用いた小規模な自動化ツールを開発します。</p>
+                        <a href="#contact" class="text-indigo-400 font-semibold hover:text-indigo-300 flex items-center transition-colors">
+                            詳しく見る
+                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </a>
+                    </div>
+                    <div class="bg-gray-800/50 p-8 rounded-2xl text-left border border-gray-700 hover:border-indigo-500 transition-all duration-300 transform hover:scale-105">
+                        <div class="text-indigo-400 mb-4">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path d="M20.42 4.58a5.4 5.4 0 0 0-7.65 0l-.77.78-.77-.78a5.4 5.4 0 0 0-7.65 0C1.46 6.7 1.33 10.28 4 13l8 8 8-8c2.67-2.72 2.54-6.3.42-8.42z"></path>
+                                <path d="M12 5l-3 3m0 0l3 3m-3-3h6"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">福祉×テクノロジー</h3>
+                        <p class="text-gray-400 mb-6">福祉現場の課題をテクノロジーで解決する支援を行います。</p>
+                        <a href="#contact" class="text-indigo-400 font-semibold hover:text-indigo-300 flex items-center transition-colors">
+                            詳しく見る
+                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- アフィリエイトセクション -->
+        <section id="affiliate" class="py-20 bg-white">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 text-center mb-16">おすすめツール・サービス</h2>
+                <p class="text-gray-600 text-center mb-12 max-w-2xl mx-auto">私が実際に使って効果を実感したツールやサービスをご紹介します。</p>
+                
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Obsidian -->
+                    <div class="bg-gradient-to-br from-indigo-50 to-purple-50 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-indigo-600 rounded-lg flex items-center justify-center mr-4">
+                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-900">Obsidian</h3>
+                        </div>
+                        <p class="text-gray-600 mb-4">私が全てのメモを集約しているナレッジ管理ツール。リンク機能で知識を繋げ、第二の脳を構築できます。</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-indigo-600 font-semibold">無料</span>
+                            <a href="https://obsidian.md" 
+                               target="_blank" 
+                               rel="nofollow"
+                               onclick="trackAffiliateClick('Obsidian', 'tool')"
+                               class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition-colors duration-300">
+                                詳細を見る
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- ChatGPT -->
+                    <div class="bg-gradient-to-br from-green-50 to-blue-50 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-green-600 rounded-lg flex items-center justify-center mr-4">
+                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-900">ChatGPT Plus</h3>
+                        </div>
+                        <p class="text-gray-600 mb-4">業務効率化に革命をもたらすAIツール。文章作成、アイデア出し、問題解決まで幅広く活用できます。</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-green-600 font-semibold">$20/月</span>
+                            <a href="https://chat.openai.com" 
+                               target="_blank" 
+                               rel="nofollow"
+                               onclick="trackAffiliateClick('ChatGPT Plus', 'ai-tool')"
+                               class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors duration-300">
+                                詳細を見る
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Notion -->
+                    <div class="bg-gradient-to-br from-gray-50 to-black rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-black rounded-lg flex items-center justify-center mr-4">
+                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                                    <line x1="9" y1="9" x2="15" y2="9"></line>
+                                    <line x1="9" y1="12" x2="15" y2="12"></line>
+                                    <line x1="9" y1="15" x2="15" y2="15"></line>
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-900">Notion</h3>
+                        </div>
+                        <p class="text-gray-600 mb-4">チームでの情報共有に最適なオールインワンワークスペース。プロジェクト管理からナレッジベースまで。</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-gray-600 font-semibold">無料〜</span>
+                            <a href="https://notion.so" 
+                               target="_blank" 
+                               rel="nofollow"
+                               onclick="trackAffiliateClick('Notion', 'productivity')"
+                               class="bg-gray-800 text-white px-4 py-2 rounded-lg hover:bg-gray-900 transition-colors duration-300">
+                                詳細を見る
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ブログセクション -->
+        <section id="blog" class="py-20 bg-gray-100">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 text-center mb-16">最新ブログ記事</h2>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="bg-white rounded-2xl shadow-xl overflow-hidden group transform hover:-translate-y-2 transition-transform duration-300">
+                        <div class="overflow-hidden h-48">
+                            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=870&auto=format&fit=crop" alt="介護施設のシフト作成" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center mb-3">
+                                <span class="text-sm font-semibold text-indigo-600 bg-indigo-100 px-3 py-1 rounded-full">業務効率化</span>
+                                <span class="text-sm text-gray-500 ml-auto">2025-08-03</span>
+                            </div>
+                            <h3 class="text-lg font-bold text-gray-800 hover:text-indigo-600 transition-colors">
+                                <a href="#">介護施設のシフト作成、Excel地獄から抜け出す3つのステップ</a>
+                            </h3>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-2xl shadow-xl overflow-hidden group transform hover:-translate-y-2 transition-transform duration-300">
+                        <div class="overflow-hidden h-48">
+                            <img src="https://images.unsplash.com/photo-1620712943543-290d242a4a42?q=80&w=870&auto=format&fit=crop" alt="ChatGPT活用" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center mb-3">
+                                <span class="text-sm font-semibold text-indigo-600 bg-indigo-100 px-3 py-1 rounded-full">AI活用入門</span>
+                                <span class="text-sm text-gray-500 ml-auto">2025-08-01</span>
+                            </div>
+                            <h3 class="text-lg font-bold text-gray-800 hover:text-indigo-600 transition-colors">
+                                <a href="#">ChatGPTは怖くない！福祉現場で今日から使えるAIとの対話術</a>
+                            </h3>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-2xl shadow-xl overflow-hidden group transform hover:-translate-y-2 transition-transform duration-300">
+                        <div class="overflow-hidden h-48">
+                            <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=870&auto=format&fit=crop" alt="Obsidian活用" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center mb-3">
+                                <span class="text-sm font-semibold text-indigo-600 bg-indigo-100 px-3 py-1 rounded-full">ナレッジ管理</span>
+                                <span class="text-sm text-gray-500 ml-auto">2025-07-28</span>
+                            </div>
+                            <h3 class="text-lg font-bold text-gray-800 hover:text-indigo-600 transition-colors">
+                                <a href="#">なぜ私は全てのメモをObsidianに集約したのか？</a>
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 自己紹介セクション -->
+        <section id="about" class="py-20 bg-white">
+            <div class="container mx-auto px-6 flex flex-col md:flex-row items-center gap-12">
+                <div class="md:w-1/3 text-center">
+                    <div class="relative inline-block">
+                        <div class="absolute -inset-1.5 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-full blur opacity-75"></div>
+                        <img src="./1544197718136.jpg" alt="オチつかない人のプロフィール写真" class="relative rounded-full w-48 h-48 mx-auto shadow-2xl object-cover object-center">
+                    </div>
+                </div>
+                <div class="md:w-2/3 text-center md:text-left">
+                                         <h2 class="text-3xl font-bold text-gray-900 mb-4">中の人について</h2>
+                     <p class="text-gray-600 leading-relaxed mb-4">
+                         はじめまして、SNSでは「オチつかない人」として活動しています。沖縄県で精神科の仕事をしながら、常に新しい何かを求めてオチつかない日々を送る4児の父です。
+                     </p>
+                    <p class="text-gray-600 leading-relaxed mb-6">
+                        現場での「もっとこうだったら…」というオチつかない想いが、いつしかプログラミングとシステム思考への探求に繋がりました。このサイトは、そんな私の試行錯誤の記録であり、同じように課題を抱えるあなたのための実験室です。
+                    </p>
+                    <a href="#contact" class="text-indigo-600 font-semibold hover:underline flex items-center justify-center md:justify-start">
+                        もっと詳しく見る
+                        <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                            <polyline points="12 5 19 12 12 19"></polyline>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- フッター -->
+    <footer id="contact" class="bg-gray-900 text-gray-400">
+        <div class="container mx-auto px-6 py-10 text-center">
+            <div class="text-2xl font-black tracking-wider text-white mb-6">
+                OCHITSUKANAI COMPANY
+            </div>
+                                     <div class="flex justify-center space-x-6 mb-6">
+                <a href="#blog" class="hover:text-white">ブログ</a>
+                <a href="#services" class="hover:text-white">サービス</a>
+                <a href="#about" class="hover:text-white">プロフィール</a>
+                <a href="privacy-policy.html" class="hover:text-white">プライバシーポリシー</a>
+            </div>
+            <p>© 2025 OCHITSUKANAI COMPANY. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            const menuIcon = document.getElementById('menu-icon');
+            const closeIcon = document.getElementById('close-icon');
+            
+            if (mobileMenu.classList.contains('hidden')) {
+                mobileMenu.classList.remove('hidden');
+                menuIcon.classList.add('hidden');
+                closeIcon.classList.remove('hidden');
+            } else {
+                mobileMenu.classList.add('hidden');
+                menuIcon.classList.remove('hidden');
+                closeIcon.classList.add('hidden');
+            }
+        }
+    </script>
+</body>
+</html> 

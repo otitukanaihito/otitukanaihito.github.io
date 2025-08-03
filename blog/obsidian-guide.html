@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>なぜ私は全てのメモをObsidianに集約したのか？ - オチつかないカンパニー</title>
+    <meta name="description" content="Obsidianを使ったナレッジ管理の実践方法。精神科現場での知識管理から個人の学習効率化まで、実際の使用体験を交えて解説します。">
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'GA_MEASUREMENT_ID');
+    </script>
+    
+    <!-- アフィリエイトトラッキング用スクリプト -->
+    <script>
+      function trackAffiliateClick(productName, affiliateType) {
+        gtag('event', 'click', {
+          'event_category': 'affiliate',
+          'event_label': productName,
+          'custom_parameter': affiliateType
+        });
+      }
+    </script>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        html { scroll-behavior: smooth; }
+        
+        /* ブログ記事用スタイル */
+        .blog-content h2 {
+            @apply text-2xl font-bold text-gray-900 mt-8 mb-4;
+        }
+        .blog-content h3 {
+            @apply text-xl font-semibold text-gray-800 mt-6 mb-3;
+        }
+        .blog-content p {
+            @apply text-gray-700 leading-relaxed mb-4;
+        }
+        .blog-content ul {
+            @apply list-disc list-inside text-gray-700 mb-4;
+        }
+        .blog-content ol {
+            @apply list-decimal list-inside text-gray-700 mb-4;
+        }
+        .blog-content blockquote {
+            @apply border-l-4 border-indigo-500 pl-4 italic text-gray-600 my-6;
+        }
+        .blog-content code {
+            @apply bg-gray-100 px-2 py-1 rounded text-sm font-mono;
+        }
+        .blog-content pre {
+            @apply bg-gray-900 text-white p-4 rounded-lg overflow-x-auto my-4;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- ヘッダー -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="../index.html" class="text-2xl font-black tracking-wider text-gray-900">
+                OCHITSUKANAI COMPANY
+            </a>
+            <nav class="hidden md:flex items-center space-x-6">
+                <a href="../index.html#blog" class="text-gray-700 hover:text-indigo-600 transition-colors duration-300">ブログ</a>
+                <a href="../index.html#affiliate" class="text-gray-700 hover:text-indigo-600 transition-colors duration-300">おすすめツール</a>
+                <a href="../index.html#services" class="text-gray-700 hover:text-indigo-600 transition-colors duration-300">サービス</a>
+                <a href="../index.html#about" class="text-gray-700 hover:text-indigo-600 transition-colors duration-300">プロフィール</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-8">
+        <!-- 記事ヘッダー -->
+        <article class="max-w-4xl mx-auto">
+            <header class="mb-8">
+                <div class="flex items-center mb-4">
+                    <span class="text-sm font-semibold text-indigo-600 bg-indigo-100 px-3 py-1 rounded-full">ナレッジ管理</span>
+                    <span class="text-sm text-gray-500 ml-4">2025-01-27</span>
+                </div>
+                <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                    なぜ私は全てのメモをObsidianに集約したのか？
+                </h1>
+                <p class="text-lg text-gray-600 mb-6">
+                    精神科現場での知識管理から個人の学習効率化まで、Obsidianを使った実践的なナレッジ管理の方法を解説します。
+                </p>
+                <div class="flex items-center">
+                    <img src="../1544197718136.jpg" alt="オチつかない人" class="w-12 h-12 rounded-full mr-4">
+                    <div>
+                        <p class="font-semibold text-gray-900">オチつかない人</p>
+                        <p class="text-sm text-gray-600">精神科現場で働く4児の父</p>
+                    </div>
+                </div>
+            </header>
+
+            <!-- 記事本文 -->
+            <div class="bg-white rounded-2xl shadow-lg p-8 blog-content">
+                <h2>はじめに</h2>
+                <p>
+                    精神科の現場で働いていると、患者さんの情報、治療法、薬の知識、そして日々の業務改善アイデアなど、管理すべき情報が山ほどあります。
+                    以前は、これらの情報をExcel、Word、メモ帳、そして頭の中に散らばらせていました。
+                    しかし、Obsidianに出会ってから、全ての情報を一箇所に集約し、効率的に管理できるようになりました。
+                </p>
+
+                <h2>Obsidianを選んだ理由</h2>
+                <h3>1. ローカルファイル管理</h3>
+                <p>
+                    医療現場では、患者さんの個人情報を扱うため、クラウドサービスへの依存は避けたいものです。
+                    Obsidianは全てのデータをローカルで管理するため、セキュリティ面で安心です。
+                </p>
+
+                <h3>2. リンク機能による知識の繋がり</h3>
+                <p>
+                    Obsidianの最大の特徴は、ノート同士をリンクで繋げられることです。
+                    例えば、「うつ病」というノートから「SSRI」という薬のノートにリンクし、
+                    さらに「認知行動療法」のノートにも繋げることで、知識のネットワークが構築されます。
+                </p>
+
+                <h3>3. マークダウン対応</h3>
+                <p>
+                    シンプルなマークダウン記法で書けるため、フォーマットに時間を取られず、
+                    内容に集中できます。また、他のツールとの互換性も高いです。
+                </p>
+
+                <h2>実際の活用例</h2>
+                <h3>患者情報の管理</h3>
+                <p>
+                    患者さんごとにノートを作成し、以下のような構造で管理しています：
+                </p>
+                <ul>
+                    <li>基本情報（年齢、性別、主訴）</li>
+                    <li>既往歴（他のノートへのリンク）</li>
+                    <li>現在の治療内容</li>
+                    <li>観察記録（日付ごと）</li>
+                    <li>今後の方針</li>
+                </ul>
+
+                <h3>治療法の知識ベース</h3>
+                <p>
+                    治療法や薬についての知識を体系的に整理しています：
+                </p>
+                <blockquote>
+                    認知行動療法 → うつ病 → SSRI → 副作用 → 対処法
+                    このように、関連する知識をリンクで繋げることで、
+                    必要な情報に素早くアクセスできます。
+                </blockquote>
+
+                <h2>Obsidianの設定とカスタマイズ</h2>
+                <h3>推奨プラグイン</h3>
+                <ul>
+                    <li><strong>Calendar</strong>: 日付ベースのノート管理</li>
+                    <li><strong>Graph View</strong>: 知識の繋がりを可視化</li>
+                    <li><strong>Dataview</strong>: データベース的な機能</li>
+                    <li><strong>Kanban</strong>: タスク管理</li>
+                </ul>
+
+                <h3>テーマ設定</h3>
+                <p>
+                    長時間使用するため、目に優しいダークテーマを使用しています。
+                    また、フォントサイズを少し大きくして、読みやすさを重視しています。
+                </p>
+
+                <h2>業務効率化への効果</h2>
+                <p>
+                    Obsidianを導入してから、以下のような改善が見られました：
+                </p>
+                <ul>
+                    <li>情報検索時間が50%短縮</li>
+                    <li>知識の共有が容易になった</li>
+                    <li>新しい発見や気づきが増えた</li>
+                    <li>学習効率が向上した</li>
+                </ul>
+
+                <h2>今後の展望</h2>
+                <p>
+                    現在は個人での使用ですが、将来的にはチームでの共有も検討しています。
+                    Obsidianの同期機能や、Gitを使ったバージョン管理を活用して、
+                    チーム全体の知識管理を効率化したいと考えています。
+                </p>
+
+                <h2>まとめ</h2>
+                <p>
+                    Obsidianは、単なるメモアプリではありません。
+                    知識を繋げ、新しい発見を生み出す「第二の脳」として機能します。
+                    特に、複雑な情報を扱う医療現場では、その真価を発揮すると思います。
+                </p>
+
+                <!-- アフィリエイトセクション -->
+                <div class="bg-gradient-to-r from-indigo-50 to-purple-50 rounded-xl p-6 mt-8">
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Obsidianを始めてみませんか？</h3>
+                    <p class="text-gray-700 mb-4">
+                        無料で始められるObsidian。私が実際に使って効果を実感したナレッジ管理ツールです。
+                    </p>
+                    <a href="https://obsidian.md" 
+                       target="_blank" 
+                       rel="nofollow"
+                       onclick="trackAffiliateClick('Obsidian', 'blog-article')"
+                       class="inline-block bg-indigo-600 text-white px-6 py-3 rounded-lg hover:bg-indigo-700 transition-colors duration-300 font-semibold">
+                        Obsidianをダウンロード
+                    </a>
+                </div>
+            </div>
+
+            <!-- 関連記事 -->
+            <div class="mt-12">
+                <h3 class="text-2xl font-bold text-gray-900 mb-6">関連記事</h3>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <a href="#" class="block bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 p-6">
+                        <h4 class="font-semibold text-gray-900 mb-2">ChatGPTは怖くない！福祉現場で今日から使えるAIとの対話術</h4>
+                        <p class="text-gray-600 text-sm">AI活用入門</p>
+                    </a>
+                    <a href="#" class="block bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 p-6">
+                        <h4 class="font-semibold text-gray-900 mb-2">介護施設のシフト作成、Excel地獄から抜け出す3つのステップ</h4>
+                        <p class="text-gray-600 text-sm">業務効率化</p>
+                    </a>
+                </div>
+            </div>
+        </article>
+    </main>
+
+    <!-- フッター -->
+    <footer class="bg-gray-900 text-gray-400 mt-16">
+        <div class="container mx-auto px-6 py-10 text-center">
+            <div class="text-2xl font-black tracking-wider text-white mb-6">
+                OCHITSUKANAI COMPANY
+            </div>
+            <div class="flex justify-center space-x-6 mb-6">
+                <a href="../index.html#blog" class="hover:text-white">ブログ</a>
+                <a href="../index.html#affiliate" class="hover:text-white">おすすめツール</a>
+                <a href="../index.html#services" class="hover:text-white">サービス</a>
+                <a href="../index.html#about" class="hover:text-white">プロフィール</a>
+            </div>
+            <p>© 2025 OCHITSUKANAI COMPANY. All Rights Reserved.</p>
+        </div>
+    </footer>
+</body>
+</html> 
