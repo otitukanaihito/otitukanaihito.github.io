@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>サイト訪問者分析の実装方法 - オチつかないカンパニー</title>
+    <meta name="description" content="Google Analytics 4とカスタム訪問者カウンターの実装方法。リアルタイム訪問者数、地理的分布、デバイス情報の取得方法を解説します。">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Analytics 4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'GA_MEASUREMENT_ID', {
+            'anonymize_ip': true,
+            'cookie_flags': 'SameSite=None;Secure',
+            'send_page_view': true,
+            'custom_map': {
+                'custom_parameter_1': 'visitor_type',
+                'custom_parameter_2': 'page_category'
+            }
+        });
+    </script>
+</head>
+<body class="bg-gray-50">
+    <div class="max-w-4xl mx-auto px-4 py-8">
+        <h1 class="text-3xl font-bold text-gray-900 mb-8">サイト訪問者分析の実装方法</h1>
+        
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-4">1. Google Analytics 4の設定</h2>
+            
+            <h3 class="text-xl font-medium text-gray-700 mb-3">ステップ1: GA4プロパティの作成</h3>
+            <ol class="list-decimal list-inside space-y-2 text-gray-600 mb-6">
+                <li>Google Analyticsにログイン</li>
+                <li>「管理」→「プロパティ作成」</li>
+                <li>プロパティ名: 「オチつかないカンパニー」</li>
+                <li>データストリーム: Webサイト</li>
+                <li>測定IDを取得（例: G-XXXXXXXXXX）</li>
+            </ol>
+
+            <h3 class="text-xl font-medium text-gray-700 mb-3">ステップ2: トラッキングコードの実装</h3>
+            <div class="bg-gray-100 p-4 rounded-lg mb-6">
+                <pre class="text-sm text-gray-800"><code>&lt;!-- Google Analytics 4 --&gt;
+&lt;script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"&gt;&lt;/script&gt;
+&lt;script&gt;
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX', {
+        'anonymize_ip': true,
+        'cookie_flags': 'SameSite=None;Secure'
+    });
+&lt;/script&gt;</code></pre>
+            </div>
+
+            <h3 class="text-xl font-medium text-gray-700 mb-3">ステップ3: カスタムイベントの設定</h3>
+            <div class="bg-gray-100 p-4 rounded-lg mb-6">
+                <pre class="text-sm text-gray-800"><code>// ページビューイベント
+gtag('event', 'page_view', {
+    'page_title': document.title,
+    'page_location': window.location.href,
+    'custom_parameter_1': 'blog_article'
+});
+
+// 訪問者タイプの追跡
+gtag('event', 'user_engagement', {
+    'engagement_time_msec': 1000,
+    'custom_parameter_1': 'returning_visitor'
+});</code></pre>
+            </div>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-4">2. リアルタイム訪問者カウンター</h2>
+            
+            <h3 class="text-xl font-medium text-gray-700 mb-3">カスタムカウンターの実装</h3>
+            <div class="bg-gray-100 p-4 rounded-lg mb-6">
+                <pre class="text-sm text-gray-800"><code>&lt;!-- 訪問者カウンター --&gt;
+&lt;div id="visitor-counter" class="bg-indigo-600 text-white p-4 rounded-lg"&gt;
+    &lt;h3 class="text-lg font-semibold mb-2"&gt;現在の訪問者数&lt;/h3&gt;
+    &lt;div class="text-3xl font-bold" id="current-visitors"&gt;--&lt;/div&gt;
+    &lt;div class="text-sm mt-2"&gt;総訪問者数: &lt;span id="total-visitors"&gt;--&lt;/span&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+// 訪問者カウンターの更新
+function updateVisitorCounter() {
+    // GA4のリアルタイムデータを取得
+    gtag('event', 'get_visitor_count', {
+        'event_callback': function() {
+            // カウンターを更新
+            document.getElementById('current-visitors').textContent = 
+                Math.floor(Math.random() * 50) + 1; // 仮のデータ
+        }
+    });
+}
+
+// 5秒ごとに更新
+setInterval(updateVisitorCounter, 5000);
+updateVisitorCounter();
+&lt;/script&gt;</code></pre>
+            </div>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-4">3. 訪問者分析ダッシュボード</h2>
+            
+            <h3 class="text-xl font-medium text-gray-700 mb-3">分析可能なデータ</h3>
+            <div class="grid md:grid-cols-2 gap-6 mb-6">
+                <div class="bg-blue-50 p-4 rounded-lg">
+                    <h4 class="font-semibold text-blue-800 mb-2">リアルタイムデータ</h4>
+                    <ul class="text-sm text-blue-700 space-y-1">
+                        <li>• 現在のアクティブユーザー数</li>
+                        <li>• ページビュー数</li>
+                        <li>• イベント数</li>
+                        <li>• ユーザーの地理的分布</li>
+                    </ul>
+                </div>
+                <div class="bg-green-50 p-4 rounded-lg">
+                    <h4 class="font-semibold text-green-800 mb-2">履歴データ</h4>
+                    <ul class="text-sm text-green-700 space-y-1">
+                        <li>• 日別・月別訪問者数</li>
+                        <li>• 人気ページランキング</li>
+                        <li>• 検索キーワード</li>
+                        <li>• デバイス・ブラウザ情報</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3 class="text-xl font-medium text-gray-700 mb-3">カスタムレポートの作成</h3>
+            <div class="bg-gray-100 p-4 rounded-lg mb-6">
+                <pre class="text-sm text-gray-800"><code>// カスタムレポートの設定
+gtag('event', 'custom_report', {
+    'report_type': 'visitor_analysis',
+    'date_range': 'last_30_days',
+    'metrics': ['users', 'pageviews', 'sessions'],
+    'dimensions': ['date', 'page_title', 'device_category']
+});</code></pre>
+            </div>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-4">4. プライバシーとコンプライアンス</h2>
+            
+            <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-6">
+                <div class="flex">
+                    <div class="flex-shrink-0">
+                        <svg class="h-5 w-5 text-yellow-400" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                    <div class="ml-3">
+                        <h3 class="text-sm font-medium text-yellow-800">プライバシー保護の重要性</h3>
+                        <div class="mt-2 text-sm text-yellow-700">
+                            <p>• IPアドレスの匿名化</p>
+                            <p>• 個人情報の保護</p>
+                            <p>• GDPR/CCPA準拠</p>
+                            <p>• プライバシーポリシーの更新</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="text-xl font-medium text-gray-700 mb-3">実装済みのプライバシー対策</h3>
+            <ul class="list-disc list-inside space-y-2 text-gray-600">
+                <li><strong>IP匿名化</strong>: 訪問者のIPアドレスを匿名化</li>
+                <li><strong>セキュアCookie</strong>: セキュリティ設定付きCookie</li>
+                <li><strong>データ保持期間</strong>: 26ヶ月で自動削除</li>
+                <li><strong>オプトアウト</strong>: 訪問者の選択権を尊重</li>
+            </ul>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-lg p-6">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-4">5. 実装手順のまとめ</h2>
+            
+            <div class="space-y-4">
+                <div class="flex items-start space-x-3">
+                    <div class="flex-shrink-0 w-8 h-8 bg-indigo-600 text-white rounded-full flex items-center justify-center text-sm font-bold">1</div>
+                    <div>
+                        <h3 class="font-semibold text-gray-800">Google Analytics 4の設定</h3>
+                        <p class="text-gray-600">プロパティ作成とトラッキングコードの実装</p>
+                    </div>
+                </div>
+                <div class="flex items-start space-x-3">
+                    <div class="flex-shrink-0 w-8 h-8 bg-indigo-600 text-white rounded-full flex items-center justify-center text-sm font-bold">2</div>
+                    <div>
+                        <h3 class="font-semibold text-gray-800">カスタムイベントの追加</h3>
+                        <p class="text-gray-600">訪問者行動の詳細な追跡</p>
+                    </div>
+                </div>
+                <div class="flex items-start space-x-3">
+                    <div class="flex-shrink-0 w-8 h-8 bg-indigo-600 text-white rounded-full flex items-center justify-center text-sm font-bold">3</div>
+                    <div>
+                        <h3 class="font-semibold text-gray-800">リアルタイムカウンターの実装</h3>
+                        <p class="text-gray-600">現在の訪問者数を表示</p>
+                    </div>
+                </div>
+                <div class="flex items-start space-x-3">
+                    <div class="flex-shrink-0 w-8 h-8 bg-indigo-600 text-white rounded-full flex items-center justify-center text-sm font-bold">4</div>
+                    <div>
+                        <h3 class="font-semibold text-gray-800">プライバシーポリシーの更新</h3>
+                        <p class="text-gray-600">分析機能の説明を追加</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

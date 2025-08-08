@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>訪問者分析ダッシュボード - オチつかないカンパニー</title>
+    <meta name="description" content="リアルタイム訪問者分析、地理的分布、ページビュー統計を確認できます。">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Google Analytics 4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'GA_MEASUREMENT_ID', {
+            'anonymize_ip': true,
+            'cookie_flags': 'SameSite=None;Secure'
+        });
+    </script>
+</head>
+<body class="bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 py-8">
+        <div class="flex justify-between items-center mb-8">
+            <h1 class="text-3xl font-bold text-gray-900">訪問者分析ダッシュボード</h1>
+            <a href="index.html" class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition-colors">
+                ホームに戻る
+            </a>
+        </div>
+
+        <!-- リアルタイム統計 -->
+        <div class="grid md:grid-cols-4 gap-6 mb-8">
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <div class="flex items-center">
+                    <div class="p-3 rounded-full bg-green-100 text-green-600">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"></path>
+                        </svg>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-sm font-medium text-gray-600">現在の訪問者</p>
+                        <p class="text-2xl font-bold text-gray-900" id="current-visitors">--</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <div class="flex items-center">
+                    <div class="p-3 rounded-full bg-blue-100 text-blue-600">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                        </svg>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-sm font-medium text-gray-600">今日のページビュー</p>
+                        <p class="text-2xl font-bold text-gray-900" id="today-pageviews">--</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <div class="flex items-center">
+                    <div class="p-3 rounded-full bg-purple-100 text-purple-600">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                        </svg>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-sm font-medium text-gray-600">今月の訪問者</p>
+                        <p class="text-2xl font-bold text-gray-900" id="monthly-visitors">--</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <div class="flex items-center">
+                    <div class="p-3 rounded-full bg-orange-100 text-orange-600">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                        </svg>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-sm font-medium text-gray-600">平均滞在時間</p>
+                        <p class="text-2xl font-bold text-gray-900" id="avg-session-duration">--</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- グラフセクション -->
+        <div class="grid md:grid-cols-2 gap-8 mb-8">
+            <!-- 訪問者推移グラフ -->
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <h3 class="text-lg font-semibold text-gray-800 mb-4">過去7日間の訪問者推移</h3>
+                <canvas id="visitorChart" width="400" height="200"></canvas>
+            </div>
+
+            <!-- 地理的分布 -->
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <h3 class="text-lg font-semibold text-gray-800 mb-4">訪問者の地理的分布</h3>
+                <div id="geographic-distribution" class="space-y-3">
+                    <div class="flex justify-between items-center p-3 bg-gray-50 rounded">
+                        <span class="font-medium">日本</span>
+                        <span class="text-indigo-600 font-bold">85%</span>
+                    </div>
+                    <div class="flex justify-between items-center p-3 bg-gray-50 rounded">
+                        <span class="font-medium">アメリカ</span>
+                        <span class="text-indigo-600 font-bold">8%</span>
+                    </div>
+                    <div class="flex justify-between items-center p-3 bg-gray-50 rounded">
+                        <span class="font-medium">その他</span>
+                        <span class="text-indigo-600 font-bold">7%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 人気ページランキング -->
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+            <h3 class="text-lg font-semibold text-gray-800 mb-4">人気ページランキング</h3>
+            <div class="space-y-3" id="popular-pages">
+                <div class="flex justify-between items-center p-3 bg-gray-50 rounded">
+                    <div>
+                        <span class="font-medium">ホームページ</span>
+                        <p class="text-sm text-gray-600">index.html</p>
+                    </div>
+                    <span class="text-indigo-600 font-bold">1,234 PV</span>
+                </div>
+                <div class="flex justify-between items-center p-3 bg-gray-50 rounded">
+                    <div>
+                        <span class="font-medium">ブログ記事1</span>
+                        <p class="text-sm text-gray-600">blog/article1.html</p>
+                    </div>
+                    <span class="text-indigo-600 font-bold">856 PV</span>
+                </div>
+                <div class="flex justify-between items-center p-3 bg-gray-50 rounded">
+                    <div>
+                        <span class="font-medium">サービス紹介</span>
+                        <p class="text-sm text-gray-600">services.html</p>
+                    </div>
+                    <span class="text-indigo-600 font-bold">543 PV</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- デバイス・ブラウザ情報 -->
+        <div class="grid md:grid-cols-2 gap-8">
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <h3 class="text-lg font-semibold text-gray-800 mb-4">デバイス別アクセス</h3>
+                <canvas id="deviceChart" width="400" height="200"></canvas>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <h3 class="text-lg font-semibold text-gray-800 mb-4">ブラウザ別アクセス</h3>
+                <canvas id="browserChart" width="400" height="200"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // リアルタイムデータ更新
+        function updateRealTimeData() {
+            // 現在の訪問者数（シミュレーション）
+            const currentVisitors = Math.floor(Math.random() * 50) + 10;
+            document.getElementById('current-visitors').textContent = currentVisitors;
+            
+            // 今日のページビュー
+            const todayPageviews = Math.floor(Math.random() * 500) + 200;
+            document.getElementById('today-pageviews').textContent = todayPageviews.toLocaleString();
+            
+            // 今月の訪問者
+            const monthlyVisitors = Math.floor(Math.random() * 5000) + 2000;
+            document.getElementById('monthly-visitors').textContent = monthlyVisitors.toLocaleString();
+            
+            // 平均滞在時間
+            const avgDuration = Math.floor(Math.random() * 5) + 2;
+            document.getElementById('avg-session-duration').textContent = avgDuration + '分';
+        }
+
+        // 訪問者推移グラフ
+        const visitorCtx = document.getElementById('visitorChart').getContext('2d');
+        const visitorChart = new Chart(visitorCtx, {
+            type: 'line',
+            data: {
+                labels: ['1日前', '2日前', '3日前', '4日前', '5日前', '6日前', '今日'],
+                datasets: [{
+                    label: '訪問者数',
+                    data: [120, 150, 180, 140, 200, 160, 190],
+                    borderColor: 'rgb(99, 102, 241)',
+                    backgroundColor: 'rgba(99, 102, 241, 0.1)',
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        // デバイス別アクセスグラフ
+        const deviceCtx = document.getElementById('deviceChart').getContext('2d');
+        const deviceChart = new Chart(deviceCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['デスクトップ', 'モバイル', 'タブレット'],
+                datasets: [{
+                    data: [45, 40, 15],
+                    backgroundColor: [
+                        'rgb(99, 102, 241)',
+                        'rgb(34, 197, 94)',
+                        'rgb(251, 146, 60)'
+                    ]
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }
+        });
+
+        // ブラウザ別アクセスグラフ
+        const browserCtx = document.getElementById('browserChart').getContext('2d');
+        const browserChart = new Chart(browserCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Chrome', 'Safari', 'Firefox', 'Edge'],
+                datasets: [{
+                    data: [60, 25, 10, 5],
+                    backgroundColor: [
+                        'rgb(99, 102, 241)',
+                        'rgb(34, 197, 94)',
+                        'rgb(251, 146, 60)',
+                        'rgb(239, 68, 68)'
+                    ]
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }
+        });
+
+        // 初期データ更新
+        updateRealTimeData();
+
+        // 30秒ごとにデータ更新
+        setInterval(updateRealTimeData, 30000);
+
+        // Google Analytics イベント送信
+        gtag('event', 'page_view', {
+            'page_title': '訪問者分析ダッシュボード',
+            'page_location': window.location.href
+        });
+    </script>
+</body>
+</html> 
