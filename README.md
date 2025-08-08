@@ -76,9 +76,9 @@ git push origin main
 
 ### アフィリエイトリンクの更新（Update Affiliate Links）
 現在のリンクを実際のアフィリエイトリンクに置換：
+- **Google Gemini**: Google公式AIアシスタント（推奨）
 - Obsidian: 公式アフィリエイトプログラム
-- ChatGPT Plus: OpenAI公式
-- Notion: Notion公式アフィリエイト
+- その他のAI・生産性ツール: 公式アフィリエイトプログラム
 
 ## 🎨 カスタマイズ（Customization）
 
