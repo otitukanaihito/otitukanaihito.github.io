@@ -48,6 +48,71 @@ function initializeAnalytics() {
     }
 }
 
+// 測定IDの解決（優先順位: URLパラメータ > window変数 > localStorage > 設定ファイル）
+function resolveMeasurementId() {
+    try {
+        const params = new URLSearchParams(window.location.search);
+        const fromQuery = params.get('ga');
+        if (fromQuery && /^G-[A-Z0-9]+$/.test(fromQuery)) {
+            return fromQuery;
+        }
+    } catch (_) {}
+
+    if (typeof window.GA_MEASUREMENT_ID === 'string' && /^G-[A-Z0-9]+$/.test(window.GA_MEASUREMENT_ID)) {
+        return window.GA_MEASUREMENT_ID;
+    }
+
+    try {
+        const ls = localStorage.getItem('GA_MEASUREMENT_ID');
+        if (ls && /^G-[A-Z0-9]+$/.test(ls)) {
+            return ls;
+        }
+    } catch (_) {}
+
+    return ANALYTICS_CONFIG.MEASUREMENT_ID;
+}
+
+// GAスクリプトを動的に読み込み、初期化を実行
+function loadGoogleAnalytics() {
+    const id = resolveMeasurementId();
+    if (!id || id === 'GA_MEASUREMENT_ID') {
+        console.warn('GA測定IDが未設定です。`analytics-config.js` または localStorage("GA_MEASUREMENT_ID")、URLパラメータ ?ga=G-XXXX で指定してください。');
+        return;
+    }
+
+    // 重複読み込み防止
+    if (document.getElementById('ga4-loader')) {
+        return;
+    }
+
+    // dataLayer と gtag の定義
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function(){ dataLayer.push(arguments); };
+    gtag('js', new Date());
+
+    // 設定ファイル上のIDを上書き
+    ANALYTICS_CONFIG.MEASUREMENT_ID = id;
+
+    // スクリプト挿入
+    const s = document.createElement('script');
+    s.async = true;
+    s.id = 'ga4-loader';
+    s.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(id)}`;
+    document.head.appendChild(s);
+
+    // 初期化
+    s.addEventListener('load', () => {
+        initializeAnalytics();
+        // 既定の page_view を送信
+        try {
+            gtag('event', ANALYTICS_CONFIG.EVENTS.PAGE_VIEW, {
+                'page_title': document.title,
+                'page_location': window.location.href
+            });
+        } catch (e) {}
+    });
+}
+
 // カスタムイベント送信関数
 function sendCustomEvent(eventName, parameters = {}) {
     if (typeof gtag !== 'undefined') {
@@ -116,6 +181,7 @@ function getVisitorAnalytics() {
 
 // グローバル関数として公開
 window.initializeAnalytics = initializeAnalytics;
+window.loadGoogleAnalytics = loadGoogleAnalytics;
 window.sendCustomEvent = sendCustomEvent;
 window.sendPageView = sendPageView;
 window.sendUserEngagement = sendUserEngagement;

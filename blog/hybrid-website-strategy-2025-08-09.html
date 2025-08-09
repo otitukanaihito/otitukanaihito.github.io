@@ -90,13 +90,8 @@
     </div>
   </div>
 
-  <!-- Google Analytics (optional) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=YOUR_GA_ID"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);} 
-    gtag('js', new Date());
-    gtag('config', 'YOUR_GA_ID');
-  </script>
+  <!-- Google Analytics (deferred loader) -->
+  <script src="../analytics-config.js"></script>
+  <script>document.addEventListener('DOMContentLoaded', function(){ try { loadGoogleAnalytics(); } catch(e) {} });</script>
 </body>
 </html>

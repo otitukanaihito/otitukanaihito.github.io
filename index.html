@@ -6,15 +6,14 @@
     <title>オチつかないカンパニー - 業務効率化・AI活用コンサルティング</title>
     <meta name="description" content="精神科現場経験とITスキルを掛け合わせ、実用的で心に寄り添う解決策を提案します。業務効率化、AI活用、ナレッジ管理支援。">
     
-    <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+    <!-- Google Analytics (deferred loader) -->
+    <script src="analytics-config.js"></script>
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'GA_MEASUREMENT_ID', {
-        'anonymize_ip': true,
-        'cookie_flags': 'SameSite=None;Secure'
+      // 1) localStorage または URL パラメータ ?ga=G-XXXX で測定IDを設定可能
+      // 2) window.GA_MEASUREMENT_ID に代入してもOK
+      // 3) 未設定の場合は読み込みをスキップ
+      document.addEventListener('DOMContentLoaded', function(){
+        try { loadGoogleAnalytics(); } catch(e) { console.warn(e); }
       });
     </script>
     

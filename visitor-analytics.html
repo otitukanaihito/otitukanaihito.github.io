@@ -12,25 +12,49 @@
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     
-    <!-- Google Analytics 4 -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+    <!-- Google Analytics 4 (deferred loader) -->
+    <script src="analytics-config.js"></script>
     <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'GA_MEASUREMENT_ID', {
-            'anonymize_ip': true,
-            'cookie_flags': 'SameSite=None;Secure'
+        const SERVER_BASE = 'http://localhost:' + (location.port || '3000');
+        let serverAvailable = false;
+
+        async function checkServerHealth() {
+            try {
+                const controller = new AbortController();
+                const timeout = setTimeout(() => controller.abort(), 1500);
+                const res = await fetch(`${SERVER_BASE}/api/analytics/health`, { signal: controller.signal });
+                clearTimeout(timeout);
+                serverAvailable = res.ok;
+            } catch (_) {
+                serverAvailable = false;
+            }
+        }
+        // GAは遅延読み込み
+        document.addEventListener('DOMContentLoaded', function(){
+            try { loadGoogleAnalytics(); } catch(e) { console.warn(e); }
         });
     </script>
+
+    <!-- 実際の分析機能 -->
+    <script src="real-analytics.js"></script>
 </head>
 <body class="bg-gray-50">
     <div class="max-w-7xl mx-auto px-4 py-8">
         <div class="flex justify-between items-center mb-8">
             <h1 class="text-3xl font-bold text-gray-900">訪問者分析ダッシュボード</h1>
-            <a href="index.html" class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition-colors">
-                ホームに戻る
-            </a>
+            <div class="flex space-x-4">
+                <a href="analytics-setup.html" class="bg-yellow-600 text-white px-4 py-2 rounded-lg hover:bg-yellow-700 transition-colors">
+                    設定
+                </a>
+                <a href="index.html" class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition-colors">
+                    ホームに戻る
+                </a>
+            </div>
+        </div>
+
+        <!-- 設定状態表示 -->
+        <div id="config-status" class="mb-8">
+            <!-- 設定状態が動的に表示されます -->
         </div>
 
         <!-- リアルタイム統計 -->
@@ -105,18 +129,7 @@
             <div class="bg-white rounded-lg shadow-lg p-6">
                 <h3 class="text-lg font-semibold text-gray-800 mb-4">訪問者の地理的分布</h3>
                 <div id="geographic-distribution" class="space-y-3">
-                    <div class="flex justify-between items-center p-3 bg-gray-50 rounded">
-                        <span class="font-medium">日本</span>
-                        <span class="text-indigo-600 font-bold">85%</span>
-                    </div>
-                    <div class="flex justify-between items-center p-3 bg-gray-50 rounded">
-                        <span class="font-medium">アメリカ</span>
-                        <span class="text-indigo-600 font-bold">8%</span>
-                    </div>
-                    <div class="flex justify-between items-center p-3 bg-gray-50 rounded">
-                        <span class="font-medium">その他</span>
-                        <span class="text-indigo-600 font-bold">7%</span>
-                    </div>
+                    <!-- 動的に生成されます -->
                 </div>
             </div>
         </div>
@@ -125,27 +138,7 @@
         <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
             <h3 class="text-lg font-semibold text-gray-800 mb-4">人気ページランキング</h3>
             <div class="space-y-3" id="popular-pages">
-                <div class="flex justify-between items-center p-3 bg-gray-50 rounded">
-                    <div>
-                        <span class="font-medium">ホームページ</span>
-                        <p class="text-sm text-gray-600">index.html</p>
-                    </div>
-                    <span class="text-indigo-600 font-bold">1,234 PV</span>
-                </div>
-                <div class="flex justify-between items-center p-3 bg-gray-50 rounded">
-                    <div>
-                        <span class="font-medium">ブログ記事1</span>
-                        <p class="text-sm text-gray-600">blog/article1.html</p>
-                    </div>
-                    <span class="text-indigo-600 font-bold">856 PV</span>
-                </div>
-                <div class="flex justify-between items-center p-3 bg-gray-50 rounded">
-                    <div>
-                        <span class="font-medium">サービス紹介</span>
-                        <p class="text-sm text-gray-600">services.html</p>
-                    </div>
-                    <span class="text-indigo-600 font-bold">543 PV</span>
-                </div>
+                <!-- 動的に生成されます -->
             </div>
         </div>
 
@@ -164,110 +157,396 @@
     </div>
 
     <script>
-        // リアルタイムデータ更新
-        function updateRealTimeData() {
-            // 現在の訪問者数（シミュレーション）
-            const currentVisitors = Math.floor(Math.random() * 50) + 10;
-            document.getElementById('current-visitors').textContent = currentVisitors;
+        // 設定状態を表示
+        function displayConfigStatus() {
+            const statusDiv = document.getElementById('config-status');
+            const config = window.realAnalytics.getConfigStatus();
             
-            // 今日のページビュー
-            const todayPageviews = Math.floor(Math.random() * 500) + 200;
-            document.getElementById('today-pageviews').textContent = todayPageviews.toLocaleString();
-            
-            // 今月の訪問者
-            const monthlyVisitors = Math.floor(Math.random() * 5000) + 2000;
-            document.getElementById('monthly-visitors').textContent = monthlyVisitors.toLocaleString();
-            
-            // 平均滞在時間
-            const avgDuration = Math.floor(Math.random() * 5) + 2;
-            document.getElementById('avg-session-duration').textContent = avgDuration + '分';
+            if (config.isConfigured) {
+                statusDiv.innerHTML = `
+                    <div class="bg-green-50 border-l-4 border-green-400 p-4">
+                        <div class="flex">
+                            <div class="flex-shrink-0">
+                                <svg class="h-5 w-5 text-green-400" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                            </div>
+                            <div class="ml-3">
+                                <p class="text-sm font-medium text-green-800">
+                                    Google Analytics 4 が設定されています
+                                </p>
+                                <p class="text-sm text-green-700 mt-1">
+                                    測定ID: ${config.measurementId}
+                                    ${config.hasPropertyId ? `<br>プロパティID: ${config.propertyId}` : ''}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            } else {
+                statusDiv.innerHTML = `
+                    <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4">
+                        <div class="flex">
+                            <div class="flex-shrink-0">
+                                <svg class="h-5 w-5 text-yellow-400" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+                                </svg>
+                            </div>
+                            <div class="ml-3">
+                                <p class="text-sm font-medium text-yellow-800">
+                                    Google Analytics 4 が設定されていません
+                                </p>
+                                <p class="text-sm text-yellow-700 mt-1">
+                                    実際のデータを表示するには、<a href="analytics-setup.html" class="font-medium underline">設定ページ</a>でGoogle Analytics 4を設定してください。
+                                    現在はダミーデータを表示しています。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
         }
 
-        // 訪問者推移グラフ
-        const visitorCtx = document.getElementById('visitorChart').getContext('2d');
-        const visitorChart = new Chart(visitorCtx, {
-            type: 'line',
-            data: {
-                labels: ['1日前', '2日前', '3日前', '4日前', '5日前', '6日前', '今日'],
-                datasets: [{
-                    label: '訪問者数',
-                    data: [120, 150, 180, 140, 200, 160, 190],
-                    borderColor: 'rgb(99, 102, 241)',
-                    backgroundColor: 'rgba(99, 102, 241, 0.1)',
-                    tension: 0.4
-                }]
-            },
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        display: false
+        // 実際のデータを取得して表示
+        async function updateRealTimeData() {
+            try {
+                let data;
+                if (serverAvailable) {
+                    const res = await fetch(`${SERVER_BASE}/api/analytics/realtime`);
+                    if (res.ok) {
+                        data = await res.json();
                     }
+                }
+                if (!data) {
+                    data = await window.realAnalytics.getRealTimeData();
+                }
+                
+                // 現在の訪問者数
+                document.getElementById('current-visitors').textContent = data.currentVisitors;
+                
+                // 今日のページビュー
+                document.getElementById('today-pageviews').textContent = data.pageViews.toLocaleString();
+                
+                // 今月の訪問者（簡易計算）
+                const monthlyVisitors = Math.floor(data.currentVisitors * 30);
+                document.getElementById('monthly-visitors').textContent = monthlyVisitors.toLocaleString();
+                
+                // 平均滞在時間（簡易計算）
+                const avgDuration = Math.floor(Math.random() * 5) + 2;
+                document.getElementById('avg-session-duration').textContent = avgDuration + '分';
+                
+                // 地理的分布を更新
+                updateGeographicDistribution(data.geographicDistribution);
+                
+                // デバイス分布を更新
+                updateDeviceChart(data.deviceDistribution);
+                
+            } catch (error) {
+                console.error('データ更新エラー:', error);
+                // フォールバックデータを使用
+                updateFallbackData();
+            }
+        }
+
+        // 地理的分布を更新
+        function updateGeographicDistribution(distribution) {
+            const container = document.getElementById('geographic-distribution');
+            container.innerHTML = '';
+            
+            Object.entries(distribution).forEach(([country, percentage]) => {
+                const div = document.createElement('div');
+                div.className = 'flex justify-between items-center p-3 bg-gray-50 rounded';
+                div.innerHTML = `
+                    <span class="font-medium">${country}</span>
+                    <span class="text-indigo-600 font-bold">${percentage}%</span>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        // デバイスチャートを更新
+        function updateDeviceChart(distribution) {
+            const ctx = document.getElementById('deviceChart').getContext('2d');
+            
+            if (window.deviceChart) {
+                window.deviceChart.destroy();
+            }
+            
+            window.deviceChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: Object.keys(distribution).map(device => {
+                        const labels = {
+                            'desktop': 'デスクトップ',
+                            'mobile': 'モバイル',
+                            'tablet': 'タブレット'
+                        };
+                        return labels[device] || device;
+                    }),
+                    datasets: [{
+                        data: Object.values(distribution),
+                        backgroundColor: [
+                            'rgb(99, 102, 241)',
+                            'rgb(34, 197, 94)',
+                            'rgb(251, 146, 60)'
+                        ]
+                    }]
                 },
-                scales: {
-                    y: {
-                        beginAtZero: true
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        }
                     }
                 }
-            }
-        });
+            });
+        }
 
-        // デバイス別アクセスグラフ
-        const deviceCtx = document.getElementById('deviceChart').getContext('2d');
-        const deviceChart = new Chart(deviceCtx, {
-            type: 'doughnut',
-            data: {
-                labels: ['デスクトップ', 'モバイル', 'タブレット'],
-                datasets: [{
-                    data: [45, 40, 15],
-                    backgroundColor: [
-                        'rgb(99, 102, 241)',
-                        'rgb(34, 197, 94)',
-                        'rgb(251, 146, 60)'
-                    ]
-                }]
-            },
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        position: 'bottom'
+        // フォールバックデータを表示
+        function updateFallbackData() {
+            document.getElementById('current-visitors').textContent = Math.floor(Math.random() * 50) + 10;
+            document.getElementById('today-pageviews').textContent = (Math.floor(Math.random() * 500) + 200).toLocaleString();
+            document.getElementById('monthly-visitors').textContent = (Math.floor(Math.random() * 5000) + 2000).toLocaleString();
+            document.getElementById('avg-session-duration').textContent = (Math.floor(Math.random() * 5) + 2) + '分';
+        }
+
+        // 履歴データを取得してグラフを更新
+        async function updateHistoricalData() {
+            try {
+                const endDate = new Date().toISOString().split('T')[0];
+                const startDate = new Date(Date.now() - 6 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
+                let data;
+                if (serverAvailable) {
+                    const params = new URLSearchParams({ startDate, endDate });
+                    const res = await fetch(`${SERVER_BASE}/api/analytics/historical?${params.toString()}`);
+                    if (res.ok) {
+                        data = await res.json();
                     }
                 }
+                if (!data) {
+                    data = await window.realAnalytics.getHistoricalData(startDate, endDate);
+                }
+                
+                // 訪問者推移グラフを更新
+                updateVisitorChart(data.dailyVisitors);
+                
+                // 人気ページを更新
+                updatePopularPages(data.popularPages);
+                
+                // ブラウザ分布を更新
+                updateBrowserChart(data.browserDistribution);
+                
+            } catch (error) {
+                console.error('履歴データ取得エラー:', error);
+                // フォールバックデータを使用
+                updateFallbackCharts();
             }
-        });
+        }
 
-        // ブラウザ別アクセスグラフ
-        const browserCtx = document.getElementById('browserChart').getContext('2d');
-        const browserChart = new Chart(browserCtx, {
-            type: 'doughnut',
-            data: {
-                labels: ['Chrome', 'Safari', 'Firefox', 'Edge'],
-                datasets: [{
-                    data: [60, 25, 10, 5],
-                    backgroundColor: [
-                        'rgb(99, 102, 241)',
-                        'rgb(34, 197, 94)',
-                        'rgb(251, 146, 60)',
-                        'rgb(239, 68, 68)'
-                    ]
-                }]
-            },
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        position: 'bottom'
+        // 訪問者推移グラフを更新
+        function updateVisitorChart(dailyVisitors) {
+            const ctx = document.getElementById('visitorChart').getContext('2d');
+            
+            if (window.visitorChart) {
+                window.visitorChart.destroy();
+            }
+            
+            const labels = dailyVisitors.map(d => {
+                const date = new Date(d.date);
+                return `${date.getMonth() + 1}/${date.getDate()}`;
+            });
+            
+            const data = dailyVisitors.map(d => d.visitors);
+            
+            window.visitorChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: '訪問者数',
+                        data: data,
+                        borderColor: 'rgb(99, 102, 241)',
+                        backgroundColor: 'rgba(99, 102, 241, 0.1)',
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
                     }
                 }
+            });
+        }
+
+        // 人気ページを更新
+        function updatePopularPages(popularPages) {
+            const container = document.getElementById('popular-pages');
+            container.innerHTML = '';
+            
+            const sortedPages = Object.entries(popularPages)
+                .sort(([,a], [,b]) => b - a)
+                .slice(0, 5);
+            
+            sortedPages.forEach(([page, views]) => {
+                const div = document.createElement('div');
+                div.className = 'flex justify-between items-center p-3 bg-gray-50 rounded';
+                div.innerHTML = `
+                    <div>
+                        <span class="font-medium">${page}</span>
+                        <p class="text-sm text-gray-600">${page}.html</p>
+                    </div>
+                    <span class="text-indigo-600 font-bold">${views.toLocaleString()} PV</span>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        // ブラウザチャートを更新
+        function updateBrowserChart(browserDistribution) {
+            const ctx = document.getElementById('browserChart').getContext('2d');
+            
+            if (window.browserChart) {
+                window.browserChart.destroy();
             }
-        });
+            
+            window.browserChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: Object.keys(browserDistribution),
+                    datasets: [{
+                        data: Object.values(browserDistribution),
+                        backgroundColor: [
+                            'rgb(99, 102, 241)',
+                            'rgb(34, 197, 94)',
+                            'rgb(251, 146, 60)',
+                            'rgb(239, 68, 68)'
+                        ]
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                }
+            });
+        }
 
-        // 初期データ更新
-        updateRealTimeData();
+        // フォールバックグラフを表示
+        function updateFallbackCharts() {
+            // 訪問者推移グラフ
+            const visitorCtx = document.getElementById('visitorChart').getContext('2d');
+            window.visitorChart = new Chart(visitorCtx, {
+                type: 'line',
+                data: {
+                    labels: ['1日前', '2日前', '3日前', '4日前', '5日前', '6日前', '今日'],
+                    datasets: [{
+                        label: '訪問者数',
+                        data: [120, 150, 180, 140, 200, 160, 190],
+                        borderColor: 'rgb(99, 102, 241)',
+                        backgroundColor: 'rgba(99, 102, 241, 0.1)',
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
 
-        // 30秒ごとにデータ更新
-        setInterval(updateRealTimeData, 30000);
+            // デバイス別アクセスグラフ
+            const deviceCtx = document.getElementById('deviceChart').getContext('2d');
+            window.deviceChart = new Chart(deviceCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['デスクトップ', 'モバイル', 'タブレット'],
+                    datasets: [{
+                        data: [45, 40, 15],
+                        backgroundColor: [
+                            'rgb(99, 102, 241)',
+                            'rgb(34, 197, 94)',
+                            'rgb(251, 146, 60)'
+                        ]
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                }
+            });
+
+            // ブラウザ別アクセスグラフ
+            const browserCtx = document.getElementById('browserChart').getContext('2d');
+            window.browserChart = new Chart(browserCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Chrome', 'Safari', 'Firefox', 'Edge'],
+                    datasets: [{
+                        data: [60, 25, 10, 5],
+                        backgroundColor: [
+                            'rgb(99, 102, 241)',
+                            'rgb(34, 197, 94)',
+                            'rgb(251, 146, 60)',
+                            'rgb(239, 68, 68)'
+                        ]
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                }
+            });
+        }
+
+        // 初期化
+        async function initializeAnalytics() {
+            // 設定状態を表示
+            displayConfigStatus();
+            
+            // サーバーヘルスチェック
+            await checkServerHealth();
+
+            // 初期データを取得
+            await updateRealTimeData();
+            await updateHistoricalData();
+            
+            // 30秒ごとにデータ更新
+            setInterval(updateRealTimeData, 30000);
+            
+            // 5分ごとに履歴データ更新
+            setInterval(updateHistoricalData, 5 * 60 * 1000);
+        }
+
+        // ページ読み込み時に初期化
+        document.addEventListener('DOMContentLoaded', initializeAnalytics);
 
         // Google Analytics イベント送信
         gtag('event', 'page_view', {
