@@ -4,7 +4,7 @@
 const ANALYTICS_CONFIG = {
     // Google Analytics 4 の測定IDをここに設定
     // 例: 'G-XXXXXXXXXX'
-    MEASUREMENT_ID: 'GA_MEASUREMENT_ID',
+    MEASUREMENT_ID: 'G-WBGJLRYXKS',
     
     // カスタム設定
     CUSTOM_CONFIG: {
