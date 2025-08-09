@@ -117,24 +117,7 @@
                     精神科の現場経験とITスキルを掛け合わせ、実用的で心に寄り添う解決策を提案します。
                 </p>
                 
-                <!-- リアルタイム訪問者カウンター -->
-                <div class="mt-8 bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-6 max-w-md mx-auto">
-                    <div class="flex items-center justify-center space-x-4">
-                        <div class="text-center">
-                            <div class="text-3xl font-bold text-indigo-300" id="current-visitors">--</div>
-                            <div class="text-sm text-gray-300">現在の訪問者</div>
-                        </div>
-                        <div class="text-center">
-                            <div class="text-3xl font-bold text-purple-300" id="total-visitors">--</div>
-                            <div class="text-sm text-gray-300">総訪問者</div>
-                        </div>
-                    </div>
-                    <div class="mt-4 text-center">
-                        <a href="visitor-analytics.html" class="text-indigo-300 hover:text-indigo-200 text-sm underline">
-                            詳細分析を見る →
-                        </a>
-                    </div>
-                </div>
+                <!-- リアルタイム訪問者カウンター（削除済み） -->
                 
                                  <div class="mt-10 flex justify-center gap-4 flex-wrap">
                      <a href="#blog" class="bg-gradient-to-r from-indigo-500 to-purple-500 text-white px-8 py-3 rounded-full text-lg font-bold shadow-2xl transform hover:scale-105 transition-all duration-300">
@@ -530,21 +513,7 @@
             }
         }
 
-        // 訪問者カウンター機能
-        function updateVisitorCounter() {
-            // 正確なリアルタイム人数はクライアント側からは取得しません。
-            // 表示はダッシュボード（訪問者分析ページ / GA）で確認してください。
-            const currentEl = document.getElementById('current-visitors');
-            const totalEl = document.getElementById('total-visitors');
-            if (currentEl) currentEl.textContent = '—';
-            if (totalEl) totalEl.textContent = '—';
-        }
-
-        // ページ読み込み時にカウンター更新
-        updateVisitorCounter();
-
-        // 30秒ごとにリフレッシュ（表示は固定のまま）
-        setInterval(updateVisitorCounter, 30000);
+        // 訪問者カウンター機能は非表示化
 
         // Google Analytics イベント送信
         gtag('event', 'page_view', {
