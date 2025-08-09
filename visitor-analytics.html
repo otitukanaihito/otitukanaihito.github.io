@@ -213,16 +213,13 @@
         // 実際のデータを取得して表示
         async function updateRealTimeData() {
             try {
-                let data;
+                // デモ値ではなく、API/サーバーが無ければUIは「—」表示のままにする
+                let data = null;
                 if (serverAvailable) {
                     const res = await fetch(`${SERVER_BASE}/api/analytics/realtime`);
-                    if (res.ok) {
-                        data = await res.json();
-                    }
+                    if (res.ok) data = await res.json();
                 }
-                if (!data) {
-                    data = await window.realAnalytics.getRealTimeData();
-                }
+                if (!data) return; // フォールバックの擬似値は使わない
                 
                 // 現在の訪問者数
                 document.getElementById('current-visitors').textContent = data.currentVisitors;
@@ -308,10 +305,11 @@
 
         // フォールバックデータを表示
         function updateFallbackData() {
-            document.getElementById('current-visitors').textContent = Math.floor(Math.random() * 50) + 10;
-            document.getElementById('today-pageviews').textContent = (Math.floor(Math.random() * 500) + 200).toLocaleString();
-            document.getElementById('monthly-visitors').textContent = (Math.floor(Math.random() * 5000) + 2000).toLocaleString();
-            document.getElementById('avg-session-duration').textContent = (Math.floor(Math.random() * 5) + 2) + '分';
+            // ダミーデータは表示しない
+            document.getElementById('current-visitors').textContent = '—';
+            document.getElementById('today-pageviews').textContent = '—';
+            document.getElementById('monthly-visitors').textContent = '—';
+            document.getElementById('avg-session-duration').textContent = '—';
         }
 
         // 履歴データを取得してグラフを更新
@@ -541,7 +539,7 @@
             await updateRealTimeData();
             await updateHistoricalData();
             
-            // 30秒ごとにデータ更新
+            // 30秒ごとにデータ更新（取得できない場合は表示は据え置き）
             setInterval(updateRealTimeData, 30000);
             
             // 5分ごとに履歴データ更新
