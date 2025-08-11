@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cursor×Obsidian連携で日次ワークを短縮する実践ログ（2025-08-10） | オチつかないカンパニー</title>
+  <meta name="description" content="Cursor×Obsidianの連携と自動化で日次ワークを短縮。今日実装した設定と手順、KPI、つまずきと回避策を具体的に解説。">
+  <meta name="keywords" content="Obsidian, Cursor, 自動化, ワークフロー, 日次記録, 効率化">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://otitukanaihito.github.io/blog/cursor-obsidian-integration-automation-2025-08-10.html">
+  <meta property="og:title" content="Cursor×Obsidian連携で日次ワークを短縮する実践ログ">
+  <meta property="og:description" content="連携セットアップ、日付修正の安全化、ランチャー統合までを一気通貫で解説。">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1518779578993-ec3579fee39f?q=80&w=1600&auto=format&fit=crop">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://otitukanaihito.github.io/blog/cursor-obsidian-integration-automation-2025-08-10.html">
+  <meta property="twitter:title" content="Cursor×Obsidian連携で日次ワークを短縮する実践ログ">
+  <meta property="twitter:description" content="今日の実装とKPI、つまずきの回避策を具体的に共有。">
+  <meta property="twitter:image" content="https://images.unsplash.com/photo-1518779578993-ec3579fee39f?q=80&w=1600&auto=format&fit=crop">
+
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family: 'Hiragino Sans','Yu Gothic','Meiryo',sans-serif; line-height:1.7; color:#333; background:#f7fafc; }
+    .container { max-width: 900px; margin: 0 auto; background:#fff; border-radius: 20px; padding:40px; margin-top:20px; margin-bottom:20px; box-shadow: 0 20px 60px rgba(0,0,0,.06); }
+    .header { text-align:center; margin-bottom: 32px; padding-bottom: 24px; border-bottom: 3px solid #4f46e5; }
+    .header h1 { font-size: 2.2rem; background: linear-gradient(45deg,#4f46e5,#7c3aed); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+    .meta-info { display:flex; justify-content:center; gap: 12px; flex-wrap:wrap; margin-top:12px; }
+    .meta-tag { background:linear-gradient(45deg,#4f46e5,#7c3aed); color:#fff; padding:6px 12px; border-radius: 999px; font-size:.9rem; font-weight:700; }
+    .section { margin-bottom: 28px; }
+    .section h2 { font-size:1.4rem; color:#1f2937; margin-bottom: 14px; padding-left:16px; border-left:5px solid #4f46e5; background:linear-gradient(90deg, rgba(79,70,229,.08), transparent); padding: 12px 16px; border-radius:10px; }
+    .highlight { background: #f9fafb; border:1px solid #e5e7eb; border-left:4px solid #4f46e5; border-radius: 10px; padding:16px; }
+    .cta { background: linear-gradient(135deg,#4f46e5,#7c3aed); color:#fff; border-radius: 16px; padding: 20px; }
+    .cta a { color:#fff; text-decoration: underline; }
+    .related a { color:#4f46e5; text-decoration: none; border-bottom:1px dashed #c7d2fe; }
+    .footer-note { text-align:center; margin-top: 28px; padding-top: 16px; border-top: 2px solid #f1f5f9; color:#64748b; font-style: italic; }
+    ul { padding-left: 1.2em; }
+    li { margin: .4em 0; }
+    @media (max-width: 768px) { .container { margin: 10px; padding: 20px; } .header h1 { font-size: 1.8rem; } }
+  </style>
+</head>
+<body>
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MDWZM4DL" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <div class="container">
+    <header class="header">
+      <h1>Cursor×Obsidian連携で日次ワークを短縮する実践ログ</h1>
+      <div class="meta-info">
+        <span class="meta-tag">📅 2025-08-10</span>
+        <span class="meta-tag">⚙️ 自動化</span>
+        <span class="meta-tag">🌐 JP/EN</span>
+      </div>
+    </header>
+
+    <section class="section">
+      <h2>要約 / Summary</h2>
+      <div class="highlight">
+        <p>Cursor×Obsidian連携と自動化により、日次ワークの作成〜公開までの所要時間を短縮。バックアップ/アーカイブを除外した日付修正、統合ランチャーにCursor起動（メニュー10）を追加し、再現性のある運用を確立しました。</p>
+        <p>(English) Using Cursor×Obsidian integration and automation, we reduced end-to-end daily workflow time. Safe date correction with backup/archive exclusion and a unified launcher (menu 10) enable a repeatable operation.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>今日の実装サマリー</h2>
+      <ul>
+        <li>日付修正ツールに除外ルール追加（バックアップ/アーカイブ/ログ）</li>
+        <li>誤記5件を安全に修正（自動バックアップ＋レポート出力）</li>
+        <li>統合ランチャーに「Cursor連携（10）」を実装</li>
+        <li>空ファイル10件を削除、重複の把握のみ（バックアップは保持）</li>
+      </ul>
+    </section>
+
+    <section class="section">
+      <h2>ワークフロー設計</h2>
+      <ol>
+        <li>Obsidianで下書き → ランチャー起動（10）でCursorに送る</li>
+        <li>Cursorで整形/編集 → 自動スクリプトで日付/テンプレ反映</li>
+        <li>公開前チェック（リンク・OG・KPI）→ GitHub Pages更新</li>
+      </ol>
+    </section>
+
+    <section class="section">
+      <h2>KPI / 計測</h2>
+      <ul>
+        <li>記事作成〜公開のリードタイム: -10分を目標</li>
+        <li>自動修正件数/空ファイル削減/重複グループ推移のログ化</li>
+        <li>GA: ページビュー・内部遷移・CTAクリックをトラッキング</li>
+      </ul>
+    </section>
+
+    <section class="section">
+      <h2>再現手順（3ステップ）</h2>
+      <ol>
+        <li><code>自動化スクリプト/open_in_cursor.bat</code> の <code>Cursor.exe</code> パスを確認</li>
+        <li>ランチャー（10）でインデックスをCursorで開き、記事テンプレを作成</li>
+        <li>日付修正プレビュー → 実行 → 公開チェック（OG/リンク/見出し）</li>
+      </ol>
+    </section>
+
+    <section class="section">
+      <h2>つまずきと回避策</h2>
+      <ul>
+        <li>PowerShellのエンコード/パイプ問題 → <code>UTF-8</code>強制とパイプ削除で解消</li>
+        <li>バックアップを誤修正しない → ディレクトリ除外の明示（prefix含む）</li>
+      </ul>
+    </section>
+
+    <section class="section cta">
+      <h2>Call to Action</h2>
+      <p>同じ仕組みを導入したい方は、軽量テンプレ一式の共有と30分の初期設計レビューを実施します。お問い合わせは <a href="mailto:contact@example.com">contact@example.com</a> まで（仮）。</p>
+    </section>
+
+    <section class="section related">
+      <h2>関連記事 / Related</h2>
+      <ul>
+        <li><a href="obsidian-vault-optimization-2025-08-08.html">Obsidian Vault完全最適化プロジェクト</a></li>
+        <li><a href="hybrid-website-strategy-2025-08-09.html">ハイブリッドサイト戦略の実装ガイド</a></li>
+        <li><a href="github-pages-blog-setup-2025-08-04.html">GitHub Pagesでブログを作成する方法</a></li>
+      </ul>
+    </section>
+
+    <div class="footer-note">
+      <p>📅 公開日: 2025-08-10 | 🏷️ カテゴリー: 自動化 | © OCHITSUKANAI COMPANY</p>
+    </div>
+  </div>
+
+  <!-- Google Analytics (deferred loader) -->
+  <script src="../analytics-config.js"></script>
+  <script>document.addEventListener('DOMContentLoaded', function(){ try { loadGoogleAnalytics(); } catch(e) {} });</script>
+  <!-- Google Tag Manager (deferred loader) -->
+  <script src="../gtm-loader.js"></script>
+  <script src="../back-home.js"></script>
+</body>
+</html>
+
+

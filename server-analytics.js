@@ -10,13 +10,18 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Google Analytics 4設定
+// Google Analytics 4設定（環境変数対応）
 const GA4_CONFIG = {
-    propertyId: 'YOUR_GA4_PROPERTY_ID',
-    clientId: 'YOUR_CLIENT_ID',
-    clientSecret: 'YOUR_CLIENT_SECRET',
-    refreshToken: 'YOUR_REFRESH_TOKEN'
+    propertyId: process.env.GA4_PROPERTY_ID || 'YOUR_GA4_PROPERTY_ID',
+    clientId: process.env.GA_CLIENT_ID || 'YOUR_CLIENT_ID',
+    clientSecret: process.env.GA_CLIENT_SECRET || 'YOUR_CLIENT_SECRET',
+    refreshToken: process.env.GA_REFRESH_TOKEN || 'YOUR_REFRESH_TOKEN'
 };
+
+// ヘルスチェック
+app.get('/api/analytics/health', (req, res) => {
+    res.json({ ok: true, hasConfig: !!GA4_CONFIG.propertyId && GA4_CONFIG.propertyId !== 'YOUR_GA4_PROPERTY_ID' });
+});
 
 // Google Analytics 4認証
 async function getGA4Client() {

@@ -8,24 +8,19 @@
 (function(){
   'use strict';
 
+  // Security: Disallow overriding via URL or localStorage to prevent arbitrary container injection
   function resolveGtmId(){
-    try {
-      var params = new URLSearchParams(window.location.search);
-      var fromQuery = params.get('gtm');
-      if (fromQuery && /^GTM-[A-Z0-9]+$/.test(fromQuery)) return fromQuery;
-    } catch (_) {}
+    var DEFAULT_ID = 'GTM-MDWZM4DL';
+    var ALLOWLIST = [DEFAULT_ID];
 
+    // Optional: allow explicit runtime override ONLY if it matches allowlist
     if (typeof window.GTM_CONTAINER_ID === 'string' && /^GTM-[A-Z0-9]+$/.test(window.GTM_CONTAINER_ID)) {
-      return window.GTM_CONTAINER_ID;
+      if (ALLOWLIST.indexOf(window.GTM_CONTAINER_ID) !== -1) {
+        return window.GTM_CONTAINER_ID;
+      }
     }
 
-    try {
-      var ls = localStorage.getItem('GTM_CONTAINER_ID');
-      if (ls && /^GTM-[A-Z0-9]+$/.test(ls)) return ls;
-    } catch (_) {}
-
-    // Default container ID provided by the user (can be changed safely)
-    return 'GTM-MDWZM4DL';
+    return DEFAULT_ID;
   }
 
   function loadGtm(containerId){
@@ -54,5 +49,6 @@
     console.warn('Failed to load GTM:', e);
   }
 })();
+
 
 

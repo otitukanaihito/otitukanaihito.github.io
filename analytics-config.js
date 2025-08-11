@@ -35,8 +35,13 @@ const ANALYTICS_CONFIG = {
     }
 };
 
-// 設定をグローバルに公開
-window.ANALYTICS_CONFIG = ANALYTICS_CONFIG;
+// 設定をグローバルに公開（限定公開）
+Object.defineProperty(window, 'ANALYTICS_CONFIG', {
+    value: ANALYTICS_CONFIG,
+    writable: false,
+    configurable: false,
+    enumerable: false
+});
 
 // Google Analytics 初期化関数
 function initializeAnalytics() {
@@ -48,27 +53,9 @@ function initializeAnalytics() {
     }
 }
 
-// 測定IDの解決（優先順位: URLパラメータ > window変数 > localStorage > 設定ファイル）
+// 測定IDの解決（セキュリティ強化: URLやlocalStorageからの上書きを禁止）
 function resolveMeasurementId() {
-    try {
-        const params = new URLSearchParams(window.location.search);
-        const fromQuery = params.get('ga');
-        if (fromQuery && /^G-[A-Z0-9]+$/.test(fromQuery)) {
-            return fromQuery;
-        }
-    } catch (_) {}
-
-    if (typeof window.GA_MEASUREMENT_ID === 'string' && /^G-[A-Z0-9]+$/.test(window.GA_MEASUREMENT_ID)) {
-        return window.GA_MEASUREMENT_ID;
-    }
-
-    try {
-        const ls = localStorage.getItem('GA_MEASUREMENT_ID');
-        if (ls && /^G-[A-Z0-9]+$/.test(ls)) {
-            return ls;
-        }
-    } catch (_) {}
-
+    // 1) 固定の設定値のみを採用
     return ANALYTICS_CONFIG.MEASUREMENT_ID;
 }
 
