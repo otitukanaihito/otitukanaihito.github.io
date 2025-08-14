@@ -73,7 +73,7 @@
    };
    ```
 
-2. **real-analytics.jsの更新**
+2. **real-analytics.sample.js を参考に実装**
    ```javascript
    this.GA4_PROPERTY_ID = '123456789'; // 実際のプロパティID
    this.GA4_API_KEY = 'your-api-key'; // 実際のAPIキー
@@ -81,12 +81,12 @@
 
 ### ステップ4: HTMLファイルの更新
 
-1. **index.htmlにreal-analytics.jsを追加**
+1. **index.htmlに real-analytics.js を追加（社内配布のみ推奨）**
    ```html
    <script src="real-analytics.js"></script>
    ```
 
-2. **visitor-analytics.htmlにreal-analytics.jsを追加**
+2. **visitor-analytics.htmlに real-analytics.js を追加（公開リポジトリでは非推奨）**
    ```html
    <script src="real-analytics.js"></script>
    ```
@@ -113,7 +113,7 @@
 
 ### ステップ2: サーバー起動
 
-1. **server-analytics.jsを実行**
+1. **server-analytics.sample.js を参考にサーバ側を実装・実行**
    ```bash
    node server-analytics.js
    ```
