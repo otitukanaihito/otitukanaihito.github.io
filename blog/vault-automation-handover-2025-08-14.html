@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vault自動化と引き継ぎ整備の実践記録 - 2025年8月14日 | オチつかないカンパニー</title>
+  <meta name="description" content="Obsidian Vaultの自動化オーケストレーター、完全バックアップ、重複退避、スケジュール登録、引き継ぎガイド作成までを短時間で実装。実手順と再現性を重視した実践メモ。">
+  <meta name="keywords" content="Obsidian, 自動化, バックアップ, 重複削除, スケジュール, 引き継ぎ, 業務効率化">
+
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://otitukanaihito.github.io/blog/vault-automation-handover-2025-08-14.html">
+  <meta property="og:title" content="Vault自動化と引き継ぎ整備の実践記録">
+  <meta property="og:description" content="自動化オーケストレーター・バックアップ・重複退避・スケジューラ登録・引き継ぎガイドを一気通貫で構築。">
+  <meta property="og:image" content="https://otitukanaihito.github.io/github-blog-site/images\Gemini_Generated_Image_76s1cd76s1cd76s1.png?v=20250814093500">
+
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Hiragino Sans', 'Yu Gothic', 'Meiryo', sans-serif; color:#333; line-height:1.8; margin:0; }
+    .container { max-width: 900px; margin: 0 auto; padding: 32px 20px; }
+    header { text-align:center; margin-bottom: 28px; }
+    header h1 { font-size: 2rem; margin: 0 0 8px; }
+    .meta { color:#666; font-size: .95rem; }
+    h2 { font-size: 1.4rem; margin: 24px 0 12px; padding-left: 12px; border-left: 4px solid #6366f1; }
+    .card { background:#fff; border:1px solid #eee; border-radius:12px; padding:20px; box-shadow:0 6px 20px rgba(0,0,0,.06); }
+    code, pre { background:#1f2937; color:#e5e7eb; border-radius:8px; padding:12px; display:block; overflow:auto; font-size:.9rem; }
+    ul { padding-left: 1.1em; }
+    .note { background:#f8fafc; border-left:4px solid #22c55e; padding:12px 16px; border-radius:8px; }
+    .footer-note { text-align:center; color:#666; margin-top: 28px; font-size:.9rem; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>⚙️ Vault自動化と引き継ぎ整備の実践記録</h1>
+      <div class="meta">2025年8月14日 / 自動化・運用設計 / 実務ログ</div>
+      <img src="https://images.unsplash.com/photo-1518779578993-ec3579fee39f?q=80&w=1200&auto=format&fit=crop" alt="Automation" style="width:100%; border-radius:12px; margin-top:16px;">
+    </header>
+
+    <section class="card">
+      <h2>今日やったこと（サマリー）</h2>
+      <ul>
+        <li>自動化オーケストレーター <strong>vault_automation.py</strong> を新規追加（<em>日次/週次の定例処理を一元化</em>）</li>
+        <li>完全バックアップ <strong>backup_vault.py</strong> と、重複安全退避 <strong>duplicate_sweeper.py</strong> を実装</li>
+        <li>Windowsタスク スケジューラに <strong>ObsidianVault_Daily / Weekly</strong> を登録（WSLから確認・起動試験）</li>
+        <li>引き継ぎ用ドキュメント <strong>管理ファイル/引き継ぎガイド.md</strong> を作成</li>
+        <li>PoC（送迎システム）用の最小API（FastAPI）を雛形で用意</li>
+        <li>「今日のやり取りサマリー」ノートを作成してリンク整備</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>コマンド実行例（再現性）</h2>
+      <p class="note">日次・週次の実行は <code>vault_automation.py</code> に集約。ブログの公開反映は必要時のみ <code>--push</code> を付ける。</p>
+      <pre><code>:: 日次（バックアップ→最適化→ブログ資産正規化）
+py -3 G:\マイドライブ\Obsidian-Vault\自動化スクリプト\vault_automation.py --all
+
+:: 週次（上記＋包括的クリーンアップ）
+py -3 G:\マイドライブ\Obsidian-Vault\自動化スクリプト\vault_automation.py --weekly
+
+:: ブログ反映（必要時のみ）
+py -3 G:\マイドライブ\Obsidian-Vault\自動化スクリプト\blog_deploy.py --push</code></pre>
+    </section>
+
+    <section class="card">
+      <h2>運用の考え方（壊さない自動化）</h2>
+      <ul>
+        <li>既定では <strong>ブログを勝手に反映しない</strong>（<code>--push</code> を付けた時のみ）</li>
+        <li>重複はまず <strong>.trash/duplicates</strong> へ <em>コピー退避</em>。削除はオプション指定時のみ</li>
+        <li>スケジューラで <em>日次 08:00</em>、<em>週次 日曜09:00</em> を自動実行</li>
+        <li>不安定要素は <strong>引き継ぎガイド</strong> に明文化して属人性を解消</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>リンク</h2>
+      <ul>
+        <li><a href="https://otitukanaihito.github.io/github-blog-site/" target="_blank" rel="noopener">サイトTOP</a></li>
+        <li><a href="https://github.com/otitukanaihito/github-blog-site" target="_blank" rel="noopener">リポジトリ</a></li>
+      </ul>
+    </section>
+
+    <div class="footer-note">本記事は、実際の運用改善タスクの進行に基づく実務メモです。</div>
+  </div>
+</body>
+</html>
