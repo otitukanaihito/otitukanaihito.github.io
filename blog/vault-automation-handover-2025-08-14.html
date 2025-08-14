@@ -13,6 +13,10 @@
   <meta property="og:description" content="自動化オーケストレーター・バックアップ・重複退避・スケジューラ登録・引き継ぎガイドを一気通貫で構築。">
   <meta property="og:image" content="https://otitukanaihito.github.io/github-blog-site/images\Gemini_Generated_Image_76s1cd76s1cd76s1.png?v=20250814093500">
 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
   <style>
     body { font-family: -apple-system, BlinkMacSystemFont, 'Hiragino Sans', 'Yu Gothic', 'Meiryo', sans-serif; color:#333; line-height:1.8; margin:0; }
     .container { max-width: 900px; margin: 0 auto; padding: 32px 20px; }
@@ -28,6 +32,9 @@
   </style>
 </head>
 <body>
+  <!-- 共通ヘッダー -->
+  <div id="site-header"></div>
+
   <div class="container">
     <header>
       <h1>⚙️ Vault自動化と引き継ぎ整備の実践記録</h1>
@@ -80,5 +87,20 @@ py -3 G:\マイドライブ\Obsidian-Vault\自動化スクリプト\blog_deploy.
 
     <div class="footer-note">本記事は、実際の運用改善タスクの進行に基づく実務メモです。</div>
   </div>
+  <!-- 共通フッター -->
+  <div id="site-footer" style="margin-top:40px"></div>
+
+  <script>
+    // シンプルなパーシャル読込
+    async function loadPartial(id, url){
+      try {
+        const res = await fetch(url);
+        const html = await res.text();
+        document.getElementById(id).innerHTML = html;
+      } catch(e) { console.warn('partial load failed', url, e); }
+    }
+    loadPartial('site-header', '/github-blog-site/_partials/header.html');
+    loadPartial('site-footer', '/github-blog-site/_partials/footer.html');
+  </script>
 </body>
 </html>
