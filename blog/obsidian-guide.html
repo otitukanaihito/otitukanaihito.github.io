@@ -31,31 +31,65 @@
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
         body { font-family: 'Inter', sans-serif; }
         html { scroll-behavior: smooth; }
-        
-        /* ブログ記事用スタイル */
         .blog-content h2 {
-            @apply text-2xl font-bold text-gray-900 mt-8 mb-4;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #111827;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #e0e7ff;
         }
         .blog-content h3 {
-            @apply text-xl font-semibold text-gray-800 mt-6 mb-3;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #1f2937;
+            margin-top: 1.75rem;
+            margin-bottom: 0.75rem;
         }
         .blog-content p {
-            @apply text-gray-700 leading-relaxed mb-4;
+            color: #374151;
+            line-height: 1.9;
+            margin-bottom: 1.25rem;
         }
         .blog-content ul {
-            @apply list-disc list-inside text-gray-700 mb-4;
+            list-style-type: disc;
+            padding-left: 1.5rem;
+            color: #374151;
+            margin-bottom: 1.25rem;
+            line-height: 1.9;
         }
         .blog-content ol {
-            @apply list-decimal list-inside text-gray-700 mb-4;
+            list-style-type: decimal;
+            padding-left: 1.5rem;
+            color: #374151;
+            margin-bottom: 1.25rem;
+            line-height: 1.9;
         }
+        .blog-content li { margin-bottom: 0.4rem; }
         .blog-content blockquote {
-            @apply border-l-4 border-indigo-500 pl-4 italic text-gray-600 my-6;
+            border-left: 4px solid #6366f1;
+            padding: 0.75rem 1rem;
+            font-style: italic;
+            color: #4b5563;
+            margin: 1.5rem 0;
+            background: #f5f3ff;
+            border-radius: 0 0.5rem 0.5rem 0;
         }
         .blog-content code {
-            @apply bg-gray-100 px-2 py-1 rounded text-sm font-mono;
+            background: #f3f4f6;
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.25rem;
+            font-size: 0.875rem;
+            font-family: monospace;
         }
         .blog-content pre {
-            @apply bg-gray-900 text-white p-4 rounded-lg overflow-x-auto my-4;
+            background: #111827;
+            color: #fff;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            margin: 1rem 0;
         }
     </style>
 </head>
@@ -63,7 +97,7 @@
     <!-- ヘッダー -->
     <header class="bg-white shadow-sm sticky top-0 z-50">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="../index.html" class="text-2xl font-black tracking-wider text-gray-900">
+            <a href="../index.html" class="text-2xl font-black tracking-wider text-gray-900 hover:text-indigo-600 transition-colors duration-300">
                 OCHITSUKANAI COMPANY
             </a>
             <nav class="hidden md:flex items-center space-x-6">
@@ -90,7 +124,7 @@
                     精神科現場での知識管理から個人の学習効率化まで、Obsidianを使った実践的なナレッジ管理の方法を解説します。
                 </p>
                 <div class="flex items-center">
-                    <img src="images\1544197718136.jpg?v=20250814093500" alt="オチつかない人" class="w-12 h-12 rounded-full mr-4">
+                    <img src="../images/1544197718136.jpg" alt="オチつかない人" class="w-12 h-12 rounded-full mr-4">
                     <div>
                         <p class="font-semibold text-gray-900">オチつかない人</p>
                         <p class="text-sm text-gray-600">精神科現場で働く4児の父</p>
@@ -257,18 +291,32 @@
     </main>
 
     <!-- フッター -->
-    <footer class="bg-gray-900 text-gray-400 mt-16">
-        <div class="container mx-auto px-6 py-10 text-center">
-            <div class="text-2xl font-black tracking-wider text-white mb-6">
-                OCHITSUKANAI COMPANY
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">OCHITSUKANAI COMPANY</h3>
+                    <p class="text-gray-400">精神科現場で働く4児の父が、業務効率化と個人の成長について発信するブログです。</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">メニュー</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="../index.html#blog" class="hover:text-white transition-colors duration-300">ブログ</a></li>
+                        <li><a href="../index.html#affiliate" class="hover:text-white transition-colors duration-300">おすすめツール</a></li>
+                        <li><a href="../index.html#services" class="hover:text-white transition-colors duration-300">サービス</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">リンク</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="../index.html" class="hover:text-white transition-colors duration-300">ホーム</a></li>
+                        <li><a href="../privacy-policy.html" class="hover:text-white transition-colors duration-300">プライバシーポリシー</a></li>
+                    </ul>
+                </div>
             </div>
-            <div class="flex justify-center space-x-6 mb-6">
-                <a href="../index.html#blog" class="hover:text-white">ブログ</a>
-                <a href="../index.html#affiliate" class="hover:text-white">おすすめツール</a>
-                <a href="../index.html#services" class="hover:text-white">サービス</a>
-                <a href="../index.html#about" class="hover:text-white">プロフィール</a>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2026 OCHITSUKANAI COMPANY. All rights reserved.</p>
             </div>
-            <p>© 2025 OCHITSUKANAI COMPANY. All Rights Reserved.</p>
         </div>
     </footer>
     <script src="../back-home.js"></script>
