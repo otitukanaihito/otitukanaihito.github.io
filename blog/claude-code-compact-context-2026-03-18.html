@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claude Codeのコンテキストが溜まったら？/compactで要約して続行する方法 - オチつかないカンパニー</title>
+    <meta name="description"
+        content="Claude Codeは会話が長くなると精度が落ちる。/clearで全消去するより/compactで要約圧縮する方法が正解。CLAUDE.mdに設定を書いておけば自動提案もできる。">
+    <meta name="keywords" content="Claude Code,コンテキスト,/compact,/clear,精度,AI,CLAUDE.md,会話管理,トークン,Lost in the Middle">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://otitukanaihito.github.io/blog/claude-code-compact-context-2026-03-18.html">
+    <meta property="og:title" content="Claude Codeのコンテキストが溜まったら？/compactで要約して続行する方法">
+    <meta property="og:description"
+        content="/clearで全消去するより/compactで要約圧縮する方法が正解。CLAUDE.mdに書いておけば自動提案もできる。">
+    <meta property="og:image" content="https://otitukanaihito.github.io/images/blog_claude_compact.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://otitukanaihito.github.io/blog/claude-code-compact-context-2026-03-18.html">
+    <meta property="twitter:title" content="Claude Codeのコンテキストが溜まったら？/compactで要約して続行する方法">
+    <meta property="twitter:description"
+        content="/clearで全消去するより/compactで要約圧縮する方法が正解。CLAUDE.mdに書いておけば自動提案もできる。">
+    <meta property="twitter:image" content="https://otitukanaihito.github.io/images/blog_claude_compact.png">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-WBGJLRYXKS"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-WBGJLRYXKS', {
+            'anonymize_ip': true,
+            'cookie_flags': 'SameSite=None;Secure'
+        });
+    </script>
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Claude Codeのコンテキストが溜まったら？/compactで要約して続行する方法",
+        "description": "Claude Codeは会話が長くなると精度が落ちる。/clearで全消去するより/compactで要約圧縮する方法が正解。",
+        "author": {
+            "@type": "Person",
+            "name": "オチつかないヒト"
+        },
+        "datePublished": "2026-03-18",
+        "dateModified": "2026-03-18",
+        "publisher": {
+            "@type": "Organization",
+            "name": "オチつかないカンパニー"
+        },
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://otitukanaihito.github.io/blog/claude-code-compact-context-2026-03-18.html"
+        }
+    }
+    </script>
+    <style>
+        pre {
+            background: #1e1e2e;
+            color: #cdd6f4;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            overflow-x: auto;
+            font-size: 0.875rem;
+            line-height: 1.6;
+        }
+        code {
+            background: #e8e8f0;
+            color: #5c5f77;
+            padding: 0.15em 0.4em;
+            border-radius: 0.25rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            background: transparent;
+            color: inherit;
+            padding: 0;
+            font-size: inherit;
+        }
+        .chat-bubble-user {
+            background: #eff6ff;
+            border-left: 4px solid #3b82f6;
+            border-radius: 0 0.5rem 0.5rem 0;
+            padding: 0.75rem 1rem;
+            margin: 0.5rem 0;
+        }
+        .chat-bubble-ai {
+            background: #f0fdf4;
+            border-left: 4px solid #22c55e;
+            border-radius: 0 0.5rem 0.5rem 0;
+            padding: 0.75rem 1rem;
+            margin: 0.5rem 0;
+        }
+    </style>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-MDWZM4DL');</script>
+<!-- End Google Tag Manager -->
+</head>
+
+<body class="bg-gray-50">
+    <!-- ヘッダー -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="../index.html" class="text-2xl font-black tracking-wider text-gray-900 hover:text-indigo-600 transition-colors duration-300">
+                OCHITSUKANAI COMPANY
+            </a>
+            <nav class="hidden md:flex items-center space-x-6">
+                <a href="../index.html#blog" class="text-gray-700 hover:text-indigo-600 transition-colors duration-300">ブログ</a>
+                <a href="../index.html#affiliate" class="text-gray-700 hover:text-indigo-600 transition-colors duration-300">おすすめツール</a>
+                <a href="../index.html#services" class="text-gray-700 hover:text-indigo-600 transition-colors duration-300">サービス</a>
+                <a href="../index.html#about" class="text-gray-700 hover:text-indigo-600 transition-colors duration-300">プロフィール</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <article class="bg-white rounded-2xl shadow-xl overflow-hidden">
+            <!-- Article Header -->
+            <div class="relative h-64 md:h-96 bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-700">
+                <div class="absolute inset-0 bg-black bg-opacity-30"></div>
+                <div class="absolute bottom-0 left-0 right-0 p-8">
+                    <div class="flex items-center mb-4">
+                        <span class="text-sm font-semibold text-white bg-emerald-500 px-3 py-1 rounded-full">AI開発</span>
+                        <span class="text-sm text-white ml-4">2026-03-18</span>
+                    </div>
+                    <h1 class="text-3xl md:text-4xl font-bold text-white mb-4">
+                        Claude Codeのコンテキストが溜まったら？<br><code class="text-emerald-200 text-2xl">/compact</code>で要約して続行する方法
+                    </h1>
+                    <p class="text-lg text-gray-200">
+                        /clearで全部消すより賢い方法がある
+                    </p>
+                </div>
+            </div>
+
+            <!-- Article Content -->
+            <div class="p-8">
+                <div class="prose prose-lg max-w-none">
+
+                    <h2>「コンテキストが溜まると精度が落ちる」は本当か</h2>
+                    <p>
+                        Claude Codeを使っていると、会話が長くなってくると挙動が怪しくなる感覚を覚えることがあります。
+                        「コンテキストが溜まると精度が落ちると聞いたけど、何パーセントくらいで落ちるの？」と気になって調べてみました。
+                    </p>
+                    <p>
+                        結論から言うと、<strong>「X%を超えたら落ちる」という明確な閾値はない</strong>のですが、
+                        研究レベルで知られている傾向はあります。
+                    </p>
+
+                    <div class="bg-amber-50 border-l-4 border-amber-400 p-4 my-6">
+                        <p class="text-amber-800">
+                            <strong>「Lost in the Middle」問題（2023年論文）</strong><br>
+                            会話の前半と後半の情報は覚えやすいが、<strong>中盤の情報が抜けやすい</strong>傾向がある。
+                            コンテキストが長くなるほど、序盤の指示や前提を忘れる確率が上がる。
+                        </p>
+                    </div>
+
+                    <p>
+                        Claude Sonnet 4.6（私が普段使っているモデル）のコンテキストウィンドウは <strong>200Kトークン</strong>（約15万語）。
+                        体感として問題が出やすいのは70〜80%以上とされることが多いですが、タスクの内容にも依存します。
+                    </p>
+
+                    <h2>/clear と /compact — 何が違うのか</h2>
+
+                    <p>
+                        コンテキスト問題への対策として、Claude Codeには2つのコマンドがあります。
+                    </p>
+
+                    <div class="overflow-x-auto my-6">
+                        <table class="w-full text-sm border-collapse">
+                            <thead>
+                                <tr class="bg-gray-100">
+                                    <th class="border border-gray-300 px-4 py-2 text-left">コマンド</th>
+                                    <th class="border border-gray-300 px-4 py-2 text-left">動作</th>
+                                    <th class="border border-gray-300 px-4 py-2 text-left">文脈</th>
+                                    <th class="border border-gray-300 px-4 py-2 text-left">使いどき</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="border border-gray-300 px-4 py-2 font-mono">/clear</td>
+                                    <td class="border border-gray-300 px-4 py-2">完全リセット</td>
+                                    <td class="border border-gray-300 px-4 py-2 text-red-600">消える</td>
+                                    <td class="border border-gray-300 px-4 py-2">全く別のタスクを始めるとき</td>
+                                </tr>
+                                <tr class="bg-gray-50">
+                                    <td class="border border-gray-300 px-4 py-2 font-mono">/compact</td>
+                                    <td class="border border-gray-300 px-4 py-2">要約して圧縮</td>
+                                    <td class="border border-gray-300 px-4 py-2 text-green-600">残る（要約形式で）</td>
+                                    <td class="border border-gray-300 px-4 py-2">同じ作業を続けながら軽量化したいとき</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <p>
+                        作業の途中でコンテキストが溜まってきた場合、<code>/clear</code> を使うと
+                        それまでの会話の流れが全部消えて、また最初から説明し直しになります。
+                        <strong><code>/compact</code> なら要約された形で文脈を引き継げる</strong>ので、
+                        長い作業セッションでは断然こちらが使いやすいです。
+                    </p>
+
+                    <h2>/compact の使い方</h2>
+
+                    <p>
+                        使い方はシンプルで、チャットに打ち込むだけです：
+                    </p>
+
+<pre><code>/compact</code></pre>
+
+                    <p>
+                        さらに、何を優先して要約するか指示を付けることもできます：
+                    </p>
+
+<pre><code>/compact 作業中のファイル名と残タスクを優先して引き継いで
+/compact これまでの設計方針と決定事項を重点的に残して</code></pre>
+
+                    <div class="bg-green-50 border-l-4 border-green-400 p-4 my-6">
+                        <p class="text-green-800">
+                            <strong>ポイント：</strong><br>
+                            引き継ぎたい情報を指定することで、圧縮後も重要な文脈が残りやすくなります。
+                            特に「どのファイルを編集中だったか」「どういう方針で進めていたか」を明示するのが効果的です。
+                        </p>
+                    </div>
+
+                    <h2>CLAUDE.mdに書いておけば自動提案してくれる</h2>
+
+                    <p>
+                        「長くなったら自動で /compact してほしい」と思うのは自然なことですが、
+                        残念ながら <strong>フックで自動実行することはできません</strong>。
+                        Claude Codeのフックはシェルコマンドしか実行できず、スラッシュコマンドは呼べないのです。
+                    </p>
+                    <p>
+                        ただし、<code>CLAUDE.md</code>（プロジェクトの設定ファイル）に指示を書いておくことで、
+                        <strong>Claudeが自分から提案してくれる</strong>ようにできます。
+                    </p>
+
+<pre><code>## コミュニケーション方針
+
+- 会話が長くなってきたと判断したら、/compact で要約・圧縮することを提案する</code></pre>
+
+                    <p>
+                        この1行を追加しておくだけで、私（Claude）がコンテキストの膨張を察知したときに
+                        「そろそろ /compact しませんか？」と声をかけるようになります。
+                        自動実行ではなく「提案して、実行は人間が判断する」という形です。
+                    </p>
+
+                    <h2>実際のやり取りで確認してみた</h2>
+
+                    <p>
+                        この記事を書くきっかけになったのは、実際にClaude Codeで以下のような会話をしたことです：
+                    </p>
+
+                    <div class="bg-gray-50 rounded-lg p-6 my-6 space-y-3">
+                        <p class="text-xs text-gray-500 font-semibold uppercase tracking-wide">実際の会話ログ（要約）</p>
+                        <div class="chat-bubble-user">
+                            <p class="text-sm font-semibold text-blue-700">自分</p>
+                            <p class="text-gray-800">クロードってコンテキストがたまると精度が落ちると聞きました。何パーセントぐらいになったら精度が落ちますか。</p>
+                        </div>
+                        <div class="chat-bubble-ai">
+                            <p class="text-sm font-semibold text-green-700">Claude</p>
+                            <p class="text-gray-800">「X%を超えたら落ちる」という明確な閾値はないが、70〜80%以上で問題が出やすいとされる。Lost in the Middle問題として研究でも確認されている。</p>
+                        </div>
+                        <div class="chat-bubble-user">
+                            <p class="text-sm font-semibold text-blue-700">自分</p>
+                            <p class="text-gray-800">70%か80%になったら自動でスラッシュクリアで修正してもらえる仕様に変更したりできますか？</p>
+                        </div>
+                        <div class="chat-bubble-ai">
+                            <p class="text-sm font-semibold text-green-700">Claude</p>
+                            <p class="text-gray-800">フックではできない。ただし /compact というコマンドがあり、/clear と違って要約して文脈を残せる。CLAUDE.mdに提案指示を書くのが現実的。</p>
+                        </div>
+                        <div class="chat-bubble-user">
+                            <p class="text-sm font-semibold text-blue-700">自分</p>
+                            <p class="text-gray-800">長くなったらスラッシュコンパクトで要約して圧縮するようにしてください。</p>
+                        </div>
+                        <div class="chat-bubble-ai">
+                            <p class="text-sm font-semibold text-green-700">Claude</p>
+                            <p class="text-gray-800">CLAUDE.mdに追記しました。（即実行）</p>
+                        </div>
+                    </div>
+
+                    <p>
+                        「許可されたら確認せず一括で進める」というルールもCLAUDE.mdに書いてあるので、
+                        確認なしでそのまま設定を追記してくれました。
+                        AIとの作業では<strong>設定ファイルに方針を書いておくこと</strong>が、繰り返し同じことを言わなくて済む近道です。
+                    </p>
+
+                    <h2>まとめ：コンテキスト管理の3つのルール</h2>
+
+                    <div class="bg-gray-50 rounded-lg p-6 my-6">
+                        <ol class="list-decimal list-inside space-y-3 text-gray-700">
+                            <li><strong>長くなってきたら /compact</strong>（文脈を残して圧縮）</li>
+                            <li><strong>全く別の作業に切り替えるなら /clear</strong>（白紙に戻してすっきり）</li>
+                            <li><strong>CLAUDE.mdに「長くなったら /compact を提案して」と書く</strong>（提案を自動化）</li>
+                        </ol>
+                    </div>
+
+                    <p>
+                        自動実行はできないけれど、「AIに気づいてもらう仕組みを作る」という考え方で
+                        運用をうまく回すことができます。
+                        精神論（「忘れないように自分でやる」）ではなく、<strong>仕組みで解決する</strong>のが正解です。
+                    </p>
+
+                </div>
+
+                <!-- Amazon アフィリエイト -->
+                <div class="mt-12 p-6 bg-amber-50 border border-amber-200 rounded-xl">
+                    <h3 class="text-lg font-bold text-amber-800 mb-3">📚 AIを使いこなすための思考法</h3>
+                    <a href="https://www.amazon.co.jp/dp/4296209310?tag=otitukanaihit-22" target="_blank" rel="nofollow noopener noreferrer" class="flex items-start gap-4 hover:bg-amber-100 rounded-lg p-3 transition-colors">
+                        <div>
+                            <p class="font-semibold text-gray-800">ChatGPT仕事術 - AIを使いこなす実践的テクニック</p>
+                            <p class="text-sm text-gray-600 mt-1">AIへの指示の出し方・設定ファイルの活用・コンテキスト管理など、AIを「使いこなす」ための思考の基礎がわかる一冊。Claude Codeのような対話型AIとの付き合い方にも応用できます。</p>
+                            <p class="text-amber-600 text-sm mt-2 font-medium">Amazonで見る →</p>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- SNS Share Buttons -->
+                <div class="mt-8 pt-8 border-t border-gray-200">
+                    <p class="text-sm font-semibold text-gray-600 mb-4 text-center">この記事をシェアする</p>
+                    <div class="flex justify-center gap-4">
+                        <a id="share-twitter" href="#" target="_blank" rel="noopener noreferrer"
+                            class="flex items-center gap-2 bg-black text-white px-5 py-2 rounded-lg hover:bg-gray-800 transition-colors text-sm font-semibold">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.748l7.73-8.835L1.254 2.25H8.08l4.253 5.622 5.91-5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                            X でシェア
+                        </a>
+                        <a id="share-hatena" href="#" target="_blank" rel="noopener noreferrer"
+                            class="flex items-center gap-2 bg-blue-600 text-white px-5 py-2 rounded-lg hover:bg-blue-700 transition-colors text-sm font-semibold">
+                            <span class="font-bold mr-1">B!</span>はてブ
+                        </a>
+                    </div>
+                </div>
+                <script>
+                (function() {
+                    var title = encodeURIComponent(document.title.replace(/ - オチつかないカンパニー.*/, ''));
+                    var url = encodeURIComponent(window.location.href);
+                    document.getElementById('share-twitter').href = 'https://twitter.com/intent/tweet?text=' + title + '&url=' + url + '&hashtags=ClaudeCode,AI活用,コンテキスト管理';
+                    document.getElementById('share-hatena').href = 'https://b.hatena.ne.jp/add?mode=confirm&title=' + title + '&url=' + url;
+                })();
+                </script>
+
+                <!-- Related Articles -->
+                <div class="mt-12 pt-8 border-t border-gray-200">
+                    <h3 class="text-xl font-bold text-gray-900 mb-6">関連記事</h3>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <a href="claude-code-statusline-windows-2026-03-16.html" class="block group">
+                            <div class="bg-gray-50 rounded-lg p-4 group-hover:bg-gray-100 transition-colors">
+                                <h4 class="font-semibold text-gray-900 group-hover:text-indigo-600">
+                                    Windows日本語環境でClaude Codeステータスラインを動かす方法【全記録】</h4>
+                                <p class="text-sm text-gray-600 mt-2">コンテキスト使用率を可視化する設定方法</p>
+                            </div>
+                        </a>
+                        <a href="antigravity-ai-experience-2026-01-31.html" class="block group">
+                            <div class="bg-gray-50 rounded-lg p-4 group-hover:bg-gray-100 transition-colors">
+                                <h4 class="font-semibold text-gray-900 group-hover:text-indigo-600">
+                                    5ヶ月ぶりのブログ復活！AI「Antigravity」を使ってみた感想</h4>
+                                <p class="text-sm text-gray-600 mt-2">複数AIを使い分ける実体験レポート</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </main>
+
+    <!-- フッター -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">OCHITSUKANAI COMPANY</h3>
+                    <p class="text-gray-400">精神科現場で働く4児の父が、業務効率化と個人の成長について発信するブログです。</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">メニュー</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="../index.html#blog" class="hover:text-white transition-colors duration-300">ブログ</a></li>
+                        <li><a href="../index.html#affiliate" class="hover:text-white transition-colors duration-300">おすすめツール</a></li>
+                        <li><a href="../index.html#services" class="hover:text-white transition-colors duration-300">サービス</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">リンク</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="../index.html" class="hover:text-white transition-colors duration-300">ホーム</a></li>
+                        <li><a href="../privacy-policy.html" class="hover:text-white transition-colors duration-300">プライバシーポリシー</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2026 OCHITSUKANAI COMPANY. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../back-home.js"></script>
+</body>
+
+</html>
