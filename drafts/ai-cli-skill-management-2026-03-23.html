@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI CLIツールのスキル管理術 — Claude Code × AntiGravity 両刀使いの実践記 - オチつかないカンパニー</title>
+    <meta name="description"
+        content="Claude CodeとAntiGravityを両方使うときのスキル管理はどうする？SKILL.md 1つから始まるスキルの仕組みと、複数ツール運用の現実的な解決策を実践ベースで解説します。">
+    <meta name="keywords" content="Claude Code,AntiGravity,AI CLI,スキル管理,SKILL.md,AI開発,ワークスペース,効率化,自動化">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://otitukanaihito.github.io/blog/ai-cli-skill-management-2026-03-23.html">
+    <meta property="og:title" content="AI CLIツールのスキル管理術 — Claude Code × AntiGravity 両刀使いの実践記">
+    <meta property="og:description"
+        content="Claude CodeとAntiGravityを両方使うときのスキル管理はどうする？SKILL.md 1つから始まる実践的な運用方法を解説します。">
+    <meta property="og:image" content="https://otitukanaihito.github.io/images/blog_ai_cli_skill.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://otitukanaihito.github.io/blog/ai-cli-skill-management-2026-03-23.html">
+    <meta property="twitter:title" content="AI CLIツールのスキル管理術 — Claude Code × AntiGravity 両刀使いの実践記">
+    <meta property="twitter:description"
+        content="Claude CodeとAntiGravityを両方使うときのスキル管理はどうする？SKILL.md 1つから始まる実践的な運用方法を解説します。">
+    <meta property="twitter:image" content="https://otitukanaihito.github.io/images/blog_ai_cli_skill.png">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-WBGJLRYXKS"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-WBGJLRYXKS', {
+            'anonymize_ip': true,
+            'cookie_flags': 'SameSite=None;Secure'
+        });
+    </script>
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "AI CLIツールのスキル管理術 — Claude Code × AntiGravity 両刀使いの実践記",
+        "description": "Claude CodeとAntiGravityを両方使うときのスキル管理はどうする？SKILL.md 1つから始まるスキルの仕組みと、複数ツール運用の現実的な解決策を実践ベースで解説します。",
+        "author": {
+            "@type": "Person",
+            "name": "オチつかないヒト"
+        },
+        "datePublished": "2026-03-23",
+        "dateModified": "2026-03-23",
+        "publisher": {
+            "@type": "Organization",
+            "name": "オチつかないカンパニー"
+        },
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://otitukanaihito.github.io/blog/ai-cli-skill-management-2026-03-23.html"
+        }
+    }
+    </script>
+    <style>
+        pre {
+            background: #1e1e2e;
+            color: #cdd6f4;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            overflow-x: auto;
+            font-size: 0.875rem;
+            line-height: 1.6;
+        }
+        code {
+            background: #e8e8f0;
+            color: #5c5f77;
+            padding: 0.15em 0.4em;
+            border-radius: 0.25rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            background: transparent;
+            color: inherit;
+            padding: 0;
+            font-size: inherit;
+        }
+    </style>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-MDWZM4DL');</script>
+<!-- End Google Tag Manager -->
+</head>
+
+<body class="bg-gray-50">
+    <!-- ヘッダー -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="../index.html" class="text-2xl font-black tracking-wider text-gray-900 hover:text-indigo-600 transition-colors duration-300">
+                OCHITSUKANAI COMPANY
+            </a>
+            <nav class="hidden md:flex items-center space-x-6">
+                <a href="../index.html#blog" class="text-gray-700 hover:text-indigo-600 transition-colors duration-300">ブログ</a>
+                <a href="../index.html#affiliate" class="text-gray-700 hover:text-indigo-600 transition-colors duration-300">おすすめツール</a>
+                <a href="../index.html#services" class="text-gray-700 hover:text-indigo-600 transition-colors duration-300">サービス</a>
+                <a href="../index.html#about" class="text-gray-700 hover:text-indigo-600 transition-colors duration-300">プロフィール</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <article class="bg-white rounded-2xl shadow-xl overflow-hidden">
+            <!-- Article Header -->
+            <div class="relative h-64 md:h-96 bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-700">
+                <div class="absolute inset-0 bg-black bg-opacity-30"></div>
+                <div class="absolute bottom-0 left-0 right-0 p-8">
+                    <div class="flex items-center mb-4">
+                        <span class="text-sm font-semibold text-white bg-teal-500 px-3 py-1 rounded-full">AI開発</span>
+                        <span class="text-sm text-white ml-4">2026-03-23</span>
+                    </div>
+                    <h1 class="text-3xl md:text-4xl font-bold text-white mb-4">
+                        AI CLIツールのスキル管理術 — Claude Code × AntiGravity 両刀使いの実践記
+                    </h1>
+                    <p class="text-lg text-gray-200">
+                        SKILL.md 1つで動く手軽さと、複数ツール運用の現実的な落とし所
+                    </p>
+                </div>
+            </div>
+
+            <!-- Article Content -->
+            <div class="p-8">
+                <div class="prose prose-lg max-w-none">
+
+                    <h2>はじめに</h2>
+                    <p>
+                        AI CLIツールを使い始めると、しばらくして「スキル」という機能に行き着きます。
+                        定型作業をテンプレート化して、AIに「あのスキルを使って」と頼むだけで動かせる仕組みです。
+                    </p>
+                    <p>
+                        問題は、Claude CodeとAntiGravityのように複数のAI CLIツールを併用し始めたとき。
+                        <strong>ツールごとにスキルの置き場所が違う</strong>ので、「同じスキルを両方に入れるの？」と悩み始めます。
+                    </p>
+                    <p>
+                        この記事は、その悩みにぶつかった私が実際にたどり着いた運用方法の記録です。
+                        正解ではなく「今これでうまく回っている」という実践報告として読んでください。
+                    </p>
+
+                    <div class="bg-teal-50 border-l-4 border-teal-400 p-4 my-6">
+                        <p class="text-teal-800">
+                            <strong>この記事の対象読者：</strong><br>
+                            Claude Code または AntiGravity を使っていて、スキル機能を使い始めたばかりの方。
+                            複数ツールを併用していて、スキルの管理方法に迷っている方。
+                        </p>
+                    </div>
+
+                    <h2>1. そもそも「スキル」とは何か</h2>
+
+                    <p>
+                        Claude Code のスキルは、<code>SKILL.md</code> というファイルを含むフォルダが1つの「スキル」になります。
+                        それだけです。フォルダ構成はこんなイメージです：
+                    </p>
+
+<pre><code>~/.claude/skills/
+├── weekly-review/
+│   └── SKILL.md      ← 週次振り返りのスキル
+├── deploy-site/
+│   └── SKILL.md      ← サイトデプロイのスキル
+└── daily-report/
+    └── SKILL.md      ← 日報作成のスキル</code></pre>
+
+                    <p>
+                        <code>SKILL.md</code> の中身は、AIへの指示書です。
+                        「このスキルが呼ばれたら、こういう手順でこういう出力をしてください」と書いておくと、
+                        Claude Codeがそれを読んで実行してくれます。
+                    </p>
+
+                    <h3>スキルで何ができるか</h3>
+                    <p>
+                        私が実際に使っているスキルの例を挙げると：
+                    </p>
+                    <ul>
+                        <li><strong>週次振り返り：</strong>今週の作業ログを読み込んで、KPT形式でまとめる</li>
+                        <li><strong>サイトデプロイ：</strong>静的サイトの更新手順（ファイル確認 → コピー → sitemap更新）をステップごとに実行</li>
+                        <li><strong>日報作成：</strong>送迎記録のCSVを読んで、決まった書式で日報を出力する</li>
+                    </ul>
+                    <p>
+                        要するに「毎回同じことをAIに説明するのが面倒な作業」を一度 <code>SKILL.md</code> に書いておけば、
+                        次回から「週次振り返りのスキルを使って」の一言で動きます。
+                    </p>
+
+                    <div class="bg-gray-50 rounded-lg p-6 my-6">
+                        <h4 class="font-semibold text-gray-800 mb-3">SKILL.md の最小構成例</h4>
+<pre><code># 週次振り返りスキル
+
+## 概要
+今週の作業ログをもとにKPT形式の振り返りを作成する。
+
+## 手順
+1. `~/logs/weekly/` 配下の最新ファイルを読み込む
+2. Keep / Problem / Try に分類してまとめる
+3. 来週のアクション3件を提案する
+
+## 出力形式
+Markdown形式で出力すること。</code></pre>
+                    </div>
+
+                    <h2>2. 複数ツールを使うときの悩み</h2>
+
+                    <p>
+                        Claude Code と AntiGravity では、スキルの置き場所が異なります。
+                    </p>
+
+                    <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 my-6">
+                        <p class="text-yellow-800">
+                            <strong>ツールごとのスキルディレクトリ：</strong><br>
+                            Claude Code → <code>~/.claude/skills/</code>（グローバル、ユーザーホーム以下）<br>
+                            AntiGravity → <code>.agent/skills/</code>（プロジェクト内、ローカル）
+                        </p>
+                    </div>
+
+                    <p>
+                        「週次振り返り」スキルを両方で使いたい場合、同じ <code>SKILL.md</code> を2か所に置く必要が出てきます。
+                        片方を変更したらもう片方も変更しなければならない。この二重管理がじわじわ面倒になってきます。
+                    </p>
+                    <p>
+                        「シンボリックリンクで一元管理すればいい」という解決策が頭に浮かびます。
+                        実際それは正しいのですが、<strong>Windowsではシンボリックリンクに権限が必要</strong>だったり、
+                        Git管理下でシンボリックリンクが意図しない挙動をすることもあります。
+                        最初からそこを目指すと、スキルを1つも作らないまま設計に時間を使い果たしてしまいます。
+                    </p>
+
+                    <h2>3. 実際にやった解決策</h2>
+
+                    <h3>方針：シンプルに始めて、必要になったら整理する</h3>
+                    <p>
+                        現時点での私の運用はこうなっています：
+                    </p>
+
+                    <ol>
+                        <li><strong>共通スキルは両方に同じ SKILL.md を配置する</strong>（コピーで管理）</li>
+                        <li><strong>ツール固有のスキルは片方だけに置く</strong></li>
+                        <li><strong>シンボリックリンクは「本当に必要になったとき」に検討する</strong></li>
+                    </ol>
+
+                    <p>
+                        共通スキルは、変更頻度が低い「定型作業の手順書」に限定しています。
+                        週に1回変更するようなスキルは、どちらかのツールに寄せて「そっちでしか使わない」と割り切る。
+                        これで二重管理の痛みはかなり減りました。
+                    </p>
+
+                    <h3>ツール固有のスキルは分ける</h3>
+                    <p>
+                        AntiGravity には <code>// turbo</code> というアノテーションがあり、
+                        特定のサブエージェント（<code>browser_subagent</code> など）を呼び出すスキルを書けます。
+                        これは AntiGravity 専用の記法なので、そのまま Claude Code に移植しても動きません。
+                    </p>
+                    <p>
+                        逆に Claude Code 固有の仕組み（例：<code>// claude_code_specific</code> 的な記法や
+                        特定のツール呼び出し）を使うスキルも、無理に AntiGravity に持ち込まないほうが安全です。
+                    </p>
+
+                    <div class="bg-gray-50 rounded-lg p-6 my-6">
+                        <h4 class="font-semibold text-gray-800 mb-4">スキルの分類フローチャート</h4>
+                        <ul class="space-y-3 text-gray-700">
+                            <li class="flex items-start gap-2">
+                                <span class="text-teal-600 font-bold mt-0.5">→</span>
+                                <span>ツール固有の記法・機能を使っている？ → <strong>片方だけに置く</strong></span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-teal-600 font-bold mt-0.5">→</span>
+                                <span>変更頻度が高い（週1以上）？ → <strong>メインで使うツールにだけ置く</strong></span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-teal-600 font-bold mt-0.5">→</span>
+                                <span>どちらでも使う、かつ変更頻度が低い？ → <strong>両方にコピーして管理</strong></span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <h2>4. ワークスペース構成のポイント</h2>
+
+                    <h3>1フォルダにまとめるメリット</h3>
+                    <p>
+                        私はナレッジ・日記・複数プロジェクトを1つのフォルダ以下にまとめて管理しています。
+                        AIツールから見ると「このフォルダを起点にすれば全部見える」状態になるので、
+                        横断的な作業（「先週の日記を参照しながら振り返りを作る」など）がやりやすい。
+                    </p>
+
+                    <h3>注意点：git の誤操作で個人情報を公開しない</h3>
+                    <p>
+                        ナレッジや日記を含むフォルダを git 管理すると、
+                        <strong>うっかり push したときに個人情報が公開される</strong>リスクがあります。
+                        私はこのフォルダに <strong>git init をしない</strong>ことをルールにしています。
+                        個別プロジェクトだけをそれぞれ独立した git リポジトリとして管理する方針です。
+                    </p>
+
+                    <div class="bg-red-50 border-l-4 border-red-400 p-4 my-6">
+                        <p class="text-red-800">
+                            <strong>ワークスペースに git init しない理由：</strong><br>
+                            日記・メモ・業務記録が混在するフォルダをうっかり GitHub に push すると、
+                            個人情報・患者情報の漏洩につながる可能性があります。
+                            「プロジェクトが大きくなったら独立させる」を判断基準に、リスクを最小化します。
+                        </p>
+                    </div>
+
+                    <h3>プロジェクトが大きくなったら独立させる判断基準</h3>
+                    <p>
+                        次のどれかに当てはまったら、独立したリポジトリに切り出すタイミングです：
+                    </p>
+                    <ul>
+                        <li>他の人と共同作業したくなった</li>
+                        <li>CI/CD（自動デプロイ）を組みたくなった</li>
+                        <li>公開したいが、そのフォルダの他のファイルは公開したくない</li>
+                    </ul>
+                    <p>
+                        逆に言えば、それ以外の段階では1フォルダにまとめておくほうが、
+                        AI ツールとの相性がいいです。
+                    </p>
+
+                    <!-- Amazon アフィリエイト 1 -->
+                    <div class="mt-10 mb-8 p-6 bg-amber-50 border border-amber-200 rounded-xl">
+                        <h3 class="text-lg font-bold text-amber-800 mb-3">AI活用・自動化に関連するおすすめ本</h3>
+                        <a href="https://www.amazon.co.jp/s?k=ChatGPT+プログラミング+自動化&tag=otitukanaihit-22" target="_blank" rel="nofollow noopener noreferrer" class="flex items-start gap-4 hover:bg-amber-100 rounded-lg p-3 transition-colors">
+                            <div>
+                                <p class="font-semibold text-gray-800">ChatGPT・AI活用 × 業務自動化 関連書籍</p>
+                                <p class="text-sm text-gray-600 mt-1">AIツールを「使いこなす」ためには、指示の出し方（プロンプト設計）の基礎が大事。スキルの SKILL.md を書く力は、プロンプトエンジニアリングの力とほぼ同じです。</p>
+                                <p class="text-amber-600 text-sm mt-2 font-medium">Amazonで探す →</p>
+                            </div>
+                        </a>
+                    </div>
+
+                    <h2>5. AIの回答を出発点にする、正解にしない</h2>
+
+                    <p>
+                        この記事を書く元になった体験として、ひとつ正直に書いておきます。
+                    </p>
+                    <p>
+                        スキルの管理方法を調べているとき、AIに「シンボリックリンクでスキルを共有する方法を教えて」と聞いたら、
+                        <code>ln -s</code> コマンドを案内されました。Windowsで作業しているのに。
+                    </p>
+                    <p>
+                        また、「AntiGravity のスキルをインストールするコマンドは？」と聞いたら、
+                        <strong>存在しないコマンドを自信満々に教えてくれた</strong>こともあります。
+                        <code>npx antigravity-awesome-skills install</code> みたいな、
+                        実際には動かないものを。
+                    </p>
+
+                    <div class="bg-indigo-50 border-l-4 border-indigo-400 p-4 my-6">
+                        <p class="text-indigo-800">
+                            <strong>AIの回答との正しい付き合い方：</strong><br>
+                            AIが教えてくれることは「出発点」であり「正解」ではありません。
+                            特にコマンドやパスに関する情報は、実際に動かして確認するまで信用しないこと。
+                            「なぜそのコマンドが存在するのか」「自分の環境（OS・シェル）に合っているか」を
+                            自分で考える癖をつけることが、AI時代の基礎リテラシーだと思います。
+                        </p>
+                    </div>
+
+                    <p>
+                        この問題はAIが悪いのではなく、使い方の問題です。
+                        「AIに聞いたから正しい」ではなく、「AIに聞いてアイデアをもらって、自分で検証する」。
+                        そのサイクルが確立できると、AIツールは本当に強力な武器になります。
+                    </p>
+
+                    <h2>6. まとめ：AI CLIツールとの付き合い方</h2>
+
+                    <div class="bg-gray-50 rounded-lg p-6 my-6">
+                        <h4 class="font-semibold text-gray-800 mb-4">この記事のポイントまとめ</h4>
+                        <ul class="space-y-3 text-gray-700">
+                            <li class="flex items-start gap-2">
+                                <span class="text-teal-600 font-bold">1.</span>
+                                <span>スキルは <code>SKILL.md</code> 1つのフォルダ。最初はシンプルに始める</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-teal-600 font-bold">2.</span>
+                                <span>複数ツールのスキル管理は「共通はコピー、固有は片方だけ」でまず運用する</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-teal-600 font-bold">3.</span>
+                                <span>シンボリックリンクは「本当に必要になったとき」に検討すれば十分</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-teal-600 font-bold">4.</span>
+                                <span>ワークスペースに git init しない（個人情報保護）</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-teal-600 font-bold">5.</span>
+                                <span>AIの回答は出発点。自分の環境で検証して初めて「正解」になる</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <p>
+                        最初から完璧なスキル管理構成を目指さなくていいです。
+                        使いながら育てていくのが、AI CLIツールとの正しい付き合い方だと実感しています。
+                    </p>
+                    <p>
+                        スキルを自分で書くのが面倒なら、<strong>Claude Code に「このスキルを作って」と頼む</strong>のが最速です。
+                        SKILL.md のたたき台を作ってもらって、そこから自分の用途に合わせて手直しするだけでOK。
+                        AIツールは、AIツールを使うための作業にも使える。それがAI CLIの面白いところです。
+                    </p>
+
+                    <!-- Amazon アフィリエイト 2 -->
+                    <div class="mt-10 p-6 bg-amber-50 border border-amber-200 rounded-xl">
+                        <h3 class="text-lg font-bold text-amber-800 mb-3">Claude Code・GitHub Copilot などAI開発ツール関連書籍</h3>
+                        <a href="https://www.amazon.co.jp/s?k=GitHub+Copilot+Claude+AI+開発&tag=otitukanaihit-22" target="_blank" rel="nofollow noopener noreferrer" class="flex items-start gap-4 hover:bg-amber-100 rounded-lg p-3 transition-colors">
+                            <div>
+                                <p class="font-semibold text-gray-800">AI開発ツール活用・GitHub Copilot 関連書籍</p>
+                                <p class="text-sm text-gray-600 mt-1">Claude Code や GitHub Copilot といったAI CLIツールの活用法を体系的に学べる書籍です。コマンドラインに慣れていない方でも、AIとの協働を通じて開発効率を上げるヒントが見つかります。</p>
+                                <p class="text-amber-600 text-sm mt-2 font-medium">Amazonで探す →</p>
+                            </div>
+                        </a>
+                    </div>
+
+                </div>
+
+                <!-- SNS Share Buttons -->
+                <div class="mt-8 pt-8 border-t border-gray-200">
+                    <p class="text-sm font-semibold text-gray-600 mb-4 text-center">この記事をシェアする</p>
+                    <div class="flex justify-center gap-4">
+                        <a id="share-twitter" href="#" target="_blank" rel="noopener noreferrer"
+                            class="flex items-center gap-2 bg-black text-white px-5 py-2 rounded-lg hover:bg-gray-800 transition-colors text-sm font-semibold">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.748l7.73-8.835L1.254 2.25H8.080l4.253 5.622 5.91-5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                            X でシェア
+                        </a>
+                        <a id="share-hatena" href="#" target="_blank" rel="noopener noreferrer"
+                            class="flex items-center gap-2 bg-blue-600 text-white px-5 py-2 rounded-lg hover:bg-blue-700 transition-colors text-sm font-semibold">
+                            <span class="font-bold mr-1">B!</span>はてブ
+                        </a>
+                    </div>
+                </div>
+                <script>
+                (function() {
+                    var title = encodeURIComponent(document.title.replace(/ - オチつかないカンパニー.*/, ''));
+                    var url = encodeURIComponent(window.location.href);
+                    document.getElementById('share-twitter').href = 'https://twitter.com/intent/tweet?text=' + title + '&url=' + url + '&hashtags=ClaudeCode,AntiGravity,AI開発,スキル管理';
+                    document.getElementById('share-hatena').href = 'https://b.hatena.ne.jp/add?mode=confirm&title=' + title + '&url=' + url;
+                })();
+                </script>
+
+                <!-- Related Articles -->
+                <div class="mt-12 pt-8 border-t border-gray-200">
+                    <h3 class="text-xl font-bold text-gray-900 mb-6">関連記事</h3>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <a href="../blog/claude-code-statusline-windows-2026-03-16.html" class="block group">
+                            <div class="bg-gray-50 rounded-lg p-4 group-hover:bg-gray-100 transition-colors">
+                                <h4 class="font-semibold text-gray-900 group-hover:text-indigo-600">
+                                    Windows日本語環境でClaude Codeステータスラインを動かす方法【全記録】</h4>
+                                <p class="text-sm text-gray-600 mt-2">cygpath・文字化け・jqの3段階で解決した全記録</p>
+                            </div>
+                        </a>
+                        <a href="../blog/antigravity-ai-experience-2026-01-31.html" class="block group">
+                            <div class="bg-gray-50 rounded-lg p-4 group-hover:bg-gray-100 transition-colors">
+                                <h4 class="font-semibold text-gray-900 group-hover:text-indigo-600">
+                                    5ヶ月ぶりのブログ復活！AI「Antigravity」を使ってみた感想</h4>
+                                <p class="text-sm text-gray-600 mt-2">AIツールの実体験レポート</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </main>
+
+    <!-- フッター -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">OCHITSUKANAI COMPANY</h3>
+                    <p class="text-gray-400">精神科現場で働く4児の父が、業務効率化と個人の成長について発信するブログです。</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">メニュー</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="../index.html#blog" class="hover:text-white transition-colors duration-300">ブログ</a></li>
+                        <li><a href="../index.html#affiliate" class="hover:text-white transition-colors duration-300">おすすめツール</a></li>
+                        <li><a href="../index.html#services" class="hover:text-white transition-colors duration-300">サービス</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">リンク</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="../index.html" class="hover:text-white transition-colors duration-300">ホーム</a></li>
+                        <li><a href="../privacy-policy.html" class="hover:text-white transition-colors duration-300">プライバシーポリシー</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2026 OCHITSUKANAI COMPANY. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../back-home.js"></script>
+</body>
+
+</html>
