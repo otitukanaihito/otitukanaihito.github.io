@@ -1,0 +1,38 @@
+name: 予約投稿の自動公開
+
+on:
+  schedule:
+    # 毎週月曜 8:00 JST (= 日曜 23:00 UTC)
+    - cron: "0 23 * * 0"
+  workflow_dispatch:
+    # GitHub画面から手動実行も可能
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: リポジトリをチェックアウト
+        uses: actions/checkout@v4
+
+      - name: Python のセットアップ
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: 予約投稿スクリプトを実行
+        run: python scripts/publish_drafts.py
+
+      - name: 変更があればコミット・プッシュ
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add blog/ sitemap.xml
+          if git diff --cached --quiet; then
+            echo "公開対象の記事がありませんでした。"
+          else
+            git commit -m "chore: 予約投稿を公開 $(date +'%Y-%m-%d')"
+            git push
+          fi
