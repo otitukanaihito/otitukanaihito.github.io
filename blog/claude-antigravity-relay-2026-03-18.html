@@ -6,15 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Claude CodeとAntigravityのリレープレー ～マルチエージェントデモをAI2本で完走した話～ - オチつかないカンパニー</title>
     <meta name="description"
-        content="Claude Codeでマルチエージェントデモを実行→レート制限で止まる→GoogleのAIエージェントIDE「Antigravity」にバトンタッチして完走。4エージェント並行実行とリアルタイムダッシュボードの全記録。">
-    <meta name="keywords" content="Claude Code,Antigravity,マルチエージェント,AI,レート制限,Python,HTTPサーバー,AI開発,Google,エージェントIDE">
+        content="Claude Codeでマルチエージェントデモを実行→レート制限で止まる→AIエージェントフレームワーク「Antigravity」にバトンタッチして完走。4エージェント並行実行とリアルタイムダッシュボードの全記録。">
+    <meta name="keywords" content="Claude Code,Antigravity,マルチエージェント,AI,レート制限,Python,HTTPサーバー,AI開発,AIエージェントフレームワーク">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="article">
     <meta property="og:url" content="https://otitukanaihito.github.io/blog/claude-antigravity-relay-2026-03-18.html">
     <meta property="og:title" content="Claude CodeとAntigravityのリレープレー ～マルチエージェントデモをAI2本で完走した話～">
     <meta property="og:description"
-        content="Claude Codeでマルチエージェントデモを実行→レート制限で止まる→GoogleのAIエージェントIDE「Antigravity」にバトンタッチして完走。4エージェント並行実行とリアルタイムダッシュボードの全記録。">
+        content="Claude Codeでマルチエージェントデモを実行→レート制限で止まる→AIエージェントフレームワーク「Antigravity」にバトンタッチして完走。4エージェント並行実行とリアルタイムダッシュボードの全記録。">
     <meta property="og:image" content="https://otitukanaihito.github.io/images/eyecatch-relay.png">
 
     <!-- Twitter -->
@@ -46,7 +46,7 @@
         "@context": "https://schema.org",
         "@type": "BlogPosting",
         "headline": "Claude CodeとAntigravityのリレープレー ～マルチエージェントデモをAI2本で完走した話～",
-        "description": "Claude Codeでマルチエージェントデモを実行→レート制限で止まる→GoogleのAIエージェントIDE「Antigravity」にバトンタッチして完走。4エージェント並行実行とリアルタイムダッシュボードの全記録。",
+        "description": "Claude Codeでマルチエージェントデモを実行→レート制限で止まる→AIエージェントフレームワーク「Antigravity」にバトンタッチして完走。4エージェント並行実行とリアルタイムダッシュボードの全記録。",
         "author": {
             "@type": "Person",
             "name": "オチつかないヒト"
@@ -144,7 +144,7 @@
                     </p>
                     <p>
                         Claude Codeで4エージェント並行のダッシュボードデモを走らせ、
-                        レート制限で止まったところをGoogleのAIエージェントIDE「Antigravity」にバトンタッチ。
+                        レート制限で止まったところをAIエージェントフレームワーク「Antigravity」にバトンタッチ。
                         同じサーバーとUIを再利用してデモを完走させるまでの全記録です。
                     </p>
 
@@ -152,7 +152,7 @@
                         <p class="text-indigo-800">
                             <strong>この記事の登場ツール：</strong><br>
                             ・<strong>Claude Code</strong>：AnthropicのAI搭載CLIツール<br>
-                            ・<strong>Antigravity</strong>：GoogleのAIエージェントIDE（エージェントがコード実行・ファイル操作・調査を自律的に行う）
+                            ・<strong>Antigravity</strong>：Claude CodeなどのAI CLIツールと組み合わせて使えるAIエージェントフレームワーク（エージェントがコード実行・ファイル操作・調査を自律的に行う）
                         </p>
                     </div>
 
@@ -248,9 +248,9 @@ python -m http.server 8080
 
                     <h3>Antigravityとは</h3>
                     <p>
-                        <strong>Antigravity はGoogleが開発したAIエージェントIDEです。</strong>
+                        <strong>Antigravity はClaude CodeなどのAI CLIツールと組み合わせて使えるAIエージェントフレームワークです。</strong>
                         単なるAIチャットではなく、エージェントがコードの実行、ファイルの読み書き、
-                        ターミナル操作、Webブラウジングまで自律的に行える統合開発環境です。
+                        ターミナル操作、Webブラウジングまで自律的に行えます。
                     </p>
                     <p>
                         Claude Codeとは独立したレート制限を持っているため、
