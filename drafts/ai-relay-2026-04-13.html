@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIツール同士のリレープレー〜1つのAIが止まっても完走できる仕組みの作り方〜 - オチつかないカンパニー</title>
+    <meta name="description"
+        content="Claude Codeがレート制限で止まったら？認証エラーが出たら？AIツール同士のリレープレー設計術。Claude Code・AntiGravity・ChatGPTの得意/不得意を整理し、コンテキストファイル共有で引き継ぎをスムーズにする実践的な方法を解説。">
+    <meta name="keywords" content="Claude Code,AntiGravity,AIツール,リレー,使い分け,レート制限,マルチエージェント,副業,個人開発,AI CLI,コンテキスト共有">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://otitukanaihito.github.io/blog/ai-relay-2026-04-13.html">
+    <meta property="og:title" content="AIツール同士のリレープレー〜1つのAIが止まっても完走できる仕組みの作り方〜">
+    <meta property="og:description"
+        content="Claude Codeがレート制限で止まったら？AIツール同士をリレーさせて完走する設計術。コンテキストファイル共有で引き継ぎをスムーズにする実践解説。">
+    <meta property="og:image" content="https://otitukanaihito.github.io/images/eyecatch-relay.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://otitukanaihito.github.io/blog/ai-relay-2026-04-13.html">
+    <meta property="twitter:title" content="AIツール同士のリレープレー〜1つのAIが止まっても完走できる仕組みの作り方〜">
+    <meta property="twitter:description"
+        content="Claude Codeがレート制限で止まったら？AIツール同士をリレーさせて完走する設計術。">
+    <meta property="twitter:image" content="https://otitukanaihito.github.io/images/eyecatch-relay.png">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-WBGJLRYXKS"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-WBGJLRYXKS', {
+            'anonymize_ip': true,
+            'cookie_flags': 'SameSite=None;Secure'
+        });
+    </script>
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "AIツール同士のリレープレー〜1つのAIが止まっても完走できる仕組みの作り方〜",
+        "description": "Claude Codeがレート制限で止まったら？AIツール同士をリレーさせて完走する設計術。コンテキストファイル共有で引き継ぎをスムーズにする実践解説。",
+        "author": {
+            "@type": "Person",
+            "name": "オチつかないヒト"
+        },
+        "datePublished": "2026-04-13",
+        "dateModified": "2026-04-13",
+        "publisher": {
+            "@type": "Organization",
+            "name": "オチつかないカンパニー"
+        },
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://otitukanaihito.github.io/blog/ai-relay-2026-04-13.html"
+        }
+    }
+    </script>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-MDWZM4DL');</script>
+<!-- End Google Tag Manager -->
+    <style>
+        pre {
+            background: #1e1e2e;
+            color: #cdd6f4;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            overflow-x: auto;
+            font-size: 0.875rem;
+            line-height: 1.6;
+        }
+        code {
+            background: #e8e8f0;
+            color: #5c5f77;
+            padding: 0.15em 0.4em;
+            border-radius: 0.25rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            background: transparent;
+            color: inherit;
+            padding: 0;
+            font-size: inherit;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50">
+    <!-- ヘッダー -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="../index.html" class="text-2xl font-black tracking-wider text-gray-900 hover:text-indigo-600 transition-colors duration-300">
+                OCHITSUKANAI COMPANY
+            </a>
+            <nav class="hidden md:flex items-center space-x-6">
+                <a href="../index.html#blog" class="text-gray-700 hover:text-indigo-600 transition-colors duration-300">ブログ</a>
+                <a href="../index.html#affiliate" class="text-gray-700 hover:text-indigo-600 transition-colors duration-300">おすすめツール</a>
+                <a href="../index.html#services" class="text-gray-700 hover:text-indigo-600 transition-colors duration-300">サービス</a>
+                <a href="../index.html#about" class="text-gray-700 hover:text-indigo-600 transition-colors duration-300">プロフィール</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <article class="bg-white rounded-2xl shadow-xl overflow-hidden">
+            <!-- Article Header -->
+            <div class="relative h-64 md:h-96 bg-gradient-to-r from-violet-600 via-blue-600 to-cyan-500">
+                <div class="absolute inset-0 bg-black bg-opacity-30"></div>
+                <div class="absolute bottom-0 left-0 right-0 p-8">
+                    <div class="flex items-center mb-4">
+                        <span class="text-sm font-semibold text-white bg-violet-500 px-3 py-1 rounded-full">AI活用</span>
+                        <span class="text-sm text-white ml-4">2026-04-13</span>
+                    </div>
+                    <h1 class="text-3xl md:text-4xl font-bold text-white mb-4">
+                        AIツール同士のリレープレー〜1つのAIが止まっても完走できる仕組みの作り方〜
+                    </h1>
+                    <p class="text-lg text-gray-200">
+                        「どちらか一方」ではなく「両方を手元に置く」が正解。Claude Code・AntiGravity・ChatGPTのリレー設計術。
+                    </p>
+                </div>
+            </div>
+
+            <!-- Article Content -->
+            <div class="p-8">
+                <div class="prose prose-lg max-w-none">
+
+                    <h2>AIが途中で止まったら、どうする？</h2>
+                    <p>
+                        AI CLIツールを使って作業を進めていると、突然こんなメッセージが出ることがあります。
+                    </p>
+
+                    <pre><code>Rate limit exceeded. Please wait before retrying.</code></pre>
+
+                    <p>
+                        あるいは、起動した瞬間に認証エラーが出て何も始められないこともあります。
+                        「さあ作業しよう」というタイミングでAIが止まる——これ、結構なストレスです。
+                    </p>
+                    <p>
+                        でも、ちょっと視点を変えると面白い発想が生まれます。
+                        <strong>「1本のAIが止まっても、別のAIにバトンを渡せばいい」</strong>。
+                    </p>
+                    <p>
+                        この記事では、Claude Code・AntiGravity・ChatGPTという3つのAIツールを「リレー」させる設計思想と、
+                        実際にバトンタッチをスムーズにする「コンテキスト共有術」を紹介します。
+                    </p>
+
+                    <div class="bg-indigo-50 border-l-4 border-indigo-400 p-4 my-6">
+                        <p class="text-indigo-800">
+                            <strong>この記事の対象読者：</strong><br>
+                            ・AI CLIツール（Claude Code / ChatGPT等）を使い始めた非エンジニアの副業・個人開発者<br>
+                            ・「1つのAIが止まってしまった」経験がある人<br>
+                            ・マルチエージェントに興味はあるが、難しそうで踏み出せていない人
+                        </p>
+                    </div>
+
+                    <div class="bg-gray-50 border-l-4 border-gray-400 p-4 my-6">
+                        <p class="text-gray-700">
+                            <strong>前回の記事（実行レポート）も合わせてどうぞ：</strong><br>
+                            「<a href="claude-antigravity-relay-2026-03-18.html" class="text-indigo-600 hover:underline">Claude CodeとAntigravityのリレープレー ～マルチエージェントデモをAI2本で完走した話～</a>」では、
+                            実際にレート制限からバトンタッチするまでの全記録を書いています。
+                            この記事はその「設計思想・Tips編」です。
+                        </p>
+                    </div>
+
+                    <h2>1. 実体験：Claude Codeが認証エラーで止まった話</h2>
+
+                    <p>
+                        ある朝、Claude Codeを起動したら認証エラーが出ました。
+                        昨日まで普通に動いていたのに、セッションの有効期限が切れていたようです。
+                    </p>
+                    <p>
+                        最初は「壊れた？」と焦りましたが、対処は拍子抜けするほど簡単でした。
+                    </p>
+
+<pre><code># Claude Codeのプロンプト内で実行
+/login</code></pre>
+
+                    <p>
+                        これだけでブラウザが開き、認証フローが走って復旧しました。
+                        「エラーが出たらまず <code>/login</code>」は覚えておいて損はないコマンドです。
+                    </p>
+
+                    <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 my-6">
+                        <p class="text-yellow-800">
+                            <strong>補足：</strong><br>
+                            環境・バージョン・ネットワーク状況によって挙動は異なります。
+                            解決しない場合は<a href="https://docs.anthropic.com/ja/docs/claude-code/overview" target="_blank" rel="noopener noreferrer" class="text-yellow-700 underline">Claude Code公式ドキュメント</a>を確認するのが確実です。
+                        </p>
+                    </div>
+
+                    <p>
+                        認証エラーはすぐ直りましたが、このとき気づいたことがあります。
+                        <strong>「もしこれが解決できなかったら、今日の作業は全部止まっていた」</strong>、と。
+                        1つのツールだけに依存していると、そのツールが止まった瞬間に詰む。
+                        これがリレープレー設計を考えるきっかけになりました。
+                    </p>
+
+                    <h2>2. 各ツールの得意・不得意を整理する</h2>
+
+                    <p>
+                        リレーをうまく機能させるには、「誰に何を渡すか」を把握しておく必要があります。
+                        まず3つのツールの特徴を整理しておきましょう。
+                    </p>
+
+                    <!-- 比較テーブル -->
+                    <div class="overflow-x-auto my-6">
+                        <table class="w-full border-collapse text-sm">
+                            <thead>
+                                <tr class="bg-indigo-600 text-white">
+                                    <th class="border border-indigo-500 px-4 py-3 text-left">ツール</th>
+                                    <th class="border border-indigo-500 px-4 py-3 text-left">得意なこと</th>
+                                    <th class="border border-indigo-500 px-4 py-3 text-left">制限・注意点</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="bg-white hover:bg-gray-50">
+                                    <td class="border border-gray-200 px-4 py-3 font-semibold text-indigo-700">Claude Code</td>
+                                    <td class="border border-gray-200 px-4 py-3">対話型の作業・ファイル操作・コード生成・ナレッジ管理</td>
+                                    <td class="border border-gray-200 px-4 py-3">レート制限あり（5時間ウィンドウ）・要認証</td>
+                                </tr>
+                                <tr class="bg-gray-50 hover:bg-gray-100">
+                                    <td class="border border-gray-200 px-4 py-3 font-semibold text-violet-700">AntiGravity</td>
+                                    <td class="border border-gray-200 px-4 py-3">自動化フロー・スケジュール実行・長時間タスクの継続</td>
+                                    <td class="border border-gray-200 px-4 py-3">対話的な判断は苦手・知名度がまだ低い</td>
+                                </tr>
+                                <tr class="bg-white hover:bg-gray-50">
+                                    <td class="border border-gray-200 px-4 py-3 font-semibold text-green-700">ChatGPT</td>
+                                    <td class="border border-gray-200 px-4 py-3">自然言語での説明・要約・翻訳・ブレスト</td>
+                                    <td class="border border-gray-200 px-4 py-3">ローカルファイルへの直接アクセス不可</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <p>
+                        <strong>AntiGravity</strong>はまだ知名度が低いので補足します。
+                        Claude Codeと同系統のAI CLIツールで、エージェントがコード実行・ファイル操作・調査を自律的に行えます。
+                        Claude Codeとの大きな違いは「自動化フローの継続性」で、レート制限に引っかかったClaude Codeの代わりに
+                        同じサーバー・UIをそのまま引き継いで作業を完走させることができます。
+                    </p>
+
+                    <h2>3. リレーの核心：マルチエージェントデモでの実体験</h2>
+
+                    <p>
+                        先日、Claude Codeで4エージェント並行のマルチエージェントデモを走らせました。
+                        オーケストレーター1体が指揮を取り、4体のサブエージェントが自分のPCの各領域を並行調査する構成です。
+                    </p>
+
+                    <div class="bg-gray-50 rounded-lg p-6 my-6">
+                        <h4 class="font-semibold text-gray-800 mb-3">デモ構成</h4>
+                        <ul class="list-disc list-inside space-y-2 text-gray-700">
+                            <li>オーケストレーター：1体（タスク分解・結果統合）</li>
+                            <li>サブエージェント：4体（PCの各領域を並行調査）</li>
+                            <li>可視化：Python HTTPサーバー + ブラウザダッシュボードUI</li>
+                        </ul>
+                    </div>
+
+                    <p>
+                        ダッシュボードには「待機中 → 実行中 → 完了」の状態遷移がリアルタイムで表示され、
+                        4体のエージェントが一斉に動く様子はなかなか壮観でした。
+                    </p>
+                    <p>
+                        しかしデモが半分ほど進んだところで、Claude Codeが止まりました。
+                        マルチエージェント実行は通常の会話の<strong>10〜100倍のトークンを消費する</strong>ため、
+                        レート制限の5時間ウィンドウに引っかかったのです。
+                    </p>
+                    <p>
+                        ここでAntiGravityの出番です。
+                        Claude Codeが立ち上げたPythonサーバーもブラウザUIも、そのまま動いています。
+                        AntiGravityに「このサーバーを使って残りのデモを完走させて」と指示したところ、
+                        <strong>同じ環境を引き継いで作業を完走</strong>させることができました。
+                    </p>
+
+                    <div class="bg-green-50 border-l-4 border-green-400 p-4 my-6">
+                        <p class="text-green-800">
+                            <strong>リレーが成功した理由：</strong><br>
+                            サーバーとUIはClaude Codeが作ったものですが、「ローカルで動くプロセス」なので
+                            どのツールからでも操作できます。AIが止まっても環境は残る——この点がリレーを可能にしました。
+                        </p>
+                    </div>
+
+                    <h2>4. 引き継ぎをスムーズにする「コンテキストファイル共有術」</h2>
+
+                    <p>
+                        リレーで一番難しいのは「引き継ぎ」です。
+                        次のAIが「どこまで進んでいて、何が残っているか」を把握できないと、
+                        ゼロから始め直すことになってしまいます。
+                    </p>
+                    <p>
+                        そこで有効なのが、<strong>Markdownファイルによるコンテキスト共有</strong>です。
+                        作業の途中状態を人間が読めるテキストで書き出しておけば、
+                        次のAIがそのファイルを読み込むだけで「今どこにいるか」を即座に把握できます。
+                    </p>
+
+                    <h3>コンテキストファイルに書くべき内容</h3>
+
+                    <pre><code># 引き継ぎメモ（2026-03-24 14:30時点）
+
+## 作業の目的
+マルチエージェントデモを完走させる
+
+## 完了済み
+- Pythonサーバー起動（localhost:8080）
+- エージェント1・2・3の調査完了
+- ダッシュボードUI表示確認済み
+
+## 残タスク
+- エージェント4（ネットワーク調査）の実行
+- 全結果の統合・出力
+
+## 環境情報
+- サーバープロセスID: 12345
+- ダッシュボードURL: http://localhost:8080/dashboard
+- 設定ファイル: ./config/agents.json</code></pre>
+
+                    <p>
+                        このファイルをAntiGravityに渡せば、前の文脈なしに「残りの作業を引き取れる」状態になります。
+                        人間でいえば、きちんとした申し送りができた状態です。
+                    </p>
+
+                    <h3>ナレッジをClaude Codeに戻すループ</h3>
+                    <p>
+                        AntiGravityで完走した結果は、そのままClaude Codeのナレッジフォルダに格納します。
+                        こうすることで「Claude Code → AntiGravity → Claude Codeのナレッジ蓄積」というループが完成し、
+                        次の作業に活かせるようになります。
+                    </p>
+
+                    <div class="bg-blue-50 rounded-lg p-6 my-6">
+                        <h4 class="font-semibold text-blue-800 mb-3">リレーの全体フロー</h4>
+                        <ol class="list-decimal list-inside space-y-2 text-blue-700">
+                            <li>Claude Codeで作業開始 → 途中でレート制限 or 認証エラー</li>
+                            <li>コンテキストファイル（Markdown）に途中状態を書き出す</li>
+                            <li>AntiGravityにファイルを渡して引き継ぎ → 作業完走</li>
+                            <li>完走した結果をClaude Codeのナレッジフォルダに格納</li>
+                            <li>次の作業でClaude Codeがナレッジを参照してスムーズにスタート</li>
+                        </ol>
+                    </div>
+
+                    <h2>5. 各ツールの「担当範囲」を決めておく</h2>
+
+                    <p>
+                        リレーをうまく機能させるコツは、<strong>「誰が何を担当するか」をあらかじめ決めておくこと</strong>です。
+                        「どちらでもいい」状態だと判断コストが増えるし、引き継ぎも曖昧になります。
+                    </p>
+
+                    <div class="grid md:grid-cols-3 gap-4 my-6">
+                        <div class="bg-indigo-50 rounded-lg p-4 border border-indigo-200">
+                            <h4 class="font-bold text-indigo-800 mb-2">Claude Code担当</h4>
+                            <ul class="text-sm text-indigo-700 space-y-1">
+                                <li>・対話しながらの設計・修正</li>
+                                <li>・ファイル生成・編集</li>
+                                <li>・ナレッジ管理・整理</li>
+                                <li>・コード生成・デバッグ</li>
+                            </ul>
+                        </div>
+                        <div class="bg-violet-50 rounded-lg p-4 border border-violet-200">
+                            <h4 class="font-bold text-violet-800 mb-2">AntiGravity担当</h4>
+                            <ul class="text-sm text-violet-700 space-y-1">
+                                <li>・長時間の自動化タスク</li>
+                                <li>・スケジュール実行</li>
+                                <li>・Claude Code停止時の引き継ぎ</li>
+                                <li>・繰り返し処理</li>
+                            </ul>
+                        </div>
+                        <div class="bg-green-50 rounded-lg p-4 border border-green-200">
+                            <h4 class="font-bold text-green-800 mb-2">ChatGPT担当</h4>
+                            <ul class="text-sm text-green-700 space-y-1">
+                                <li>・記事・文章の要約・改善</li>
+                                <li>・アイデアのブレスト</li>
+                                <li>・日本語↔英語の翻訳</li>
+                                <li>・説明・教育コンテンツ作成</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <p>
+                        この分担を意識すると、「これはAntiGravityに任せた方が早い」「これはChatGPTに聞く方がいい」という判断が
+                        自然とできるようになります。
+                    </p>
+
+                    <h2>6. 「1つのAIに依存しない」という設計思想</h2>
+
+                    <p>
+                        ここまで読んでいただいた方には伝わっていると思いますが、
+                        このリレープレーの本質は「技術的なテクニック」ではありません。
+                    </p>
+                    <p>
+                        <strong>「1つのツール・1つの人物・1つの仕組みに依存しない」という設計思想</strong>です。
+                    </p>
+                    <p>
+                        これは福祉デイケアの仕事でも同じことを考えています。
+                        「○○さんじゃないと回せない」という属人化が最大のリスク。
+                        引き継ぎができる仕組みを作り、誰がいなくなっても止まらない体制を作る——
+                        そのアプローチはAIツールの使い方にもそのまま当てはまります。
+                    </p>
+
+                    <div class="bg-violet-50 border-l-4 border-violet-400 p-4 my-6">
+                        <p class="text-violet-800">
+                            <strong>まとめ：リレープレーの3原則</strong><br><br>
+                            1. <strong>複数のツールを手元に置く</strong>：Claude Code・AntiGravity・ChatGPTを「どちらか」ではなく「全部」用意する<br>
+                            2. <strong>コンテキストをMarkdownで書き出す</strong>：途中状態を人間が読める形で残せば、次のAIがすぐ引き取れる<br>
+                            3. <strong>担当範囲を決めておく</strong>：「誰に何を渡すか」が決まっていれば、止まったときに迷わない
+                        </p>
+                    </div>
+
+                    <h2>おわりに</h2>
+
+                    <p>
+                        「AIが途中で止まった」は、最初は焦ります。でも今は「バトンを渡せばいいだけ」と思えるようになりました。
+                    </p>
+                    <p>
+                        道具は壊れるし、制限はかかる。それを前提に設計しておけば、止まることを恐れなくて済みます。
+                        <strong>「失敗→復旧→完走」のサイクル自体が、AIを使いこなす力になっていく</strong>と感じています。
+                    </p>
+                    <p>
+                        まずはClaude CodeとAntiGravityを両方インストールして手元に置いておくところから始めてみてください。
+                        使わなくても、「いざとなれば切り替えられる」という安心感が、作業のストレスをぐっと減らしてくれます。
+                    </p>
+
+                </div>
+
+                <!-- Amazon アフィリエイト -->
+                <div class="mt-12 p-6 bg-amber-50 border border-amber-200 rounded-xl">
+                    <h3 class="text-lg font-bold text-amber-800 mb-3">この記事に関連するおすすめ本</h3>
+                    <a href="https://www.amazon.co.jp/s?k=AIエージェント+自動化+Python&tag=otitukanaihit-22" target="_blank" rel="nofollow noopener noreferrer" class="flex items-start gap-4 hover:bg-amber-100 rounded-lg p-3 transition-colors">
+                        <div>
+                            <p class="font-semibold text-gray-800">AI・自動化系の実践書をAmazonで探す</p>
+                            <p class="text-sm text-gray-600 mt-1">AIエージェント・Python自動化・個人開発に関する書籍を探せます。マルチエージェントやCLIツール活用の理解を深めたい方におすすめです。</p>
+                            <p class="text-amber-600 text-sm mt-2 font-medium">Amazonで見る →</p>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- 参考リンク -->
+                <div class="mt-8 p-6 bg-gray-50 border border-gray-200 rounded-xl">
+                    <h3 class="text-lg font-bold text-gray-800 mb-3">参考リンク</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="https://docs.anthropic.com/ja/docs/claude-code/overview" target="_blank" rel="noopener noreferrer" class="text-indigo-600 hover:underline">Claude Code 公式ドキュメント（Anthropic）</a></li>
+                        <li><a href="https://antigravity.dev/" target="_blank" rel="noopener noreferrer" class="text-indigo-600 hover:underline">AntiGravity 公式サイト</a></li>
+                        <li><a href="https://chat.openai.com/" target="_blank" rel="noopener noreferrer" class="text-indigo-600 hover:underline">ChatGPT（OpenAI）</a></li>
+                    </ul>
+                </div>
+
+                <!-- SNS Share Buttons -->
+                <div class="mt-8 pt-8 border-t border-gray-200">
+                    <p class="text-sm font-semibold text-gray-600 mb-4 text-center">この記事をシェアする</p>
+                    <div class="flex justify-center gap-4">
+                        <a id="share-twitter" href="#" target="_blank" rel="noopener noreferrer"
+                            class="flex items-center gap-2 bg-black text-white px-5 py-2 rounded-lg hover:bg-gray-800 transition-colors text-sm font-semibold">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.748l7.73-8.835L1.254 2.25H8.08l4.253 5.622 5.91-5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                            X でシェア
+                        </a>
+                        <a id="share-hatena" href="#" target="_blank" rel="noopener noreferrer"
+                            class="flex items-center gap-2 bg-blue-600 text-white px-5 py-2 rounded-lg hover:bg-blue-700 transition-colors text-sm font-semibold">
+                            <span class="font-bold mr-1">B!</span>はてブ
+                        </a>
+                    </div>
+                </div>
+                <script>
+                (function() {
+                    var title = encodeURIComponent(document.title.replace(/ - オチつかないカンパニー.*/, ''));
+                    var url = encodeURIComponent(window.location.href);
+                    document.getElementById('share-twitter').href = 'https://twitter.com/intent/tweet?text=' + title + '&url=' + url + '&hashtags=ClaudeCode,AIツール,個人開発';
+                    document.getElementById('share-hatena').href = 'https://b.hatena.ne.jp/add?mode=confirm&title=' + title + '&url=' + url;
+                })();
+                </script>
+
+                <!-- Related Articles -->
+                <div class="mt-12 pt-8 border-t border-gray-200">
+                    <h3 class="text-xl font-bold text-gray-900 mb-6">関連記事</h3>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <a href="claude-antigravity-relay-2026-03-18.html" class="block group">
+                            <div class="bg-gray-50 rounded-lg p-4 group-hover:bg-gray-100 transition-colors">
+                                <h4 class="font-semibold text-gray-900 group-hover:text-indigo-600">
+                                    Claude CodeとAntigravityのリレープレー ～マルチエージェントデモをAI2本で完走した話～</h4>
+                                <p class="text-sm text-gray-600 mt-2">実行レポート編。認証エラー→マルチエージェント起動→レート制限→バトンタッチの全記録</p>
+                            </div>
+                        </a>
+                        <a href="claude-code-agent-team-2026-03-18.html" class="block group">
+                            <div class="bg-gray-50 rounded-lg p-4 group-hover:bg-gray-100 transition-colors">
+                                <h4 class="font-semibold text-gray-900 group-hover:text-indigo-600">
+                                    Claude Codeでエージェントチームを作る</h4>
+                                <p class="text-sm text-gray-600 mt-2">マルチエージェントの構成と役割分担の設計について</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </main>
+
+    <!-- フッター -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">OCHITSUKANAI COMPANY</h3>
+                    <p class="text-gray-400">福祉の現場で働く4児の父が、業務効率化と個人の成長について発信するブログです。</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">メニュー</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="../index.html#blog" class="hover:text-white transition-colors duration-300">ブログ</a></li>
+                        <li><a href="../index.html#affiliate" class="hover:text-white transition-colors duration-300">おすすめツール</a></li>
+                        <li><a href="../index.html#services" class="hover:text-white transition-colors duration-300">サービス</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">リンク</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="../index.html" class="hover:text-white transition-colors duration-300">ホーム</a></li>
+                        <li><a href="../privacy-policy.html" class="hover:text-white transition-colors duration-300">プライバシーポリシー</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2026 OCHITSUKANAI COMPANY. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../back-home.js"></script>
+</body>
+
+</html>

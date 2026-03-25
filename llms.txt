@@ -1,0 +1,22 @@
+# オチつかないカンパニー
+
+> 業務効率化・AI活用・ナレッジ管理を支援するブログ
+
+## About
+福祉現場の経験とITスキルを掛け合わせ、実用的で心に寄り添う解決策を提案します。
+
+## Topics
+- AI活用（Claude Code, AntiGravity, ChatGPT）
+- 業務効率化・自動化
+- ナレッジ管理（Obsidian, GitHub Pages）
+- 福祉×テクノロジー
+
+## Recent Articles
+- [Claude CodeでAIチームを作った話](https://otitukanaihito.github.io/blog/claude-code-agent-team-2026-03-18.html)
+- [Claude Codeのコンテキスト管理術](https://otitukanaihito.github.io/blog/claude-code-compact-context-2026-03-18.html)
+- [AIツール同士のリレープレー](https://otitukanaihito.github.io/blog/claude-antigravity-relay-2026-03-18.html)
+- [AntiGravity AI 体験記](https://otitukanaihito.github.io/blog/antigravity-ai-experience-2026-01-31.html)
+- [福祉現場の属人化問題](https://otitukanaihito.github.io/blog/daycare-dx-workflow-2026-03-15.html)
+
+## Contact
+Blog: https://otitukanaihito.github.io/
