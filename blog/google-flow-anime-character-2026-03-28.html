@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google FlowでAIキャラをアニメのまま動かそうとしたら全部リアル人間になった話 - オチつかないカンパニー</title>
+    <meta name="description"
+        content="Veo 3搭載のGoogle Flowでオリジナルのアニメキャラに動きをつけようとしたら、全然違うリアル人間が生成された。3つの方法を試して全部うまくいかなかった失敗記録。">
+    <meta name="keywords" content="Google Flow,Veo 3,AI動画生成,アニメキャラ,生成AI,AI動画,失敗談,Kling,Gemini">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://otitukanaihito.github.io/blog/google-flow-anime-character-2026-03-28.html">
+    <meta property="og:title" content="Google FlowでAIキャラをアニメのまま動かそうとしたら全部リアル人間になった話">
+    <meta property="og:description"
+        content="Veo 3搭載のGoogle Flowでアニメキャラに動きをつけようとしたら、全然違うリアル人間が生成された。3つの方法を試して全滅した失敗記録。">
+    <meta property="og:image" content="https://otitukanaihito.github.io/images/blog_ai_antigravity.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url"
+        content="https://otitukanaihito.github.io/blog/google-flow-anime-character-2026-03-28.html">
+    <meta property="twitter:title" content="Google FlowでAIキャラをアニメのまま動かそうとしたら全部リアル人間になった話">
+    <meta property="twitter:description"
+        content="Veo 3搭載のGoogle Flowでアニメキャラに動きをつけようとしたら、全然違うリアル人間が生成された。3つの方法を試して全滅した失敗記録。">
+    <meta property="twitter:image" content="https://otitukanaihito.github.io/images/blog_ai_antigravity.png">
+
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="../style.css">
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-WBGJLRYXKS"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-WBGJLRYXKS', {
+            'anonymize_ip': true,
+            'cookie_flags': 'SameSite=None;Secure'
+        });
+    </script>
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Google FlowでAIキャラをアニメのまま動かそうとしたら全部リアル人間になった話",
+        "description": "Veo 3搭載のGoogle Flowでオリジナルのアニメキャラに動きをつけようとしたら、全然違うリアル人間が生成された。3つの方法を試して全部うまくいかなかった失敗記録。",
+        "author": {
+            "@type": "Person",
+            "name": "オチつかないヒト"
+        },
+        "datePublished": "2026-03-28",
+        "dateModified": "2026-03-28",
+        "publisher": {
+            "@type": "Organization",
+            "name": "オチつかないカンパニー"
+        },
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://otitukanaihito.github.io/blog/google-flow-anime-character-2026-03-28.html"
+        }
+    }
+    </script>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-MDWZM4DL');</script>
+<!-- End Google Tag Manager -->
+</head>
+
+<body class="bg-gray-50">
+    <!-- ヘッダー -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="../index.html" class="text-2xl font-black tracking-wider text-gray-900 hover:text-indigo-600 transition-colors duration-300">
+                OCHITSUKANAI COMPANY
+            </a>
+            <nav class="hidden md:flex items-center space-x-6">
+                <a href="../index.html#blog" class="text-gray-700 hover:text-indigo-600 transition-colors duration-300">ブログ</a>
+                <a href="../index.html#affiliate" class="text-gray-700 hover:text-indigo-600 transition-colors duration-300">おすすめツール</a>
+                <a href="../index.html#services" class="text-gray-700 hover:text-indigo-600 transition-colors duration-300">サービス</a>
+                <a href="../index.html#about" class="text-gray-700 hover:text-indigo-600 transition-colors duration-300">プロフィール</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <article class="bg-white rounded-2xl shadow-xl overflow-hidden">
+            <!-- Article Header -->
+            <div class="relative h-64 md:h-96 bg-gradient-to-r from-violet-600 via-purple-600 to-indigo-600">
+                <div class="absolute inset-0 bg-black bg-opacity-30"></div>
+                <div class="absolute bottom-0 left-0 right-0 p-8">
+                    <div class="flex items-center mb-4">
+                        <span class="text-sm font-semibold text-white bg-purple-500 px-3 py-1 rounded-full">AI×動画</span>
+                        <span class="text-sm text-white ml-4">2026-03-28</span>
+                    </div>
+                    <h1 class="text-3xl md:text-4xl font-bold text-white mb-4">
+                        Google FlowでAIキャラをアニメのまま動かそうとしたら全部リアル人間になった話
+                    </h1>
+                    <p class="text-lg text-gray-200">
+                        うまくいかなかった。でも、わかったことがある。
+                    </p>
+                </div>
+            </div>
+
+            <!-- Article Content -->
+            <div class="p-8">
+                <div class="prose prose-lg max-w-none">
+
+                    <!-- この記事でわかること -->
+                    <div class="bg-gray-50 border border-gray-200 rounded-xl p-6 my-6">
+                        <h3 class="text-base font-bold text-gray-800 mb-3">この記事でわかること</h3>
+                        <ul class="text-sm text-gray-700 space-y-1 mb-0">
+                            <li>✅ Google Flow（Veo 3）でアニメキャラの動画を作ろうとした結果</li>
+                            <li>✅ Claude Chrome拡張機能でFlow操作を自動化しようとした結果</li>
+                            <li>✅ Veo 3がアニメキャラに向いていない理由</li>
+                            <li>✅ アニメ向けに試す価値のある代替ツール</li>
+                        </ul>
+                    </div>
+
+                    <h2>やろうとしたこと</h2>
+                    <p>
+                        動画制作プロジェクトで使っているオリジナルキャラクター「あすまおひかり」（アニメ調・着物・銀髪）のリアクション動画を複数作りたかった。
+                        すでに話している8秒の動画（<code>talking-v1.mp4</code>）は持っていたので、
+                        そこに「うなずく」「驚く」「笑う」「考える」といったバリエーションを追加したかった。
+                    </p>
+                    <p>
+                        月額約3,000円のGoogle AI Proプランを使っているので、Veo 3が使えるGoogle Flowを試してみることにした。
+                    </p>
+
+                    <h2>試したこと① Google Flow（Veo 3）で動画生成</h2>
+
+                    <h3>やったこと</h3>
+                    <ol>
+                        <li>既存の動画（<code>talking-v1.mp4</code>）からffmpegで3フレームを切り出し（Claude Codeが自動実行）</li>
+                        <li><code>flow.google.com</code> でプロジェクトを作成</li>
+                        <li>キャラクター画像をアップロード</li>
+                        <li>「この女の子が、話を聞きながらゆっくりうなずいている8秒の動画を作って。白い背景、正面向き、やさしい笑顔で。」とプロンプトを入力して生成</li>
+                    </ol>
+
+                    <h3>結果</h3>
+                    <div class="bg-red-50 border-l-4 border-red-400 p-4 my-6">
+                        <p class="text-red-800">
+                            <strong>❌ 全然違う人物が生成された</strong><br>
+                            右側にあすまおひかり（アニメ調・静止画のまま）が表示されているのに、
+                            生成された動画には<strong>黒髪・ピンクセーター着用のアジア系女性（実写）</strong>が登場した。
+                            アニメキャラクターがそのまま動いた動画にはならなかった。
+                        </p>
+                    </div>
+
+                    <h3>なぜこうなったか（推測）</h3>
+                    <p>
+                        Veo 3はフォトリアリスティックな動画生成に特化したモデルだ。
+                        アニメ調のキャラクター画像を入力すると、「こういうルックスの人物」と解釈して
+                        リアルな人間として生成してしまう傾向があるらしい。
+                        アニメの画風をそのまま保持して動かすことは、現時点では苦手なようだ。
+                    </p>
+
+                    <h2>試したこと② Claude Chrome拡張機能でFlowを自動操作</h2>
+
+                    <h3>やったこと</h3>
+                    <p>
+                        ChromeのClaude拡張機能（サイドバー）を使って、Flowの操作を自動化しようとした。
+                        「高リスク：Claudeはインターネットのほとんどのことができるようになっています」という警告が表示される、
+                        ブラウザ操作系の拡張機能だ。
+                    </p>
+
+                    <h3>結果</h3>
+                    <div class="bg-red-50 border-l-4 border-red-400 p-4 my-6">
+                        <p class="text-red-800">
+                            <strong>❌ うまく動かなかった</strong><br>
+                            拡張機能経由でのFlow操作には限界があり、意図した動作を実現できなかった。
+                        </p>
+                    </div>
+
+                    <h2>試したこと③ Geminiで直接生成</h2>
+
+                    <h3>やったこと</h3>
+                    <p>
+                        <code>gemini.google.com</code> でキャラクター画像を添付して、アニメキャラの動画生成を依頼した。
+                    </p>
+
+                    <h3>結果</h3>
+                    <div class="bg-red-50 border-l-4 border-red-400 p-4 my-6">
+                        <p class="text-red-800">
+                            <strong>❌ サーバー混雑で使えなかった</strong><br>
+                            「現在リクエストが多数届いているため、対応できませんでした。しばらくしてからもう一度お試しください。」
+                            というメッセージが表示され、生成できなかった。
+                        </p>
+                    </div>
+
+                    <h2>この日わかったこと</h2>
+
+                    <div class="grid md:grid-cols-2 gap-4 my-6">
+                        <div class="bg-red-50 rounded-lg p-4 border border-red-200">
+                            <h4 class="font-bold text-red-800 mb-2">Veo 3（Google Flow）</h4>
+                            <p class="text-sm text-red-700">アニメキャラには向いていない。リアル人間の動画生成は得意。</p>
+                        </div>
+                        <div class="bg-green-50 rounded-lg p-4 border border-green-200">
+                            <h4 class="font-bold text-green-800 mb-2">Kling 3.0（次に試す）</h4>
+                            <p class="text-sm text-green-700">無料枠66クレジット/日。アニメ向けとの情報あり。まだ未検証。</p>
+                        </div>
+                        <div class="bg-yellow-50 rounded-lg p-4 border border-yellow-200">
+                            <h4 class="font-bold text-yellow-800 mb-2">Gemini（再挑戦予定）</h4>
+                            <p class="text-sm text-yellow-700">混雑が解消されたら再試行する。結果次第で別記事を書く。</p>
+                        </div>
+                        <div class="bg-gray-50 rounded-lg p-4 border border-gray-200">
+                            <h4 class="font-bold text-gray-800 mb-2">Claude拡張機能</h4>
+                            <p class="text-sm text-gray-700">Webアプリの複雑な操作自動化には限界がある。</p>
+                        </div>
+                    </div>
+
+                    <h2>正直な感想</h2>
+                    <p>
+                        生成されたのが全然違うリアル人間だったのは予想外だった。
+                        「アニメキャラの画像を入れたらアニメのまま動く」と思っていたが、そうではなかった。
+                        Geminiも混んでて使えず、この日は結局リアクション動画が1本も作れなかった。
+                    </p>
+                    <p>
+                        ただ、「Veo 3はリアル系、アニメ系は別ツールを使う」という切り分けができたのは収穫だ。
+                        次はKling 3.0を試してみる。うまくいったら「成功編」として別記事を書く予定。
+                    </p>
+
+                    <div class="bg-indigo-50 border-l-4 border-indigo-400 p-4 my-6">
+                        <p class="text-indigo-800">
+                            <strong>まとめ：</strong><br>
+                            AI動画生成ツールはそれぞれ得意不得意がある。
+                            Veo 3（Google Flow）はリアル系動画に強く、アニメキャラには向かない。
+                            アニメキャラの動画生成にはKling 3.0など別のツールを試す必要がある。
+                            失敗しないとわからないことが、AIの世界には多い。
+                        </p>
+                    </div>
+
+                </div>
+
+                <!-- Amazon アフィリエイト -->
+                <div class="mt-12 p-6 bg-amber-50 border border-amber-200 rounded-xl">
+                    <h3 class="text-lg font-bold text-amber-800 mb-3">📚 AI動画・画像生成を体系的に学ぶなら</h3>
+                    <a href="https://www.amazon.co.jp/s?k=AI+動画生成+入門&tag=otitukanaihit-22" target="_blank" rel="nofollow noopener noreferrer" class="flex items-start gap-4 hover:bg-amber-100 rounded-lg p-3 transition-colors">
+                        <div>
+                            <p class="font-semibold text-gray-800">AI動画・画像生成関連書籍</p>
+                            <p class="text-sm text-gray-600 mt-1">ツールの特性や使い分けを体系的に理解すると、どのツールで何が得意かが分かり、試行錯誤の時間を減らせます。</p>
+                            <p class="text-amber-600 text-sm mt-2 font-medium">Amazonで探す →</p>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- SNS Share Buttons -->
+                <div class="mt-8 pt-8 border-t border-gray-200">
+                    <p class="text-sm font-semibold text-gray-600 mb-4 text-center">この記事をシェアする</p>
+                    <div class="flex justify-center gap-4">
+                        <a id="share-twitter" href="#" target="_blank" rel="noopener noreferrer"
+                            class="flex items-center gap-2 bg-black text-white px-5 py-2 rounded-lg hover:bg-gray-800 transition-colors text-sm font-semibold">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.748l7.73-8.835L1.254 2.25H8.08l4.253 5.622 5.91-5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                            X でシェア
+                        </a>
+                        <a id="share-hatena" href="#" target="_blank" rel="noopener noreferrer"
+                            class="flex items-center gap-2 bg-blue-600 text-white px-5 py-2 rounded-lg hover:bg-blue-700 transition-colors text-sm font-semibold">
+                            <span class="font-bold mr-1">B!</span>はてブ
+                        </a>
+                    </div>
+                </div>
+                <script>
+                (function() {
+                    var title = encodeURIComponent(document.title.replace(/ - オチつかないカンパニー.*/, ''));
+                    var url = encodeURIComponent(window.location.href);
+                    document.getElementById('share-twitter').href = 'https://twitter.com/intent/tweet?text=' + title + '&url=' + url + '&hashtags=AI動画生成,GoogleFlow,Veo3';
+                    document.getElementById('share-hatena').href = 'https://b.hatena.ne.jp/add?mode=confirm&title=' + title + '&url=' + url;
+                })();
+                </script>
+
+                <!-- Related Articles -->
+                <div class="mt-12 pt-8 border-t border-gray-200">
+                    <h3 class="text-xl font-bold text-gray-900 mb-6">関連記事</h3>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <a href="ai-agent-team-build-2026-03-18.html" class="block group">
+                            <div class="bg-gray-50 rounded-lg p-4 group-hover:bg-gray-100 transition-colors">
+                                <h4 class="font-semibold text-gray-900 group-hover:text-indigo-600">
+                                    AIエージェントチームを作った話</h4>
+                                <p class="text-sm text-gray-600 mt-2">複数のAIを連携させてコンテンツを自動生成する仕組み</p>
+                            </div>
+                        </a>
+                        <a href="ai-tools-relay-2026-03-18.html" class="block group">
+                            <div class="bg-gray-50 rounded-lg p-4 group-hover:bg-gray-100 transition-colors">
+                                <h4 class="font-semibold text-gray-900 group-hover:text-indigo-600">
+                                    AIツール同士のリレープレー</h4>
+                                <p class="text-sm text-gray-600 mt-2">Claude・Gemini・AntiGravityを連携させる使い方</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </main>
+
+    <!-- フッター -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">OCHITSUKANAI COMPANY</h3>
+                    <p class="text-gray-400">福祉の現場で働く4児の父が、業務効率化と個人の成長について発信するブログです。</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">メニュー</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="../index.html#blog" class="hover:text-white transition-colors duration-300">ブログ</a></li>
+                        <li><a href="../index.html#affiliate" class="hover:text-white transition-colors duration-300">おすすめツール</a></li>
+                        <li><a href="../index.html#services" class="hover:text-white transition-colors duration-300">サービス</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">リンク</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="../index.html" class="hover:text-white transition-colors duration-300">ホーム</a></li>
+                        <li><a href="../privacy-policy.html" class="hover:text-white transition-colors duration-300">プライバシーポリシー</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2026 OCHITSUKANAI COMPANY. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../back-home.js"></script>
+</body>
+
+</html>
