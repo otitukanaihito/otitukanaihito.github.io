@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub PagesのLighthouseスコアをPerformance 65→77に改善した話 - オチつかないカンパニー</title>
+    <meta name="description"
+        content="静的サイトのパフォーマンスを改善したい方向け。WebP変換・フォントpreload・lazy loading など5つの施策でLighthouseのPerformanceスコアを65から77に引き上げた実体験を解説します。">
+    <meta name="keywords" content="Lighthouse,GitHub Pages,パフォーマンス改善,WebP,lazy loading,Core Web Vitals,フロントエンド最適化,静的サイト">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://otitukanaihito.github.io/blog/lighthouse-performance-improvement-2026-05-04.html">
+    <meta property="og:title" content="GitHub PagesのLighthouseスコアをPerformance 65→77に改善した話">
+    <meta property="og:description"
+        content="WebP変換・フォントpreload・lazy loadingなど5つの施策でLighthouseスコアを65から77に引き上げた実体験レポート。">
+    <meta property="og:image" content="https://otitukanaihito.github.io/images/lighthouse-performance-improvement.webp">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://otitukanaihito.github.io/blog/lighthouse-performance-improvement-2026-05-04.html">
+    <meta property="twitter:title" content="GitHub PagesのLighthouseスコアをPerformance 65→77に改善した話">
+    <meta property="twitter:description"
+        content="WebP変換・フォントpreload・lazy loadingなど5つの施策でLighthouseスコアを65から77に引き上げた実体験レポート。">
+    <meta property="twitter:image" content="https://otitukanaihito.github.io/images/lighthouse-performance-improvement.webp">
+
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="../style.css">
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-WBGJLRYXKS"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-WBGJLRYXKS', {
+            'anonymize_ip': true,
+            'cookie_flags': 'SameSite=None;Secure'
+        });
+    </script>
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "GitHub PagesのLighthouseスコアをPerformance 65→77に改善した話",
+        "description": "静的サイトのパフォーマンスを改善したい方向け。WebP変換・フォントpreload・lazy loading など5つの施策でLighthouseのPerformanceスコアを65から77に引き上げた実体験を解説します。",
+        "author": {
+            "@type": "Person",
+            "name": "オチつかないヒト"
+        },
+        "datePublished": "2026-05-04",
+        "dateModified": "2026-05-04",
+        "publisher": {
+            "@type": "Organization",
+            "name": "オチつかないカンパニー"
+        },
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://otitukanaihito.github.io/blog/lighthouse-performance-improvement-2026-05-04.html"
+        }
+    }
+    </script>
+    <style>
+        pre {
+            background: #1e1e2e;
+            color: #cdd6f4;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            overflow-x: auto;
+            font-size: 0.875rem;
+            line-height: 1.6;
+        }
+        code {
+            background: #e8e8f0;
+            color: #5c5f77;
+            padding: 0.15em 0.4em;
+            border-radius: 0.25rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            background: transparent;
+            color: inherit;
+            padding: 0;
+            font-size: inherit;
+        }
+    </style>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-MDWZM4DL');</script>
+<!-- End Google Tag Manager -->
+</head>
+
+<body class="bg-gray-50">
+    <!-- ヘッダー -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="../index.html" class="text-2xl font-black tracking-wider text-gray-900 hover:text-indigo-600 transition-colors duration-300">
+                OCHITSUKANAI COMPANY
+            </a>
+            <nav class="hidden md:flex items-center space-x-6">
+                <a href="../index.html#blog" class="text-gray-700 hover:text-indigo-600 transition-colors duration-300">ブログ</a>
+                <a href="../index.html#affiliate" class="text-gray-700 hover:text-indigo-600 transition-colors duration-300">おすすめツール</a>
+                <a href="../index.html#services" class="text-gray-700 hover:text-indigo-600 transition-colors duration-300">サービス</a>
+                <a href="../index.html#about" class="text-gray-700 hover:text-indigo-600 transition-colors duration-300">プロフィール</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <article class="bg-white rounded-2xl shadow-xl overflow-hidden">
+            <!-- Article Header -->
+            <div class="relative h-64 md:h-96 bg-gradient-to-r from-blue-600 via-indigo-600 to-violet-700">
+                <div class="absolute inset-0 bg-black bg-opacity-30"></div>
+                <div class="absolute bottom-0 left-0 right-0 p-8">
+                    <div class="flex items-center mb-4">
+                        <span class="text-sm font-semibold text-white bg-indigo-500 px-3 py-1 rounded-full">フロントエンド</span>
+                        <span class="text-sm text-white ml-4">2026-05-04</span>
+                    </div>
+                    <h1 class="text-3xl md:text-4xl font-bold text-white mb-4">
+                        GitHub PagesのLighthouseスコアをPerformance 65→77に改善した話
+                    </h1>
+                    <p class="text-lg text-gray-200">
+                        WebP変換・フォントpreload・lazy loading。小さなサイトでも効く5つの施策
+                    </p>
+                </div>
+            </div>
+
+            <!-- Article Content -->
+            <div class="p-8">
+                <div class="prose prose-lg max-w-none">
+
+                    <h2>はじめに</h2>
+                    <p>
+                        自分のブログ（このサイト）をChromeの開発者ツールで計測したとき、
+                        Lighthouseの Performanceスコアが <strong>65点</strong> だと知って少しショックでした。
+                    </p>
+                    <p>
+                        「静的サイトだし、そんなに遅くはないだろう」と思っていたのですが、
+                        画像の最適化もフォントの読み込みもほぼデフォルトのまま。
+                        改善できそうなことが明らかにたくさんありました。
+                    </p>
+                    <p>
+                        この記事は、いくつかの施策を実施して <strong>77点まで引き上げた</strong>ときの記録です。
+                        エンジニアでなくても取り組める内容ばかりなので、同じように静的サイトを運営している方の参考になれば。
+                    </p>
+
+                    <div class="bg-indigo-50 border-l-4 border-indigo-400 p-4 my-6">
+                        <p class="text-indigo-800">
+                            <strong>この記事の対象読者：</strong><br>
+                            GitHub Pages や静的サイトを運営していて、Lighthouseスコアを改善したい方。
+                            フロントエンドの専門家でなくても取り組める施策に絞っています。
+                        </p>
+                    </div>
+
+                    <h2>1. Lighthouseとは？なぜスコアが重要か</h2>
+
+                    <p>
+                        LighthouseはGoogleが開発した、ウェブページの品質を自動計測するツールです。
+                        Chrome DevToolsから無料で使えて、Performance・Accessibility・Best Practices・SEOの4軸で評価してくれます。
+                    </p>
+                    <p>
+                        Performanceスコアが重要な理由は主に2つです。
+                    </p>
+                    <ul>
+                        <li><strong>検索順位への影響：</strong>Googleは「Core Web Vitals」をランキング要素として使用しており、表示速度が遅いと検索順位が下がる可能性がある</li>
+                        <li><strong>直帰率への影響：</strong>ページの表示に3秒以上かかると、スマホユーザーの53%が離脱するというデータもある</li>
+                    </ul>
+
+                    <p>
+                        Performanceスコアは以下の5つの指標の加重平均で計算されます：
+                    </p>
+
+                    <div class="bg-gray-50 rounded-lg p-6 my-6 overflow-x-auto">
+                        <table class="w-full text-sm">
+                            <thead>
+                                <tr class="border-b border-gray-300">
+                                    <th class="text-left py-2 pr-4 font-semibold text-gray-800">指標</th>
+                                    <th class="text-left py-2 pr-4 font-semibold text-gray-800">説明</th>
+                                    <th class="text-left py-2 font-semibold text-gray-800">配点</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-gray-700">
+                                <tr class="border-b border-gray-200">
+                                    <td class="py-2 pr-4 font-medium">FCP</td>
+                                    <td class="py-2 pr-4">最初のコンテンツが描画されるまでの時間</td>
+                                    <td class="py-2">10%</td>
+                                </tr>
+                                <tr class="border-b border-gray-200">
+                                    <td class="py-2 pr-4 font-medium">SI</td>
+                                    <td class="py-2 pr-4">画面が視覚的に埋まっていく速度</td>
+                                    <td class="py-2">10%</td>
+                                </tr>
+                                <tr class="border-b border-gray-200">
+                                    <td class="py-2 pr-4 font-medium">LCP</td>
+                                    <td class="py-2 pr-4">最も大きな要素が描画されるまでの時間</td>
+                                    <td class="py-2">25%</td>
+                                </tr>
+                                <tr class="border-b border-gray-200">
+                                    <td class="py-2 pr-4 font-medium">TBT</td>
+                                    <td class="py-2 pr-4">メインスレッドがブロックされている合計時間</td>
+                                    <td class="py-2">30%</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-2 pr-4 font-medium">CLS</td>
+                                    <td class="py-2 pr-4">レイアウトのずれの大きさ</td>
+                                    <td class="py-2">25%</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h2>2. 改善前の状態（65点）：何が問題だったか</h2>
+
+                    <p>
+                        Lighthouseのレポートで「Opportunities（改善の機会）」として挙げられていた主な問題は3つでした。
+                    </p>
+
+                    <ol>
+                        <li><strong>画像がPNG/JPGのまま：</strong>サイト内の画像がすべて従来形式で、ファイルサイズが大きい</li>
+                        <li><strong>フォント読み込みがブロッキング：</strong>Google Fontsの読み込みが、初回描画を遅らせていた</li>
+                        <li><strong>lazy loadingが未設定：</strong>スクロールしないと見えない画像も、ページ読み込み時に全部取得していた</li>
+                    </ol>
+
+                    <p>
+                        見た目には大きな問題はなかったのですが、パフォーマンスの観点では「やれることを何もやっていない」状態でした。
+                    </p>
+
+                    <h2>3. やったこと5つ</h2>
+
+                    <h3>施策1：WebP変換（LCP改善に効果大）</h3>
+                    <p>
+                        すべての画像をPNG/JPGからWebP形式に変換しました。
+                        WebPはGoogleが開発した次世代画像フォーマットで、同等の品質でファイルサイズを <strong>40〜60%削減</strong>できます。
+                    </p>
+                    <p>
+                        Windowsでは「<a href="https://squoosh.app/" target="_blank" rel="noopener noreferrer" class="text-indigo-600 hover:underline">Squoosh</a>」（無料ブラウザツール）を使って変換しました。
+                        ドラッグ＆ドロップで変換できるので、エンジニアでなくても簡単に使えます。
+                    </p>
+
+                    <div class="bg-gray-50 rounded-lg p-6 my-6">
+                        <h4 class="font-semibold text-gray-800 mb-3">HTMLの変更例</h4>
+<pre><code>&lt;!-- 変換前 --&gt;
+&lt;img src="images/eyecatch.png" alt="アイキャッチ画像"&gt;
+
+&lt;!-- 変換後 --&gt;
+&lt;img src="images/eyecatch.webp" alt="アイキャッチ画像"
+     width="640" height="640"
+     decoding="async"&gt;</code></pre>
+                    </div>
+
+                    <h3>施策2：画像にwidth/height属性を追加（CLS改善）</h3>
+                    <p>
+                        画像の縦横サイズをHTMLに明記することで、ブラウザが画像を読み込む前から「ここに640×640のスペースが必要」と判断できるようになります。
+                        これにより、画像読み込み後にレイアウトがガタッとずれる現象（CLS）を防げます。
+                    </p>
+                    <p>
+                        CLSはLighthouseスコアの25%を占める重要指標なので、ここの改善は効きました。
+                    </p>
+
+                    <h3>施策3：フォントのpreload化（FCP改善）</h3>
+                    <p>
+                        Google Fontsを使っている場合、デフォルトの読み込み方では描画がブロックされることがあります。
+                        <code>preload</code> と <code>font-display: swap</code> を組み合わせることで、フォントが読み込まれる前に仮フォントで表示→後からちゃんとしたフォントに切り替える方式にしました。
+                    </p>
+
+                    <div class="bg-gray-50 rounded-lg p-6 my-6">
+                        <h4 class="font-semibold text-gray-800 mb-3">フォント読み込みの最適化（head内）</h4>
+<pre><code>&lt;!-- preconnect で接続を先に確立 --&gt;
+&lt;link rel="preconnect" href="https://fonts.googleapis.com"&gt;
+&lt;link rel="preconnect" href="https://fonts.gstatic.com" crossorigin&gt;
+
+&lt;!-- フォントCSSをpreloadして、onloadでstylesheetに切り替え --&gt;
+&lt;link rel="preload" as="style"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap"
+    onload="this.onload=null;this.rel='stylesheet'"&gt;
+
+&lt;!-- JS無効環境向けフォールバック --&gt;
+&lt;noscript&gt;
+    &lt;link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap"&gt;
+&lt;/noscript&gt;</code></pre>
+                    </div>
+
+                    <p>
+                        また、フォントウェイトを本当に使うものだけ（400・600・700・800）に絞って、不要なウェイトを読み込まないようにしました。
+                        これだけでフォント関連の転送量がかなり減ります。
+                    </p>
+
+                    <h3>施策4：loading="lazy" の追加（SI改善）</h3>
+                    <p>
+                        ファーストビューに表示されない画像（スクロールしないと見えない位置の画像）に <code>loading="lazy"</code> を追加しました。
+                        これにより、スクロールに近づいたタイミングで初めて画像の読み込みが始まるようになり、
+                        初期ページ読み込み時の転送量が削減されます。
+                    </p>
+
+                    <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 my-6">
+                        <p class="text-yellow-800">
+                            <strong>注意点：</strong><br>
+                            ファーストビューの「メインビジュアル」や「ヒーロー画像」には <code>loading="lazy"</code> を付けてはいけません。
+                            逆に遅くなります。LCPの対象になるような画像には <code>rel="preload"</code> で先読みするのが正解です。
+                        </p>
+                    </div>
+
+                    <h3>施策5：Tailwind CSSをビルド済みファイルで配信（FCP改善）</h3>
+                    <p>
+                        最初はTailwind CSSのCDNスクリプトを使って、ブラウザ上でリアルタイムにCSSを生成していました。
+                        これは「CDN版はJavaScriptでCSSを動的生成するため重い」という問題があります。
+                    </p>
+                    <p>
+                        ビルドツールを使って「このサイトで実際に使っているクラスだけを含んだCSSファイル」を事前に生成し、
+                        静的ファイルとして配信するように変更しました。
+                        CDN版51KB → ビルド済み（使用分のみ）への削減でFCPが改善しました。
+                    </p>
+
+                    <!-- Amazon アフィリエイト 1 -->
+                    <div class="mt-10 mb-8 p-6 bg-amber-50 border border-amber-200 rounded-xl">
+                        <h3 class="text-lg font-bold text-amber-800 mb-3">Webパフォーマンス・フロントエンド関連おすすめ書籍</h3>
+                        <a href="https://www.amazon.co.jp/s?k=Webパフォーマンス+フロントエンド+最適化&tag=otitukanaihit-22" target="_blank" rel="nofollow noopener noreferrer" class="flex items-start gap-4 hover:bg-amber-100 rounded-lg p-3 transition-colors">
+                            <div>
+                                <p class="font-semibold text-gray-800">Webパフォーマンス最適化・Core Web Vitals 関連書籍</p>
+                                <p class="text-sm text-gray-600 mt-1">LCP・CLS・TBTといったCore Web Vitalsの改善方法を体系的に学べる書籍。Lighthouseスコアを上げるための考え方と具体的なテクニックが身につきます。</p>
+                                <p class="text-amber-600 text-sm mt-2 font-medium">Amazonで探す →</p>
+                            </div>
+                        </a>
+                    </div>
+
+                    <h2>4. 改善後の結果（77点）</h2>
+
+                    <p>
+                        5つの施策を実施した後、Lighthouseで再計測したところ <strong>65 → 77点</strong> に改善されました。
+                        特に効果が大きかったのはWebP変換（LCP）と width/height 追加（CLS）の2つでした。
+                    </p>
+
+                    <div class="bg-green-50 rounded-lg p-6 my-6">
+                        <h4 class="font-semibold text-gray-800 mb-4">改善ポイントまとめ</h4>
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div class="bg-white rounded-lg p-4 border border-green-200">
+                                <p class="font-semibold text-green-800 mb-1">LCP改善</p>
+                                <p class="text-sm text-gray-600">WebP変換で画像ファイルサイズ40〜60%削減。ページの最大要素が速く描画されるようになった。</p>
+                            </div>
+                            <div class="bg-white rounded-lg p-4 border border-green-200">
+                                <p class="font-semibold text-green-800 mb-1">CLS改善</p>
+                                <p class="text-sm text-gray-600">width/height属性の追加で、レイアウトのズレがほぼゼロに。スコアへの影響が25%と大きい指標。</p>
+                            </div>
+                            <div class="bg-white rounded-lg p-4 border border-green-200">
+                                <p class="font-semibold text-green-800 mb-1">FCP改善</p>
+                                <p class="text-sm text-gray-600">フォントpreload化とTailwindのビルド化で、最初のコンテンツ描画が速くなった。</p>
+                            </div>
+                            <div class="bg-white rounded-lg p-4 border border-green-200">
+                                <p class="font-semibold text-green-800 mb-1">SI改善</p>
+                                <p class="text-sm text-gray-600">lazy loading で初期ロードの転送量を削減。下部のコンテンツ読み込みが邪魔しなくなった。</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h2>5. まだやれること（77→90点以上を目指すなら）</h2>
+
+                    <p>
+                        77点でも一応「オレンジ」圏内で、まだ改善の余地はあります。
+                        次にやるとしたら以下の施策です。
+                    </p>
+
+                    <div class="bg-gray-50 rounded-lg p-6 my-6 overflow-x-auto">
+                        <table class="w-full text-sm">
+                            <thead>
+                                <tr class="border-b border-gray-300">
+                                    <th class="text-left py-2 pr-4 font-semibold text-gray-800">施策</th>
+                                    <th class="text-left py-2 pr-4 font-semibold text-gray-800">期待効果</th>
+                                    <th class="text-left py-2 font-semibold text-gray-800">難易度</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-gray-700">
+                                <tr class="border-b border-gray-200">
+                                    <td class="py-2 pr-4">GA4/GTMの遅延読み込み（ユーザー操作後に発火）</td>
+                                    <td class="py-2 pr-4">TBT -200ms</td>
+                                    <td class="py-2">中</td>
+                                </tr>
+                                <tr class="border-b border-gray-200">
+                                    <td class="py-2 pr-4">Critical CSS のインライン化（Above-the-fold CSS）</td>
+                                    <td class="py-2 pr-4">FCP -0.3s</td>
+                                    <td class="py-2">中</td>
+                                </tr>
+                                <tr class="border-b border-gray-200">
+                                    <td class="py-2 pr-4">画像の &lt;picture&gt; + srcset（レスポンシブ画像）</td>
+                                    <td class="py-2 pr-4">LCP改善（モバイル）</td>
+                                    <td class="py-2">低</td>
+                                </tr>
+                                <tr class="border-b border-gray-200">
+                                    <td class="py-2 pr-4">フォントのサブセット化</td>
+                                    <td class="py-2 pr-4">FCP改善</td>
+                                    <td class="py-2">低</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-2 pr-4">Service Worker導入（キャッシュ戦略）</td>
+                                    <td class="py-2 pr-4">リピーターのSI改善</td>
+                                    <td class="py-2">高</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <p>
+                        今のところは77点で満足しています。
+                        Googleのガイドラインでは「90点以上でGreen（良好）」ですが、
+                        コンテンツの質や更新頻度に比べると優先度は低いかなと考えています。
+                    </p>
+
+                    <h2>6. まとめ：小さなサイトでもLighthouseは見る価値がある</h2>
+
+                    <div class="bg-gray-50 rounded-lg p-6 my-6">
+                        <h4 class="font-semibold text-gray-800 mb-4">この記事のポイントまとめ</h4>
+                        <ul class="space-y-3 text-gray-700">
+                            <li class="flex items-start gap-2">
+                                <span class="text-indigo-600 font-bold">1.</span>
+                                <span>LighthouseはChrome DevToolsで無料計測できる。まず現状を知るところから</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-indigo-600 font-bold">2.</span>
+                                <span>WebP変換が一番コスパが高い。Squooshで変換→HTMLを書き換えるだけ</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-indigo-600 font-bold">3.</span>
+                                <span>width/height 属性の追加はCLSに効く。忘れがちだが効果大</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-indigo-600 font-bold">4.</span>
+                                <span>フォントは preload + display=swap の組み合わせが基本</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-indigo-600 font-bold">5.</span>
+                                <span>lazy loading はファーストビュー以外の画像にだけ付ける（ヒーロー画像には付けない）</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <p>
+                        「静的サイトだからパフォーマンスはいいはず」と思っていましたが、
+                        計測してみると改善できることがたくさんありました。
+                        Lighthouseは問題を指摘するだけでなく、「何をすればいいか」も具体的に教えてくれます。
+                        まだ試したことがない方は、ぜひ一度計測してみてください。
+                    </p>
+
+                    <!-- Amazon アフィリエイト 2 -->
+                    <div class="mt-10 p-6 bg-amber-50 border border-amber-200 rounded-xl">
+                        <h3 class="text-lg font-bold text-amber-800 mb-3">HTML/CSS・フロントエンド入門書</h3>
+                        <a href="https://www.amazon.co.jp/s?k=HTML+CSS+フロントエンド+入門+最適化&tag=otitukanaihit-22" target="_blank" rel="nofollow noopener noreferrer" class="flex items-start gap-4 hover:bg-amber-100 rounded-lg p-3 transition-colors">
+                            <div>
+                                <p class="font-semibold text-gray-800">HTML/CSS・フロントエンド 入門〜中級書籍</p>
+                                <p class="text-sm text-gray-600 mt-1">WebP・lazy loading・preloadなどのパフォーマンス改善は、HTMLとCSSの基礎があれば対応できます。まず基礎を固めたい方にはこちら。</p>
+                                <p class="text-amber-600 text-sm mt-2 font-medium">Amazonで探す →</p>
+                            </div>
+                        </a>
+                    </div>
+
+                </div>
+
+                <!-- SNS Share Buttons -->
+                <div class="mt-8 pt-8 border-t border-gray-200">
+                    <p class="text-sm font-semibold text-gray-600 mb-4 text-center">この記事をシェアする</p>
+                    <div class="flex justify-center gap-4">
+                        <a id="share-twitter" href="#" target="_blank" rel="noopener noreferrer"
+                            class="flex items-center gap-2 bg-black text-white px-5 py-2 rounded-lg hover:bg-gray-800 transition-colors text-sm font-semibold">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.748l7.73-8.835L1.254 2.25H8.080l4.253 5.622 5.91-5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                            X でシェア
+                        </a>
+                        <a id="share-hatena" href="#" target="_blank" rel="noopener noreferrer"
+                            class="flex items-center gap-2 bg-blue-600 text-white px-5 py-2 rounded-lg hover:bg-blue-700 transition-colors text-sm font-semibold">
+                            <span class="font-bold mr-1">B!</span>はてブ
+                        </a>
+                    </div>
+                </div>
+                <script>
+                (function() {
+                    var title = encodeURIComponent(document.title.replace(/ - オチつかないカンパニー.*/, ''));
+                    var url = encodeURIComponent(window.location.href);
+                    document.getElementById('share-twitter').href = 'https://twitter.com/intent/tweet?text=' + title + '&url=' + url + '&hashtags=Lighthouse,WebPerformance,GitHub Pages,フロントエンド';
+                    document.getElementById('share-hatena').href = 'https://b.hatena.ne.jp/add?mode=confirm&title=' + title + '&url=' + url;
+                })();
+                </script>
+
+                <!-- Related Articles -->
+                <div class="mt-12 pt-8 border-t border-gray-200">
+                    <h3 class="text-xl font-bold text-gray-900 mb-6">関連記事</h3>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <a href="../blog/github-pages-blog-setup-2025-08-04.html" class="block group">
+                            <div class="bg-gray-50 rounded-lg p-4 group-hover:bg-gray-100 transition-colors">
+                                <h4 class="font-semibold text-gray-900 group-hover:text-indigo-600">
+                                    GitHub Pagesでアフィリエイトブログを作った話</h4>
+                                <p class="text-sm text-gray-600 mt-2">無料ホスティングで始めるブログの作り方</p>
+                            </div>
+                        </a>
+                        <a href="../blog/claude-code-statusline-windows-2026-03-16.html" class="block group">
+                            <div class="bg-gray-50 rounded-lg p-4 group-hover:bg-gray-100 transition-colors">
+                                <h4 class="font-semibold text-gray-900 group-hover:text-indigo-600">
+                                    Windows日本語環境でClaude Codeステータスラインを動かす方法【全記録】</h4>
+                                <p class="text-sm text-gray-600 mt-2">cygpath・文字化け・jqの3段階で解決した全記録</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </main>
+
+    <!-- フッター -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">OCHITSUKANAI COMPANY</h3>
+                    <p class="text-gray-400">福祉の現場で働く4児の父が、業務効率化と個人の成長について発信するブログです。</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">メニュー</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="../index.html#blog" class="hover:text-white transition-colors duration-300">ブログ</a></li>
+                        <li><a href="../index.html#affiliate" class="hover:text-white transition-colors duration-300">おすすめツール</a></li>
+                        <li><a href="../index.html#services" class="hover:text-white transition-colors duration-300">サービス</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">リンク</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="../index.html" class="hover:text-white transition-colors duration-300">ホーム</a></li>
+                        <li><a href="../privacy-policy.html" class="hover:text-white transition-colors duration-300">プライバシーポリシー</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2026 OCHITSUKANAI COMPANY. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../back-home.js"></script>
+</body>
+
+</html>

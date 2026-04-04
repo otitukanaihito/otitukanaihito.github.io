@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claude Codeスキルの探し方・インストール方法〜自分に合ったスキルをネットから入れる〜 - オチつかないカンパニー</title>
+    <meta name="description"
+        content="Claude Codeの「スキル」機能を使いこなしたい方向け。SKILL.mdの仕組みから、ネットでの探し方・3ステップでのインストール方法まで実体験ベースで解説。34個のスキルを使う私の活用例も紹介。">
+    <meta name="keywords" content="Claude Code,スキル,SKILL.md,インストール,awesome-claude-skills,SkillsMP,AI活用,自動化,find-skills">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://otitukanaihito.github.io/blog/claude-code-skills-guide-2026-05-11.html">
+    <meta property="og:title" content="Claude Codeスキルの探し方・インストール方法〜自分に合ったスキルをネットから入れる〜">
+    <meta property="og:description"
+        content="SKILL.mdの仕組みから、ネットでの探し方・3ステップでのインストール方法まで実体験ベースで解説します。">
+    <meta property="og:image" content="https://otitukanaihito.github.io/images/claude-code-skills-guide.webp">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://otitukanaihito.github.io/blog/claude-code-skills-guide-2026-05-11.html">
+    <meta property="twitter:title" content="Claude Codeスキルの探し方・インストール方法〜自分に合ったスキルをネットから入れる〜">
+    <meta property="twitter:description"
+        content="SKILL.mdの仕組みから、ネットでの探し方・3ステップでのインストール方法まで実体験ベースで解説します。">
+    <meta property="twitter:image" content="https://otitukanaihito.github.io/images/claude-code-skills-guide.webp">
+
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="../style.css">
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-WBGJLRYXKS"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-WBGJLRYXKS', {
+            'anonymize_ip': true,
+            'cookie_flags': 'SameSite=None;Secure'
+        });
+    </script>
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Claude Codeスキルの探し方・インストール方法〜自分に合ったスキルをネットから入れる〜",
+        "description": "Claude Codeの「スキル」機能を使いこなしたい方向け。SKILL.mdの仕組みから、ネットでの探し方・3ステップでのインストール方法まで実体験ベースで解説。34個のスキルを使う私の活用例も紹介。",
+        "author": {
+            "@type": "Person",
+            "name": "オチつかないヒト"
+        },
+        "datePublished": "2026-05-11",
+        "dateModified": "2026-05-11",
+        "publisher": {
+            "@type": "Organization",
+            "name": "オチつかないカンパニー"
+        },
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://otitukanaihito.github.io/blog/claude-code-skills-guide-2026-05-11.html"
+        }
+    }
+    </script>
+    <style>
+        pre {
+            background: #1e1e2e;
+            color: #cdd6f4;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            overflow-x: auto;
+            font-size: 0.875rem;
+            line-height: 1.6;
+        }
+        code {
+            background: #e8e8f0;
+            color: #5c5f77;
+            padding: 0.15em 0.4em;
+            border-radius: 0.25rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            background: transparent;
+            color: inherit;
+            padding: 0;
+            font-size: inherit;
+        }
+    </style>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-MDWZM4DL');</script>
+<!-- End Google Tag Manager -->
+</head>
+
+<body class="bg-gray-50">
+    <!-- ヘッダー -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="../index.html" class="text-2xl font-black tracking-wider text-gray-900 hover:text-indigo-600 transition-colors duration-300">
+                OCHITSUKANAI COMPANY
+            </a>
+            <nav class="hidden md:flex items-center space-x-6">
+                <a href="../index.html#blog" class="text-gray-700 hover:text-indigo-600 transition-colors duration-300">ブログ</a>
+                <a href="../index.html#affiliate" class="text-gray-700 hover:text-indigo-600 transition-colors duration-300">おすすめツール</a>
+                <a href="../index.html#services" class="text-gray-700 hover:text-indigo-600 transition-colors duration-300">サービス</a>
+                <a href="../index.html#about" class="text-gray-700 hover:text-indigo-600 transition-colors duration-300">プロフィール</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <article class="bg-white rounded-2xl shadow-xl overflow-hidden">
+            <!-- Article Header -->
+            <div class="relative h-64 md:h-96 bg-gradient-to-r from-purple-600 via-violet-600 to-indigo-700">
+                <div class="absolute inset-0 bg-black bg-opacity-30"></div>
+                <div class="absolute bottom-0 left-0 right-0 p-8">
+                    <div class="flex items-center mb-4">
+                        <span class="text-sm font-semibold text-white bg-violet-500 px-3 py-1 rounded-full">AI活用</span>
+                        <span class="text-sm text-white ml-4">2026-05-11</span>
+                    </div>
+                    <h1 class="text-3xl md:text-4xl font-bold text-white mb-4">
+                        Claude Codeスキルの探し方・インストール方法<br class="hidden md:block">〜自分に合ったスキルをネットから入れる〜
+                    </h1>
+                    <p class="text-lg text-gray-200">
+                        SKILL.md 1つで「専門家を雇う」感覚。34個使ってわかった活用のコツ
+                    </p>
+                </div>
+            </div>
+
+            <!-- Article Content -->
+            <div class="p-8">
+                <div class="prose prose-lg max-w-none">
+
+                    <h2>はじめに</h2>
+                    <p>
+                        Claude Codeを使い始めてしばらくすると、「スキル」という機能に出会います。
+                        私は最初「なんか難しそう」と思って後回しにしていたのですが、
+                        使い始めたら <strong>「もっと早く使えばよかった」</strong> と思うくらい便利でした。
+                    </p>
+                    <p>
+                        福祉のデイケアで働きながら副業ブログをやっている私にとって、
+                        時間は本当に貴重です。「ブログ記事書いて」の一言でAIチームが動く、
+                        「歌詞をPDFにして」で利用者さん向けの印刷物が完成する。
+                        そんな仕組みをスキルで実現しています。
+                    </p>
+                    <p>
+                        この記事では、Claude Codeのスキルとは何か、どこで探して、どうやってインストールするかを
+                        実体験ベースでわかりやすく解説します。
+                    </p>
+
+                    <div class="bg-violet-50 border-l-4 border-violet-400 p-4 my-6">
+                        <p class="text-violet-800">
+                            <strong>この記事の対象読者：</strong><br>
+                            Claude Code を使っているが、スキル機能をまだ活用していない方。
+                            「スキルって何？」から「実際にどうインストールするの？」まで一通り知りたい方。
+                        </p>
+                    </div>
+
+                    <h2>1. Claude Codeの「スキル」って何？</h2>
+
+                    <p>
+                        一言で言うと、<strong>Claude Codeに特定の専門知識や手順を教えるMarkdownファイル</strong>です。
+                    </p>
+                    <p>
+                        ファイル名は <code>SKILL.md</code>。これを決まったフォルダに置くだけで、
+                        Claude Codeが会話中に自動で参照して、適切な場面で実行してくれます。
+                    </p>
+                    <p>
+                        イメージとしては「専門家を雇う」感覚に近いです。
+                        SEOのことならSEOスキル、ブログ記事なら記事作成スキル、
+                        Gitの操作ならgit-workflowスキルが動く。
+                        毎回同じことをAIに説明しなくて済むようになります。
+                    </p>
+
+                    <div class="bg-gray-50 rounded-lg p-6 my-6">
+                        <h4 class="font-semibold text-gray-800 mb-3">スキルのフォルダ構成（グローバルの場合）</h4>
+<pre><code>~/.claude/skills/
+├── blog/
+│   └── SKILL.md      ← ブログ記事作成スキル
+├── seo/
+│   └── SKILL.md      ← SEO分析スキル
+├── git-workflow/
+│   └── SKILL.md      ← Git操作スキル
+└── lyrics-print/
+    └── SKILL.md      ← 歌詞PDF化スキル（職場用）</code></pre>
+                    </div>
+
+                    <p>
+                        スキルには2種類の置き場所があります：
+                    </p>
+                    <ul>
+                        <li><strong>グローバルスキル：</strong><code>~/.claude/skills/</code> — どのプロジェクトでも使える</li>
+                        <li><strong>プロジェクトローカルスキル：</strong><code>.agent/skills/</code>（プロジェクト内） — そのフォルダ専用</li>
+                    </ul>
+
+                    <h3>SKILL.md の中身はシンプル</h3>
+                    <p>
+                        難しそうに見えて、中身はMarkdownのテキストファイルです。
+                        「このスキルが呼ばれたら、こういう手順でこういう出力をしてください」と書くだけ。
+                    </p>
+
+                    <div class="bg-gray-50 rounded-lg p-6 my-6">
+                        <h4 class="font-semibold text-gray-800 mb-3">SKILL.md の最小構成例</h4>
+<pre><code>---
+name: weekly-review
+description: "週次振り返りを作成する。「週次振り返り」「週の振り返り」などで発動"
+---
+
+# 週次振り返りスキル
+
+## 概要
+今週の作業ログをもとにKPT形式の振り返りを作成する。
+
+## 手順
+1. 作業ログフォルダの最新ファイルを読み込む
+2. Keep / Problem / Try に分類する
+3. 来週のアクション3件を提案する</code></pre>
+                    </div>
+
+                    <h2>2. スキルはどこで探す？4つの方法</h2>
+
+                    <h3>方法1：find-skillsスキルを使う（最も簡単）</h3>
+                    <p>
+                        「find-skills」というメタスキルがあります。
+                        Claude Codeに「こんなスキルない？○○ができるやつ」と聞くだけで、
+                        インターネット上から自動的に探してきてくれます。
+                    </p>
+                    <p>
+                        私はこれを最初にインストールしました。
+                        「デプロイを自動化できるスキルない？」と聞いたら、
+                        site-deployスキルを見つけてインストール方法まで教えてくれました。
+                    </p>
+
+                    <h3>方法2：awesome-claude-skillsで探す</h3>
+                    <p>
+                        GitHub上にコミュニティが厳選したスキル一覧があります：
+                        <a href="https://github.com/travisvn/awesome-claude-skills" target="_blank" rel="noopener noreferrer" class="text-indigo-600 hover:underline">awesome-claude-skills</a>
+                    </p>
+                    <p>
+                        「awesome-〇〇」シリーズはGitHubではおなじみの厳選リスト形式で、
+                        品質が高いスキルが集まっています。初めて探すならここから見るのがおすすめです。
+                    </p>
+
+                    <h3>方法3：スキルマーケットプレイスで探す</h3>
+
+                    <div class="bg-gray-50 rounded-lg p-6 my-6 overflow-x-auto">
+                        <table class="w-full text-sm">
+                            <thead>
+                                <tr class="border-b border-gray-300">
+                                    <th class="text-left py-2 pr-4 font-semibold text-gray-800">サービス</th>
+                                    <th class="text-left py-2 pr-4 font-semibold text-gray-800">URL</th>
+                                    <th class="text-left py-2 font-semibold text-gray-800">特徴</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-gray-700">
+                                <tr class="border-b border-gray-200">
+                                    <td class="py-2 pr-4 font-medium">SkillsMP</td>
+                                    <td class="py-2 pr-4">skillsmp.com</td>
+                                    <td class="py-2">スキルのマーケットプレイス。カテゴリ検索が使いやすい</td>
+                                </tr>
+                                <tr class="border-b border-gray-200">
+                                    <td class="py-2 pr-4 font-medium">SkillHub</td>
+                                    <td class="py-2 pr-4">skillhub.club</td>
+                                    <td class="py-2">スキル共有プラットフォーム。コミュニティ評価つき</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-2 pr-4 font-medium">Anthropic公式</td>
+                                    <td class="py-2 pr-4">github.com/anthropics/skills</td>
+                                    <td class="py-2">Anthropic公式提供スキル。信頼性が高い</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h3>方法4：GitHub検索</h3>
+                    <p>
+                        GitHubの検索で <code>Claude Code skill SKILL.md [キーワード]</code> と入力すると、
+                        個人開発者が公開しているスキルが出てきます。
+                        ニッチな用途のスキルはこちらで見つかることも多いです。
+                    </p>
+
+                    <!-- Amazon アフィリエイト 1 -->
+                    <div class="mt-10 mb-8 p-6 bg-amber-50 border border-amber-200 rounded-xl">
+                        <h3 class="text-lg font-bold text-amber-800 mb-3">Claude / AI活用・プログラミング関連おすすめ書籍</h3>
+                        <a href="https://www.amazon.co.jp/s?k=Claude+AI活用+プロンプト+エンジニアリング&tag=otitukanaihit-22" target="_blank" rel="nofollow noopener noreferrer" class="flex items-start gap-4 hover:bg-amber-100 rounded-lg p-3 transition-colors">
+                            <div>
+                                <p class="font-semibold text-gray-800">Claude・ChatGPT プロンプトエンジニアリング 関連書籍</p>
+                                <p class="text-sm text-gray-600 mt-1">SKILL.mdを自分で書く力は、プロンプトエンジニアリングの力とほぼ同じです。「AIにどう指示を出せばいいか」を体系的に学べる書籍が参考になります。</p>
+                                <p class="text-amber-600 text-sm mt-2 font-medium">Amazonで探す →</p>
+                            </div>
+                        </a>
+                    </div>
+
+                    <h2>3. インストールは3ステップ（mkdir → curl → 完了）</h2>
+
+                    <p>
+                        スキルのインストールは拍子抜けするほど簡単です。
+                        コマンド3行で終わります。
+                    </p>
+
+                    <div class="bg-gray-50 rounded-lg p-6 my-6">
+                        <h4 class="font-semibold text-gray-800 mb-3">スキルのインストール手順（共通）</h4>
+<pre><code># 1. スキル用フォルダを作成
+mkdir -p ~/.claude/skills/[スキル名]
+
+# 2. SKILL.mdをダウンロード
+curl -sL [GitHubのraw URL] > ~/.claude/skills/[スキル名]/SKILL.md
+
+# 3. 確認
+ls ~/.claude/skills/[スキル名]/
+# → SKILL.md が表示されればOK</code></pre>
+                    </div>
+
+                    <p>
+                        Claude Codeを再起動（または新しいセッションを開始）すると、
+                        自動でスキルが認識されます。設定ファイルへの追記などは不要です。
+                    </p>
+
+                    <div class="bg-green-50 border-l-4 border-green-400 p-4 my-6">
+                        <p class="text-green-800">
+                            <strong>インストール後の確認方法：</strong><br>
+                            Claude Codeで「インストールしたスキルの名前」や「そのスキルが発動するキーワード」を含む指示を出してみてください。
+                            スキルが認識されていれば、対応した動作をしてくれます。
+                        </p>
+                    </div>
+
+                    <h3>Windowsユーザーへの補足</h3>
+                    <p>
+                        Windowsで使う場合、<code>~/.claude/skills/</code> は
+                        <code>C:\Users\[ユーザー名]\.claude\skills\</code> に対応します。
+                        <code>mkdir</code> コマンドはGit BashやWSL環境で実行するとスムーズです。
+                    </p>
+
+                    <h2>4. 私が入れている34個のスキル（カテゴリ別）</h2>
+
+                    <p>
+                        現在、私の環境には34個のスキルが入っています。
+                        カテゴリ別に紹介します。
+                    </p>
+
+                    <h3>チーム管理系スキル（5個）</h3>
+                    <p>
+                        複数のAIエージェントを連携させるための「司令塔」系スキルです。
+                        「ブログ記事書いて」と指示すると、team-managerスキルが発動して
+                        リサーチ・記事作成・レビューを分担してくれます。
+                    </p>
+                    <ul>
+                        <li><strong>team-manager：</strong>マルチエージェントの司令塔</li>
+                        <li><strong>agent-content：</strong>ブログ記事作成担当</li>
+                        <li><strong>agent-research：</strong>情報収集・調査担当</li>
+                        <li><strong>agent-system：</strong>システム設計・実装担当</li>
+                        <li><strong>agent-video：</strong>動画制作担当</li>
+                    </ul>
+
+                    <h3>ブログ・コンテンツ系スキル（2個）</h3>
+                    <ul>
+                        <li><strong>blog：</strong>記事作成の全工程エンジン（v1.6.0）。タイトルからHTML出力まで</li>
+                        <li><strong>copywriting：</strong>マーケティングコピー作成</li>
+                    </ul>
+
+                    <h3>SEO系スキル（13個）</h3>
+                    <p>
+                        SEO関連は専門性が高いため、用途ごとに細かく分かれています。
+                        「SEOチェックして」と言うだけで、seoスキルが関連サブスキルを呼び出してくれます。
+                    </p>
+
+                    <h3>ユーティリティ系スキル（7個）</h3>
+                    <ul>
+                        <li><strong>find-skills：</strong>スキル検索メタスキル（前述）</li>
+                        <li><strong>skill-creator：</strong>新スキルを作るためのテンプレートを提供</li>
+                        <li><strong>git-workflow：</strong>Git操作・PR管理</li>
+                        <li><strong>site-deploy：</strong>GitHub Pagesへのデプロイ手順</li>
+                        <li><strong>google-ai-mode-skill：</strong>Google AI検索で最新情報を取得</li>
+                        <li><strong>obsidian-cli：</strong>Obsidianノートの操作</li>
+                        <li><strong>weekly-review：</strong>週次振り返りの作成</li>
+                    </ul>
+
+                    <h3>福祉・業務系スキル（2個）</h3>
+                    <p>
+                        デイケアの仕事に使うスキルです。職場では外部ツール不可ですが、
+                        個人PCでの準備作業にスキルを活用しています。
+                    </p>
+                    <ul>
+                        <li><strong>lyrics-print：</strong>歌詞テキストをA4印刷用HTMLに変換（デイケア利用者向け）</li>
+                        <li><strong>voice-memo-organizer：</strong>音声メモをナレッジベースに整理・保存</li>
+                    </ul>
+
+                    <h2>5. スキルを選ぶ時の注意点</h2>
+
+                    <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 my-6">
+                        <p class="text-yellow-800">
+                            <strong>インストール前に中身を確認すること：</strong><br>
+                            スキルはMarkdownテキストなので、インストール前に必ずSKILL.mdの中身を読んでください。
+                            信頼できる作者・GitHubスター数が多い・最終更新日が新しい、
+                            これらを確認してから入れるのが安全です。
+                        </p>
+                    </div>
+
+                    <p>スキルを選ぶときの評価基準はこの3点です：</p>
+                    <ol>
+                        <li><strong>GitHubスター数・更新日：</strong>メンテナンスが続いているか確認する</li>
+                        <li><strong>SKILL.mdの品質：</strong>name/descriptionが明確で、手順が具体的か</li>
+                        <li><strong>自分の用途に合うか：</strong>descriptionに書かれたトリガー条件が自分の使い方と一致するか</li>
+                    </ol>
+
+                    <p>
+                        また、同名スキルが <code>~/.claude/skills/</code> と <code>.agent/skills/</code> の両方にある場合、
+                        両方が読み込まれます。意図しない動作を防ぐため、
+                        同名スキルの二重インストールには注意してください。
+                    </p>
+
+                    <h2>6. 自分でスキルを作る方法</h2>
+
+                    <p>
+                        既存のスキルに合うものがなければ、自分で作ることもできます。
+                        <strong>skill-creator</strong>スキルを使うと、テンプレートを提供してくれます。
+                    </p>
+                    <p>
+                        私の「lyrics-print」スキルは完全に自作です。
+                        「デイケアの利用者さん向けに歌詞をA4印刷用のHTMLに変換する」という
+                        ニッチすぎる用途はネットにないので、自分で作りました。
+                    </p>
+                    <p>
+                        スキル作りで大事なのはdescriptionの書き方です。
+                        Claude Codeはここを読んで「このスキルを使うべきか」を判断するので、
+                        <strong>どんな言葉で話しかけたときに発動してほしいか</strong>を具体的に書くのがコツです。
+                    </p>
+
+                    <div class="bg-gray-50 rounded-lg p-6 my-6">
+                        <h4 class="font-semibold text-gray-800 mb-3">descriptionの書き方のコツ</h4>
+<pre><code>---
+name: lyrics-print
+description: "歌詞テキストをA4印刷用HTMLに変換する。
+  「歌詞をPDFにして」「歌詞を印刷用に」「歌詞.txtを変換して」
+  などで発動。デイケア利用者向けのレイアウト。"
+---</code></pre>
+                    </div>
+
+                    <!-- Amazon アフィリエイト 2 -->
+                    <div class="mt-10 p-6 bg-amber-50 border border-amber-200 rounded-xl">
+                        <h3 class="text-lg font-bold text-amber-800 mb-3">AI・自動化・Python プログラミング関連書籍</h3>
+                        <a href="https://www.amazon.co.jp/s?k=Python+自動化+AI+業務効率化&tag=otitukanaihit-22" target="_blank" rel="nofollow noopener noreferrer" class="flex items-start gap-4 hover:bg-amber-100 rounded-lg p-3 transition-colors">
+                            <div>
+                                <p class="font-semibold text-gray-800">Python・AI活用 × 業務自動化 関連書籍</p>
+                                <p class="text-sm text-gray-600 mt-1">Claude Codeスキルで自動化できる範囲はMarkdownの知識だけでも広がりますが、Pythonが書けるとさらに強力になります。自動化・効率化に興味が出てきたら、ぜひ。</p>
+                                <p class="text-amber-600 text-sm mt-2 font-medium">Amazonで探す →</p>
+                            </div>
+                        </a>
+                    </div>
+
+                    <h2>7. まとめ：スキルでClaude Codeが「自分専用のAIチーム」になる</h2>
+
+                    <div class="bg-gray-50 rounded-lg p-6 my-6">
+                        <h4 class="font-semibold text-gray-800 mb-4">この記事のポイントまとめ</h4>
+                        <ul class="space-y-3 text-gray-700">
+                            <li class="flex items-start gap-2">
+                                <span class="text-violet-600 font-bold">1.</span>
+                                <span>スキル = SKILL.mdファイル。難しいものではなく、Markdownで書ける指示書</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-violet-600 font-bold">2.</span>
+                                <span>探し場所は「find-skillsスキル」「awesome-claude-skills」「SkillsMP」「GitHub検索」の4つ</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-violet-600 font-bold">3.</span>
+                                <span>インストールは mkdir → curl → 再起動の3ステップだけ</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-violet-600 font-bold">4.</span>
+                                <span>インストール前に中身（SKILL.md）を必ず確認する</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-violet-600 font-bold">5.</span>
+                                <span>ニッチな用途は自作する。skill-creatorスキルがテンプレートを出してくれる</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <p>
+                        スキルを増やしていくと、Claude Codeが「自分の仕事を理解している専任チーム」に育っていく感覚があります。
+                    </p>
+                    <p>
+                        ブログ担当、SEO担当、調査担当、職場の歌詞担当……それぞれの専門家が、
+                        適切な言葉をかけると動き出す。そんな体制が、
+                        <strong>Markdownファイルを数個並べるだけで作れてしまう</strong>のがスキルの面白さです。
+                    </p>
+                    <p>
+                        まずは1つ、自分の仕事で「毎回同じことをAIに説明してるな」という作業を探してみてください。
+                        そこをSKILL.mdにすることから始めると、スキルの価値が実感できます。
+                    </p>
+
+                </div>
+
+                <!-- SNS Share Buttons -->
+                <div class="mt-8 pt-8 border-t border-gray-200">
+                    <p class="text-sm font-semibold text-gray-600 mb-4 text-center">この記事をシェアする</p>
+                    <div class="flex justify-center gap-4">
+                        <a id="share-twitter" href="#" target="_blank" rel="noopener noreferrer"
+                            class="flex items-center gap-2 bg-black text-white px-5 py-2 rounded-lg hover:bg-gray-800 transition-colors text-sm font-semibold">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.748l7.73-8.835L1.254 2.25H8.080l4.253 5.622 5.91-5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                            X でシェア
+                        </a>
+                        <a id="share-hatena" href="#" target="_blank" rel="noopener noreferrer"
+                            class="flex items-center gap-2 bg-blue-600 text-white px-5 py-2 rounded-lg hover:bg-blue-700 transition-colors text-sm font-semibold">
+                            <span class="font-bold mr-1">B!</span>はてブ
+                        </a>
+                    </div>
+                </div>
+                <script>
+                (function() {
+                    var title = encodeURIComponent(document.title.replace(/ - オチつかないカンパニー.*/, ''));
+                    var url = encodeURIComponent(window.location.href);
+                    document.getElementById('share-twitter').href = 'https://twitter.com/intent/tweet?text=' + title + '&url=' + url + '&hashtags=ClaudeCode,スキル,AI活用,自動化';
+                    document.getElementById('share-hatena').href = 'https://b.hatena.ne.jp/add?mode=confirm&title=' + title + '&url=' + url;
+                })();
+                </script>
+
+                <!-- Related Articles -->
+                <div class="mt-12 pt-8 border-t border-gray-200">
+                    <h3 class="text-xl font-bold text-gray-900 mb-6">関連記事</h3>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <a href="../blog/ai-cli-skill-management-2026-04-06.html" class="block group">
+                            <div class="bg-gray-50 rounded-lg p-4 group-hover:bg-gray-100 transition-colors">
+                                <h4 class="font-semibold text-gray-900 group-hover:text-indigo-600">
+                                    AI CLIツールのスキル管理術 — Claude Code × AntiGravity 両刀使いの実践記</h4>
+                                <p class="text-sm text-gray-600 mt-2">複数ツールでスキルを管理するコツ</p>
+                            </div>
+                        </a>
+                        <a href="../blog/claude-code-statusline-windows-2026-03-16.html" class="block group">
+                            <div class="bg-gray-50 rounded-lg p-4 group-hover:bg-gray-100 transition-colors">
+                                <h4 class="font-semibold text-gray-900 group-hover:text-indigo-600">
+                                    Windows日本語環境でClaude Codeステータスラインを動かす方法【全記録】</h4>
+                                <p class="text-sm text-gray-600 mt-2">Claude Code環境構築の実体験</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </main>
+
+    <!-- フッター -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">OCHITSUKANAI COMPANY</h3>
+                    <p class="text-gray-400">福祉の現場で働く4児の父が、業務効率化と個人の成長について発信するブログです。</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">メニュー</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="../index.html#blog" class="hover:text-white transition-colors duration-300">ブログ</a></li>
+                        <li><a href="../index.html#affiliate" class="hover:text-white transition-colors duration-300">おすすめツール</a></li>
+                        <li><a href="../index.html#services" class="hover:text-white transition-colors duration-300">サービス</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">リンク</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="../index.html" class="hover:text-white transition-colors duration-300">ホーム</a></li>
+                        <li><a href="../privacy-policy.html" class="hover:text-white transition-colors duration-300">プライバシーポリシー</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2026 OCHITSUKANAI COMPANY. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../back-home.js"></script>
+</body>
+
+</html>
