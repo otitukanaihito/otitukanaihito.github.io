@@ -1,0 +1,128 @@
+[
+  {
+    "slug": "ai-relay-2026-04-04",
+    "title": "AIツール同士のリレープレー〜1つのAIが止まっても完走できる仕組みの作り方〜",
+    "date": "2026-04-04",
+    "category": "AI活用",
+    "image": "images/eyecatch-relay.webp"
+  },
+  {
+    "slug": "ai-cli-skill-management-2026-04-04",
+    "title": "AI CLIツールのスキル管理術 — Claude Code × AntiGravity 両刀使いの実践記",
+    "date": "2026-04-04",
+    "category": "自動化",
+    "image": "images/blog_ai_thumbnail.webp"
+  },
+  {
+    "slug": "google-flow-anime-character-2026-03-28",
+    "title": "Google FlowでAIキャラをアニメのまま動かそうとしたら全部リアル人間になった話",
+    "date": "2026-03-28",
+    "category": "AI活用",
+    "image": "images/blog_ai_antigravity.webp"
+  },
+  {
+    "slug": "ai-team-with-personality-2026-03-18",
+    "title": "AIに名前と性格を与えたら、チームっぽくなった話 ～菅さん・ミク・ケンジ・サトルと働く1日～",
+    "date": "2026-03-18",
+    "category": "AI開発",
+    "image": "images/eyecatch-personality.webp"
+  },
+  {
+    "slug": "claude-code-agent-team-2026-03-18",
+    "title": "Claude CodeでAIチームを作った話 ～社長・マネージャー・担当3名の組織を1人で構築～",
+    "date": "2026-03-18",
+    "category": "AI開発",
+    "image": "images/eyecatch-agent-team.webp"
+  },
+  {
+    "slug": "claude-antigravity-relay-2026-03-18",
+    "title": "Claude CodeとAntigravityのリレープレー ～マルチエージェントデモをAI2本で完走した話～",
+    "date": "2026-03-18",
+    "category": "AI開発",
+    "image": "images/eyecatch-relay.webp"
+  },
+  {
+    "slug": "claude-code-compact-context-2026-03-18",
+    "title": "Claude Codeのコンテキストが溜まったら？/compactで要約して続行する方法",
+    "date": "2026-03-18",
+    "category": "AI開発",
+    "image": "images/eyecatch-compact.webp"
+  },
+  {
+    "slug": "claude-code-statusline-windows-2026-03-16",
+    "title": "Windows日本語環境でClaude Codeステータスラインを動かす方法【全記録】",
+    "date": "2026-03-16",
+    "category": "AI活用",
+    "image": "images/blog_claude_statusline.png"
+  },
+  {
+    "slug": "daycare-dx-workflow-2026-03-15",
+    "title": "福祉デイケアの属人化問題〜解決したいと考えているが、まだできていない話〜",
+    "date": "2026-03-15",
+    "category": "福祉×テック",
+    "image": "images/blog_daycare_dx.webp"
+  },
+  {
+    "slug": "antigravity-ai-experience-2026-01-31",
+    "title": "5ヶ月ぶりのブログ復活！AI「Antigravity」を使ってみた感想",
+    "date": "2026-01-31",
+    "category": "AI活用",
+    "image": "images/blog_ai_antigravity.webp"
+  },
+  {
+    "slug": "vault-automation-handover-2025-08-14",
+    "title": "Vault自動化と引き継ぎ整備の実践記録",
+    "date": "2025-08-14",
+    "category": "自動化",
+    "image": "images/blog_vault_handover.webp"
+  },
+  {
+    "slug": "cursor-obsidian-integration-automation-2025-08-10",
+    "title": "Cursor×Obsidian連携で日次ワークを短縮する実践ログ",
+    "date": "2025-08-10",
+    "category": "自動化",
+    "image": "images/blog_workflow_automation.webp"
+  },
+  {
+    "slug": "hybrid-website-strategy-2025-08-09",
+    "title": "ハイブリッドサイト戦略の実装ガイド（個人ビジネス向け）",
+    "date": "2025-08-09",
+    "category": "サイト制作",
+    "image": "images/blog_hybrid_strategy.webp"
+  },
+  {
+    "slug": "obsidian-vault-optimization-2025-08-08",
+    "title": "Obsidian Vault完全最適化プロジェクト - 自律型システム管理の実現",
+    "date": "2025-08-08",
+    "category": "ナレッジ管理",
+    "image": "images/blog_obsidian_knowledge.webp"
+  },
+  {
+    "slug": "daily-life-insights-2025-08-06",
+    "title": "4児の父が語る、仕事と家庭の両立で学んだこと",
+    "date": "2025-08-06",
+    "category": "ライフスタイル",
+    "image": "images/blog_family_worklife.webp"
+  },
+  {
+    "slug": "mental-health-productivity-2025-08-04",
+    "title": "福祉の現場で実践する業務効率化の具体的方法",
+    "date": "2025-08-04",
+    "category": "福祉×テック",
+    "image": "images/blog_mental_health_dx.webp"
+  },
+  {
+    "slug": "obsidian-guide",
+    "title": "なぜ私は全てのメモをObsidianに集約したのか？",
+    "date": "2025-08-04",
+    "category": "ナレッジ管理",
+    "image": "images/blog_obsidian_knowledge.webp"
+  },
+  {
+    "slug": "github-pages-blog-setup-2025-08-04",
+    "title": "GitHub Pagesでアフィリエイトブログを構築した話",
+    "date": "2025-08-04",
+    "category": "サイト制作",
+    "image": "images/blog_github_pages.webp"
+  }
+]
