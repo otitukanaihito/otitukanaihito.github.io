@@ -29,18 +29,6 @@
     <!-- Tailwind CSS -->
     <link rel="stylesheet" href="../style.css">
 
-    <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-WBGJLRYXKS"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
-        gtag('config', 'G-WBGJLRYXKS', {
-            'anonymize_ip': true,
-            'cookie_flags': 'SameSite=None;Secure'
-        });
-    </script>
-
     <!-- Structured Data -->
     <script type="application/ld+json">
     {
@@ -61,7 +49,35 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https://otitukanaihito.github.io/blog/daycare-dx-workflow-2026-03-15.html"
-        }
+        },
+        "image": "https://otitukanaihito.github.io/images/blog_daycare_dx.png"
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "ホーム",
+                "item": "https://otitukanaihito.github.io/"
+            },
+            {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "福祉×テック",
+                "item": "https://otitukanaihito.github.io/categories.html#welfare-tech"
+            },
+            {
+                "@type": "ListItem",
+                "position": 3,
+                "name": "福祉デイケアの属人化問題〜解決したいと考えているが、まだできていない話〜",
+                "item": "https://otitukanaihito.github.io/blog/daycare-dx-workflow-2026-03-15.html"
+            }
+        ]
     }
     </script>
 <!-- Google Tag Manager -->
