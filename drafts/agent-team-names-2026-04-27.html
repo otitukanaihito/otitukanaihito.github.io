@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claude Codeのエージェントチームに名前をつけて運用する話〜ブロさん・リサさん・シス・ドウさん・歌詞さん・レビュさん〜 - オチつかないカンパニー</title>
+    <meta name="description"
+        content="Claude Codeのエージェントに名前をつけたら、使い方が変わった。「ブロさん・リサさん・ドウさん」という名前が生まれた理由と、別人格として機能させる運用術を紹介します。">
+    <meta name="keywords" content="Claude Code,AIエージェント,スキル,SKILL.md,CLAUDE.md,エージェントチーム,個人開発,AI活用,自動化">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://otitukanaihito.github.io/blog/agent-team-names-2026-04-27.html">
+    <meta property="og:title" content="Claude Codeのエージェントチームに名前をつけて運用する話">
+    <meta property="og:description"
+        content="ブロさん・リサさん・ドウさん——名前をつけたら、AIエージェントへの頼み方が変わった。別人格として機能させる運用術。">
+    <meta property="og:image" content="https://otitukanaihito.github.io/images/eyecatch-agent-team.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://otitukanaihito.github.io/blog/agent-team-names-2026-04-27.html">
+    <meta property="twitter:title" content="Claude Codeのエージェントチームに名前をつけて運用する話">
+    <meta property="twitter:description"
+        content="名前をつけたら、AIエージェントへの頼み方が変わった。ブロさん・リサさん・ドウさんのチーム運用術。">
+    <meta property="twitter:image" content="https://otitukanaihito.github.io/images/eyecatch-agent-team.png">
+
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="../style.css">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Claude Codeのエージェントチームに名前をつけて運用する話〜ブロさん・リサさん・シス・ドウさん・歌詞さん・レビュさん〜",
+        "description": "Claude Codeのエージェントに名前をつけたら、使い方が変わった。「ブロさん・リサさん・ドウさん」という名前が生まれた理由と、別人格として機能させる運用術を紹介します。",
+        "author": {
+            "@type": "Person",
+            "name": "オチつかないヒト"
+        },
+        "datePublished": "2026-04-27",
+        "dateModified": "2026-04-27",
+        "publisher": {
+            "@type": "Organization",
+            "name": "オチつかないカンパニー"
+        },
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://otitukanaihito.github.io/blog/agent-team-names-2026-04-27.html"
+        },
+        "image": "https://otitukanaihito.github.io/images/eyecatch-agent-team.png"
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "ホーム",
+                "item": "https://otitukanaihito.github.io/"
+            },
+            {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "AI活用",
+                "item": "https://otitukanaihito.github.io/categories.html#ai"
+            },
+            {
+                "@type": "ListItem",
+                "position": 3,
+                "name": "Claude Codeのエージェントチームに名前をつけて運用する話",
+                "item": "https://otitukanaihito.github.io/blog/agent-team-names-2026-04-27.html"
+            }
+        ]
+    }
+    </script>
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-MDWZM4DL');</script>
+<!-- End Google Tag Manager -->
+    <style>
+        pre {
+            background: #1e1e2e;
+            color: #cdd6f4;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            overflow-x: auto;
+            font-size: 0.875rem;
+            line-height: 1.6;
+        }
+        code {
+            background: #e8e8f0;
+            color: #5c5f77;
+            padding: 0.15em 0.4em;
+            border-radius: 0.25rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            background: transparent;
+            color: inherit;
+            padding: 0;
+            font-size: inherit;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50">
+    <!-- ヘッダー -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="../index.html" class="text-2xl font-black tracking-wider text-gray-900 hover:text-indigo-600 transition-colors duration-300">
+                OCHITSUKANAI COMPANY
+            </a>
+            <nav class="hidden md:flex items-center space-x-6">
+                <a href="../index.html#blog" class="text-gray-700 hover:text-indigo-600 transition-colors duration-300">ブログ</a>
+                <a href="../index.html#affiliate" class="text-gray-700 hover:text-indigo-600 transition-colors duration-300">おすすめツール</a>
+                <a href="../index.html#services" class="text-gray-700 hover:text-indigo-600 transition-colors duration-300">サービス</a>
+                <a href="../index.html#about" class="text-gray-700 hover:text-indigo-600 transition-colors duration-300">プロフィール</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <article class="bg-white rounded-2xl shadow-xl overflow-hidden">
+            <!-- Article Header -->
+            <div class="relative h-64 md:h-96 bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500">
+                <div class="absolute inset-0 bg-black bg-opacity-30"></div>
+                <div class="absolute bottom-0 left-0 right-0 p-8">
+                    <div class="flex items-center mb-4">
+                        <span class="text-sm font-semibold text-white bg-emerald-500 px-3 py-1 rounded-full">AI活用</span>
+                        <span class="text-sm text-white ml-4">2026-04-27</span>
+                    </div>
+                    <h1 class="text-3xl md:text-4xl font-bold text-white mb-4">
+                        Claude Codeのエージェントチームに名前をつけて運用する話
+                    </h1>
+                    <p class="text-lg text-gray-200">
+                        〜ブロさん・リサさん・シス・ドウさん・歌詞さん・レビュさん〜
+                    </p>
+                </div>
+            </div>
+
+            <!-- Article Content -->
+            <div class="p-8">
+                <div class="prose prose-lg max-w-none">
+
+                    <h2>「誰に頼む？」が直感でわかるようになった</h2>
+                    <p>
+                        Claude Codeには、スキルファイル（SKILL.md）を使って「専門エージェント」を作る仕組みがあります。
+                        記事を書くエージェント、調査するエージェント、システムを作るエージェント——役割ごとに分けて呼び出せるわけです。
+                    </p>
+                    <p>
+                        最初はそれぞれを「agent-content」「agent-research」などのスキル名で呼んでいました。
+                        でもあるとき、このエージェントたちに<strong>名前をつけてみた</strong>ら、使い方が変わりました。
+                    </p>
+
+                    <h2>1. 名前をつけた理由</h2>
+                    <p>
+                        理由は2つあります。
+                    </p>
+                    <p>
+                        1つ目は、<strong>愛着がわくから</strong>。
+                        「agent-content」より「ブロさん」のほうが、頼みやすい。
+                        毎日のように指示を出す相手なので、名前があるかどうかは地味に大事でした。
+                    </p>
+                    <p>
+                        2つ目は、<strong>それぞれを別の人格として機能させたかったから</strong>。
+                        私が目指しているのは、「同じAIに色々頼む」ではなく、「得意分野を持つ専門家にそれぞれ任せる」という運用です。
+                        ブロさんはブログ専門、リサさんは調査専門、ドウさんは動画専門——役割が名前に込められていると、
+                        「この仕事はどこに頼むべきか」が自然と決まります。
+                    </p>
+
+                    <div class="bg-emerald-50 border-l-4 border-emerald-400 p-4 my-6">
+                        <p class="text-emerald-800">
+                            <strong>「誰に頼む？」が直感でわかる状態を作りたかった。</strong><br>
+                            名前は、そのための道具です。
+                        </p>
+                    </div>
+
+                    <h2>2. チームの紹介</h2>
+
+                    <div class="grid md:grid-cols-2 gap-4 my-6">
+                        <div class="bg-indigo-50 rounded-lg p-4 border border-indigo-200">
+                            <h4 class="font-bold text-indigo-800 mb-1">ブロさん</h4>
+                            <p class="text-xs text-indigo-500 mb-2">agent-content</p>
+                            <p class="text-sm text-indigo-700">ブログ記事の作成・アフィリリンク挿入・GitHubへの公開を担当。明るくテンポが速い。</p>
+                        </div>
+                        <div class="bg-violet-50 rounded-lg p-4 border border-violet-200">
+                            <h4 class="font-bold text-violet-800 mb-1">リサさん</h4>
+                            <p class="text-xs text-violet-500 mb-2">agent-research</p>
+                            <p class="text-sm text-violet-700">情報収集・調査・ファクトチェック・ナレッジ整理を担当。正確性を重視する。</p>
+                        </div>
+                        <div class="bg-orange-50 rounded-lg p-4 border border-orange-200">
+                            <h4 class="font-bold text-orange-800 mb-1">シス</h4>
+                            <p class="text-xs text-orange-500 mb-2">agent-system</p>
+                            <p class="text-sm text-orange-700">デイケア送迎システム・ツール作成・技術的実装を担当。エンジニア気質。</p>
+                        </div>
+                        <div class="bg-pink-50 rounded-lg p-4 border border-pink-200">
+                            <h4 class="font-bold text-pink-800 mb-1">ドウさん</h4>
+                            <p class="text-xs text-pink-500 mb-2">agent-video</p>
+                            <p class="text-sm text-pink-700">動画企画・台本・Remotionコード生成を担当。クリエイティブ系。</p>
+                        </div>
+                        <div class="bg-yellow-50 rounded-lg p-4 border border-yellow-200">
+                            <h4 class="font-bold text-yellow-800 mb-1">歌詞さん</h4>
+                            <p class="text-xs text-yellow-500 mb-2">agent-lyrics</p>
+                            <p class="text-sm text-yellow-700">歌詞テキストをA4印刷用HTMLに変換。デイケアの歌声プリント作成専門。</p>
+                        </div>
+                        <div class="bg-red-50 rounded-lg p-4 border border-red-200">
+                            <h4 class="font-bold text-red-800 mb-1">レビュさん</h4>
+                            <p class="text-xs text-red-500 mb-2">review</p>
+                            <p class="text-sm text-red-700">コード・記事・設計の採点とフィードバックを担当。辛口で容赦ない。</p>
+                        </div>
+                    </div>
+
+                    <h2>3. どうやって「別人格」にするのか</h2>
+                    <p>
+                        Claude Codeのスキル機能は、SKILL.mdというファイルで動きます。
+                        このファイルに「役割・性格・しゃべり方・担当業務」を書いておくと、
+                        呼び出したときにその設定で動いてくれます。
+                    </p>
+                    <p>
+                        たとえばブロさんのSKILL.mdには、こんなことが書いてあります。
+                    </p>
+
+                    <pre><code>## 性格・しゃべり方
+明るくクリエイティブな女性スタッフ。
+語尾に「〜ですね！」「〜しますよ！」が多い。
+仕事は速くて丁寧。完成物への自信があり、仕上がりを誇らしげに報告する。</code></pre>
+
+                    <p>
+                        性格を書いておくと、返答のトーンが変わります。
+                        同じClaude Codeが動いているはずなのに、ブロさんとリサさんでは
+                        文体も報告スタイルも違う——これが「別人格」を作る仕組みです。
+                    </p>
+
+                    <h2>4. SKILL.mdとCLAUDE.mdの名前を一致させることが重要だった</h2>
+                    <p>
+                        実は、名前をつけた当初は少し混乱がありました。
+                        CLAUDE.mdの委任ルール表には「ブロさん」と書いてあるのに、
+                        SKILL.mdの中身には以前の名前が残っていた、という状態になっていたのです。
+                    </p>
+                    <p>
+                        その日のうちに、全ファイルの名前を統一しました。
+                    </p>
+
+                    <div class="bg-gray-50 rounded-lg p-4 my-6 text-sm">
+                        <p class="font-semibold text-gray-700 mb-2">修正した場所：</p>
+                        <ul class="space-y-1 text-gray-600 list-disc list-inside">
+                            <li>CLAUDE.md の委任ルール表</li>
+                            <li>各SKILL.mdの見出し・本文中の名前</li>
+                            <li>他エージェントのSKILL.md内の「引き継ぎメモ」の宛名</li>
+                        </ul>
+                    </div>
+
+                    <p>
+                        「CLAUDE.mdとSKILL.mdで名前が一致していないと、AIが混乱する」——というよりも、
+                        <strong>自分が混乱します</strong>。どのファイルを見ても同じ名前が使われている状態が、
+                        運用の安定につながりました。
+                    </p>
+
+                    <h2>5. チームで動かすことの実感</h2>
+                    <p>
+                        名前をつけてしばらく運用してみた感想です。
+                    </p>
+                    <p>
+                        「ブロさんにお願いしよう」と思ったとき、頼む内容が自然と絞られます。
+                        ブロさんはブログの人なので、記事以外のことを頼もうとすると「あれ、これはシスの仕事では？」と
+                        自分で気づけるようになりました。
+                    </p>
+                    <p>
+                        これは、<strong>名前が「担当範囲の境界線」を引いてくれている</strong>ということだと思います。
+                        指示を出す前に「誰に頼むか」を考える習慣ができると、
+                        作業の渡し方もシンプルになりました。
+                    </p>
+
+                    <div class="bg-teal-50 border-l-4 border-teal-400 p-4 my-6">
+                        <p class="text-teal-800">
+                            <strong>まとめ：名前をつける3つの効果</strong><br><br>
+                            1. <strong>愛着がわく</strong> — 毎日頼む相手に名前があると、関係性が変わる<br>
+                            2. <strong>担当範囲が明確になる</strong> — 「誰に何を頼むか」が直感でわかる<br>
+                            3. <strong>別人格として機能する</strong> — SKILL.mdに性格を書くと、返答のトーンが変わる
+                        </p>
+                    </div>
+
+                    <h2>おわりに</h2>
+                    <p>
+                        AIエージェントに名前をつけることに、最初は「意味があるのか？」と思っていました。
+                        でも実際にやってみると、<strong>自分の使い方が変わった</strong>ことに気づきました。
+                    </p>
+                    <p>
+                        「何でもこなす万能AI」として使うより、「得意分野を持つ専門家チーム」として使う方が、
+                        指示が明確になるし、結果もよくなる感覚があります。
+                    </p>
+                    <p>
+                        Claude Codeを使っていて「なんとなく毎回同じ感じになる」と思っている方には、
+                        スキルで役割を分けて名前をつける、というアプローチを試してみてほしいです。
+                    </p>
+
+                </div>
+
+                <!-- Amazon アフィリエイト -->
+                <div class="mt-12 p-6 bg-amber-50 border border-amber-200 rounded-xl">
+                    <h3 class="text-lg font-bold text-amber-800 mb-3">この記事に関連するおすすめ本</h3>
+                    <a href="https://www.amazon.co.jp/s?k=AIエージェント+チーム+自動化&tag=otitukanaihit-22" target="_blank" rel="nofollow noopener noreferrer" class="flex items-start gap-4 hover:bg-amber-100 rounded-lg p-3 transition-colors">
+                        <div>
+                            <p class="font-semibold text-gray-800">AIエージェント・チーム運用の実践書をAmazonで探す</p>
+                            <p class="text-sm text-gray-600 mt-1">マルチエージェント・AI自動化・チーム設計に関する書籍を探せます。Claude Codeを使いこなしたい方におすすめです。</p>
+                            <p class="text-amber-600 text-sm mt-2 font-medium">Amazonで見る →</p>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- SNS Share Buttons -->
+                <div class="mt-8 pt-8 border-t border-gray-200">
+                    <p class="text-sm font-semibold text-gray-600 mb-4 text-center">この記事をシェアする</p>
+                    <div class="flex justify-center gap-4">
+                        <a id="share-twitter" href="#" target="_blank" rel="noopener noreferrer"
+                            class="flex items-center gap-2 bg-black text-white px-5 py-2 rounded-lg hover:bg-gray-800 transition-colors text-sm font-semibold">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.748l7.73-8.835L1.254 2.25H8.08l4.253 5.622 5.91-5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                            X でシェア
+                        </a>
+                        <a id="share-hatena" href="#" target="_blank" rel="noopener noreferrer"
+                            class="flex items-center gap-2 bg-blue-600 text-white px-5 py-2 rounded-lg hover:bg-blue-700 transition-colors text-sm font-semibold">
+                            <span class="font-bold mr-1">B!</span>はてブ
+                        </a>
+                    </div>
+                </div>
+                <script>
+                (function() {
+                    var title = encodeURIComponent(document.title.replace(/ - オチつかないカンパニー.*/, ''));
+                    var url = encodeURIComponent(window.location.href);
+                    document.getElementById('share-twitter').href = 'https://twitter.com/intent/tweet?text=' + title + '&url=' + url + '&hashtags=ClaudeCode,AIエージェント,個人開発';
+                    document.getElementById('share-hatena').href = 'https://b.hatena.ne.jp/add?mode=confirm&title=' + title + '&url=' + url;
+                })();
+                </script>
+
+                <!-- Related Articles -->
+                <div class="mt-12 pt-8 border-t border-gray-200">
+                    <h3 class="text-xl font-bold text-gray-900 mb-6">関連記事</h3>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <a href="harness-engineering-2026-04-20.html" class="block group">
+                            <div class="bg-gray-50 rounded-lg p-4 group-hover:bg-gray-100 transition-colors">
+                                <h4 class="font-semibold text-gray-900 group-hover:text-indigo-600">
+                                    ハーネスエンジニアリングを調べたら自分がやっていたことに名前がついていた話</h4>
+                                <p class="text-sm text-gray-600 mt-2">CLAUDE.mdは「手綱」だった。エージェントを動かす環境設計の話。</p>
+                            </div>
+                        </a>
+                        <a href="ai-relay-2026-04-13.html" class="block group">
+                            <div class="bg-gray-50 rounded-lg p-4 group-hover:bg-gray-100 transition-colors">
+                                <h4 class="font-semibold text-gray-900 group-hover:text-indigo-600">
+                                    AIツール同士のリレープレー〜1つのAIが止まっても完走できる仕組みの作り方〜</h4>
+                                <p class="text-sm text-gray-600 mt-2">Claude Code・AntiGravity・ChatGPTのリレー設計術</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </main>
+
+    <!-- フッター -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">OCHITSUKANAI COMPANY</h3>
+                    <p class="text-gray-400">福祉の現場で働く4児の父が、業務効率化と個人の成長について発信するブログです。</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">メニュー</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="../index.html#blog" class="hover:text-white transition-colors duration-300">ブログ</a></li>
+                        <li><a href="../index.html#affiliate" class="hover:text-white transition-colors duration-300">おすすめツール</a></li>
+                        <li><a href="../index.html#services" class="hover:text-white transition-colors duration-300">サービス</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">リンク</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="../index.html" class="hover:text-white transition-colors duration-300">ホーム</a></li>
+                        <li><a href="../privacy-policy.html" class="hover:text-white transition-colors duration-300">プライバシーポリシー</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2026 OCHITSUKANAI COMPANY. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../back-home.js"></script>
+</body>
+</html>
