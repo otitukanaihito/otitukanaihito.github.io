@@ -10,9 +10,12 @@
       link.textContent = '← ホーム';
       link.setAttribute('aria-label', 'ホームに戻る');
       link.style.position = 'fixed';
-      link.style.right = '20px';
-      link.style.bottom = '20px';
+      link.style.right = '16px';
+      link.style.bottom = window.innerWidth < 768 ? '72px' : '20px';
       link.style.zIndex = '9999';
+      window.addEventListener('resize', function() {
+        link.style.bottom = window.innerWidth < 768 ? '72px' : '20px';
+      });
       link.style.padding = '10px 14px';
       link.style.borderRadius = '999px';
       link.style.background = 'linear-gradient(135deg,#4f46e5,#7c3aed)';

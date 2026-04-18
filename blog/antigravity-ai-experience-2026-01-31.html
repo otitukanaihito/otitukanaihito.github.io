@@ -89,14 +89,37 @@
     <!-- ヘッダー -->
     <header class="bg-white shadow-sm sticky top-0 z-50">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="../index.html" class="text-2xl font-black tracking-wider text-gray-900 hover:text-indigo-600 transition-colors duration-300">
+            <a href="../index.html" class="text-sm md:text-2xl font-black tracking-wider whitespace-nowrap text-gray-900 hover:text-indigo-600 transition-colors duration-300">
                 OCHITSUKANAI COMPANY
             </a>
             <nav class="hidden md:flex items-center space-x-6">
                 <a href="../index.html#blog" class="text-gray-700 hover:text-indigo-600 transition-colors duration-300">ブログ</a>
+                <a href="../categories.html" class="text-gray-700 hover:text-indigo-600 transition-colors duration-300">カテゴリー</a>
                 <a href="../index.html#affiliate" class="text-gray-700 hover:text-indigo-600 transition-colors duration-300">おすすめツール</a>
-                <a href="../index.html#services" class="text-gray-700 hover:text-indigo-600 transition-colors duration-300">サービス</a>
                 <a href="../index.html#about" class="text-gray-700 hover:text-indigo-600 transition-colors duration-300">プロフィール</a>
+                <a href="../index.html#contact" class="text-gray-700 hover:text-indigo-600 transition-colors duration-300">お問い合わせ</a>
+            </nav>
+            <div class="md:hidden">
+                <button onclick="toggleMenu()" class="text-gray-700" aria-label="メニューを開く" aria-expanded="false" id="hamburger-btn">
+                    <svg id="menu-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                    <svg id="close-icon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="md:hidden bg-white px-6 pb-4 hidden">
+            <nav class="flex flex-col space-y-4">
+                <a href="../index.html#blog" class="text-gray-700 hover:text-indigo-600">ブログ</a>
+                <a href="../categories.html" class="text-gray-700 hover:text-indigo-600">カテゴリー</a>
+                <a href="../index.html#affiliate" class="text-gray-700 hover:text-indigo-600">おすすめツール</a>
+                <a href="../index.html#about" class="text-gray-700 hover:text-indigo-600">プロフィール</a>
+                <a href="../index.html#contact" class="text-gray-700 hover:text-indigo-600">お問い合わせ</a>
             </nav>
         </div>
     </header>
@@ -336,6 +359,20 @@
         </div>
     </footer>
 
+    <script>
+        function toggleMenu() {
+            var mobileMenu = document.getElementById('mobile-menu');
+            var menuIcon = document.getElementById('menu-icon');
+            var closeIcon = document.getElementById('close-icon');
+            var btn = document.getElementById('hamburger-btn');
+            var isOpen = mobileMenu.classList.contains('hidden');
+            mobileMenu.classList.toggle('hidden');
+            menuIcon.classList.toggle('hidden');
+            closeIcon.classList.toggle('hidden');
+            btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+            btn.setAttribute('aria-label', isOpen ? 'メニューを閉じる' : 'メニューを開く');
+        }
+    </script>
     <script src="../back-home.js"></script>
 </body>
 
