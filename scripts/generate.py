@@ -41,26 +41,6 @@ def load_articles():
         return json.load(f)
 
 
-def image_tag(image_path, alt, extra_class=""):
-    """画像パスに応じて picture または img タグを生成する。"""
-    base_class = "w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-    if extra_class:
-        base_class = f"{base_class} {extra_class}"
-
-    if image_path.endswith(".webp"):
-        png_path = image_path[:-5] + ".png"
-        return (
-            f'<picture>\n'
-            f'                                <source srcset="{image_path}" type="image/webp">\n'
-            f'                                <img src="{png_path}" alt="{alt}" width="640" height="640" loading="lazy" decoding="async" class="{base_class}">\n'
-            f'                            </picture>'
-        )
-    else:
-        return (
-            f'<img src="{image_path}" alt="{alt}" width="640" height="640" loading="lazy" decoding="async" class="{base_class}">'
-        )
-
-
 def get_article_description(slug):
     """blog/{slug}.html の <meta name="description"> を抽出する。"""
     filepath = os.path.join(BLOG_DIR, f"{slug}.html")
@@ -69,8 +49,6 @@ def get_article_description(slug):
     with open(filepath, encoding="utf-8") as f:
         content = f.read()
     m = re.search(r'<meta name="description"[^>]*content="(.*?)"', content, re.DOTALL)
-    if not m:
-        m = re.search(r'<meta name="description"\s+content="(.*?)"', content, re.DOTALL)
     return m.group(1) if m else ""
 
 

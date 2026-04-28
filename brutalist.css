@@ -474,6 +474,13 @@ body {
   line-height: 1.85;
 }
 
+.hero-cta {
+  margin-top: 2rem;
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
 /* Section */
 .brut-section {
   padding: 3rem 0;

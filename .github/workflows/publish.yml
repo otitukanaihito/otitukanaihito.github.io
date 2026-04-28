@@ -33,6 +33,6 @@ jobs:
           if git diff --cached --quiet; then
             echo "公開対象の記事がありませんでした。"
           else
-            git commit -m "chore: 予約投稿を公開 $(date +'%Y-%m-%d')"
+            git commit -m "chore: 予約投稿を公開 $(TZ=Asia/Tokyo date +'%Y-%m-%d')"
             git push
           fi
