@@ -1,453 +1,311 @@
 <!DOCTYPE html>
 <html lang="ja">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Windows日本語環境でClaude Codeステータスラインを動かす方法【全記録】 - オチつかないカンパニー</title>
-    <meta name="description"
-        content="Claude Codeのステータスラインが「0% | waiting...」のまま動かない。Windows + Git Bash + 日本語パスという環境で詰まった全記録。cygpath問題・文字化け・jqインストールまで解決策を網羅します。">
-    <meta name="keywords" content="Claude Code,ステータスライン,Windows,Git Bash,日本語パス,jq,cygpath,PowerShell,設定,トラブルシューティング,AI開発">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Windows日本語環境でClaude Codeステータスラインを動かす方法【全記録】 - オチつかないカンパニー</title>
+  <meta name="description" content="Claude Codeのステータスラインが「0% | waiting...」のまま動かない。Windows + Git Bash + 日本語パスという環境で詰まった全記録。cygpath問題・文字化け・jqインストールまで解決策を網羅します。">
+  <meta name="keywords" content="Claude Code,ステータスライン,Windows,Git Bash,日本語パス,jq,cygpath,PowerShell,設定,トラブルシューティング,AI開発">
+  <link rel="canonical" href="https://otitukanaihito.github.io/blog/claude-code-statusline-windows-2026-03-16.html">
 
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="article">
-    <meta property="og:url" content="https://otitukanaihito.github.io/blog/claude-code-statusline-windows-2026-03-16.html">
-    <meta property="og:title" content="Windows日本語環境でClaude Codeステータスラインを動かす方法【全記録】">
-    <meta property="og:description"
-        content="「0% | waiting...」のまま動かないClaude Codeステータスライン。cygpath・文字化け・jqの3段階で解決した全記録。">
-    <meta property="og:image" content="https://otitukanaihito.github.io/images/blog_claude_statusline.png">
+  <!-- OGP -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://otitukanaihito.github.io/blog/claude-code-statusline-windows-2026-03-16.html">
+  <meta property="og:title" content="Windows日本語環境でClaude Codeステータスラインを動かす方法【全記録】">
+  <meta property="og:description" content="Claude Codeのステータスラインが「0% | waiting...」のまま動かない。Windows + Git Bash + 日本語パスという環境で詰まった全記録。cygpath問題・文字化け・jqインストールまで解決策を網羅します。">
+  <meta property="og:image" content="https://otitukanaihito.github.io/images/blog_claude_statusline.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://otitukanaihito.github.io/blog/claude-code-statusline-windows-2026-03-16.html">
+  <meta name="twitter:title" content="Windows日本語環境でClaude Codeステータスラインを動かす方法【全記録】">
+  <meta name="twitter:description" content="Claude Codeのステータスラインが「0% | waiting...」のまま動かない。Windows + Git Bash + 日本語パスという環境で詰まった全記録。cygpath問題・文字化け・jqインストールまで解決策を網羅します。">
+  <meta name="twitter:image" content="https://otitukanaihito.github.io/images/blog_claude_statusline.png">
 
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://otitukanaihito.github.io/blog/claude-code-statusline-windows-2026-03-16.html">
-    <meta property="twitter:title" content="Windows日本語環境でClaude Codeステータスラインを動かす方法【全記録】">
-    <meta property="twitter:description"
-        content="「0% | waiting...」のまま動かないClaude Codeステータスライン。cygpath・文字化け・jqの3段階で解決した全記録。">
-    <meta property="twitter:image" content="https://otitukanaihito.github.io/images/blog_claude_statusline.png">
+  <!-- Structured Data: BlogPosting -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Windows日本語環境でClaude Codeステータスラインを動かす方法【全記録】",
+    "description": "Claude Codeのステータスラインが「0% | waiting...」のまま動かない。Windows + Git Bash + 日本語パスという環境で詰まった全記録。cygpath問題・文字化け・jqインストールまで解決策を網羅します。",
+    "author": {"@type": "Person", "name": "オチつかないヒト"},
+    "datePublished": "2026-03-16",
+    "dateModified": "2026-03-16",
+    "publisher": {
+      "@type": "Organization",
+      "name": "オチつかないカンパニー",
+      "logo": {"@type": "ImageObject", "url": "https://otitukanaihito.github.io/images/hero_banner.png"}
+    },
+    "mainEntityOfPage": {"@type": "WebPage", "@id": "https://otitukanaihito.github.io/blog/claude-code-statusline-windows-2026-03-16.html"},
+    "image": "https://otitukanaihito.github.io/images/blog_claude_statusline.png"
+  }
+  </script>
 
-    <!-- Tailwind CSS -->
-    <link rel="stylesheet" href="../style.css">
+  <!-- Structured Data: BreadcrumbList -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {"@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://otitukanaihito.github.io/"},
+      {"@type": "ListItem", "position": 2, "name": "AI活用", "item": "https://otitukanaihito.github.io/categories.html#ai-usage"},
+      {"@type": "ListItem", "position": 3, "name": "Windows日本語環境でClaude Codeステータスラインを動かす方法【全記録】", "item": "https://otitukanaihito.github.io/blog/claude-code-statusline-windows-2026-03-16.html"}
+    ]
+  }
+  </script>
 
-    <!-- Structured Data -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "BlogPosting",
-        "headline": "Windows日本語環境でClaude Codeステータスラインを動かす方法【全記録】",
-        "description": "Claude Codeのステータスラインが「0% | waiting...」のまま動かない。Windows + Git Bash + 日本語パスという環境で詰まった全記録。",
-        "author": {
-            "@type": "Person",
-            "name": "オチつかないヒト"
-        },
-        "datePublished": "2026-03-16",
-        "dateModified": "2026-03-16",
-        "publisher": {
-            "@type": "Organization",
-            "name": "オチつかないカンパニー"
-        },
-        "mainEntityOfPage": {
-            "@type": "WebPage",
-            "@id": "https://otitukanaihito.github.io/blog/claude-code-statusline-windows-2026-03-16.html"
-        },
-        "image": "https://otitukanaihito.github.io/images/blog_claude_statusline.png"
-    }
-    </script>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-MDWZM4DL');</script>
 
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-            {
-                "@type": "ListItem",
-                "position": 1,
-                "name": "ホーム",
-                "item": "https://otitukanaihito.github.io/"
-            },
-            {
-                "@type": "ListItem",
-                "position": 2,
-                "name": "AI活用",
-                "item": "https://otitukanaihito.github.io/categories.html#ai-usage"
-            },
-            {
-                "@type": "ListItem",
-                "position": 3,
-                "name": "Windows日本語環境でClaude Codeステータスラインを動かす方法【全記録】",
-                "item": "https://otitukanaihito.github.io/blog/claude-code-statusline-windows-2026-03-16.html"
-            }
-        ]
-    }
-    </script>
-    <style>
-        pre {
-            background: #1e1e2e;
-            color: #cdd6f4;
-            border-radius: 0.5rem;
-            padding: 1rem;
-            overflow-x: auto;
-            font-size: 0.875rem;
-            line-height: 1.6;
-        }
-        code {
-            background: #e8e8f0;
-            color: #5c5f77;
-            padding: 0.15em 0.4em;
-            border-radius: 0.25rem;
-            font-size: 0.875em;
-        }
-        pre code {
-            background: transparent;
-            color: inherit;
-            padding: 0;
-            font-size: inherit;
-        }
-    </style>
-<!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-MDWZM4DL');</script>
-<!-- End Google Tag Manager -->
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@400;700;800&family=IBM+Plex+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@400;700;800&family=IBM+Plex+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;500;700&display=swap"></noscript>
+
+  <!-- Styles: Tailwind utilities + Brutalist design layer -->
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="../brutalist.css">
 </head>
 
-<body class="bg-gray-50">
-    <!-- ヘッダー -->
-    <header class="bg-white shadow-sm sticky top-0 z-50">
-        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="../index.html" class="text-sm md:text-2xl font-black tracking-wider whitespace-nowrap text-gray-900 hover:text-indigo-600 transition-colors duration-300">
-                OCHITSUKANAI COMPANY
-            </a>
-            <nav class="hidden md:flex items-center space-x-6">
-                <a href="../index.html#blog" class="text-gray-700 hover:text-indigo-600 transition-colors duration-300">ブログ</a>
-                <a href="../categories.html" class="text-gray-700 hover:text-indigo-600 transition-colors duration-300">カテゴリー</a>
-                <a href="../index.html#affiliate" class="text-gray-700 hover:text-indigo-600 transition-colors duration-300">おすすめツール</a>
-                <a href="../index.html#about" class="text-gray-700 hover:text-indigo-600 transition-colors duration-300">プロフィール</a>
-                <a href="../index.html#contact" class="text-gray-700 hover:text-indigo-600 transition-colors duration-300">お問い合わせ</a>
-            </nav>
-            <div class="md:hidden">
-                <button onclick="toggleMenu()" class="text-gray-700" aria-label="メニューを開く" aria-expanded="false" id="hamburger-btn">
-                    <svg id="menu-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <line x1="3" y1="6" x2="21" y2="6"></line>
-                        <line x1="3" y1="12" x2="21" y2="12"></line>
-                        <line x1="3" y1="18" x2="21" y2="18"></line>
-                    </svg>
-                    <svg id="close-icon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <line x1="18" y1="6" x2="6" y2="18"></line>
-                        <line x1="6" y1="6" x2="18" y2="18"></line>
-                    </svg>
-                </button>
-            </div>
+<body>
+  <!-- GTM noscript -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MDWZM4DL" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+  <!-- ── HEADER ─────────────────────────────────────────── -->
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a href="../index.html" class="site-logo">オチつかないカンパニー</a>
+
+      <nav id="desktop-nav" aria-label="メインナビゲーション">
+        <ul class="site-nav-list">
+          <li><a href="../index.html#blog">ブログ</a></li>
+          <li><a href="../categories.html">カテゴリー</a></li>
+          <li><a href="../index.html#affiliate">おすすめツール</a></li>
+          <li><a href="../index.html#about">プロフィール</a></li>
+          <li><a href="../index.html#contact">お問い合わせ</a></li>
+        </ul>
+      </nav>
+
+      <button id="hamburger-btn" aria-label="メニューを開く" aria-expanded="false" aria-controls="mobile-menu">
+        <svg id="menu-icon" width="18" height="13" viewBox="0 0 18 13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square">
+          <line x1="0" y1="1.5" x2="18" y2="1.5"/>
+          <line x1="0" y1="6.5" x2="18" y2="6.5"/>
+          <line x1="0" y1="11.5" x2="18" y2="11.5"/>
+        </svg>
+        <svg id="close-icon" width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square" style="display:none;">
+          <line x1="0" y1="0" x2="14" y2="14"/>
+          <line x1="14" y1="0" x2="0" y2="14"/>
+        </svg>
+      </button>
+    </div>
+
+    <div id="mobile-menu" role="navigation" aria-label="モバイルメニュー">
+      <ul class="mobile-nav-list">
+        <li><a href="../index.html#blog">ブログ</a></li>
+        <li><a href="../categories.html">カテゴリー</a></li>
+        <li><a href="../index.html#affiliate">おすすめツール</a></li>
+        <li><a href="../index.html#about">プロフィール</a></li>
+        <li><a href="../index.html#contact">お問い合わせ</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- ── ARTICLE ────────────────────────────────────────── -->
+  <main>
+    <div class="article-wrap">
+      <!-- Black typographic header (replaces gradient banner) -->
+      <div class="article-header">
+        <div class="article-meta">
+          <span class="category-tag">AI活用</span>
+          <span class="article-date">2026-03-16</span>
         </div>
-        <div id="mobile-menu" class="md:hidden bg-white px-6 pb-4 hidden">
-            <nav class="flex flex-col space-y-4">
-                <a href="../index.html#blog" class="text-gray-700 hover:text-indigo-600">ブログ</a>
-                <a href="../categories.html" class="text-gray-700 hover:text-indigo-600">カテゴリー</a>
-                <a href="../index.html#affiliate" class="text-gray-700 hover:text-indigo-600">おすすめツール</a>
-                <a href="../index.html#about" class="text-gray-700 hover:text-indigo-600">プロフィール</a>
-                <a href="../index.html#contact" class="text-gray-700 hover:text-indigo-600">お問い合わせ</a>
-            </nav>
-        </div>
-    </header>
+        <h1 class="article-title">Windows日本語環境でClaude Codeステータスラインを動かす方法【全記録】</h1>
+        <p class="article-lead">「0% | waiting...」で止まった3時間。詰まりポイントを全部書いておく</p>
+      </div>
 
-    <!-- Main Content -->
-    <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <article class="bg-white rounded-2xl shadow-xl overflow-hidden">
-            <!-- Article Header -->
-            <div class="relative h-64 md:h-96 bg-gradient-to-r from-violet-700 via-indigo-700 to-purple-700">
-                <div class="absolute inset-0 bg-black bg-opacity-30"></div>
-                <div class="absolute bottom-0 left-0 right-0 p-8">
-                    <div class="flex items-center mb-4">
-                        <span class="text-sm font-semibold text-white bg-indigo-500 px-3 py-1 rounded-full">AI開発</span>
-                        <span class="text-sm text-white ml-4">2026-03-16</span>
-                    </div>
-                    <h1 class="text-3xl md:text-4xl font-bold text-white mb-4">
-                        Windows日本語環境でClaude Codeステータスラインを動かす方法【全記録】
-                    </h1>
-                    <p class="text-lg text-gray-200">
-                        「0% | waiting...」で止まった3時間。詰まりポイントを全部書いておく
-                    </p>
-                </div>
-            </div>
-
-            <!-- Article Content -->
-            <div class="p-8">
-                <div class="prose prose-lg max-w-none">
-
-                    <h2>はじめに</h2>
-                    <p>
+      <!-- Article body -->
+      <div class="article-body">
+        
+<h2>はじめに</h2>
+<p>
                         Claude Codeにはコンテキスト使用率をターミナルのステータスラインに表示する機能があります。
                         設定すれば「今どれくらいコンテキストを消費しているか」がリアルタイムで見える便利な機能です。
                     </p>
-                    <p>
+<p>
                         ところがWindowsで試すと、設定したはずなのに<strong>ずっと「0% | waiting...」のまま</strong>。
                         スクリプトを直接実行すれば動くのに、Claude Codeが呼ぶと動かない。
                         この記事は、その原因を3段階で特定して解決した全記録です。
                     </p>
-
-                    <div class="bg-indigo-50 border-l-4 border-indigo-400 p-4 my-6">
-                        <p class="text-indigo-800">
-                            <strong>この記事が対象とする環境：</strong><br>
+<div class="bg-indigo-50 border-l-4 border-indigo-400 p-4 my-6">
+<p class="text-indigo-800">
+<strong>この記事が対象とする環境：</strong><br/>
                             Windows 11 + Git Bash（MSYS2ベース）+ プロジェクトフォルダ名に日本語を含む。
                             この3つが重なると、ほぼ確実にはまります。
                         </p>
-                    </div>
-
-                    <h2>1. ステータスラインとは何か</h2>
-
-                    <p>
+</div>
+<h2>1. ステータスラインとは何か</h2>
+<p>
                         Claude Codeのステータスライン機能は、外部スクリプトを定期実行してその出力をターミナルのステータスバーに表示するしくみです。
                         <code>~/.claude/settings.json</code> に以下のように設定します：
                     </p>
-
 <pre><code>{
   "statusCommand": "bash ~/.claude/statusline-command.sh"
 }</code></pre>
-
-                    <p>
+<p>
                         スクリプトは標準出力に表示したいテキストを出力するだけでOK。
                         Claude Codeが定期的にこのコマンドを実行してステータスバーを更新します。
                     </p>
-                    <p>
+<p>
                         スクリプト例としてはコンテキスト使用率をパーセント表示するものが典型的ですが、
                         ここで詰まったのは「直接実行すると動く、でもClaude Codeが呼ぶと動かない」という状況です。
                     </p>
-
-                    <h2>2. 詰まりポイント①：cygpath がない</h2>
-
-                    <h3>症状</h3>
-                    <p>
+<h2>2. 詰まりポイント①：cygpath がない</h2>
+<h3>症状</h3>
+<p>
                         ステータスバーに何も表示されない、あるいは常に <code>0% | waiting...</code> のまま。
                         スクリプトを Git Bash で直接 <code>bash ~/.claude/statusline-command.sh</code> と叩くと正常に動く。
                     </p>
-
-                    <h3>原因</h3>
-                    <p>
+<h3>原因</h3>
+<p>
                         Claude Codeはシェルを起動するとき、Git Bashとは異なる環境変数 <code>PATH</code> を使います。
                         そのためGit Bashには入っている <code>cygpath</code>（Unix形式 ↔ Windows形式のパス変換コマンド）が
                         Claude Code経由では見つからない状態になっていました。
                     </p>
-                    <p>
+<p>
                         スクリプト内で <code>cygpath -w "$TMPDIR"</code> のような変換をしていると、
                         <code>command not found</code> になって処理が止まります。
                     </p>
-
-                    <h3>対策</h3>
-                    <p>
+<h3>対策</h3>
+<p>
                         スクリプト内でPATHを明示的に設定して <code>cygpath</code> を補完するか、
                         <code>cygpath</code> を使わずWindowsパスを直接ハードコードする方法で回避できます。
                     </p>
-
 <pre><code># スクリプト冒頭でPATHを補完する
 export PATH="/usr/bin:/bin:$PATH"</code></pre>
-
-                    <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 my-6">
-                        <p class="text-yellow-800">
-                            <strong>ポイント：</strong><br>
+<div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 my-6">
+<p class="text-yellow-800">
+<strong>ポイント：</strong><br/>
                             Claude Codeが呼ぶシェルのPATHは、ログインシェルのPATHと別物。
                             「手元では動く」を信用してはいけません。
                         </p>
-                    </div>
-
-                    <h2>3. 詰まりポイント②：日本語パスでPowerShellが文字化け</h2>
-
-                    <h3>症状</h3>
-                    <p>
+</div>
+<h2>3. 詰まりポイント②：日本語パスでPowerShellが文字化け</h2>
+<h3>症状</h3>
+<p>
                         cygpath問題を回避してスクリプトが動き始めたと思ったら、今度は出力が文字化け。
                         ステータスバーに文字化けした謎の文字列が表示される。
                     </p>
-
-                    <h3>原因</h3>
-                    <p>
+<h3>原因</h3>
+<p>
                         私のプロジェクトフォルダの名前が「私のナレッジを蓄積」という日本語でした。
                         スクリプト内でPowerShellを経由してJSONファイルを読み込む処理があったのですが、
                         PowerShellがデフォルトでShift-JIS（CP932）として読み込もうとするため、
                         UTF-8で書かれたJSONが文字化けしていました。
                     </p>
-
 <pre><code># NG: デフォルトはShift-JIS解釈になる場合がある
 $json = Get-Content "$env:USERPROFILE/.claude/context.json" | ConvertFrom-Json
 
 # OK: UTF-8を明示する
 $json = Get-Content "$env:USERPROFILE/.claude/context.json" -Encoding UTF8 | ConvertFrom-Json</code></pre>
-
-                    <h3>対策</h3>
-                    <p>
+<h3>対策</h3>
+<p>
                         PowerShellで <code>Get-Content</code> を使う際は <code>-Encoding UTF8</code> を必ず付けること。
                         または後述の <code>jq</code> を使えばこの問題自体が起きなくなります。
                     </p>
-
-                    <h2>4. 根本解決：jqをインストールして全部解決</h2>
-
-                    <h3>なぜjqで解決するのか</h3>
-                    <p>
+<h2>4. 根本解決：jqをインストールして全部解決</h2>
+<h3>なぜjqで解決するのか</h3>
+<p>
                         上記2つの問題は「PowerShellをスクリプト内で呼ぶ」構成をやめることで根本解決できます。
                         <code>jq</code>（JSONパーサー）をシェルスクリプト内で直接使えば、
                         PowerShellもcygpathも不要になります。
                     </p>
-                    <p>
-                        <code>jq</code>はWindowsにも <code>winget</code> で簡単にインストールできます：
+<p>
+<code>jq</code>はWindowsにも <code>winget</code> で簡単にインストールできます：
                     </p>
-
 <pre><code>winget install jqlang.jq</code></pre>
-
-                    <p>
+<p>
                         インストール後、JSONの値取得はシェルスクリプト内でこう書けます：
                     </p>
-
 <pre><code># PowerShell不要。jqで直接JSON解析
-value=$(jq -r '.contextUsagePercent' "$HOME/.claude/context.json" 2>/dev/null)
+value=$(jq -r '.contextUsagePercent' "$HOME/.claude/context.json" 2&gt;/dev/null)
 echo "${value:-0}% | context"</code></pre>
-
-                    <div class="bg-green-50 border-l-4 border-green-400 p-4 my-6">
-                        <p class="text-green-800">
-                            <strong>これで動いた：</strong><br>
+<div class="bg-green-50 border-l-4 border-green-400 p-4 my-6">
+<p class="text-green-800">
+<strong>これで動いた：</strong><br/>
                             jqインストール後、ステータスバーが正常にコンテキスト使用率を表示するようになりました。
                             cygpathの有無も、PowerShellの文字コードも、関係なくなります。
                         </p>
-                    </div>
-
-                    <h2>5. まとめ：最初にやるべきこと</h2>
-
-                    <p>
+</div>
+<h2>5. まとめ：最初にやるべきこと</h2>
+<p>
                         Windows環境でClaude Codeのステータスラインを設定するなら、
                         <strong>最初に <code>jq</code> をインストールするだけ</strong>で3時間の試行錯誤が不要になります。
                     </p>
-
-                    <div class="bg-gray-50 rounded-lg p-6 my-6">
-                        <h4 class="font-semibold text-gray-800 mb-4">Windows環境での推奨セットアップ手順</h4>
-                        <ol class="list-decimal list-inside space-y-2 text-gray-700">
-                            <li><code>winget install jqlang.jq</code> を実行してjqをインストール</li>
-                            <li><code>~/.claude/statusline-command.sh</code> を作成（jqを使ったシェルスクリプト）</li>
-                            <li><code>~/.claude/settings.json</code> に <code>"statusCommand"</code> を追加</li>
-                            <li>Claude Codeを再起動して動作確認</li>
-                        </ol>
-                    </div>
-
-                    <h3>日本語フォルダ名という地雷について</h3>
-                    <p>
+<div class="bg-gray-50 rounded-lg p-6 my-6">
+<h4 class="font-semibold text-gray-800 mb-4">Windows環境での推奨セットアップ手順</h4>
+<ol class="list-decimal list-inside space-y-2 text-gray-700">
+<li><code>winget install jqlang.jq</code> を実行してjqをインストール</li>
+<li><code>~/.claude/statusline-command.sh</code> を作成（jqを使ったシェルスクリプト）</li>
+<li><code>~/.claude/settings.json</code> に <code>"statusCommand"</code> を追加</li>
+<li>Claude Codeを再起動して動作確認</li>
+</ol>
+</div>
+<h3>日本語フォルダ名という地雷について</h3>
+<p>
                         今回の問題の一因は、プロジェクトフォルダ名に日本語が含まれていたことです。
                         Windows上でBashスクリプトを動かすとき、日本語パスはShift-JISとUTF-8の混在問題を引き起こしやすい。
                     </p>
-                    <p>
+<p>
                         開発系のフォルダは英数字のみで命名するのが鉄則ですが、
                         既存のフォルダ名を変えられない事情があることもあります。
                         そういう場合は jq のように「Windowsのロケール設定を参照しないツール」で処理するのが安全です。
                     </p>
-
-                    <div class="bg-red-50 border-l-4 border-red-400 p-4 my-6">
-                        <p class="text-red-800">
-                            <strong>まとめると：</strong><br>
-                            ① Claude Code経由のPATHはGit BashのPATHとは別物 → cygpathが使えない<br>
-                            ② PowerShellのGet-ContentはデフォルトでShift-JISを想定することがある → 日本語パスで文字化け<br>
+<div class="bg-red-50 border-l-4 border-red-400 p-4 my-6">
+<p class="text-red-800">
+<strong>まとめると：</strong><br/>
+                            ① Claude Code経由のPATHはGit BashのPATHとは別物 → cygpathが使えない<br/>
+                            ② PowerShellのGet-ContentはデフォルトでShift-JISを想定することがある → 日本語パスで文字化け<br/>
                             ③ <strong>jqを最初に入れればどちらも回避できる</strong>
-                        </p>
-                    </div>
+</p>
+</div>
 
-                </div>
+      </div>
+    </div>
+  </main>
 
-                <!-- Amazon アフィリエイト -->
-                <div class="mt-12 p-6 bg-amber-50 border border-amber-200 rounded-xl">
-                    <h3 class="text-lg font-bold text-amber-800 mb-3">📚 シェルスクリプト・コマンドライン関連のおすすめ本</h3>
-                    <a href="https://www.amazon.co.jp/s?k=シェルスクリプト+Linux+コマンド&tag=otitukanaihit-22" target="_blank" rel="nofollow noopener noreferrer" class="flex items-start gap-4 hover:bg-amber-100 rounded-lg p-3 transition-colors">
-                        <div>
-                            <p class="font-semibold text-gray-800">シェルスクリプト・Linuxコマンド関連書籍</p>
-                            <p class="text-sm text-gray-600 mt-1">今回の問題の根っこにあるのはシェルの基礎知識。jqやcygpathのような道具を正しく使うために、コマンドラインの仕組みを体系的に学ぶのがおすすめです。</p>
-                            <p class="text-amber-600 text-sm mt-2 font-medium">Amazonで探す →</p>
-                        </div>
-                    </a>
-                </div>
+  <!-- ── FOOTER ─────────────────────────────────────────── -->
+  <footer class="site-footer" id="contact">
+    <div class="site-footer-inner">
+      <a href="../index.html" class="footer-logo">オチつかないカンパニー</a>
+      <div class="footer-tagline">福祉 × IT × 試行錯誤の記録</div>
+      <nav class="footer-nav" aria-label="フッターナビゲーション">
+        <a href="../index.html#blog">ブログ</a>
+        <a href="../categories.html">カテゴリー</a>
+        <a href="../index.html#affiliate">おすすめツール</a>
+        <a href="../index.html#about">プロフィール</a>
+        <a href="../privacy-policy.html">プライバシーポリシー</a>
+      </nav>
+      <div class="footer-copy">© 2026 OCHITSUKANAI COMPANY. All rights reserved.</div>
+    </div>
+  </footer>
 
-                <!-- SNS Share Buttons -->
-                <div class="mt-8 pt-8 border-t border-gray-200">
-                    <p class="text-sm font-semibold text-gray-600 mb-4 text-center">この記事をシェアする</p>
-                    <div class="flex justify-center gap-4">
-                        <a id="share-twitter" href="#" target="_blank" rel="noopener noreferrer"
-                            class="flex items-center gap-2 bg-black text-white px-5 py-2 rounded-lg hover:bg-gray-800 transition-colors text-sm font-semibold">
-                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.748l7.73-8.835L1.254 2.25H8.08l4.253 5.622 5.91-5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-                            X でシェア
-                        </a>
-                        <a id="share-hatena" href="#" target="_blank" rel="noopener noreferrer"
-                            class="flex items-center gap-2 bg-blue-600 text-white px-5 py-2 rounded-lg hover:bg-blue-700 transition-colors text-sm font-semibold">
-                            <span class="font-bold mr-1">B!</span>はてブ
-                        </a>
-                    </div>
-                </div>
-                <script>
-                (function() {
-                    var title = encodeURIComponent(document.title.replace(/ - オチつかないカンパニー.*/, ''));
-                    var url = encodeURIComponent(window.location.href);
-                    document.getElementById('share-twitter').href = 'https://twitter.com/intent/tweet?text=' + title + '&url=' + url + '&hashtags=ClaudeCode,Windows,jq,開発環境';
-                    document.getElementById('share-hatena').href = 'https://b.hatena.ne.jp/add?mode=confirm&title=' + title + '&url=' + url;
-                })();
-                </script>
+  <!-- Hamburger JS -->
+  <script>
+    (function () {
+      var btn = document.getElementById('hamburger-btn');
+      var menu = document.getElementById('mobile-menu');
+      var menuIcon = document.getElementById('menu-icon');
+      var closeIcon = document.getElementById('close-icon');
 
-                <!-- Related Articles -->
-                <div class="mt-12 pt-8 border-t border-gray-200">
-                    <h3 class="text-xl font-bold text-gray-900 mb-6">関連記事</h3>
-                    <div class="grid md:grid-cols-2 gap-6">
-                        <a href="antigravity-ai-experience-2026-01-31.html" class="block group">
-                            <div class="bg-gray-50 rounded-lg p-4 group-hover:bg-gray-100 transition-colors">
-                                <h4 class="font-semibold text-gray-900 group-hover:text-indigo-600">
-                                    5ヶ月ぶりのブログ復活！AI「Antigravity」を使ってみた感想</h4>
-                                <p class="text-sm text-gray-600 mt-2">AIツールの実体験レポート</p>
-                            </div>
-                        </a>
-                        <a href="github-pages-blog-setup-2025-08-04.html" class="block group">
-                            <div class="bg-gray-50 rounded-lg p-4 group-hover:bg-gray-100 transition-colors">
-                                <h4 class="font-semibold text-gray-900 group-hover:text-indigo-600">
-                                    GitHub Pagesでアフィリエイトブログを構築した話</h4>
-                                <p class="text-sm text-gray-600 mt-2">ゼロコストで始める静的サイト構築</p>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </article>
-    </main>
-
-    <!-- フッター -->
-    <footer class="bg-gray-900 text-white py-12">
-        <div class="container mx-auto px-6">
-            <div class="grid md:grid-cols-3 gap-8">
-                <div>
-                    <h3 class="text-xl font-bold mb-4">OCHITSUKANAI COMPANY</h3>
-                    <p class="text-gray-400">福祉の現場で働く4児の父が、業務効率化と個人の成長について発信するブログです。</p>
-                </div>
-                <div>
-                    <h4 class="font-semibold mb-4">メニュー</h4>
-                    <ul class="space-y-2 text-gray-400">
-                        <li><a href="../index.html#blog" class="hover:text-white transition-colors duration-300">ブログ</a></li>
-                        <li><a href="../index.html#affiliate" class="hover:text-white transition-colors duration-300">おすすめツール</a></li>
-                        <li><a href="../index.html#services" class="hover:text-white transition-colors duration-300">サービス</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="font-semibold mb-4">リンク</h4>
-                    <ul class="space-y-2 text-gray-400">
-                        <li><a href="../index.html" class="hover:text-white transition-colors duration-300">ホーム</a></li>
-                        <li><a href="../privacy-policy.html" class="hover:text-white transition-colors duration-300">プライバシーポリシー</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-                <p>&copy; 2026 OCHITSUKANAI COMPANY. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        function toggleMenu() {
-            var mobileMenu = document.getElementById('mobile-menu');
-            var menuIcon = document.getElementById('menu-icon');
-            var closeIcon = document.getElementById('close-icon');
-            var btn = document.getElementById('hamburger-btn');
-            var isOpen = mobileMenu.classList.contains('hidden');
-            mobileMenu.classList.toggle('hidden');
-            menuIcon.classList.toggle('hidden');
-            closeIcon.classList.toggle('hidden');
-            btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-            btn.setAttribute('aria-label', isOpen ? 'メニューを閉じる' : 'メニューを開く');
-        }
-    </script>
-    <script src="../back-home.js"></script>
+      btn.addEventListener('click', function () {
+        var isOpen = menu.classList.toggle('open');
+        menuIcon.style.display = isOpen ? 'none' : 'block';
+        closeIcon.style.display = isOpen ? 'block' : 'none';
+        btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        btn.setAttribute('aria-label', isOpen ? 'メニューを閉じる' : 'メニューを開く');
+      });
+    })();
+  </script>
+  <script src="../back-home.js"></script>
 </body>
-
 </html>

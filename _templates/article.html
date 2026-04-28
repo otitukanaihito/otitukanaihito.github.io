@@ -3,40 +3,40 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Vault自動化と引き継ぎ整備の実践記録 - オチつかないカンパニー</title>
-  <meta name="description" content="Obsidian Vaultの自動化をゼロから構築する手順を解説。バックアップ・重複退避・Windowsタスクスケジューラ登録・引き継ぎガイド作成まで再現性重視でまとめました。">
-  <meta name="keywords" content="Obsidian, 自動化, バックアップ, 重複削除, スケジュール, 引き継ぎ, 業務効率化">
-  <link rel="canonical" href="https://otitukanaihito.github.io/blog/vault-automation-handover-2025-08-14.html">
+  <title>{{TITLE_META}}</title>
+  <meta name="description" content="{{DESCRIPTION}}">
+  <meta name="keywords" content="{{KEYWORDS}}">
+  <link rel="canonical" href="{{CANONICAL_URL}}">
 
   <!-- OGP -->
   <meta property="og:type" content="article">
-  <meta property="og:url" content="https://otitukanaihito.github.io/blog/vault-automation-handover-2025-08-14.html">
-  <meta property="og:title" content="Vault自動化と引き継ぎ整備の実践記録">
-  <meta property="og:description" content="Obsidian Vaultの自動化をゼロから構築する手順を解説。バックアップ・重複退避・Windowsタスクスケジューラ登録・引き継ぎガイド作成まで再現性重視でまとめました。">
-  <meta property="og:image" content="https://otitukanaihito.github.io/images/blog_vault_handover.png">
+  <meta property="og:url" content="{{CANONICAL_URL}}">
+  <meta property="og:title" content="{{OG_TITLE}}">
+  <meta property="og:description" content="{{DESCRIPTION}}">
+  <meta property="og:image" content="{{OG_IMAGE}}">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:url" content="https://otitukanaihito.github.io/blog/vault-automation-handover-2025-08-14.html">
-  <meta name="twitter:title" content="Vault自動化と引き継ぎ整備の実践記録">
-  <meta name="twitter:description" content="Obsidian Vaultの自動化をゼロから構築する手順を解説。バックアップ・重複退避・Windowsタスクスケジューラ登録・引き継ぎガイド作成まで再現性重視でまとめました。">
-  <meta name="twitter:image" content="https://otitukanaihito.github.io/images/blog_vault_handover.png">
+  <meta name="twitter:url" content="{{CANONICAL_URL}}">
+  <meta name="twitter:title" content="{{OG_TITLE}}">
+  <meta name="twitter:description" content="{{DESCRIPTION}}">
+  <meta name="twitter:image" content="{{OG_IMAGE}}">
 
   <!-- Structured Data: BlogPosting -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
-    "headline": "Vault自動化と引き継ぎ整備の実践記録",
-    "description": "Obsidian Vaultの自動化をゼロから構築する手順を解説。バックアップ・重複退避・Windowsタスクスケジューラ登録・引き継ぎガイド作成まで再現性重視でまとめました。",
+    "headline": "{{OG_TITLE}}",
+    "description": "{{DESCRIPTION}}",
     "author": {"@type": "Person", "name": "オチつかないヒト"},
-    "datePublished": "2025-08-14",
-    "dateModified": "2025-08-14",
+    "datePublished": "{{DATE}}",
+    "dateModified": "{{DATE}}",
     "publisher": {
       "@type": "Organization",
       "name": "オチつかないカンパニー",
       "logo": {"@type": "ImageObject", "url": "https://otitukanaihito.github.io/images/hero_banner.png"}
     },
-    "mainEntityOfPage": {"@type": "WebPage", "@id": "https://otitukanaihito.github.io/blog/vault-automation-handover-2025-08-14.html"},
-    "image": "https://otitukanaihito.github.io/images/blog_vault_handover.png"
+    "mainEntityOfPage": {"@type": "WebPage", "@id": "{{CANONICAL_URL}}"},
+    "image": "{{OG_IMAGE}}"
   }
   </script>
 
@@ -47,8 +47,8 @@
     "@type": "BreadcrumbList",
     "itemListElement": [
       {"@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://otitukanaihito.github.io/"},
-      {"@type": "ListItem", "position": 2, "name": "自動化", "item": "https://otitukanaihito.github.io/categories.html#automation"},
-      {"@type": "ListItem", "position": 3, "name": "Vault自動化と引き継ぎ整備の実践記録", "item": "https://otitukanaihito.github.io/blog/vault-automation-handover-2025-08-14.html"}
+      {"@type": "ListItem", "position": 2, "name": "{{CATEGORY}}", "item": "https://otitukanaihito.github.io/categories.html#{{CATEGORY_ID}}"},
+      {"@type": "ListItem", "position": 3, "name": "{{OG_TITLE}}", "item": "{{CANONICAL_URL}}"}
     ]
   }
   </script>
@@ -116,46 +116,16 @@
       <!-- Black typographic header (replaces gradient banner) -->
       <div class="article-header">
         <div class="article-meta">
-          <span class="category-tag">自動化</span>
-          <span class="article-date">2025-08-14</span>
+          <span class="category-tag">{{CATEGORY}}</span>
+          <span class="article-date">{{DATE}}</span>
         </div>
-        <h1 class="article-title">⚙️ Vault自動化と引き継ぎ整備の実践記録</h1>
-        <p class="article-lead"></p>
+        <h1 class="article-title">{{H1}}</h1>
+        <p class="article-lead">{{SUBTITLE}}</p>
       </div>
 
       <!-- Article body -->
       <div class="article-body">
-        <h2>今日やったこと（サマリー）</h2>
-<ul>
-<li>自動化オーケストレーター <strong>vault_automation.py</strong> を新規追加（<em>日次/週次の定例処理を一元化</em>）</li>
-<li>完全バックアップ <strong>backup_vault.py</strong> と、重複安全退避 <strong>duplicate_sweeper.py</strong> を実装</li>
-<li>Windowsタスク スケジューラに <strong>ObsidianVault_Daily / Weekly</strong> を登録（WSLから確認・起動試験）</li>
-<li>引き継ぎ用ドキュメント <strong>管理ファイル/引き継ぎガイド.md</strong> を作成</li>
-<li>PoC（送迎システム）用の最小API（FastAPI）を雛形で用意</li>
-<li>「今日のやり取りサマリー」ノートを作成してリンク整備</li>
-</ul>
-<h2>コマンド実行例（再現性）</h2>
-<p class="note">日次・週次の実行は <code>vault_automation.py</code> に集約。ブログの公開反映は必要時のみ <code>--push</code> を付ける。</p>
-<pre><code>:: 日次（バックアップ→最適化→ブログ資産正規化）
-py -3 G:\マイドライブ\Obsidian-Vault\自動化スクリプト\vault_automation.py --all
-
-:: 週次（上記＋包括的クリーンアップ）
-py -3 G:\マイドライブ\Obsidian-Vault\自動化スクリプト\vault_automation.py --weekly
-
-:: ブログ反映（必要時のみ）
-py -3 G:\マイドライブ\Obsidian-Vault\自動化スクリプト\blog_deploy.py --push</code></pre>
-<h2>運用の考え方（壊さない自動化）</h2>
-<ul>
-<li>既定では <strong>ブログを勝手に反映しない</strong>（<code>--push</code> を付けた時のみ）</li>
-<li>重複はまず <strong>.trash/duplicates</strong> へ <em>コピー退避</em>。削除はオプション指定時のみ</li>
-<li>スケジューラで <em>日次 08:00</em>、<em>週次 日曜09:00</em> を自動実行</li>
-<li>不安定要素は <strong>引き継ぎガイド</strong> に明文化して属人性を解消</li>
-</ul>
-<h2>リンク</h2>
-<ul>
-<li><a href="https://otitukanaihito.github.io/github-blog-site/" rel="noopener" target="_blank">サイトTOP</a></li>
-<li><a href="https://github.com/otitukanaihito/github-blog-site" rel="noopener" target="_blank">リポジトリ</a></li>
-</ul>
+        {{CONTENT}}
       </div>
     </div>
   </main>

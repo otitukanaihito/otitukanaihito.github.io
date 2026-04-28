@@ -1,283 +1,220 @@
 <!DOCTYPE html>
 <html lang="ja">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Claude CodeでAIチームを作った話 ～社長・マネージャー・担当3名の組織を1人で構築～ - オチつかないカンパニー</title>
-    <meta name="description"
-        content="Claude Codeのスキルファイルを使って「社長→マネージャー→担当3名」の階層型AIチームを構築。コンテンツ・システム・リサーチ担当にそれぞれ役割を持たせ、ダッシュボードで進捗を可視化しながら実際に動かした全記録。">
-    <meta name="keywords" content="Claude Code,マルチエージェント,AIチーム,スキルファイル,SKILL.md,エージェント,AI開発,自動化,ダッシュボード,役割分担">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Claude CodeでAIチームを作った話 ～社長・マネージャー・担当3名の組織を1人で構築～ - オチつかないカンパニー</title>
+  <meta name="description" content="Claude Codeのスキルファイルを使って「社長→マネージャー→担当3名」の階層型AIチームを構築。コンテンツ・システム・リサーチ担当にそれぞれ役割を持たせ、ダッシュボードで進捗を可視化しながら実際に動かした全記録。">
+  <meta name="keywords" content="Claude Code,マルチエージェント,AIチーム,スキルファイル,SKILL.md,エージェント,AI開発,自動化,ダッシュボード,役割分担">
+  <link rel="canonical" href="https://otitukanaihito.github.io/blog/claude-code-agent-team-2026-03-18.html">
 
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="article">
-    <meta property="og:url" content="https://otitukanaihito.github.io/blog/claude-code-agent-team-2026-03-18.html">
-    <meta property="og:title" content="Claude CodeでAIチームを作った話 ～社長・マネージャー・担当3名の組織を1人で構築～">
-    <meta property="og:description"
-        content="Claude Codeのスキルファイルを使って「社長→マネージャー→担当3名」の階層型AIチームを構築。コンテンツ・システム・リサーチ担当にそれぞれ役割を持たせ、ダッシュボードで進捗を可視化しながら実際に動かした全記録。">
-    <meta property="og:image" content="https://otitukanaihito.github.io/images/eyecatch-agent-team.png">
+  <!-- OGP -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://otitukanaihito.github.io/blog/claude-code-agent-team-2026-03-18.html">
+  <meta property="og:title" content="Claude CodeでAIチームを作った話 ～社長・マネージャー・担当3名の組織を1人で構築～">
+  <meta property="og:description" content="Claude Codeのスキルファイルを使って「社長→マネージャー→担当3名」の階層型AIチームを構築。コンテンツ・システム・リサーチ担当にそれぞれ役割を持たせ、ダッシュボードで進捗を可視化しながら実際に動かした全記録。">
+  <meta property="og:image" content="https://otitukanaihito.github.io/images/eyecatch-agent-team.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://otitukanaihito.github.io/blog/claude-code-agent-team-2026-03-18.html">
+  <meta name="twitter:title" content="Claude CodeでAIチームを作った話 ～社長・マネージャー・担当3名の組織を1人で構築～">
+  <meta name="twitter:description" content="Claude Codeのスキルファイルを使って「社長→マネージャー→担当3名」の階層型AIチームを構築。コンテンツ・システム・リサーチ担当にそれぞれ役割を持たせ、ダッシュボードで進捗を可視化しながら実際に動かした全記録。">
+  <meta name="twitter:image" content="https://otitukanaihito.github.io/images/eyecatch-agent-team.png">
 
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://otitukanaihito.github.io/blog/claude-code-agent-team-2026-03-18.html">
-    <meta property="twitter:title" content="Claude CodeでAIチームを作った話 ～社長・マネージャー・担当3名の組織を1人で構築～">
-    <meta property="twitter:description"
-        content="Claude Codeのスキルファイルで「社長→マネージャー→担当3名」のAIチームを構築。コンテンツ・システム・リサーチ担当が実際に動いた全記録。">
-    <meta property="twitter:image" content="https://otitukanaihito.github.io/images/eyecatch-agent-team.png">
+  <!-- Structured Data: BlogPosting -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Claude CodeでAIチームを作った話 ～社長・マネージャー・担当3名の組織を1人で構築～",
+    "description": "Claude Codeのスキルファイルを使って「社長→マネージャー→担当3名」の階層型AIチームを構築。コンテンツ・システム・リサーチ担当にそれぞれ役割を持たせ、ダッシュボードで進捗を可視化しながら実際に動かした全記録。",
+    "author": {"@type": "Person", "name": "オチつかないヒト"},
+    "datePublished": "2026-03-18",
+    "dateModified": "2026-03-18",
+    "publisher": {
+      "@type": "Organization",
+      "name": "オチつかないカンパニー",
+      "logo": {"@type": "ImageObject", "url": "https://otitukanaihito.github.io/images/hero_banner.png"}
+    },
+    "mainEntityOfPage": {"@type": "WebPage", "@id": "https://otitukanaihito.github.io/blog/claude-code-agent-team-2026-03-18.html"},
+    "image": "https://otitukanaihito.github.io/images/eyecatch-agent-team.png"
+  }
+  </script>
 
-    <!-- Tailwind CSS -->
-    <link rel="stylesheet" href="../style.css">
+  <!-- Structured Data: BreadcrumbList -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {"@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://otitukanaihito.github.io/"},
+      {"@type": "ListItem", "position": 2, "name": "AI開発", "item": "https://otitukanaihito.github.io/categories.html#ai-dev"},
+      {"@type": "ListItem", "position": 3, "name": "Claude CodeでAIチームを作った話 ～社長・マネージャー・担当3名の組織を1人で構築～", "item": "https://otitukanaihito.github.io/blog/claude-code-agent-team-2026-03-18.html"}
+    ]
+  }
+  </script>
 
-    <!-- Structured Data -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "BlogPosting",
-        "headline": "Claude CodeでAIチームを作った話 ～社長・マネージャー・担当3名の組織を1人で構築～",
-        "description": "Claude Codeのスキルファイルを使って「社長→マネージャー→担当3名」の階層型AIチームを構築。コンテンツ・システム・リサーチ担当にそれぞれ役割を持たせ、ダッシュボードで進捗を可視化しながら実際に動かした全記録。",
-        "author": {
-            "@type": "Person",
-            "name": "オチつかないヒト"
-        },
-        "datePublished": "2026-03-18",
-        "dateModified": "2026-03-18",
-        "publisher": {
-            "@type": "Organization",
-            "name": "オチつかないカンパニー"
-        },
-        "mainEntityOfPage": {
-            "@type": "WebPage",
-            "@id": "https://otitukanaihito.github.io/blog/claude-code-agent-team-2026-03-18.html"
-        },
-        "image": "https://otitukanaihito.github.io/images/eyecatch-agent-team.png"
-    }
-    </script>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-MDWZM4DL');</script>
 
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-            {
-                "@type": "ListItem",
-                "position": 1,
-                "name": "ホーム",
-                "item": "https://otitukanaihito.github.io/"
-            },
-            {
-                "@type": "ListItem",
-                "position": 2,
-                "name": "AI開発",
-                "item": "https://otitukanaihito.github.io/categories.html#ai-dev"
-            },
-            {
-                "@type": "ListItem",
-                "position": 3,
-                "name": "Claude CodeでAIチームを作った話 ～社長・マネージャー・担当3名の組織を1人で構築～",
-                "item": "https://otitukanaihito.github.io/blog/claude-code-agent-team-2026-03-18.html"
-            }
-        ]
-    }
-    </script>
-    <style>
-        pre {
-            background: #1e1e2e;
-            color: #cdd6f4;
-            border-radius: 0.5rem;
-            padding: 1rem;
-            overflow-x: auto;
-            font-size: 0.875rem;
-            line-height: 1.6;
-        }
-        code {
-            background: #e8e8f0;
-            color: #5c5f77;
-            padding: 0.15em 0.4em;
-            border-radius: 0.25rem;
-            font-size: 0.875em;
-        }
-        pre code {
-            background: transparent;
-            color: inherit;
-            padding: 0;
-            font-size: inherit;
-        }
-    </style>
-<!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-MDWZM4DL');</script>
-<!-- End Google Tag Manager -->
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@400;700;800&family=IBM+Plex+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@400;700;800&family=IBM+Plex+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;500;700&display=swap"></noscript>
+
+  <!-- Styles: Tailwind utilities + Brutalist design layer -->
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="../brutalist.css">
 </head>
 
-<body class="bg-gray-50">
-    <!-- ヘッダー -->
-    <header class="bg-white shadow-sm sticky top-0 z-50">
-        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="../index.html" class="text-sm md:text-2xl font-black tracking-wider whitespace-nowrap text-gray-900 hover:text-indigo-600 transition-colors duration-300">
-                OCHITSUKANAI COMPANY
-            </a>
-            <nav class="hidden md:flex items-center space-x-6">
-                <a href="../index.html#blog" class="text-gray-700 hover:text-indigo-600 transition-colors duration-300">ブログ</a>
-                <a href="../categories.html" class="text-gray-700 hover:text-indigo-600 transition-colors duration-300">カテゴリー</a>
-                <a href="../index.html#affiliate" class="text-gray-700 hover:text-indigo-600 transition-colors duration-300">おすすめツール</a>
-                <a href="../index.html#about" class="text-gray-700 hover:text-indigo-600 transition-colors duration-300">プロフィール</a>
-                <a href="../index.html#contact" class="text-gray-700 hover:text-indigo-600 transition-colors duration-300">お問い合わせ</a>
-            </nav>
-            <div class="md:hidden">
-                <button onclick="toggleMenu()" class="text-gray-700" aria-label="メニューを開く" aria-expanded="false" id="hamburger-btn">
-                    <svg id="menu-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <line x1="3" y1="6" x2="21" y2="6"></line>
-                        <line x1="3" y1="12" x2="21" y2="12"></line>
-                        <line x1="3" y1="18" x2="21" y2="18"></line>
-                    </svg>
-                    <svg id="close-icon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <line x1="18" y1="6" x2="6" y2="18"></line>
-                        <line x1="6" y1="6" x2="18" y2="18"></line>
-                    </svg>
-                </button>
-            </div>
+<body>
+  <!-- GTM noscript -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MDWZM4DL" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+  <!-- ── HEADER ─────────────────────────────────────────── -->
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a href="../index.html" class="site-logo">オチつかないカンパニー</a>
+
+      <nav id="desktop-nav" aria-label="メインナビゲーション">
+        <ul class="site-nav-list">
+          <li><a href="../index.html#blog">ブログ</a></li>
+          <li><a href="../categories.html">カテゴリー</a></li>
+          <li><a href="../index.html#affiliate">おすすめツール</a></li>
+          <li><a href="../index.html#about">プロフィール</a></li>
+          <li><a href="../index.html#contact">お問い合わせ</a></li>
+        </ul>
+      </nav>
+
+      <button id="hamburger-btn" aria-label="メニューを開く" aria-expanded="false" aria-controls="mobile-menu">
+        <svg id="menu-icon" width="18" height="13" viewBox="0 0 18 13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square">
+          <line x1="0" y1="1.5" x2="18" y2="1.5"/>
+          <line x1="0" y1="6.5" x2="18" y2="6.5"/>
+          <line x1="0" y1="11.5" x2="18" y2="11.5"/>
+        </svg>
+        <svg id="close-icon" width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square" style="display:none;">
+          <line x1="0" y1="0" x2="14" y2="14"/>
+          <line x1="14" y1="0" x2="0" y2="14"/>
+        </svg>
+      </button>
+    </div>
+
+    <div id="mobile-menu" role="navigation" aria-label="モバイルメニュー">
+      <ul class="mobile-nav-list">
+        <li><a href="../index.html#blog">ブログ</a></li>
+        <li><a href="../categories.html">カテゴリー</a></li>
+        <li><a href="../index.html#affiliate">おすすめツール</a></li>
+        <li><a href="../index.html#about">プロフィール</a></li>
+        <li><a href="../index.html#contact">お問い合わせ</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- ── ARTICLE ────────────────────────────────────────── -->
+  <main>
+    <div class="article-wrap">
+      <!-- Black typographic header (replaces gradient banner) -->
+      <div class="article-header">
+        <div class="article-meta">
+          <span class="category-tag">AI開発</span>
+          <span class="article-date">2026-03-18</span>
         </div>
-        <div id="mobile-menu" class="md:hidden bg-white px-6 pb-4 hidden">
-            <nav class="flex flex-col space-y-4">
-                <a href="../index.html#blog" class="text-gray-700 hover:text-indigo-600">ブログ</a>
-                <a href="../categories.html" class="text-gray-700 hover:text-indigo-600">カテゴリー</a>
-                <a href="../index.html#affiliate" class="text-gray-700 hover:text-indigo-600">おすすめツール</a>
-                <a href="../index.html#about" class="text-gray-700 hover:text-indigo-600">プロフィール</a>
-                <a href="../index.html#contact" class="text-gray-700 hover:text-indigo-600">お問い合わせ</a>
-            </nav>
-        </div>
-    </header>
+        <h1 class="article-title">Claude CodeでAIチームを作った話 ～社長・マネージャー・担当3名の組織を1人で構築～</h1>
+        <p class="article-lead">スキルファイルで「部下」を定義し、指示一発でブログ記事を書いて公開するまでを自動化した</p>
+      </div>
 
-    <!-- Main Content -->
-    <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <article class="bg-white rounded-2xl shadow-xl overflow-hidden">
-            <!-- Article Header -->
-            <div class="relative h-64 md:h-96 bg-gradient-to-r from-slate-700 via-gray-700 to-zinc-800">
-                <div class="absolute inset-0 bg-black bg-opacity-30"></div>
-                <div class="absolute bottom-0 left-0 right-0 p-8">
-                    <div class="flex items-center mb-4">
-                        <span class="text-sm font-semibold text-white bg-slate-500 px-3 py-1 rounded-full">AI開発</span>
-                        <span class="text-sm text-white ml-4">2026-03-18</span>
-                    </div>
-                    <h1 class="text-3xl md:text-4xl font-bold text-white mb-4">
-                        Claude CodeでAIチームを作った話 ～社長・マネージャー・担当3名の組織を1人で構築～
-                    </h1>
-                    <p class="text-lg text-gray-200">
-                        スキルファイルで「部下」を定義し、指示一発でブログ記事を書いて公開するまでを自動化した
-                    </p>
-                </div>
-                <!-- 大きな TEAM テキスト -->
-                <div class="absolute top-6 right-8 text-8xl md:text-9xl font-black text-white opacity-10 select-none">
-                    TEAM
-                </div>
-            </div>
-
-            <!-- アイキャッチ画像 -->
-            <div class="px-8 pt-8">
-                <img src="../images/eyecatch-agent-team.webp" width="640" height="640" loading="lazy" decoding="async" alt="AIチームの階層構造イメージ" class="w-full rounded-xl shadow-md">
-            </div>
-
-            <!-- Article Content -->
-            <div class="p-8">
-                <div class="prose prose-lg max-w-none">
-
-                    <h2>はじめに：「AIに仕事を任せたい」という発想</h2>
-                    <p>
+      <!-- Article body -->
+      <div class="article-body">
+        
+<h2>はじめに：「AIに仕事を任せたい」という発想</h2>
+<p>
                         1人でブログを運営しながら副業を回していると、どこかで壁に当たります。
                         「記事を書く・サイトを更新する・情報収集する」を全部自分でやるには、
                         物理的に時間が足りない。
                     </p>
-                    <p>
+<p>
                         そこで思ったのが「AIに役割を与えて、チームとして動かせないか」ということです。
                         精神論ではなく、<strong>仕組みで解決する</strong>。
                         Claude Codeのスキルファイルという機能を使えば、AIに「キャラクター」と「担当業務」を
                         定義できます。これを使って、階層型のAIチームを構築してみました。
                     </p>
-
-                    <div class="bg-slate-50 border-l-4 border-slate-400 p-4 my-6">
-                        <p class="text-slate-800">
-                            <strong>この記事で作ったもの：</strong><br>
-                            ・<strong>team-manager</strong>：マネージャー（タスク分解・各担当への橋渡し）<br>
-                            ・<strong>agent-content</strong>：コンテンツ担当（記事作成・HTML生成・git push）<br>
-                            ・<strong>agent-system</strong>：システム担当（ファイル操作・サーバー管理・スクリプト実行）<br>
+<div class="bg-slate-50 border-l-4 border-slate-400 p-4 my-6">
+<p class="text-slate-800">
+<strong>この記事で作ったもの：</strong><br/>
+                            ・<strong>team-manager</strong>：マネージャー（タスク分解・各担当への橋渡し）<br/>
+                            ・<strong>agent-content</strong>：コンテンツ担当（記事作成・HTML生成・git push）<br/>
+                            ・<strong>agent-system</strong>：システム担当（ファイル操作・サーバー管理・スクリプト実行）<br/>
                             ・<strong>agent-research</strong>：リサーチ担当（情報収集・ファクトチェック・まとめ）
                         </p>
-                    </div>
-
-                    <h2>1. チーム構成を設計する</h2>
-
-                    <h3>「社長は自分」という整理</h3>
-                    <p>
+</div>
+<h2>1. チーム構成を設計する</h2>
+<h3>「社長は自分」という整理</h3>
+<p>
                         チームの構造はシンプルに決めました。
                     </p>
-
-                    <div class="bg-gray-50 rounded-lg p-6 my-6">
-                        <h4 class="font-semibold text-gray-800 mb-4">AIチームの階層構造</h4>
-                        <div class="space-y-3">
-                            <div class="flex items-center gap-3">
-                                <span class="bg-zinc-700 text-white text-xs font-bold px-3 py-1 rounded-full">社長</span>
-                                <span class="text-gray-700">自分（Claude Codeに指示を出す人間）</span>
-                            </div>
-                            <div class="flex items-center gap-3 ml-6">
-                                <span class="text-gray-400 text-lg">↓</span>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <span class="bg-slate-600 text-white text-xs font-bold px-3 py-1 rounded-full">マネージャー</span>
-                                <span class="text-gray-700">team-manager（タスク分解・進捗管理・結果統合）</span>
-                            </div>
-                            <div class="flex items-center gap-3 ml-6">
-                                <span class="text-gray-400 text-lg">↓</span>
-                            </div>
-                            <div class="flex items-start gap-3">
-                                <span class="bg-gray-500 text-white text-xs font-bold px-3 py-1 rounded-full mt-1">担当</span>
-                                <div class="text-gray-700 space-y-1">
-                                    <div>agent-content（記事作成・HTML・git）</div>
-                                    <div>agent-system（ファイル操作・スクリプト）</div>
-                                    <div>agent-research（調査・ファクトチェック）</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <h3>各担当の役割説明</h3>
-                    <p>
-                        <strong>コンテンツ担当（agent-content）</strong>は、ブログ記事のHTML作成・アフィリエイトリンクの挿入・
+<div class="bg-gray-50 rounded-lg p-6 my-6">
+<h4 class="font-semibold text-gray-800 mb-4">AIチームの階層構造</h4>
+<div class="space-y-3">
+<div class="flex items-center gap-3">
+<span class="bg-zinc-700 text-white text-xs font-bold px-3 py-1 rounded-full">社長</span>
+<span class="text-gray-700">自分（Claude Codeに指示を出す人間）</span>
+</div>
+<div class="flex items-center gap-3 ml-6">
+<span class="text-gray-400 text-lg">↓</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="bg-slate-600 text-white text-xs font-bold px-3 py-1 rounded-full">マネージャー</span>
+<span class="text-gray-700">team-manager（タスク分解・進捗管理・結果統合）</span>
+</div>
+<div class="flex items-center gap-3 ml-6">
+<span class="text-gray-400 text-lg">↓</span>
+</div>
+<div class="flex items-start gap-3">
+<span class="bg-gray-500 text-white text-xs font-bold px-3 py-1 rounded-full mt-1">担当</span>
+<div class="text-gray-700 space-y-1">
+<div>agent-content（記事作成・HTML・git）</div>
+<div>agent-system（ファイル操作・スクリプト）</div>
+<div>agent-research（調査・ファクトチェック）</div>
+</div>
+</div>
+</div>
+</div>
+<h3>各担当の役割説明</h3>
+<p>
+<strong>コンテンツ担当（agent-content）</strong>は、ブログ記事のHTML作成・アフィリエイトリンクの挿入・
                         sitemap.xmlとindex.htmlの更新・git pushまでを一括で担います。
                         記事公開の一連の作業を任せられる「編集長」のような役割です。
                     </p>
-                    <p>
-                        <strong>システム担当（agent-system）</strong>は、ローカルサーバーの起動・終了・ファイル整合性の確認・
+<p>
+<strong>システム担当（agent-system）</strong>は、ローカルサーバーの起動・終了・ファイル整合性の確認・
                         設定ファイルの管理など、裏側のインフラ作業を担当します。
                         「何かが動かなくなったら呼ぶ担当」です。
                     </p>
-                    <p>
-                        <strong>リサーチ担当（agent-research）</strong>は、記事のネタに対してファクトチェックをかけ、
+<p>
+<strong>リサーチ担当（agent-research）</strong>は、記事のネタに対してファクトチェックをかけ、
                         参考情報を集めてまとめます。「書く前に裏取りをする担当」として機能します。
                     </p>
-
-                    <h3>「社員は増やさない方がいい」理由</h3>
-                    <p>
+<h3>「社員は増やさない方がいい」理由</h3>
+<p>
                         当初は「デザイン担当」や「SNS担当」も作ろうと考えていましたが、やめました。
                         理由は明快です。<strong>役割が曖昧になると、誰に何を頼めばいいかわからなくなる</strong>からです。
                     </p>
-                    <p>
+<p>
                         今の3名でカバーできない仕事は、マネージャーか自分（社長）が判断して
                         既存の担当に振るか、一時的に臨時対応させれば足ります。
                         チームは小さく保つほど管理コストが下がります。
                     </p>
-
-                    <h2>2. スキルファイルで「部下」を定義する</h2>
-
-                    <h3>Claude Codeのスキルとは</h3>
-                    <p>
+<h2>2. スキルファイルで「部下」を定義する</h2>
+<h3>Claude Codeのスキルとは</h3>
+<p>
                         Claude Codeには「スキル」という概念があります。
                         <code>SKILL.md</code>というMarkdownファイルにロールと行動規範を書いておくと、
                         そのスキルを呼び出したときにClaude Codeがそのキャラクターとして動いてくれます。
                     </p>
-                    <p>
+<p>
                         スキルファイルは <code>~/.claude/skills/</code> ディレクトリ以下に配置します。
                         Claude Codeがそのディレクトリを読み込み、スキル名でいつでも呼び出せる状態になります。
                     </p>
-
 <pre><code># スキルファイルの配置構造
 ~/.claude/skills/
 ├── team-manager/
@@ -288,13 +225,11 @@
 │   └── SKILL.md    ← システム担当の役割・作業手順を記述
 └── agent-research/
     └── SKILL.md    ← リサーチ担当の役割・作業手順を記述</code></pre>
-
-                    <h3>SKILL.mdに書くこと</h3>
-                    <p>
+<h3>SKILL.mdに書くこと</h3>
+<p>
                         SKILL.mdには「このエージェントは何をする担当か」「どう動くか」「何を優先するか」を
                         Markdownで記述します。例えばコンテンツ担当のSKILL.mdには以下のような内容を書きます。
                     </p>
-
 <pre><code># コンテンツ担当（agent-content）
 
 ## 役割
@@ -311,35 +246,30 @@
 ## 制約
 - 確認なしで一括実行する（許可が下りた前提で動く）
 - Amazonアソシエイト ID: otitukanaihit-22</code></pre>
-
-                    <h3>CLAUDE.mdとスキルファイルの関係</h3>
-                    <p>
-                        <code>CLAUDE.md</code>はプロジェクト全体の指示書です。「このリポジトリでは何をするか」
+<h3>CLAUDE.mdとスキルファイルの関係</h3>
+<p>
+<code>CLAUDE.md</code>はプロジェクト全体の指示書です。「このリポジトリでは何をするか」
                         「どんな制約があるか」を書きます。一方、スキルファイルは「この担当エージェントは
                         どう動くか」という個人レベルの仕様書です。
                     </p>
-
-                    <div class="bg-zinc-50 border-l-4 border-zinc-400 p-4 my-6">
-                        <p class="text-zinc-800">
-                            <strong>CLAUDE.md vs SKILL.md：</strong><br>
-                            <strong>CLAUDE.md</strong> → プロジェクトの共通ルール・制約・技術スタック（全員が読む就業規則）<br>
-                            <strong>SKILL.md</strong> → 各担当エージェントの役割・行動規範（個人の業務マニュアル）
+<div class="bg-zinc-50 border-l-4 border-zinc-400 p-4 my-6">
+<p class="text-zinc-800">
+<strong>CLAUDE.md vs SKILL.md：</strong><br/>
+<strong>CLAUDE.md</strong> → プロジェクトの共通ルール・制約・技術スタック（全員が読む就業規則）<br/>
+<strong>SKILL.md</strong> → 各担当エージェントの役割・行動規範（個人の業務マニュアル）
                         </p>
-                    </div>
-
-                    <h2>3. ダッシュボードで進捗を見える化</h2>
-
-                    <h3>agent-demoとの連携</h3>
-                    <p>
+</div>
+<h2>3. ダッシュボードで進捗を見える化</h2>
+<h3>agent-demoとの連携</h3>
+<p>
                         各エージェントが今何をしているかをリアルタイムで把握するため、
                         Python HTTPサーバーとブラウザUIを組み合わせたダッシュボードを用意しました。
                     </p>
-                    <p>
+<p>
                         仕組みはシンプルです。各エージェントは作業の各ステップで
                         <code>~/agent-demo/status/</code> 以下のJSONファイルを更新します。
                         ブラウザ側はそのJSONをポーリングして画面に反映します。
                     </p>
-
 <pre><code># エージェントがステップ開始時にJSONを更新するコマンド
 python -c "
 import json, datetime, os
@@ -353,23 +283,20 @@ open(base + 'agent_2.json', 'w', encoding='utf-8').write(
 
 # ブラウザで確認
 # http://localhost:8080</code></pre>
-
-                    <p>
+<p>
                         これによって自分がブラウザを開いておくだけで、
                         「今どのエージェントが何の作業をしているか」が一目でわかります。
                         マネージャーも各担当のJSONを集約して全体の進捗を把握できます。
                     </p>
-
-                    <h3>「許可を何度も求められる問題」の解決</h3>
-                    <p>
+<h3>「許可を何度も求められる問題」の解決</h3>
+<p>
                         Claude Codeは安全のため、ファイル操作やコマンド実行の前に確認を求めます。
                         これが毎回発生すると、自動化の意味が薄れてしまいます。
                     </p>
-                    <p>
+<p>
                         解決策は <code>settings.json</code> の <code>permissions</code> 設定です。
                         許可する操作をあらかじめ定義しておくと、対象の操作は確認なしで実行されます。
                     </p>
-
 <pre><code>// ~/.claude/settings.json（例）
 {
   "permissions": {
@@ -381,110 +308,96 @@ open(base + 'agent_2.json', 'w', encoding='utf-8').write(
     ]
   }
 }</code></pre>
-
-                    <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 my-6">
-                        <p class="text-yellow-800">
-                            <strong>注意：</strong><br>
+<div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 my-6">
+<p class="text-yellow-800">
+<strong>注意：</strong><br/>
                             許可する操作は必要最小限に絞ることを推奨します。
                             <code>Bash(*)</code> のように全コマンドを許可すると、
                             意図しない操作が実行されるリスクがあります。
                             操作ごとに具体的なパターンを指定するのが安全です。
                         </p>
-                    </div>
-
-                    <h2>4. 実際に動かした結果</h2>
-
-                    <h3>指示はたった一行</h3>
-                    <p>
+</div>
+<h2>4. 実際に動かした結果</h2>
+<h3>指示はたった一行</h3>
+<p>
                         チームが整ったら、マネージャースキルを呼び出して指示を出します。
                     </p>
-
 <pre><code># Claude Codeでマネージャースキルを使って指示
 /skill team-manager
 
 「ブログネタ（blog_idea_statusline.md）を見て、
 ファクトチェックして、記事を書いて、公開して」</code></pre>
-
-                    <p>
+<p>
                         マネージャーがこの指示を受け取ると、タスクを分解して各担当に振り分けます。
                     </p>
-
-                    <div class="bg-gray-50 rounded-lg p-6 my-6">
-                        <h4 class="font-semibold text-gray-800 mb-4">マネージャーが分解したタスクの流れ</h4>
-                        <ol class="list-decimal list-inside space-y-3 text-gray-700">
-                            <li><strong>リサーチ担当へ</strong>：blog_idea_statusline.mdの内容をファクトチェックし、補足情報をまとめる</li>
-                            <li><strong>コンテンツ担当へ</strong>：ファクトチェック結果を踏まえて記事HTMLを作成し、sitemap・indexを更新してpush</li>
-                            <li><strong>マネージャーが結果を集約</strong>：各担当の完了報告を受け取り、自分（社長）に最終報告</li>
-                        </ol>
-                    </div>
-
-                    <h3>リサーチ担当がファクトチェック</h3>
-                    <p>
+<div class="bg-gray-50 rounded-lg p-6 my-6">
+<h4 class="font-semibold text-gray-800 mb-4">マネージャーが分解したタスクの流れ</h4>
+<ol class="list-decimal list-inside space-y-3 text-gray-700">
+<li><strong>リサーチ担当へ</strong>：blog_idea_statusline.mdの内容をファクトチェックし、補足情報をまとめる</li>
+<li><strong>コンテンツ担当へ</strong>：ファクトチェック結果を踏まえて記事HTMLを作成し、sitemap・indexを更新してpush</li>
+<li><strong>マネージャーが結果を集約</strong>：各担当の完了報告を受け取り、自分（社長）に最終報告</li>
+</ol>
+</div>
+<h3>リサーチ担当がファクトチェック</h3>
+<p>
                         リサーチ担当がブログネタのMarkdownを読み込み、
                         記事に含まれる技術的な情報（コマンドの正確性・バージョン情報・外部リンクの有効性など）を
                         確認してまとめます。この結果がコンテンツ担当に渡されます。
                     </p>
-
-                    <h3>コンテンツ担当が記事作成・pushまで完走</h3>
-                    <p>
+<h3>コンテンツ担当が記事作成・pushまで完走</h3>
+<p>
                         コンテンツ担当がリサーチ結果を受け取り、既存記事のフォーマットに合わせてHTMLを生成。
                         sitemap.xmlとindex.htmlを更新し、git pushまで完走します。
                         自分がやることはほぼゼロです。
                     </p>
-
-                    <div class="bg-green-50 border-l-4 border-green-400 p-4 my-6">
-                        <p class="text-green-800">
-                            <strong>実際に動いた結果：</strong><br>
+<div class="bg-green-50 border-l-4 border-green-400 p-4 my-6">
+<p class="text-green-800">
+<strong>実際に動いた結果：</strong><br/>
                             指示から公開まで、自分が介入したのはマネージャーへの最初の一行だけでした。
                             ダッシュボードを眺めながらコーヒーを飲んでいる間に、記事が公開されました。
                         </p>
-                    </div>
-
-                    <h2>5. まとめ：AIチームを持つことの価値</h2>
-
-                    <h3>「呼んだら動く部下」という現実的な定義</h3>
-                    <p>
+</div>
+<h2>5. まとめ：AIチームを持つことの価値</h2>
+<h3>「呼んだら動く部下」という現実的な定義</h3>
+<p>
                         AIチームは24時間常駐する従業員ではありません。
                         正確には「<strong>呼んだときだけ動く、役割を持った専門家</strong>」です。
                         常時稼働のコストもなく、給与も不要。呼べば即動き、終わったら待機する。
                         これが現実的なAIチームの定義だと思っています。
                     </p>
-
-                    <h3>精神論ではなく仕組みで解決する</h3>
-                    <p>
+<h3>精神論ではなく仕組みで解決する</h3>
+<p>
                         「もっと頑張る」「時間を作る」ではなく、
                         <strong>やる仕組みを作って、そこに流し込む</strong>。
                         スキルファイルはまさにその「仕組み」の核心部分です。
                         一度作れば、同じタスクは何度でも同じクオリティで処理されます。
                     </p>
-
-                    <div class="bg-gray-50 rounded-lg p-6 my-6">
-                        <h4 class="font-semibold text-gray-800 mb-4">AIチーム構築のポイント まとめ</h4>
-                        <ol class="list-decimal list-inside space-y-3 text-gray-700">
-                            <li>
-                                <strong>役割を明確にする</strong>
+<div class="bg-gray-50 rounded-lg p-6 my-6">
+<h4 class="font-semibold text-gray-800 mb-4">AIチーム構築のポイント まとめ</h4>
+<ol class="list-decimal list-inside space-y-3 text-gray-700">
+<li>
+<strong>役割を明確にする</strong>
                                 — 「誰が何をするか」を曖昧にしない。担当が重複すると混乱する
                             </li>
-                            <li>
-                                <strong>スキルは小さく保つ</strong>
+<li>
+<strong>スキルは小さく保つ</strong>
                                 — 3〜4名で回せるなら増やさない。管理コストが増えるだけ
                             </li>
-                            <li>
-                                <strong>進捗の可視化は最初から設計する</strong>
+<li>
+<strong>進捗の可視化は最初から設計する</strong>
                                 — ダッシュボードがないと「今何が起きているか」が把握できなくなる
                             </li>
-                            <li>
-                                <strong>許可設定を事前に整える</strong>
+<li>
+<strong>許可設定を事前に整える</strong>
                                 — 毎回の確認ダイアログは自動化の最大の敵。settings.jsonで解決する
                             </li>
-                            <li>
-                                <strong>指示は一行で済むように設計する</strong>
+<li>
+<strong>指示は一行で済むように設計する</strong>
                                 — 細かい手順をスキルファイルに書き込んでおけば、社長は大方針だけ示せばいい
                             </li>
-                        </ol>
-                    </div>
-
-                    <p>
+</ol>
+</div>
+<p>
                         Claude Codeのスキルファイルは、使い慣れると「自分専用のチーム」を
                         少しずつ育てていく感覚があります。
                         一度動かして、うまくいったところと失敗したところを見直して、
@@ -492,113 +405,43 @@ open(base + 'agent_2.json', 'w', encoding='utf-8').write(
                         AIチームはどんどん使いやすくなっていきます。
                     </p>
 
-                </div>
+      </div>
+    </div>
+  </main>
 
-                <!-- Amazon アフィリエイト -->
-                <div class="mt-12 p-6 bg-amber-50 border border-amber-200 rounded-xl">
-                    <h3 class="text-lg font-bold text-amber-800 mb-3">AIを使った仕事効率化・自動化のおすすめ本</h3>
-                    <a href="https://www.amazon.co.jp/dp/4296209310?tag=otitukanaihit-22" target="_blank" rel="nofollow noopener noreferrer" class="flex items-start gap-4 hover:bg-amber-100 rounded-lg p-3 transition-colors">
-                        <div>
-                            <p class="font-semibold text-gray-800">ChatGPT仕事術 ― AIで業務を自動化・効率化する方法</p>
-                            <p class="text-sm text-gray-600 mt-1">AIエージェントに役割を与えてチームとして動かす発想は、ChatGPTで仕事を効率化する考え方の延長線上にあります。「AIに何を任せるか」の感覚を養うなら、実践的なAI仕事術の書籍が最短の近道です。まず基礎を固めてから、エージェント設計に進むのがおすすめです。</p>
-                            <p class="text-amber-600 text-sm mt-2 font-medium">Amazonで確認する →</p>
-                        </div>
-                    </a>
-                </div>
+  <!-- ── FOOTER ─────────────────────────────────────────── -->
+  <footer class="site-footer" id="contact">
+    <div class="site-footer-inner">
+      <a href="../index.html" class="footer-logo">オチつかないカンパニー</a>
+      <div class="footer-tagline">福祉 × IT × 試行錯誤の記録</div>
+      <nav class="footer-nav" aria-label="フッターナビゲーション">
+        <a href="../index.html#blog">ブログ</a>
+        <a href="../categories.html">カテゴリー</a>
+        <a href="../index.html#affiliate">おすすめツール</a>
+        <a href="../index.html#about">プロフィール</a>
+        <a href="../privacy-policy.html">プライバシーポリシー</a>
+      </nav>
+      <div class="footer-copy">© 2026 OCHITSUKANAI COMPANY. All rights reserved.</div>
+    </div>
+  </footer>
 
-                <!-- SNS Share Buttons -->
-                <div class="mt-8 pt-8 border-t border-gray-200">
-                    <p class="text-sm font-semibold text-gray-600 mb-4 text-center">この記事をシェアする</p>
-                    <div class="flex justify-center gap-4">
-                        <a id="share-twitter" href="#" target="_blank" rel="noopener noreferrer"
-                            class="flex items-center gap-2 bg-black text-white px-5 py-2 rounded-lg hover:bg-gray-800 transition-colors text-sm font-semibold">
-                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.748l7.73-8.835L1.254 2.25H8.08l4.253 5.622 5.91-5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-                            X でシェア
-                        </a>
-                        <a id="share-hatena" href="#" target="_blank" rel="noopener noreferrer"
-                            class="flex items-center gap-2 bg-blue-600 text-white px-5 py-2 rounded-lg hover:bg-blue-700 transition-colors text-sm font-semibold">
-                            <span class="font-bold mr-1">B!</span>はてブ
-                        </a>
-                    </div>
-                </div>
-                <script>
-                (function() {
-                    var title = encodeURIComponent(document.title.replace(/ - オチつかないカンパニー.*/, ''));
-                    var url = encodeURIComponent(window.location.href);
-                    document.getElementById('share-twitter').href = 'https://twitter.com/intent/tweet?text=' + title + '&url=' + url + '&hashtags=ClaudeCode,マルチエージェント,AIチーム,AI開発';
-                    document.getElementById('share-hatena').href = 'https://b.hatena.ne.jp/add?mode=confirm&title=' + title + '&url=' + url;
-                })();
-                </script>
+  <!-- Hamburger JS -->
+  <script>
+    (function () {
+      var btn = document.getElementById('hamburger-btn');
+      var menu = document.getElementById('mobile-menu');
+      var menuIcon = document.getElementById('menu-icon');
+      var closeIcon = document.getElementById('close-icon');
 
-                <!-- Related Articles -->
-                <div class="mt-12 pt-8 border-t border-gray-200">
-                    <h3 class="text-xl font-bold text-gray-900 mb-6">関連記事</h3>
-                    <div class="grid md:grid-cols-2 gap-6">
-                        <a href="claude-antigravity-relay-2026-03-18.html" class="block group">
-                            <div class="bg-gray-50 rounded-lg p-4 group-hover:bg-gray-100 transition-colors">
-                                <h4 class="font-semibold text-gray-900 group-hover:text-indigo-600">
-                                    Claude CodeとAntigravityのリレープレー ～マルチエージェントデモをAI2本で完走した話～</h4>
-                                <p class="text-sm text-gray-600 mt-2">レート制限で止まったClaude Codeの仕事をAntigravityが引き継いだ記録</p>
-                            </div>
-                        </a>
-                        <a href="claude-code-statusline-windows-2026-03-16.html" class="block group">
-                            <div class="bg-gray-50 rounded-lg p-4 group-hover:bg-gray-100 transition-colors">
-                                <h4 class="font-semibold text-gray-900 group-hover:text-indigo-600">
-                                    Windows日本語環境でClaude Codeステータスラインを動かす方法【全記録】</h4>
-                                <p class="text-sm text-gray-600 mt-2">Claude Codeのトラブルシューティング記録</p>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </article>
-    </main>
-
-    <!-- フッター -->
-    <footer class="bg-gray-900 text-white py-12">
-        <div class="container mx-auto px-6">
-            <div class="grid md:grid-cols-3 gap-8">
-                <div>
-                    <h3 class="text-xl font-bold mb-4">OCHITSUKANAI COMPANY</h3>
-                    <p class="text-gray-400">福祉の現場で働く4児の父が、業務効率化と個人の成長について発信するブログです。</p>
-                </div>
-                <div>
-                    <h4 class="font-semibold mb-4">メニュー</h4>
-                    <ul class="space-y-2 text-gray-400">
-                        <li><a href="../index.html#blog" class="hover:text-white transition-colors duration-300">ブログ</a></li>
-                        <li><a href="../index.html#affiliate" class="hover:text-white transition-colors duration-300">おすすめツール</a></li>
-                        <li><a href="../index.html#services" class="hover:text-white transition-colors duration-300">サービス</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="font-semibold mb-4">リンク</h4>
-                    <ul class="space-y-2 text-gray-400">
-                        <li><a href="../index.html" class="hover:text-white transition-colors duration-300">ホーム</a></li>
-                        <li><a href="../privacy-policy.html" class="hover:text-white transition-colors duration-300">プライバシーポリシー</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-                <p>&copy; 2026 OCHITSUKANAI COMPANY. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        function toggleMenu() {
-            var mobileMenu = document.getElementById('mobile-menu');
-            var menuIcon = document.getElementById('menu-icon');
-            var closeIcon = document.getElementById('close-icon');
-            var btn = document.getElementById('hamburger-btn');
-            var isOpen = mobileMenu.classList.contains('hidden');
-            mobileMenu.classList.toggle('hidden');
-            menuIcon.classList.toggle('hidden');
-            closeIcon.classList.toggle('hidden');
-            btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-            btn.setAttribute('aria-label', isOpen ? 'メニューを閉じる' : 'メニューを開く');
-        }
-    </script>
-    <script src="../back-home.js"></script>
+      btn.addEventListener('click', function () {
+        var isOpen = menu.classList.toggle('open');
+        menuIcon.style.display = isOpen ? 'none' : 'block';
+        closeIcon.style.display = isOpen ? 'block' : 'none';
+        btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        btn.setAttribute('aria-label', isOpen ? 'メニューを閉じる' : 'メニューを開く');
+      });
+    })();
+  </script>
+  <script src="../back-home.js"></script>
 </body>
-
 </html>

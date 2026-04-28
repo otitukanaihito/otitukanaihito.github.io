@@ -1,330 +1,288 @@
 <!DOCTYPE html>
 <html lang="ja">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>福祉デイケアの属人化問題〜解決したいと考えているが、まだできていない話〜 - オチつかないカンパニー</title>
-    <meta name="description"
-        content="福祉デイケアに蔓延る「属人化」問題。送迎業務・情報管理・リスクマネジメントの改革を構想しているが、まだ実践できていない。正直な現場の記録。">
-    <meta name="keywords" content="福祉デイケア,DX,属人化,送迎業務,SOAPノート,リスクマネジメント,精神保健福祉士,業務効率化,福祉テック">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>福祉デイケアの属人化問題〜解決したいと考えているが、まだできていない話〜 - オチつかないカンパニー</title>
+  <meta name="description" content="福祉デイケアに蔓延る「属人化」問題。送迎業務・情報管理・リスクマネジメントの改革を構想しているが、まだ実践できていない。正直な現場の記録。">
+  <meta name="keywords" content="福祉デイケア,DX,属人化,送迎業務,SOAPノート,リスクマネジメント,精神保健福祉士,業務効率化,福祉テック">
+  <link rel="canonical" href="https://otitukanaihito.github.io/blog/daycare-dx-workflow-2026-03-15.html">
 
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="article">
-    <meta property="og:url" content="https://otitukanaihito.github.io/blog/daycare-dx-workflow-2026-03-15.html">
-    <meta property="og:title" content="福祉デイケアの属人化問題〜解決したいと考えているが、まだできていない話〜">
-    <meta property="og:description"
-        content="福祉デイケアに蔓延る「属人化」問題。解決したいと構想しているが、まだ実践できていない。正直な現場の記録。">
-    <meta property="og:image" content="https://otitukanaihito.github.io/images/blog_daycare_dx.png">
+  <!-- OGP -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://otitukanaihito.github.io/blog/daycare-dx-workflow-2026-03-15.html">
+  <meta property="og:title" content="福祉デイケアの属人化問題〜解決したいと考えているが、まだできていない話〜">
+  <meta property="og:description" content="福祉デイケアに蔓延る「属人化」問題。送迎業務・情報管理・リスクマネジメントの改革を構想しているが、まだ実践できていない。正直な現場の記録。">
+  <meta property="og:image" content="https://otitukanaihito.github.io/images/blog_daycare_dx.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://otitukanaihito.github.io/blog/daycare-dx-workflow-2026-03-15.html">
+  <meta name="twitter:title" content="福祉デイケアの属人化問題〜解決したいと考えているが、まだできていない話〜">
+  <meta name="twitter:description" content="福祉デイケアに蔓延る「属人化」問題。送迎業務・情報管理・リスクマネジメントの改革を構想しているが、まだ実践できていない。正直な現場の記録。">
+  <meta name="twitter:image" content="https://otitukanaihito.github.io/images/blog_daycare_dx.png">
 
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url"
-        content="https://otitukanaihito.github.io/blog/daycare-dx-workflow-2026-03-15.html">
-    <meta property="twitter:title" content="福祉デイケアの属人化問題〜解決したいと考えているが、まだできていない話〜">
-    <meta property="twitter:description"
-        content="福祉デイケアに蔓延る「属人化」問題。解決したいと構想しているが、まだ実践できていない。正直な現場の記録。">
-    <meta property="twitter:image" content="https://otitukanaihito.github.io/images/blog_daycare_dx.png">
+  <!-- Structured Data: BlogPosting -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "福祉デイケアの属人化問題〜解決したいと考えているが、まだできていない話〜",
+    "description": "福祉デイケアに蔓延る「属人化」問題。送迎業務・情報管理・リスクマネジメントの改革を構想しているが、まだ実践できていない。正直な現場の記録。",
+    "author": {"@type": "Person", "name": "オチつかないヒト"},
+    "datePublished": "2026-03-15",
+    "dateModified": "2026-03-15",
+    "publisher": {
+      "@type": "Organization",
+      "name": "オチつかないカンパニー",
+      "logo": {"@type": "ImageObject", "url": "https://otitukanaihito.github.io/images/hero_banner.png"}
+    },
+    "mainEntityOfPage": {"@type": "WebPage", "@id": "https://otitukanaihito.github.io/blog/daycare-dx-workflow-2026-03-15.html"},
+    "image": "https://otitukanaihito.github.io/images/blog_daycare_dx.png"
+  }
+  </script>
 
-    <!-- Tailwind CSS -->
-    <link rel="stylesheet" href="../style.css">
+  <!-- Structured Data: BreadcrumbList -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {"@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://otitukanaihito.github.io/"},
+      {"@type": "ListItem", "position": 2, "name": "福祉×テック", "item": "https://otitukanaihito.github.io/categories.html#welfare-tech"},
+      {"@type": "ListItem", "position": 3, "name": "福祉デイケアの属人化問題〜解決したいと考えているが、まだできていない話〜", "item": "https://otitukanaihito.github.io/blog/daycare-dx-workflow-2026-03-15.html"}
+    ]
+  }
+  </script>
 
-    <!-- Structured Data -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "BlogPosting",
-        "headline": "福祉デイケアの属人化問題〜解決したいと考えているが、まだできていない話〜",
-        "description": "福祉デイケアに蔓延る「属人化」問題。解決したいと構想しているが、まだ実践できていない。正直な現場の記録。",
-        "author": {
-            "@type": "Person",
-            "name": "オチつかないヒト"
-        },
-        "datePublished": "2026-03-15",
-        "dateModified": "2026-03-15",
-        "publisher": {
-            "@type": "Organization",
-            "name": "オチつかないカンパニー"
-        },
-        "mainEntityOfPage": {
-            "@type": "WebPage",
-            "@id": "https://otitukanaihito.github.io/blog/daycare-dx-workflow-2026-03-15.html"
-        },
-        "image": "https://otitukanaihito.github.io/images/blog_daycare_dx.png"
-    }
-    </script>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-MDWZM4DL');</script>
 
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-            {
-                "@type": "ListItem",
-                "position": 1,
-                "name": "ホーム",
-                "item": "https://otitukanaihito.github.io/"
-            },
-            {
-                "@type": "ListItem",
-                "position": 2,
-                "name": "福祉×テック",
-                "item": "https://otitukanaihito.github.io/categories.html#welfare-tech"
-            },
-            {
-                "@type": "ListItem",
-                "position": 3,
-                "name": "福祉デイケアの属人化問題〜解決したいと考えているが、まだできていない話〜",
-                "item": "https://otitukanaihito.github.io/blog/daycare-dx-workflow-2026-03-15.html"
-            }
-        ]
-    }
-    </script>
-<!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-MDWZM4DL');</script>
-<!-- End Google Tag Manager -->
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@400;700;800&family=IBM+Plex+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@400;700;800&family=IBM+Plex+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;500;700&display=swap"></noscript>
+
+  <!-- Styles: Tailwind utilities + Brutalist design layer -->
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="../brutalist.css">
 </head>
 
-<body class="bg-gray-50">
-    <!-- ヘッダー -->
-    <header class="bg-white shadow-sm sticky top-0 z-50">
-        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="../index.html" class="text-sm md:text-2xl font-black tracking-wider whitespace-nowrap text-gray-900 hover:text-indigo-600 transition-colors duration-300">
-                OCHITSUKANAI COMPANY
-            </a>
-            <nav class="hidden md:flex items-center space-x-6">
-                <a href="../index.html#blog" class="text-gray-700 hover:text-indigo-600 transition-colors duration-300">ブログ</a>
-                <a href="../categories.html" class="text-gray-700 hover:text-indigo-600 transition-colors duration-300">カテゴリー</a>
-                <a href="../index.html#affiliate" class="text-gray-700 hover:text-indigo-600 transition-colors duration-300">おすすめツール</a>
-                <a href="../index.html#about" class="text-gray-700 hover:text-indigo-600 transition-colors duration-300">プロフィール</a>
-                <a href="../index.html#contact" class="text-gray-700 hover:text-indigo-600 transition-colors duration-300">お問い合わせ</a>
-            </nav>
-            <div class="md:hidden">
-                <button onclick="toggleMenu()" class="text-gray-700" aria-label="メニューを開く" aria-expanded="false" id="hamburger-btn">
-                    <svg id="menu-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <line x1="3" y1="6" x2="21" y2="6"></line>
-                        <line x1="3" y1="12" x2="21" y2="12"></line>
-                        <line x1="3" y1="18" x2="21" y2="18"></line>
-                    </svg>
-                    <svg id="close-icon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <line x1="18" y1="6" x2="6" y2="18"></line>
-                        <line x1="6" y1="6" x2="18" y2="18"></line>
-                    </svg>
-                </button>
-            </div>
+<body>
+  <!-- GTM noscript -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MDWZM4DL" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+  <!-- ── HEADER ─────────────────────────────────────────── -->
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a href="../index.html" class="site-logo">オチつかないカンパニー</a>
+
+      <nav id="desktop-nav" aria-label="メインナビゲーション">
+        <ul class="site-nav-list">
+          <li><a href="../index.html#blog">ブログ</a></li>
+          <li><a href="../categories.html">カテゴリー</a></li>
+          <li><a href="../index.html#affiliate">おすすめツール</a></li>
+          <li><a href="../index.html#about">プロフィール</a></li>
+          <li><a href="../index.html#contact">お問い合わせ</a></li>
+        </ul>
+      </nav>
+
+      <button id="hamburger-btn" aria-label="メニューを開く" aria-expanded="false" aria-controls="mobile-menu">
+        <svg id="menu-icon" width="18" height="13" viewBox="0 0 18 13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square">
+          <line x1="0" y1="1.5" x2="18" y2="1.5"/>
+          <line x1="0" y1="6.5" x2="18" y2="6.5"/>
+          <line x1="0" y1="11.5" x2="18" y2="11.5"/>
+        </svg>
+        <svg id="close-icon" width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square" style="display:none;">
+          <line x1="0" y1="0" x2="14" y2="14"/>
+          <line x1="14" y1="0" x2="0" y2="14"/>
+        </svg>
+      </button>
+    </div>
+
+    <div id="mobile-menu" role="navigation" aria-label="モバイルメニュー">
+      <ul class="mobile-nav-list">
+        <li><a href="../index.html#blog">ブログ</a></li>
+        <li><a href="../categories.html">カテゴリー</a></li>
+        <li><a href="../index.html#affiliate">おすすめツール</a></li>
+        <li><a href="../index.html#about">プロフィール</a></li>
+        <li><a href="../index.html#contact">お問い合わせ</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- ── ARTICLE ────────────────────────────────────────── -->
+  <main>
+    <div class="article-wrap">
+      <!-- Black typographic header (replaces gradient banner) -->
+      <div class="article-header">
+        <div class="article-meta">
+          <span class="category-tag">福祉×テック</span>
+          <span class="article-date">2026-03-15</span>
         </div>
-        <div id="mobile-menu" class="md:hidden bg-white px-6 pb-4 hidden">
-            <nav class="flex flex-col space-y-4">
-                <a href="../index.html#blog" class="text-gray-700 hover:text-indigo-600">ブログ</a>
-                <a href="../categories.html" class="text-gray-700 hover:text-indigo-600">カテゴリー</a>
-                <a href="../index.html#affiliate" class="text-gray-700 hover:text-indigo-600">おすすめツール</a>
-                <a href="../index.html#about" class="text-gray-700 hover:text-indigo-600">プロフィール</a>
-                <a href="../index.html#contact" class="text-gray-700 hover:text-indigo-600">お問い合わせ</a>
-            </nav>
-        </div>
-    </header>
+        <h1 class="article-title">福祉デイケアの属人化問題〜解決したいと考えているが、まだできていない話〜</h1>
+        <p class="article-lead">精神論より仕組みで解決したい。でも、まだできていない。その正直な記録。</p>
+      </div>
 
-    <!-- Main Content -->
-    <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <article class="bg-white rounded-2xl shadow-xl overflow-hidden">
-            <!-- Article Header -->
-            <div class="relative h-64 md:h-96 bg-gradient-to-r from-teal-600 via-green-600 to-emerald-600">
-                <div class="absolute inset-0 bg-black bg-opacity-30"></div>
-                <div class="absolute bottom-0 left-0 right-0 p-8">
-                    <div class="flex items-center mb-4">
-                        <span class="text-sm font-semibold text-white bg-teal-500 px-3 py-1 rounded-full">福祉×テック</span>
-                        <span class="text-sm text-white ml-4">2026-03-15</span>
-                    </div>
-                    <h1 class="text-3xl md:text-4xl font-bold text-white mb-4">
-                        福祉デイケアの属人化問題〜解決したいと考えているが、まだできていない話〜
-                    </h1>
-                    <p class="text-lg text-gray-200">
-                        精神論より仕組みで解決したい。でも、まだできていない。その正直な記録。
-                    </p>
-                </div>
-            </div>
-
-            <!-- Article Content -->
-            <div class="p-8">
-                <div class="prose prose-lg max-w-none">
-
-                    <h2>はじめに</h2>
-                    <p>
+      <!-- Article body -->
+      <div class="article-body">
+        
+<h2>はじめに</h2>
+<p>
                         福祉デイケアで働いていると、「この業務、〇〇さんじゃないと回せない」という場面に頻繁に出くわします。
                         送迎の順番、利用者ごとの細かい配慮事項、インシデントの記録方法——どれも担当者の頭の中にしか存在しない。
                     </p>
-                    <p>
+<p>
                         これは「やる気」や「責任感」の問題ではなく、<strong>仕組みの問題</strong>です。
                         仕組みがないから人に依存する。人に依存するから引き継ぎができない。引き継ぎができないから担当者が休めない。
                         この悪循環を断ち切りたいと考えている——が、正直に言うと、<strong>まだ実践できていない。</strong>
-                    </p>
-                    <p>
+</p>
+<p>
                         この記事は「やった話」ではなく、「やりたいと考えている構想」の記録です。
                         理想と現実のギャップを抱えながら、それでも仕組みで解決したいと思っている現場スタッフの、正直なメモです。
                     </p>
-
-                    <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 my-6">
-                        <p class="text-yellow-800">
-                            <strong>⚠️ この記事について：</strong><br>
+<div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 my-6">
+<p class="text-yellow-800">
+<strong>⚠️ この記事について：</strong><br/>
                             以下の内容は「実践した記録」ではなく「こうしたいという構想」です。
                             福祉デイケアにおける(1)送迎業務のデジタル化、(2)情報管理のDB化、(3)リスクマネジメントの改革という3つの軸で、
                             「理想の仕組み」を考えた記録としてお読みください。
                         </p>
-                    </div>
-
-                    <h2>1. 福祉デイケアが抱える「属人化」問題</h2>
-
-                    <h3>なぜデイケアは属人化しやすいか</h3>
-                    <p>
+</div>
+<h2>1. 福祉デイケアが抱える「属人化」問題</h2>
+<h3>なぜデイケアは属人化しやすいか</h3>
+<p>
                         福祉デイケアの業務の特徴として、利用者との関係性が支援の質に直結する点があります。
                         「Aさんは雨の日に不安が強くなる」「Bさんは送迎の順番が変わると混乱する」——こうした個別情報は、
                         熟練スタッフの経験知として蓄積されますが、文書化されないまま属人化していきます。
                     </p>
-                    <p>
+<p>
                         加えて、少人数体制で回している施設が多く、「○○さんがいないと動かない」状況が常態化しています。
                         特定のスタッフが病欠・異動・退職した際のリスクは非常に大きい。
                     </p>
-
-                    <h3>属人化が招く具体的な問題</h3>
-                    <ul>
-                        <li><strong>引き継ぎの失敗：</strong>新人スタッフが利用者の特性を把握するのに数ヶ月かかる</li>
-                        <li><strong>担当者の疲弊：</strong>「自分がいないと回らない」プレッシャーで休暇取得が困難に</li>
-                        <li><strong>リスク管理の穴：</strong>過去のインシデント情報が特定の人物の記憶に依存している</li>
-                        <li><strong>サービス品質のムラ：</strong>担当者によって支援の質が大きく変わってしまう</li>
-                    </ul>
-
-                    <div class="bg-gray-50 rounded-lg p-6 my-6">
-                        <h4 class="font-semibold text-gray-800 mb-3">解決の方向性</h4>
-                        <p class="text-gray-700">
+<h3>属人化が招く具体的な問題</h3>
+<ul>
+<li><strong>引き継ぎの失敗：</strong>新人スタッフが利用者の特性を把握するのに数ヶ月かかる</li>
+<li><strong>担当者の疲弊：</strong>「自分がいないと回らない」プレッシャーで休暇取得が困難に</li>
+<li><strong>リスク管理の穴：</strong>過去のインシデント情報が特定の人物の記憶に依存している</li>
+<li><strong>サービス品質のムラ：</strong>担当者によって支援の質が大きく変わってしまう</li>
+</ul>
+<div class="bg-gray-50 rounded-lg p-6 my-6">
+<h4 class="font-semibold text-gray-800 mb-3">解決の方向性</h4>
+<p class="text-gray-700">
                             「担当者の能力を上げる」ではなく、「誰でも同じ質で動ける仕組みを作る」。
                             これが私たちのアプローチです。人の善意や熱意に頼る運用は、持続可能ではありません。
                         </p>
-                    </div>
-
-                    <h2>2. 送迎業務のデジタル化（クラウドマッピング導入）</h2>
-
-                    <h3>送迎業務の属人化とは</h3>
-                    <p>
+</div>
+<h2>2. 送迎業務のデジタル化（クラウドマッピング導入）</h2>
+<h3>送迎業務の属人化とは</h3>
+<p>
                         デイケアの送迎業務は、表面上はシンプルに見えて実は複雑です。
                         利用者の自宅位置、乗降の順番、体調による変更対応、家族への連絡タイミング——
                         これらを頭の中で管理していた担当者が異動になった瞬間、業務が崩壊します。
                     </p>
-
-                    <h3>クラウドマッピングの導入</h3>
-                    <p>
+<h3>クラウドマッピングの導入</h3>
+<p>
                         私たちはまず、Googleマップのカスタムマップ機能を使って利用者の居宅位置を可視化しました。
                         各ピンには以下の情報を紐付けています：
                     </p>
-                    <ul>
-                        <li>自宅の正確な住所（番地・建物名・部屋番号）</li>
-                        <li>乗降時の注意事項（玄関の場所、インターホンの有無など）</li>
-                        <li>同乗できない組み合わせのメモ（関係性上の配慮）</li>
-                        <li>緊急連絡先（家族・主治医）</li>
-                    </ul>
-                    <p>
+<ul>
+<li>自宅の正確な住所（番地・建物名・部屋番号）</li>
+<li>乗降時の注意事項（玄関の場所、インターホンの有無など）</li>
+<li>同乗できない組み合わせのメモ（関係性上の配慮）</li>
+<li>緊急連絡先（家族・主治医）</li>
+</ul>
+<p>
                         このマップはチームのGoogleアカウントで共有管理されており、
                         誰がドライバーになっても同じ情報にアクセスできます。
                         更新は担当者でなくても可能で、変更があった際は施設長に確認を経て即時反映します。
                     </p>
-
-                    <div class="bg-blue-50 border-l-4 border-blue-400 p-4 my-6">
-                        <p class="text-blue-800">
-                            <strong>期待する効果（構想段階）：</strong><br>
+<div class="bg-blue-50 border-l-4 border-blue-400 p-4 my-6">
+<p class="text-blue-800">
+<strong>期待する効果（構想段階）：</strong><br/>
                             新人スタッフがドライバーを担当する際の不安が減るはず。
                             「迷ったら地図を見ればいい」という安心感が、業務の質を底上げするはず。
                             ベテランスタッフへの依存度も下がり、担当替えがスムーズになるはず——と考えている。
                         </p>
-                    </div>
-
-                    <h2>3. 情報管理のDB化（SOAPノートの4カテゴリ分類）</h2>
-
-                    <h3>SOAP記録の活用と限界</h3>
-                    <p>
+</div>
+<h2>3. 情報管理のDB化（SOAPノートの4カテゴリ分類）</h2>
+<h3>SOAP記録の活用と限界</h3>
+<p>
                         医療・福祉現場では、SOAP（Subjective・Objective・Assessment・Plan）形式の記録が広く使われています。
                         しかし多くの現場では、SOAPが「書くための書類」になっており、
                         後から参照・検索・分析に使えない状態になっています。
                     </p>
-
-                    <h3>4カテゴリ分類の実装</h3>
-                    <p>
+<h3>4カテゴリ分類の実装</h3>
+<p>
                         私たちはSOAPノートをスプレッドシート（Google Sheets）でDB化し、
                         以下の4カテゴリでタグ付けして管理するようにしました：
                     </p>
-
-                    <div class="grid md:grid-cols-2 gap-4 my-6">
-                        <div class="bg-blue-50 rounded-lg p-4 border border-blue-200">
-                            <h4 class="font-bold text-blue-800 mb-2">状態変化</h4>
-                            <p class="text-sm text-blue-700">体調・気分・行動の変化。定期的な推移を追跡するために使用</p>
-                        </div>
-                        <div class="bg-yellow-50 rounded-lg p-4 border border-yellow-200">
-                            <h4 class="font-bold text-yellow-800 mb-2">介入記録</h4>
-                            <p class="text-sm text-yellow-700">スタッフが行った具体的な支援・声かけ・調整の内容</p>
-                        </div>
-                        <div class="bg-red-50 rounded-lg p-4 border border-red-200">
-                            <h4 class="font-bold text-red-800 mb-2">リスク事象</h4>
-                            <p class="text-sm text-red-700">インシデント・ヒヤリハット・要注意事項。全スタッフで共有必須</p>
-                        </div>
-                        <div class="bg-purple-50 rounded-lg p-4 border border-purple-200">
-                            <h4 class="font-bold text-purple-800 mb-2">申し送り事項</h4>
-                            <p class="text-sm text-purple-700">次のシフトや翌日に引き継ぐべき情報。期限付きで管理</p>
-                        </div>
-                    </div>
-
-                    <p>
+<div class="grid md:grid-cols-2 gap-4 my-6">
+<div class="bg-blue-50 rounded-lg p-4 border border-blue-200">
+<h4 class="font-bold text-blue-800 mb-2">状態変化</h4>
+<p class="text-sm text-blue-700">体調・気分・行動の変化。定期的な推移を追跡するために使用</p>
+</div>
+<div class="bg-yellow-50 rounded-lg p-4 border border-yellow-200">
+<h4 class="font-bold text-yellow-800 mb-2">介入記録</h4>
+<p class="text-sm text-yellow-700">スタッフが行った具体的な支援・声かけ・調整の内容</p>
+</div>
+<div class="bg-red-50 rounded-lg p-4 border border-red-200">
+<h4 class="font-bold text-red-800 mb-2">リスク事象</h4>
+<p class="text-sm text-red-700">インシデント・ヒヤリハット・要注意事項。全スタッフで共有必須</p>
+</div>
+<div class="bg-purple-50 rounded-lg p-4 border border-purple-200">
+<h4 class="font-bold text-purple-800 mb-2">申し送り事項</h4>
+<p class="text-sm text-purple-700">次のシフトや翌日に引き継ぐべき情報。期限付きで管理</p>
+</div>
+</div>
+<p>
                         各記録にはカテゴリタグ・日付・利用者ID・記録者名が付与されており、
                         フィルタリングするだけで「この利用者の過去1ヶ月のリスク事象」を一覧表示できます。
                     </p>
-
-                    <h3>DB化で期待できる変化（構想段階）</h3>
-                    <p>
+<h3>DB化で期待できる変化（構想段階）</h3>
+<p>
                         最も大きな変化として期待しているのは、<strong>引き継ぎの質が上がること</strong>です。
                         現状は「口頭で伝える」しかない申し送りが、
                         検索可能なデータとして残るようになるはず。
                         新しい担当スタッフがアサインされた際も、過去の記録を参照することで
                         利用者の傾向を素早く把握できるようになる——と考えている。
                     </p>
-
-                    <h2>4. リスクマネジメントの改革（マイクロ・レポート）</h2>
-
-                    <h3>従来のリスク管理の問題点</h3>
-                    <p>
+<h2>4. リスクマネジメントの改革（マイクロ・レポート）</h2>
+<h3>従来のリスク管理の問題点</h3>
+<p>
                         多くの施設では、インシデントが起きた後に「事故報告書」を書く文化があります。
                         しかしこれは事後対応であり、予防にはつながりにくい。
                         また、「書かなきゃいけない書類」という心理的ハードルから、
                         軽微なヒヤリハットが報告されないまま埋もれてしまう問題もあります。
                     </p>
-
-                    <h3>マイクロ・レポートの導入</h3>
-                    <p>
+<h3>マイクロ・レポートの導入</h3>
+<p>
                         そこで私たちが導入したのが「マイクロ・レポート」という仕組みです。
                         これはA4用紙1枚の正式な事故報告書ではなく、
                         <strong>3行以内で書けるミニ報告</strong>をGoogleフォームで随時提出できるようにしたものです。
                     </p>
-                    <p>
+<p>
                         フォームの項目はシンプルです：
                     </p>
-                    <ul>
-                        <li>起きたこと（1〜2行）</li>
-                        <li>対応したこと（1行）</li>
-                        <li>カテゴリ選択（ヒヤリハット / 状態悪化 / 環境問題 / その他）</li>
-                    </ul>
-                    <p>
+<ul>
+<li>起きたこと（1〜2行）</li>
+<li>対応したこと（1行）</li>
+<li>カテゴリ選択（ヒヤリハット / 状態悪化 / 環境問題 / その他）</li>
+</ul>
+<p>
                         送信されたデータはスプレッドシートに自動蓄積され、
                         週次ミーティングで全スタッフが確認する運用になっています。
                     </p>
-
-                    <div class="bg-orange-50 border-l-4 border-orange-400 p-4 my-6">
-                        <p class="text-orange-800">
-                            <strong>考え方のポイント：</strong><br>
+<div class="bg-orange-50 border-l-4 border-orange-400 p-4 my-6">
+<p class="text-orange-800">
+<strong>考え方のポイント：</strong><br/>
                             「書きやすさ」を最優先にすれば、報告件数が増えるはず。
                             報告件数が増えることは、問題が増えたのではなく、
                             見えていなかったリスクが可視化されたということ。
                             これがリスクマネジメントの第一歩になると考えている。
                         </p>
-                    </div>
-
-                    <h3>データを使ったパターン分析（構想）</h3>
-                    <p>
+</div>
+<h3>データを使ったパターン分析（構想）</h3>
+<p>
                         蓄積されたマイクロ・レポートを月次で集計することで、
                         「月曜日の午前中にヒヤリハットが集中している」
                         「特定の利用者の状態悪化が送迎後に起きやすい」
@@ -332,150 +290,76 @@
                         これを踏まえてスタッフ配置や送迎順を調整するという、
                         データドリブンな改善サイクルを作りたいと考えている。
                     </p>
-
-                    <h2>5. まとめと今後の展望</h2>
-
-                    <h3>3つの構想を考えてわかったこと</h3>
-                    <p>
+<h2>5. まとめと今後の展望</h2>
+<h3>3つの構想を考えてわかったこと</h3>
+<p>
                         送迎のクラウドマッピング、SOAPノートのDB化、マイクロ・レポートによるリスク管理——
                         この3つを構想する中で気づいたことは、「DXは高価なシステムを入れることではない」ということです。
                     </p>
-                    <p>
+<p>
                         Googleマップ、Googleスプレッドシート、Googleフォームは無料で使えます。
                         重要なのは、<strong>どんな情報を・誰がアクセスできる形で・どう蓄積するか</strong>という設計です。
                         ツールよりも、業務フローと情報設計が先です。
                     </p>
-                    <p>
+<p>
                         ただ正直に言えば、<strong>構想はあるが実践できていない。</strong>
                         職場環境・時間・合意形成の壁がある。それでもこの構想を持ち続けることが、いつか動き出す一歩になると思っている。
                     </p>
-
-                    <h3>今後取り組みたいこと</h3>
-                    <ul>
-                        <li><strong>送迎システムのさらなる自動化：</strong>利用者の欠席連絡に応じてルートを自動再計算する仕組み</li>
-                        <li><strong>SOAPノートのAI支援：</strong>定型文の入力補完や、記録漏れの自動検知</li>
-                        <li><strong>職種間連携のデジタル化：</strong>医師・看護師・PSW・OTが同一プラットフォームで情報共有できる環境の整備</li>
-                        <li><strong>利用者本人への情報開示：</strong>自分の状態変化を本人がデジタルで確認できる仕組み（本人同意のもとで）</li>
-                    </ul>
-
-                    <div class="bg-indigo-50 border-l-4 border-indigo-400 p-4 my-6">
-                        <p class="text-indigo-800">
-                            <strong>最後に：</strong><br>
+<h3>今後取り組みたいこと</h3>
+<ul>
+<li><strong>送迎システムのさらなる自動化：</strong>利用者の欠席連絡に応じてルートを自動再計算する仕組み</li>
+<li><strong>SOAPノートのAI支援：</strong>定型文の入力補完や、記録漏れの自動検知</li>
+<li><strong>職種間連携のデジタル化：</strong>医師・看護師・PSW・OTが同一プラットフォームで情報共有できる環境の整備</li>
+<li><strong>利用者本人への情報開示：</strong>自分の状態変化を本人がデジタルで確認できる仕組み（本人同意のもとで）</li>
+</ul>
+<div class="bg-indigo-50 border-l-4 border-indigo-400 p-4 my-6">
+<p class="text-indigo-800">
+<strong>最後に：</strong><br/>
                             福祉デイケアのDX化は、利用者の回復を支えるためのものです。
                             スタッフが業務に追われて疲弊していては、丁寧な関わりができません。
-                            仕組みを整えることは、利用者へのケアの質を守ることでもある——そう確信しているのに、まだ動けていない。<br><br>
+                            仕組みを整えることは、利用者へのケアの質を守ることでもある——そう確信しているのに、まだ動けていない。<br/><br/>
                             この記事は「実践できた話」ではなく、「実践したいと思い続けている話」です。
                             いつか「実践編」を書けるように、構想を育て続けていきます。
                         </p>
-                    </div>
+</div>
 
-                </div>
+      </div>
+    </div>
+  </main>
 
-                <!-- Amazon アフィリエイト -->
-                <div class="mt-12 p-6 bg-amber-50 border border-amber-200 rounded-xl">
-                    <h3 class="text-lg font-bold text-amber-800 mb-3">📚 この記事に関連するおすすめ本</h3>
-                    <a href="https://www.amazon.co.jp/dp/4805858214?tag=otitukanaihit-22" target="_blank" rel="nofollow noopener noreferrer" class="flex items-start gap-4 hover:bg-amber-100 rounded-lg p-3 transition-colors">
-                        <div>
-                            <p class="font-semibold text-gray-800">精神保健福祉士の仕事</p>
-                            <p class="text-sm text-gray-600 mt-1">福祉の現場でのソーシャルワーク実践を体系的に学べる一冊。DX化を進める上でも「何のための仕組みか」を問い直す基礎になります</p>
-                            <p class="text-amber-600 text-sm mt-2 font-medium">Amazonで見る →</p>
-                        </div>
-                    </a>
-                </div>
+  <!-- ── FOOTER ─────────────────────────────────────────── -->
+  <footer class="site-footer" id="contact">
+    <div class="site-footer-inner">
+      <a href="../index.html" class="footer-logo">オチつかないカンパニー</a>
+      <div class="footer-tagline">福祉 × IT × 試行錯誤の記録</div>
+      <nav class="footer-nav" aria-label="フッターナビゲーション">
+        <a href="../index.html#blog">ブログ</a>
+        <a href="../categories.html">カテゴリー</a>
+        <a href="../index.html#affiliate">おすすめツール</a>
+        <a href="../index.html#about">プロフィール</a>
+        <a href="../privacy-policy.html">プライバシーポリシー</a>
+      </nav>
+      <div class="footer-copy">© 2026 OCHITSUKANAI COMPANY. All rights reserved.</div>
+    </div>
+  </footer>
 
-                <!-- SNS Share Buttons -->
-                <div class="mt-8 pt-8 border-t border-gray-200">
-                    <p class="text-sm font-semibold text-gray-600 mb-4 text-center">この記事をシェアする</p>
-                    <div class="flex justify-center gap-4">
-                        <a id="share-twitter" href="#" target="_blank" rel="noopener noreferrer"
-                            class="flex items-center gap-2 bg-black text-white px-5 py-2 rounded-lg hover:bg-gray-800 transition-colors text-sm font-semibold">
-                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.748l7.73-8.835L1.254 2.25H8.08l4.253 5.622 5.91-5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-                            X でシェア
-                        </a>
-                        <a id="share-hatena" href="#" target="_blank" rel="noopener noreferrer"
-                            class="flex items-center gap-2 bg-blue-600 text-white px-5 py-2 rounded-lg hover:bg-blue-700 transition-colors text-sm font-semibold">
-                            <span class="font-bold mr-1">B!</span>はてブ
-                        </a>
-                    </div>
-                </div>
-                <script>
-                (function() {
-                    var title = encodeURIComponent(document.title.replace(/ - オチつかないカンパニー.*/, ''));
-                    var url = encodeURIComponent(window.location.href);
-                    document.getElementById('share-twitter').href = 'https://twitter.com/intent/tweet?text=' + title + '&url=' + url + '&hashtags=福祉デイケア,DX,福祉テック';
-                    document.getElementById('share-hatena').href = 'https://b.hatena.ne.jp/add?mode=confirm&title=' + title + '&url=' + url;
-                })();
-                </script>
+  <!-- Hamburger JS -->
+  <script>
+    (function () {
+      var btn = document.getElementById('hamburger-btn');
+      var menu = document.getElementById('mobile-menu');
+      var menuIcon = document.getElementById('menu-icon');
+      var closeIcon = document.getElementById('close-icon');
 
-                <!-- Related Articles -->
-                <div class="mt-12 pt-8 border-t border-gray-200">
-                    <h3 class="text-xl font-bold text-gray-900 mb-6">関連記事</h3>
-                    <div class="grid md:grid-cols-2 gap-6">
-                        <a href="mental-health-productivity-2025-08-04.html" class="block group">
-                            <div class="bg-gray-50 rounded-lg p-4 group-hover:bg-gray-100 transition-colors">
-                                <h4 class="font-semibold text-gray-900 group-hover:text-indigo-600">
-                                    福祉の現場で実践する業務効率化の具体的方法</h4>
-                                <p class="text-sm text-gray-600 mt-2">現場視点での業務改善アプローチ</p>
-                            </div>
-                        </a>
-                        <a href="vault-automation-handover-2025-08-14.html" class="block group">
-                            <div class="bg-gray-50 rounded-lg p-4 group-hover:bg-gray-100 transition-colors">
-                                <h4 class="font-semibold text-gray-900 group-hover:text-indigo-600">
-                                    Vault自動化と引き継ぎ整備の実践記録</h4>
-                                <p class="text-sm text-gray-600 mt-2">属人化解消のための自動化・引き継ぎ設計</p>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </article>
-    </main>
-
-    <!-- フッター -->
-    <footer class="bg-gray-900 text-white py-12">
-        <div class="container mx-auto px-6">
-            <div class="grid md:grid-cols-3 gap-8">
-                <div>
-                    <h3 class="text-xl font-bold mb-4">OCHITSUKANAI COMPANY</h3>
-                    <p class="text-gray-400">福祉の現場で働く4児の父が、業務効率化と個人の成長について発信するブログです。</p>
-                </div>
-                <div>
-                    <h4 class="font-semibold mb-4">メニュー</h4>
-                    <ul class="space-y-2 text-gray-400">
-                        <li><a href="../index.html#blog" class="hover:text-white transition-colors duration-300">ブログ</a></li>
-                        <li><a href="../index.html#affiliate" class="hover:text-white transition-colors duration-300">おすすめツール</a></li>
-                        <li><a href="../index.html#services" class="hover:text-white transition-colors duration-300">サービス</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="font-semibold mb-4">リンク</h4>
-                    <ul class="space-y-2 text-gray-400">
-                        <li><a href="../index.html" class="hover:text-white transition-colors duration-300">ホーム</a></li>
-                        <li><a href="../privacy-policy.html" class="hover:text-white transition-colors duration-300">プライバシーポリシー</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-                <p>&copy; 2026 OCHITSUKANAI COMPANY. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        function toggleMenu() {
-            var mobileMenu = document.getElementById('mobile-menu');
-            var menuIcon = document.getElementById('menu-icon');
-            var closeIcon = document.getElementById('close-icon');
-            var btn = document.getElementById('hamburger-btn');
-            var isOpen = mobileMenu.classList.contains('hidden');
-            mobileMenu.classList.toggle('hidden');
-            menuIcon.classList.toggle('hidden');
-            closeIcon.classList.toggle('hidden');
-            btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-            btn.setAttribute('aria-label', isOpen ? 'メニューを閉じる' : 'メニューを開く');
-        }
-    </script>
-    <script src="../back-home.js"></script>
+      btn.addEventListener('click', function () {
+        var isOpen = menu.classList.toggle('open');
+        menuIcon.style.display = isOpen ? 'none' : 'block';
+        closeIcon.style.display = isOpen ? 'block' : 'none';
+        btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        btn.setAttribute('aria-label', isOpen ? 'メニューを閉じる' : 'メニューを開く');
+      });
+    })();
+  </script>
+  <script src="../back-home.js"></script>
 </body>
-
 </html>

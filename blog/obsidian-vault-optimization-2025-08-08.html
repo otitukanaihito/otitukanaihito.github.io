@@ -1,435 +1,186 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Obsidian Vault完全自動化システムの作り方｜ファイル整理・重複削除・統合ランチャー | オチつかないカンパニー</title>
-    <meta name="description" content="Obsidian Vaultを完全自動化するシステムの構築手順を紹介。ファイル構造の最適化・重複削除・統合ランチャー作成まで一気通貫で解説します。">
-    <meta name="keywords" content="Obsidian, Vault最適化, 自動化システム, AI管理, 効率化, デジタル整理術, 第二の脳">
-    
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="article">
-    <meta property="og:url" content="https://otitukanaihito.github.io/blog/obsidian-vault-optimization-2025-08-08.html">
-    <meta property="og:title" content="Obsidian Vault完全自動化システム構築記録">
-    <meta property="og:description" content="専属AIシステム管理者による包括的最適化プロジェクトの全記録">
-    <meta property="og:image" content="https://otitukanaihito.github.io/images/blog_obsidian_knowledge.png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Obsidian Vault完全自動化システム構築記録 - オチつかないカンパニー</title>
+  <meta name="description" content="Obsidian Vaultを完全自動化するシステムの構築手順を紹介。ファイル構造の最適化・重複削除・統合ランチャー作成まで一気通貫で解説します。">
+  <meta name="keywords" content="Obsidian, Vault最適化, 自動化システム, AI管理, 効率化, デジタル整理術, 第二の脳">
+  <link rel="canonical" href="https://otitukanaihito.github.io/blog/obsidian-vault-optimization-2025-08-08.html">
 
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://otitukanaihito.github.io/blog/obsidian-vault-optimization-2025-08-08.html">
-    <meta property="twitter:title" content="Obsidian Vault完全自動化システム構築記録">
-    <meta property="twitter:description" content="専属AIシステム管理者による包括的最適化プロジェクトの全記録">
-    <meta property="twitter:image" content="https://otitukanaihito.github.io/images/blog_obsidian_knowledge.png">
+  <!-- OGP -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://otitukanaihito.github.io/blog/obsidian-vault-optimization-2025-08-08.html">
+  <meta property="og:title" content="Obsidian Vault完全自動化システム構築記録">
+  <meta property="og:description" content="Obsidian Vaultを完全自動化するシステムの構築手順を紹介。ファイル構造の最適化・重複削除・統合ランチャー作成まで一気通貫で解説します。">
+  <meta property="og:image" content="https://otitukanaihito.github.io/images/blog_obsidian_knowledge.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://otitukanaihito.github.io/blog/obsidian-vault-optimization-2025-08-08.html">
+  <meta name="twitter:title" content="Obsidian Vault完全自動化システム構築記録">
+  <meta name="twitter:description" content="Obsidian Vaultを完全自動化するシステムの構築手順を紹介。ファイル構造の最適化・重複削除・統合ランチャー作成まで一気通貫で解説します。">
+  <meta name="twitter:image" content="https://otitukanaihito.github.io/images/blog_obsidian_knowledge.png">
 
-    <link rel="stylesheet" href="../style.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <!-- Structured Data: BlogPosting -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Obsidian Vault完全自動化システム構築記録",
+    "description": "Obsidian Vaultを完全自動化するシステムの構築手順を紹介。ファイル構造の最適化・重複削除・統合ランチャー作成まで一気通貫で解説します。",
+    "author": {"@type": "Person", "name": "オチつかないヒト"},
+    "datePublished": "2025-08-08",
+    "dateModified": "2025-08-08",
+    "publisher": {
+      "@type": "Organization",
+      "name": "オチつかないカンパニー",
+      "logo": {"@type": "ImageObject", "url": "https://otitukanaihito.github.io/images/hero_banner.png"}
+    },
+    "mainEntityOfPage": {"@type": "WebPage", "@id": "https://otitukanaihito.github.io/blog/obsidian-vault-optimization-2025-08-08.html"},
+    "image": "https://otitukanaihito.github.io/images/blog_obsidian_knowledge.png"
+  }
+  </script>
 
-        body {
-            font-family: 'Hiragino Sans', 'Yu Gothic', 'Meiryo', sans-serif;
-            line-height: 1.7;
-            color: #333;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-        }
+  <!-- Structured Data: BreadcrumbList -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {"@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://otitukanaihito.github.io/"},
+      {"@type": "ListItem", "position": 2, "name": "ナレッジ管理", "item": "https://otitukanaihito.github.io/categories.html#knowledge"},
+      {"@type": "ListItem", "position": 3, "name": "Obsidian Vault完全自動化システム構築記録", "item": "https://otitukanaihito.github.io/blog/obsidian-vault-optimization-2025-08-08.html"}
+    ]
+  }
+  </script>
 
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 40px;
-            margin-top: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
-        }
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-MDWZM4DL');</script>
 
-        .header {
-            text-align: center;
-            margin-bottom: 40px;
-            padding-bottom: 30px;
-            border-bottom: 3px solid #667eea;
-        }
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@400;700;800&family=IBM+Plex+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@400;700;800&family=IBM+Plex+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;500;700&display=swap"></noscript>
 
-        .header h1 {
-            font-size: 2.2rem;
-            color: #2c3e50;
-            margin-bottom: 15px;
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .meta-info {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
-            margin-top: 15px;
-        }
-
-        .meta-tag {
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            color: white;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: bold;
-        }
-
-        .section {
-            margin-bottom: 40px;
-        }
-
-        .section h2 {
-            font-size: 1.6rem;
-            color: #2c3e50;
-            margin-bottom: 20px;
-            padding-left: 20px;
-            border-left: 5px solid #667eea;
-            background: linear-gradient(90deg, rgba(102, 126, 234, 0.1), transparent);
-            padding: 15px 20px;
-            border-radius: 10px;
-        }
-
-        .section h3 {
-            font-size: 1.3rem;
-            color: #34495e;
-            margin: 25px 0 15px 0;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #ecf0f1;
-        }
-
-        .highlight-box {
-            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
-            border: 2px solid #667eea;
-            border-radius: 15px;
-            padding: 25px;
-            margin: 20px 0;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .highlight-box::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(45deg, #667eea, #764ba2);
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin: 20px 0;
-        }
-
-        .stat-card {
-            background: white;
-            border-radius: 15px;
-            padding: 20px;
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            border: 2px solid #ecf0f1;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .stat-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.2);
-        }
-
-        .stat-number {
-            font-size: 2rem;
-            font-weight: bold;
-            color: #667eea;
-            margin-bottom: 10px;
-        }
-
-        .stat-label {
-            color: #666;
-            font-size: 0.9rem;
-        }
-
-        .code-block {
-            background: #2c3e50;
-            color: #ecf0f1;
-            padding: 20px;
-            border-radius: 10px;
-            font-family: 'Consolas', 'Monaco', monospace;
-            font-size: 0.9rem;
-            overflow-x: auto;
-            margin: 15px 0;
-            border-left: 5px solid #667eea;
-        }
-
-        .process-step {
-            background: white;
-            border-radius: 15px;
-            padding: 20px;
-            margin: 15px 0;
-            border-left: 5px solid #27ae60;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-        }
-
-        .process-step h4 {
-            color: #27ae60;
-            margin-bottom: 10px;
-            font-size: 1.1rem;
-        }
-
-        .emoji {
-            font-size: 1.2em;
-            margin-right: 8px;
-        }
-
-        .future-vision {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            border-radius: 20px;
-            padding: 30px;
-            margin: 30px 0;
-            text-align: center;
-        }
-
-        .future-vision h3 {
-            color: white;
-            border-bottom: 2px solid rgba(255, 255, 255, 0.3);
-            padding-bottom: 15px;
-            margin-bottom: 20px;
-        }
-
-        .tag-cloud {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin: 20px 0;
-        }
-
-        .tag {
-            background: rgba(102, 126, 234, 0.1);
-            color: #667eea;
-            padding: 8px 15px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            border: 1px solid rgba(102, 126, 234, 0.3);
-        }
-
-        .footer-note {
-            text-align: center;
-            margin-top: 40px;
-            padding-top: 20px;
-            border-top: 2px solid #ecf0f1;
-            color: #666;
-            font-style: italic;
-        }
-
-        @media (max-width: 768px) {
-            .container {
-                margin: 10px;
-                padding: 20px;
-            }
-            
-            .header h1 {
-                font-size: 1.8rem;
-            }
-            
-            .meta-info {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .stats-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
-<!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-MDWZM4DL');</script>
-<!-- End Google Tag Manager -->
-    <!-- Structured Data -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "BlogPosting",
-        "headline": "Obsidian Vault完全最適化プロジェクト - 自律型システム管理の実現",
-        "description": "Obsidian Vaultを完全自動化するシステムの構築手順を紹介。ファイル構造の最適化・重複削除・統合ランチャー作成まで一気通貫で解説します。",
-        "author": {
-            "@type": "Person",
-            "name": "オチつかないヒト"
-        },
-        "datePublished": "2025-08-08",
-        "dateModified": "2025-08-08",
-        "publisher": {
-            "@type": "Organization",
-            "name": "オチつかないカンパニー"
-        },
-        "mainEntityOfPage": {
-            "@type": "WebPage",
-            "@id": "https://otitukanaihito.github.io/blog/obsidian-vault-optimization-2025-08-08.html"
-        },
-        "image": "https://otitukanaihito.github.io/images/blog_obsidian_knowledge.png"
-    }
-    </script>
-
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-            {
-                "@type": "ListItem",
-                "position": 1,
-                "name": "ホーム",
-                "item": "https://otitukanaihito.github.io/"
-            },
-            {
-                "@type": "ListItem",
-                "position": 2,
-                "name": "ナレッジ管理",
-                "item": "https://otitukanaihito.github.io/categories.html#knowledge"
-            },
-            {
-                "@type": "ListItem",
-                "position": 3,
-                "name": "Obsidian Vault完全最適化プロジェクト - 自律型システム管理の実現",
-                "item": "https://otitukanaihito.github.io/blog/obsidian-vault-optimization-2025-08-08.html"
-            }
-        ]
-    }
-    </script>
+  <!-- Styles: Tailwind utilities + Brutalist design layer -->
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="../brutalist.css">
 </head>
+
 <body>
-    <!-- ヘッダー -->
-    <header class="bg-white shadow-sm sticky top-0 z-50">
-        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="../index.html" class="text-sm md:text-2xl font-black tracking-wider whitespace-nowrap text-gray-900 hover:text-indigo-600 transition-colors duration-300">
-                OCHITSUKANAI COMPANY
-            </a>
-            <nav class="hidden md:flex items-center space-x-6">
-                <a href="../index.html#blog" class="text-gray-700 hover:text-indigo-600 transition-colors duration-300">ブログ</a>
-                <a href="../categories.html" class="text-gray-700 hover:text-indigo-600 transition-colors duration-300">カテゴリー</a>
-                <a href="../index.html#affiliate" class="text-gray-700 hover:text-indigo-600 transition-colors duration-300">おすすめツール</a>
-                <a href="../index.html#about" class="text-gray-700 hover:text-indigo-600 transition-colors duration-300">プロフィール</a>
-                <a href="../index.html#contact" class="text-gray-700 hover:text-indigo-600 transition-colors duration-300">お問い合わせ</a>
-            </nav>
-            <div class="md:hidden">
-                <button onclick="toggleMenu()" class="text-gray-700" aria-label="メニューを開く" aria-expanded="false" id="hamburger-btn">
-                    <svg id="menu-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <line x1="3" y1="6" x2="21" y2="6"></line>
-                        <line x1="3" y1="12" x2="21" y2="12"></line>
-                        <line x1="3" y1="18" x2="21" y2="18"></line>
-                    </svg>
-                    <svg id="close-icon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <line x1="18" y1="6" x2="6" y2="18"></line>
-                        <line x1="6" y1="6" x2="18" y2="18"></line>
-                    </svg>
-                </button>
-            </div>
+  <!-- GTM noscript -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MDWZM4DL" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+  <!-- ── HEADER ─────────────────────────────────────────── -->
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a href="../index.html" class="site-logo">オチつかないカンパニー</a>
+
+      <nav id="desktop-nav" aria-label="メインナビゲーション">
+        <ul class="site-nav-list">
+          <li><a href="../index.html#blog">ブログ</a></li>
+          <li><a href="../categories.html">カテゴリー</a></li>
+          <li><a href="../index.html#affiliate">おすすめツール</a></li>
+          <li><a href="../index.html#about">プロフィール</a></li>
+          <li><a href="../index.html#contact">お問い合わせ</a></li>
+        </ul>
+      </nav>
+
+      <button id="hamburger-btn" aria-label="メニューを開く" aria-expanded="false" aria-controls="mobile-menu">
+        <svg id="menu-icon" width="18" height="13" viewBox="0 0 18 13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square">
+          <line x1="0" y1="1.5" x2="18" y2="1.5"/>
+          <line x1="0" y1="6.5" x2="18" y2="6.5"/>
+          <line x1="0" y1="11.5" x2="18" y2="11.5"/>
+        </svg>
+        <svg id="close-icon" width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square" style="display:none;">
+          <line x1="0" y1="0" x2="14" y2="14"/>
+          <line x1="14" y1="0" x2="0" y2="14"/>
+        </svg>
+      </button>
+    </div>
+
+    <div id="mobile-menu" role="navigation" aria-label="モバイルメニュー">
+      <ul class="mobile-nav-list">
+        <li><a href="../index.html#blog">ブログ</a></li>
+        <li><a href="../categories.html">カテゴリー</a></li>
+        <li><a href="../index.html#affiliate">おすすめツール</a></li>
+        <li><a href="../index.html#about">プロフィール</a></li>
+        <li><a href="../index.html#contact">お問い合わせ</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- ── ARTICLE ────────────────────────────────────────── -->
+  <main>
+    <div class="article-wrap">
+      <!-- Black typographic header (replaces gradient banner) -->
+      <div class="article-header">
+        <div class="article-meta">
+          <span class="category-tag">ナレッジ管理</span>
+          <span class="article-date">2025-08-08</span>
         </div>
-        <div id="mobile-menu" class="md:hidden bg-white px-6 pb-4 hidden">
-            <nav class="flex flex-col space-y-4">
-                <a href="../index.html#blog" class="text-gray-700 hover:text-indigo-600">ブログ</a>
-                <a href="../categories.html" class="text-gray-700 hover:text-indigo-600">カテゴリー</a>
-                <a href="../index.html#affiliate" class="text-gray-700 hover:text-indigo-600">おすすめツール</a>
-                <a href="../index.html#about" class="text-gray-700 hover:text-indigo-600">プロフィール</a>
-                <a href="../index.html#contact" class="text-gray-700 hover:text-indigo-600">お問い合わせ</a>
-            </nav>
-        </div>
-    </header>
-    <div class="container">
-        <header class="header">
-            <h1>🤖 Obsidian Vault完全自動化システム構築記録</h1>
-            <div class="meta-info">
-                <span class="meta-tag">📅 2025年8月8日</span>
-                <span class="meta-tag">⏱️ 約2時間の集中作業</span>
-                <span class="meta-tag">🎯 一気通貫最適化</span>
-                <span class="meta-tag">🧠 人物分析ベース</span>
-            </div>
-        </header>
+        <h1 class="article-title">🤖 Obsidian Vault完全自動化システム構築記録</h1>
+        <p class="article-lead"></p>
+      </div>
 
-        <section class="section">
-            <h2><span class="emoji">🎯</span>プロジェクト概要</h2>
-            <div class="highlight-box">
-                <p><strong>専属AIシステム管理者</strong>として、私のObsidian Vaultの完全自動化システムを構築しました。分析（Analysis）→計画（Planning）→実行（Execution）→検証（Verification）のサイクルを自律的に実行し、<strong>効率性の追求</strong>、<strong>統合と単純化</strong>、<strong>完全自動化</strong>、<strong>論理的構造化</strong>を実現しました。</p>
-            </div>
-
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-number">125</div>
-                    <div class="stat-label">総ファイル数<br>(Total Files)</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">495</div>
-                    <div class="stat-label">総フォルダ数<br>(Total Folders)</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">100%</div>
-                    <div class="stat-label">自動化達成度<br>(Automation Level)</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">6</div>
-                    <div class="stat-label">統合ツール数<br>(Integrated Tools)</div>
-                </div>
-            </div>
-        </section>
-
-        <section class="section">
-            <h2><span class="emoji">🔄</span>実行したタスク</h2>
-            
-            <div class="process-step">
-                <h4>📊 1. Vault分析・評価 (Vault Analysis & Evaluation)</h4>
-                <p>現在のファイル構造を詳細分析し、最適化対象を特定。重複ファイル3グループ、空ファイル10個、不要スクリプト複数を発見しました。</p>
-            </div>
-
-            <div class="process-step">
-                <h4>🤖 2. 自動化スクリプト統合 (Automation Script Integration)</h4>
-                <p>分散していた自動化スクリプトを統合し、新たに包括的クリーンアップシステムと統合ランチャーを構築。ワンクリックで全機能にアクセス可能になりました。</p>
-            </div>
-
-            <div class="process-step">
-                <h4>📁 3. ファイル構造最適化 (File Structure Optimization)</h4>
-                <p>散在していたファイルを論理的な構造に再編成。日次記録の命名規則統一、重複レポートの統合、一時ファイルの削除を実行しました。</p>
-            </div>
-
-            <div class="process-step">
-                <h4>⚙️ 4. 依存関係更新 (Dependency Updates)</h4>
-                <p>PythonとNext.jsの依存関係を最新版に更新。セキュリティ脆弱性の解消と機能向上を実現しました。</p>
-            </div>
-
-            <div class="process-step">
-                <h4>🚀 5. 完全自動化システム構築 (Full Automation System)</h4>
-                <p>統合ランチャーによる一元管理システムを構築。人物分析に基づいた最適化機能を実装し、継続的な自律運用を実現しました。</p>
-            </div>
-        </section>
-
-        <section class="section">
-            <h2><span class="emoji">🧠</span>人物分析に基づく最適化</h2>
-            <div class="highlight-box">
-                <h3>佐久間さんの特徴に合わせたカスタマイズ</h3>
-                <ul>
-                    <li><strong>学習効率重視</strong>: 多分野学習に対応した構造最適化</li>
-                    <li><strong>AI活用志向</strong>: 第二の自分AI機能の拡張実装</li>
-                    <li><strong>実用性追求</strong>: 理論と実践のバランスを重視した設計</li>
-                    <li><strong>国際化対応</strong>: 英語併記の自動化システム導入</li>
-                </ul>
-            </div>
-        </section>
-
-        <section class="section">
-            <h2><span class="emoji">💻</span>技術的成果</h2>
-            
-            <h3>新規作成したツール</h3>
-            <div class="code-block">
+      <!-- Article body -->
+      <div class="article-body">
+        <h2>🎯プロジェクト概要</h2>
+<div class="highlight-box">
+<p><strong>専属AIシステム管理者</strong>として、私のObsidian Vaultの完全自動化システムを構築しました。分析（Analysis）→計画（Planning）→実行（Execution）→検証（Verification）のサイクルを自律的に実行し、<strong>効率性の追求</strong>、<strong>統合と単純化</strong>、<strong>完全自動化</strong>、<strong>論理的構造化</strong>を実現しました。</p>
+</div>
+<div class="stats-grid">
+<div class="stat-card">
+<div class="stat-number">125</div>
+<div class="stat-label">総ファイル数<br/>(Total Files)</div>
+</div>
+<div class="stat-card">
+<div class="stat-number">495</div>
+<div class="stat-label">総フォルダ数<br/>(Total Folders)</div>
+</div>
+<div class="stat-card">
+<div class="stat-number">100%</div>
+<div class="stat-label">自動化達成度<br/>(Automation Level)</div>
+</div>
+<div class="stat-card">
+<div class="stat-number">6</div>
+<div class="stat-label">統合ツール数<br/>(Integrated Tools)</div>
+</div>
+</div>
+<h2>🔄実行したタスク</h2>
+<div class="process-step">
+<h4>📊 1. Vault分析・評価 (Vault Analysis &amp; Evaluation)</h4>
+<p>現在のファイル構造を詳細分析し、最適化対象を特定。重複ファイル3グループ、空ファイル10個、不要スクリプト複数を発見しました。</p>
+</div>
+<div class="process-step">
+<h4>🤖 2. 自動化スクリプト統合 (Automation Script Integration)</h4>
+<p>分散していた自動化スクリプトを統合し、新たに包括的クリーンアップシステムと統合ランチャーを構築。ワンクリックで全機能にアクセス可能になりました。</p>
+</div>
+<div class="process-step">
+<h4>📁 3. ファイル構造最適化 (File Structure Optimization)</h4>
+<p>散在していたファイルを論理的な構造に再編成。日次記録の命名規則統一、重複レポートの統合、一時ファイルの削除を実行しました。</p>
+</div>
+<div class="process-step">
+<h4>⚙️ 4. 依存関係更新 (Dependency Updates)</h4>
+<p>PythonとNext.jsの依存関係を最新版に更新。セキュリティ脆弱性の解消と機能向上を実現しました。</p>
+</div>
+<div class="process-step">
+<h4>🚀 5. 完全自動化システム構築 (Full Automation System)</h4>
+<p>統合ランチャーによる一元管理システムを構築。人物分析に基づいた最適化機能を実装し、継続的な自律運用を実現しました。</p>
+</div>
+<h2>🧠人物分析に基づく最適化</h2>
+<div class="highlight-box">
+<h3>自分の特徴に合わせたカスタマイズ</h3>
+<ul>
+<li><strong>学習効率重視</strong>: 多分野学習に対応した構造最適化</li>
+<li><strong>AI活用志向</strong>: 第二の自分AI機能の拡張実装</li>
+<li><strong>実用性追求</strong>: 理論と実践のバランスを重視した設計</li>
+<li><strong>国際化対応</strong>: 英語併記の自動化システム導入</li>
+</ul>
+</div>
+<h2>💻技術的成果</h2>
+<h3>新規作成したツール</h3>
+<div class="code-block">
 自動化スクリプト/
 ├── vault_master_optimizer.py  # 拡張・最適化済み
 ├── master_cleanup.py          # 新規作成
@@ -437,172 +188,99 @@
 ├── auto_date.py              # 既存・改良
 └── requirements.txt          # 依存関係更新
             </div>
-
-            <h3>統合ランチャー機能</h3>
-            <p><code>起動.bat</code>をダブルクリックするだけで以下の機能にアクセス可能：</p>
-            <ul>
-                <li>🔄 完全自動最適化 (Full Auto Optimization)</li>
-                <li>🔍 Vault分析 (Vault Analysis)</li>
-                <li>🧹 包括的クリーンアップ (Comprehensive Cleanup)</li>
-                <li>📝 日次記録生成 (Daily Record Generation)</li>
-                <li>📊 プロジェクト状況レポート (Project Status Report)</li>
-                <li>🧠 人物分析最適化 (Personality-based Optimization)</li>
-            </ul>
-        </section>
-
-        <section class="section">
-            <h2><span class="emoji">📈</span>最適化結果</h2>
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-number">25%</div>
-                    <div class="stat-label">重複ファイル削減<br>(Duplicate Reduction)</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">100%</div>
-                    <div class="stat-label">空ファイル削除<br>(Empty Files Cleaned)</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">100%</div>
-                    <div class="stat-label">不要スクリプト除去<br>(Obsolete Scripts Removed)</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">完全</div>
-                    <div class="stat-label">自律運用達成<br>(Autonomous Operation)</div>
-                </div>
-            </div>
-        </section>
-
-        <section class="section">
-            <h2><span class="emoji">🌟</span>学んだこと・気づき</h2>
-            <div class="tag-cloud">
-                <span class="tag">自律実行システム</span>
-                <span class="tag">人物分析最適化</span>
-                <span class="tag">統合と単純化</span>
-                <span class="tag">完全自動化</span>
-                <span class="tag">効率性追求</span>
-                <span class="tag">国際化対応</span>
-                <span class="tag">第二の脳構築</span>
-                <span class="tag">AI連携強化</span>
-                <span class="tag">論理的構造化</span>
-                <span class="tag">継続的改善</span>
-            </div>
-
-            <div class="highlight-box">
-                <p>今回のプロジェクトで最も重要な学びは、<strong>「一気通貫」による包括的最適化の威力</strong>でした。個別の問題を順次解決するのではなく、全体を俯瞰し、人物分析に基づいた統合的なアプローチを取ることで、真の自律システムを構築できることを実証しました。</p>
-            </div>
-        </section>
-
-        <div class="future-vision">
-            <h3><span class="emoji">🚀</span>今後の展望</h3>
-            <p><strong>完全自律運用</strong>が実現されました！</p>
-            <ul>
-                <li>📅 <strong>日常運用</strong>: 特別な操作は不要</li>
-                <li>🔄 <strong>週次メンテナンス</strong>: ワンクリック最適化</li>
-                <li>🔧 <strong>月次点検</strong>: システム統合実行</li>
-                <li>🚨 <strong>緊急時対応</strong>: 緊急メンテナンス機能</li>
-            </ul>
-            <p>これで真の「第二の脳」として機能する、<strong>完全自律化Obsidian Vault</strong>が完成しました！</p>
-        </div>
-
-        <section class="section">
-            <h2><span class="emoji">💡</span>実践的なアドバイス</h2>
-            <div class="highlight-box">
-                <h3>他の方にも応用可能なポイント</h3>
-                <ol>
-                    <li><strong>人物分析ベースの最適化</strong>: 個人の特性に合わせたシステム設計</li>
-                    <li><strong>一気通貫アプローチ</strong>: 部分最適ではなく全体最適を目指す</li>
-                    <li><strong>自律実行の重要性</strong>: 手動操作への依存を最小化する</li>
-                    <li><strong>統合と単純化</strong>: 複雑性を排除し、使いやすさを追求する</li>
-                    <li><strong>継続的改善の自動化</strong>: システム自体が成長し続ける仕組み</li>
-                </ol>
-            </div>
-        </section>
-
-                <!-- Amazon アフィリエイト -->
-                <div class="mt-12 p-6 bg-amber-50 border border-amber-200 rounded-xl">
-                    <h3 class="text-lg font-bold text-amber-800 mb-3">📚 この記事に関連するおすすめ本</h3>
-                    <a href="https://www.amazon.co.jp/dp/4344034082?tag=otitukanaihit-22" target="_blank" rel="nofollow noopener noreferrer" class="flex items-start gap-4 hover:bg-amber-100 rounded-lg p-3 transition-colors">
-                        <div>
-                            <p class="font-semibold text-gray-800">メモの魔力 -The Magic of Memos-</p>
-                            <p class="text-sm text-gray-600 mt-1">メモを知的生産の武器にする思考法。Obsidianと組み合わせて最強の知識管理システムを作ろう</p>
-                            <p class="text-amber-600 text-sm mt-2 font-medium">Amazonで見る →</p>
-                        </div>
-                    </a>
-                </div>
-
-                <!-- SNS Share Buttons -->
-                <div class="mt-8 pt-8 border-t border-gray-200">
-                    <p class="text-sm font-semibold text-gray-600 mb-4 text-center">この記事をシェアする</p>
-                    <div class="flex justify-center gap-4">
-                        <a id="share-twitter" href="#" target="_blank" rel="noopener noreferrer"
-                            class="flex items-center gap-2 bg-black text-white px-5 py-2 rounded-lg hover:bg-gray-800 transition-colors text-sm font-semibold">
-                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.748l7.73-8.835L1.254 2.25H8.08l4.253 5.622 5.91-5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-                            X でシェア
-                        </a>
-                        <a id="share-hatena" href="#" target="_blank" rel="noopener noreferrer"
-                            class="flex items-center gap-2 bg-blue-600 text-white px-5 py-2 rounded-lg hover:bg-blue-700 transition-colors text-sm font-semibold">
-                            <span class="font-bold mr-1">B!</span>はてブ
-                        </a>
-                    </div>
-                </div>
-                <script>
-                (function() {
-                    var title = encodeURIComponent(document.title.replace(/ - オチつかないカンパニー.*/, ''));
-                    var url = encodeURIComponent(window.location.href);
-                    document.getElementById('share-twitter').href = 'https://twitter.com/intent/tweet?text=' + title + '&url=' + url + '&hashtags=AI,業務効率化';
-                    document.getElementById('share-hatena').href = 'https://b.hatena.ne.jp/add?mode=confirm&title=' + title + '&url=' + url;
-                })();
-                </script>
-
-        <div class="footer-note">
-            <p>🤖 <strong>この記事は、専属AIシステム管理者による実際の最適化プロジェクトを基に作成されました。</strong></p>
-            <p>📅 記録日時: 2025年8月8日 09:55 | ⏱️ 作業時間: 約2時間 | 🎯 達成度: 100%</p>
-        </div>
+<h3>統合ランチャー機能</h3>
+<p><code>起動.bat</code>をダブルクリックするだけで以下の機能にアクセス可能：</p>
+<ul>
+<li>🔄 完全自動最適化 (Full Auto Optimization)</li>
+<li>🔍 Vault分析 (Vault Analysis)</li>
+<li>🧹 包括的クリーンアップ (Comprehensive Cleanup)</li>
+<li>📝 日次記録生成 (Daily Record Generation)</li>
+<li>📊 プロジェクト状況レポート (Project Status Report)</li>
+<li>🧠 人物分析最適化 (Personality-based Optimization)</li>
+</ul>
+<h2>📈最適化結果</h2>
+<div class="stats-grid">
+<div class="stat-card">
+<div class="stat-number">25%</div>
+<div class="stat-label">重複ファイル削減<br/>(Duplicate Reduction)</div>
+</div>
+<div class="stat-card">
+<div class="stat-number">100%</div>
+<div class="stat-label">空ファイル削除<br/>(Empty Files Cleaned)</div>
+</div>
+<div class="stat-card">
+<div class="stat-number">100%</div>
+<div class="stat-label">不要スクリプト除去<br/>(Obsolete Scripts Removed)</div>
+</div>
+<div class="stat-card">
+<div class="stat-number">完全</div>
+<div class="stat-label">自律運用達成<br/>(Autonomous Operation)</div>
+</div>
+</div>
+<h2>🌟学んだこと・気づき</h2>
+<div class="tag-cloud">
+<span class="tag">自律実行システム</span>
+<span class="tag">人物分析最適化</span>
+<span class="tag">統合と単純化</span>
+<span class="tag">完全自動化</span>
+<span class="tag">効率性追求</span>
+<span class="tag">国際化対応</span>
+<span class="tag">第二の脳構築</span>
+<span class="tag">AI連携強化</span>
+<span class="tag">論理的構造化</span>
+<span class="tag">継続的改善</span>
+</div>
+<div class="highlight-box">
+<p>今回のプロジェクトで最も重要な学びは、<strong>「一気通貫」による包括的最適化の威力</strong>でした。個別の問題を順次解決するのではなく、全体を俯瞰し、人物分析に基づいた統合的なアプローチを取ることで、真の自律システムを構築できることを実証しました。</p>
+</div>
+<h2>💡実践的なアドバイス</h2>
+<div class="highlight-box">
+<h3>他の方にも応用可能なポイント</h3>
+<ol>
+<li><strong>人物分析ベースの最適化</strong>: 個人の特性に合わせたシステム設計</li>
+<li><strong>一気通貫アプローチ</strong>: 部分最適ではなく全体最適を目指す</li>
+<li><strong>自律実行の重要性</strong>: 手動操作への依存を最小化する</li>
+<li><strong>統合と単純化</strong>: 複雑性を排除し、使いやすさを追求する</li>
+<li><strong>継続的改善の自動化</strong>: システム自体が成長し続ける仕組み</li>
+</ol>
+</div>
+      </div>
     </div>
+  </main>
 
-    <script>
-        function toggleMenu() {
-            var mobileMenu = document.getElementById('mobile-menu');
-            var menuIcon = document.getElementById('menu-icon');
-            var closeIcon = document.getElementById('close-icon');
-            var btn = document.getElementById('hamburger-btn');
-            var isOpen = mobileMenu.classList.contains('hidden');
-            mobileMenu.classList.toggle('hidden');
-            menuIcon.classList.toggle('hidden');
-            closeIcon.classList.toggle('hidden');
-            btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-            btn.setAttribute('aria-label', isOpen ? 'メニューを閉じる' : 'メニューを開く');
-        }
-    </script>
-    <script src="../back-home.js"></script>
-    <!-- フッター -->
-    <footer class="bg-gray-900 text-white py-12">
-        <div class="container mx-auto px-6">
-            <div class="grid md:grid-cols-3 gap-8">
-                <div>
-                    <h3 class="text-xl font-bold mb-4">OCHITSUKANAI COMPANY</h3>
-                    <p class="text-gray-400">福祉の現場で働く4児の父が、業務効率化と個人の成長について発信するブログです。</p>
-                </div>
-                <div>
-                    <h4 class="font-semibold mb-4">メニュー</h4>
-                    <ul class="space-y-2 text-gray-400">
-                        <li><a href="../index.html#blog" class="hover:text-white transition-colors duration-300">ブログ</a></li>
-                        <li><a href="../index.html#affiliate" class="hover:text-white transition-colors duration-300">おすすめツール</a></li>
-                        <li><a href="../index.html#services" class="hover:text-white transition-colors duration-300">サービス</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="font-semibold mb-4">リンク</h4>
-                    <ul class="space-y-2 text-gray-400">
-                        <li><a href="../index.html" class="hover:text-white transition-colors duration-300">ホーム</a></li>
-                        <li><a href="../privacy-policy.html" class="hover:text-white transition-colors duration-300">プライバシーポリシー</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-                <p>&copy; 2026 OCHITSUKANAI COMPANY. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
+  <!-- ── FOOTER ─────────────────────────────────────────── -->
+  <footer class="site-footer" id="contact">
+    <div class="site-footer-inner">
+      <a href="../index.html" class="footer-logo">オチつかないカンパニー</a>
+      <div class="footer-tagline">福祉 × IT × 試行錯誤の記録</div>
+      <nav class="footer-nav" aria-label="フッターナビゲーション">
+        <a href="../index.html#blog">ブログ</a>
+        <a href="../categories.html">カテゴリー</a>
+        <a href="../index.html#affiliate">おすすめツール</a>
+        <a href="../index.html#about">プロフィール</a>
+        <a href="../privacy-policy.html">プライバシーポリシー</a>
+      </nav>
+      <div class="footer-copy">© 2026 OCHITSUKANAI COMPANY. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <!-- Hamburger JS -->
+  <script>
+    (function () {
+      var btn = document.getElementById('hamburger-btn');
+      var menu = document.getElementById('mobile-menu');
+      var menuIcon = document.getElementById('menu-icon');
+      var closeIcon = document.getElementById('close-icon');
+
+      btn.addEventListener('click', function () {
+        var isOpen = menu.classList.toggle('open');
+        menuIcon.style.display = isOpen ? 'none' : 'block';
+        closeIcon.style.display = isOpen ? 'block' : 'none';
+        btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        btn.setAttribute('aria-label', isOpen ? 'メニューを閉じる' : 'メニューを開く');
+      });
+    })();
+  </script>
+  <script src="../back-home.js"></script>
 </body>
 </html>

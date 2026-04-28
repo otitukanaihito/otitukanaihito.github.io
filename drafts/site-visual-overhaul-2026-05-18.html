@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIと一緒にブログの見た目を全部見直した話〜スクリーンショット分析→一括修正の全記録〜 - オチつかないカンパニー</title>
+    <meta name="description"
+        content="「見た目を見直したい」の一言でAIがPlaywrightでスクリーンショットを撮影・分析し、問題を3つ発見。Pythonで全17記事を手作業ゼロで一括修正。さらにレビュさん（AI）がHTMLバグを発見する一幕も。デザイン知識ゼロでもできたサイト改善の全記録。">
+    <meta name="keywords" content="Claude Code,AI,ブログ改善,Playwright,Python,モバイル対応,ハンバーガーメニュー,HTML,サイト改善,AI活用">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://otitukanaihito.github.io/blog/site-visual-overhaul-2026-05-18.html">
+    <meta property="og:title" content="AIと一緒にブログの見た目を全部見直した話〜スクリーンショット分析→一括修正の全記録〜">
+    <meta property="og:description"
+        content="「見た目を見直したい」の一言から始まった。AIがスクリーンショットで問題を発見し、Pythonで全17記事を手作業ゼロで修正。レビュさんがHTMLバグまで見つけてくれた話。">
+    <meta property="og:image" content="https://otitukanaihito.github.io/images/blog_ai_thumbnail.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://otitukanaihito.github.io/blog/site-visual-overhaul-2026-05-18.html">
+    <meta property="twitter:title" content="AIと一緒にブログの見た目を全部見直した話">
+    <meta property="twitter:description"
+        content="スクリーンショット分析→優先度付け→一括修正→AIレビュー。デザイン知識ゼロで全17記事を改善した記録。">
+    <meta property="twitter:image" content="https://otitukanaihito.github.io/images/blog_ai_thumbnail.png">
+
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="../style.css">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "AIと一緒にブログの見た目を全部見直した話〜スクリーンショット分析→一括修正の全記録〜",
+        "description": "「見た目を見直したい」の一言でAIがPlaywrightでスクリーンショットを撮影・分析し、問題を3つ発見。Pythonで全17記事を手作業ゼロで一括修正。さらにレビュさん（AI）がHTMLバグを発見する一幕も。",
+        "author": {
+            "@type": "Person",
+            "name": "オチつかないヒト"
+        },
+        "datePublished": "2026-05-18",
+        "dateModified": "2026-05-18",
+        "publisher": {
+            "@type": "Organization",
+            "name": "オチつかないカンパニー",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://otitukanaihito.github.io/images/blog_ai_thumbnail.png"
+            }
+        },
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://otitukanaihito.github.io/blog/site-visual-overhaul-2026-05-18.html"
+        },
+        "image": "https://otitukanaihito.github.io/images/blog_ai_thumbnail.png"
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "ホーム",
+                "item": "https://otitukanaihito.github.io/"
+            },
+            {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "AI活用",
+                "item": "https://otitukanaihito.github.io/categories.html#ai"
+            },
+            {
+                "@type": "ListItem",
+                "position": 3,
+                "name": "AIと一緒にブログの見た目を全部見直した話",
+                "item": "https://otitukanaihito.github.io/blog/site-visual-overhaul-2026-05-18.html"
+            }
+        ]
+    }
+    </script>
+
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-MDWZM4DL');</script>
+    <!-- End Google Tag Manager -->
+
+    <style>
+        pre {
+            background: #1e1e2e;
+            color: #cdd6f4;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            overflow-x: auto;
+            font-size: 0.875rem;
+            line-height: 1.6;
+        }
+        code {
+            background: #e8e8f0;
+            color: #5c5f77;
+            padding: 0.15em 0.4em;
+            border-radius: 0.25rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            background: transparent;
+            color: inherit;
+            padding: 0;
+            font-size: inherit;
+        }
+        /* モバイルナビ */
+        #mobile-menu {
+            display: none;
+        }
+        #mobile-menu.open {
+            display: block;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MDWZM4DL"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <!-- ヘッダー -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="../index.html" class="text-2xl font-black tracking-wider text-gray-900 hover:text-indigo-600 transition-colors duration-300">
+                OCHITSUKANAI COMPANY
+            </a>
+            <!-- デスクトップナビ -->
+            <nav class="hidden md:flex items-center space-x-6" aria-label="メインナビゲーション">
+                <a href="../index.html#blog" class="text-gray-700 hover:text-indigo-600 transition-colors duration-300">ブログ</a>
+                <a href="../index.html#affiliate" class="text-gray-700 hover:text-indigo-600 transition-colors duration-300">おすすめツール</a>
+                <a href="../index.html#services" class="text-gray-700 hover:text-indigo-600 transition-colors duration-300">サービス</a>
+                <a href="../index.html#about" class="text-gray-700 hover:text-indigo-600 transition-colors duration-300">プロフィール</a>
+            </nav>
+            <!-- ハンバーガーボタン（モバイル） -->
+            <button id="hamburger-btn"
+                class="md:hidden flex flex-col justify-center items-center w-10 h-10 rounded-lg hover:bg-gray-100 transition-colors"
+                aria-label="メニューを開く"
+                aria-expanded="false"
+                aria-controls="mobile-menu"
+                onclick="toggleMenu()">
+                <span class="block w-6 h-0.5 bg-gray-700 mb-1"></span>
+                <span class="block w-6 h-0.5 bg-gray-700 mb-1"></span>
+                <span class="block w-6 h-0.5 bg-gray-700"></span>
+            </button>
+        </div>
+        <!-- モバイルメニュー -->
+        <nav id="mobile-menu" class="bg-white border-t border-gray-100 px-6 py-4 space-y-3" aria-label="モバイルナビゲーション">
+            <a href="../index.html#blog" class="block text-gray-700 hover:text-indigo-600 transition-colors duration-300 py-2">ブログ</a>
+            <a href="../index.html#affiliate" class="block text-gray-700 hover:text-indigo-600 transition-colors duration-300 py-2">おすすめツール</a>
+            <a href="../index.html#services" class="block text-gray-700 hover:text-indigo-600 transition-colors duration-300 py-2">サービス</a>
+            <a href="../index.html#about" class="block text-gray-700 hover:text-indigo-600 transition-colors duration-300 py-2">プロフィール</a>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <article class="bg-white rounded-2xl shadow-xl overflow-hidden">
+            <!-- Article Header -->
+            <div class="relative h-64 md:h-96 bg-gradient-to-r from-teal-600 via-cyan-500 to-indigo-500">
+                <div class="absolute inset-0 bg-black bg-opacity-30"></div>
+                <div class="absolute bottom-0 left-0 right-0 p-8">
+                    <div class="flex items-center mb-4">
+                        <span class="text-sm font-semibold text-white bg-teal-500 px-3 py-1 rounded-full">AI活用</span>
+                        <span class="text-sm text-white ml-4">2026-05-18</span>
+                    </div>
+                    <h1 class="text-3xl md:text-4xl font-bold text-white mb-4">
+                        AIと一緒にブログの見た目を全部見直した話
+                    </h1>
+                    <p class="text-lg text-gray-200">
+                        〜スクリーンショット分析→優先度付け→一括修正の全記録〜
+                    </p>
+                </div>
+            </div>
+
+            <!-- Article Content -->
+            <div class="p-8">
+                <div class="prose prose-lg max-w-none">
+
+                    <h2>「見た目を見直したい」の一言から始まった</h2>
+                    <p>
+                        ある日、Claude Codeに「ブログの見た目を見直したい」と伝えました。
+                        デザインの知識はほぼゼロです。「なんとなく整えたいけど、何から手をつければいいかもわからない」というふわっとした状態でした。
+                    </p>
+                    <p>
+                        そこからAIが動き始めて、気づいたら全17記事が修正されていました。
+                        その一部始終を記録します。
+                    </p>
+
+                    <h2>ステップ1：AIがスクリーンショットを4枚撮って現状分析した</h2>
+                    <p>
+                        私が最初にやったこと——というより、AIがやったことは、<strong>Playwrightを使ってサイトのスクリーンショットを4枚撮影すること</strong>でした。
+                    </p>
+                    <p>
+                        デスクトップ表示・モバイル表示・記事ページ・トップページ、それぞれの見た目を画像として取得して、AIが自分で分析したわけです。
+                        私は特に「ここを見て」とは言っていません。「見た目を見直したい」と伝えただけで、AIが自分で判断してスクリーンショットを撮り始めました。
+                    </p>
+
+                    <div class="bg-teal-50 border-l-4 border-teal-400 p-4 my-6">
+                        <p class="text-teal-800">
+                            <strong>これが意外でした。</strong><br>
+                            私はてっきり「どこを直したいですか？」と聞かれると思っていました。
+                            でもAIは「まず現状を見る」という段取りから入ってきた。
+                            自分で問題を探しに行く、という動き方です。
+                        </p>
+                    </div>
+
+                    <h2>ステップ2：問題が3つ見つかり、優先度をつけてもらった</h2>
+                    <p>
+                        分析の結果、AIが発見した問題は3つでした。
+                    </p>
+
+                    <div class="overflow-x-auto my-6">
+                        <table class="w-full border-collapse text-sm">
+                            <thead>
+                                <tr class="bg-teal-600 text-white">
+                                    <th class="border border-teal-500 px-4 py-3 text-left">優先度</th>
+                                    <th class="border border-teal-500 px-4 py-3 text-left">問題</th>
+                                    <th class="border border-teal-500 px-4 py-3 text-left">影響範囲</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="bg-white">
+                                    <td class="border border-gray-200 px-4 py-3"><span class="font-bold text-red-600">高</span></td>
+                                    <td class="border border-gray-200 px-4 py-3">モバイルでハンバーガーメニューがない</td>
+                                    <td class="border border-gray-200 px-4 py-3">全17記事</td>
+                                </tr>
+                                <tr class="bg-gray-50">
+                                    <td class="border border-gray-200 px-4 py-3"><span class="font-bold text-yellow-600">中</span></td>
+                                    <td class="border border-gray-200 px-4 py-3">ヘッダーロゴが2行に折り返す</td>
+                                    <td class="border border-gray-200 px-4 py-3">全ページ</td>
+                                </tr>
+                                <tr class="bg-white">
+                                    <td class="border border-gray-200 px-4 py-3"><span class="font-bold text-blue-600">低</span></td>
+                                    <td class="border border-gray-200 px-4 py-3">ページ間でナビゲーションの項目数が違う</td>
+                                    <td class="border border-gray-200 px-4 py-3">記事ページ</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <p>
+                        一番大きな問題は「モバイルでハンバーガーメニューがない」でした。
+                        スマートフォンで見ると、トップページ以外のナビゲーションが消えていて「← ホーム」ボタンしか使えない状態だったわけです。
+                        これは気づいていませんでした。
+                    </p>
+                    <p>
+                        2つ目は「ヘッダーロゴの折り返し」。サイト名の「OCHITSUKANAI COMPANY」が小さい画面幅で2行になってしまっていました。
+                        3つ目は「ナビの項目数のズレ」。トップページには4項目あるのに、記事ページでは項目が少ない——という統一感のなさです。
+                    </p>
+
+                    <div class="bg-indigo-50 border-l-4 border-indigo-400 p-4 my-6">
+                        <p class="text-indigo-800">
+                            <strong>デザインの知識ゼロでも、問題が見つかる。</strong><br>
+                            自分では「なんかおかしいな」と感じてもどこが悪いか言語化できなかったことを、
+                            AIがスクリーンショットを見て整理してくれました。
+                            「問題を発見する」という作業自体をAIに任せられたのが大きかったです。
+                        </p>
+                    </div>
+
+                    <h2>ステップ3：Pythonスクリプトで全17記事を一括修正</h2>
+                    <p>
+                        問題と優先度が整理されたあと、AIがPythonスクリプトを書いて全17記事を一括で修正しました。
+                    </p>
+                    <p>
+                        私がやったことは、スクリプトの実行確認をしただけです。
+                        手動でHTMLファイルを1つずつ開いて編集するようなことはゼロでした。
+                    </p>
+
+                    <div class="bg-gray-900 rounded-lg p-6 my-6 text-gray-100 text-sm font-mono overflow-x-auto">
+                        <p class="text-green-400 mb-2"># AIが書いたスクリプトの動作イメージ</p>
+                        <p class="text-gray-300">for html_file in blog/*.html:</p>
+                        <p class="text-gray-300">&nbsp;&nbsp;&nbsp;&nbsp;# ハンバーガーメニューのHTMLを挿入</p>
+                        <p class="text-gray-300">&nbsp;&nbsp;&nbsp;&nbsp;insert_hamburger_menu(html_file)</p>
+                        <p class="text-gray-300">&nbsp;&nbsp;&nbsp;&nbsp;# nav閉じタグの存在を検証</p>
+                        <p class="text-gray-300">&nbsp;&nbsp;&nbsp;&nbsp;assert_nav_closed(html_file)</p>
+                        <p class="text-gray-300">&nbsp;&nbsp;&nbsp;&nbsp;# ヘッダーロゴのスタイル修正</p>
+                        <p class="text-gray-300">&nbsp;&nbsp;&nbsp;&nbsp;fix_header_logo(html_file)</p>
+                        <p class="text-green-400 mt-2"># 17ファイル、完了。</p>
+                    </div>
+
+                    <p>
+                        「全記事を手動で直すのは大変だろうな」と思っていたのが、
+                        スクリプト1本で全部終わりました。
+                        17記事分の作業時間は、体感として数分です。
+                    </p>
+
+                    <h2>ステップ4：レビュさん（AI）がHTMLバグを発見した</h2>
+                    <p>
+                        修正が終わったあと、レビュさん（レビュー担当のAI）にチェックを依頼しました。
+                        すると、<strong>スクリプトの置換処理で <code>&lt;/nav&gt;</code> の閉じタグが消えていた</strong>ことが発覚しました。
+                    </p>
+                    <p>
+                        全17記事に、nav要素が閉じられていない不正なHTMLが配布されていたわけです。
+                        レビュさんがいなければ、そのまま公開するところでした。
+                    </p>
+
+                    <div class="bg-red-50 border-l-4 border-red-400 p-4 my-6">
+                        <p class="text-red-800">
+                            <strong>発見されたバグ（レビュさんの指摘）：</strong><br>
+                            スクリプトの置換で <code>&lt;/nav&gt;</code> 閉じタグを消失 → nav未閉じの不正HTMLを全17記事に配布<br><br>
+                            <strong>対応：</strong>即日修正 + 今後の再発防止として「置換後に <code>&lt;/nav&gt;</code> の存在を検証するアサーションをスクリプトに入れる」をルール化
+                        </p>
+                    </div>
+
+                    <p>
+                        バグを修正して再度レビューを依頼すると、今度は <code>aria-expanded</code> 属性が未設定という指摘も出てきました。
+                        スクリーンリーダー（視覚障害者向けツール）がメニューの開閉状態を認識できない、というアクセシビリティの問題です。
+                        こちらも合わせて修正しました。
+                    </p>
+
+                    <h2>AI同士のチェック体制が機能した</h2>
+                    <p>
+                        今回の流れを整理するとこうなります。
+                    </p>
+
+                    <div class="bg-gray-50 rounded-lg p-6 my-6">
+                        <div class="flex flex-col space-y-4">
+                            <div class="flex items-start gap-4">
+                                <div class="w-10 h-10 bg-teal-500 rounded-full flex items-center justify-center text-white font-bold text-sm flex-shrink-0">1</div>
+                                <div>
+                                    <p class="font-semibold text-gray-800">Claude Code（作業担当）</p>
+                                    <p class="text-gray-600 text-sm">スクリーンショット撮影 → 問題発見・優先度付け → Pythonスクリプト作成・実行</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <div class="w-10 h-10 bg-indigo-500 rounded-full flex items-center justify-center text-white font-bold text-sm flex-shrink-0">2</div>
+                                <div>
+                                    <p class="font-semibold text-gray-800">レビュさん（チェック担当）</p>
+                                    <p class="text-gray-600 text-sm">HTMLバグ発見（nav未閉じ）→ アクセシビリティ指摘（aria-expanded未設定）</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <div class="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center text-white font-bold text-sm flex-shrink-0">3</div>
+                                <div>
+                                    <p class="font-semibold text-gray-800">Claude Code（修正担当）</p>
+                                    <p class="text-gray-600 text-sm">バグ修正 → 再レビュー → aria属性追加 → push完了</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <p>
+                        作業担当とチェック担当が別のAIになっていることで、「自分で作ったものを自分でチェック」という死角が消えます。
+                        人間でいえば「製造と品質検査は別の人がやる」という当たり前の仕組みです。
+                    </p>
+                    <p>
+                        レビュさんがバグを見つけなければ、nav未閉じのまま全記事が公開されていました。
+                        AI同士のチェック体制が実際に機能した体験でした。
+                    </p>
+
+                    <h2>今回わかったこと・気づいたこと</h2>
+
+                    <div class="bg-violet-50 border-l-4 border-violet-400 p-4 my-6">
+                        <p class="text-violet-800">
+                            <strong>まとめ：</strong><br><br>
+                            1. <strong>「見た目を見直したい」だけでAIが現状分析から始める</strong> → 問題の言語化も任せられる<br>
+                            2. <strong>スクリーンショットで見える化</strong> → 「なんとなくおかしい」が具体的な問題として整理される<br>
+                            3. <strong>Pythonで全17記事を手作業ゼロで修正</strong> → 「記事数が多くて大変」は仕組みで解決できる<br>
+                            4. <strong>AI同士のチェック体制</strong> → 作業AIが見落としたバグを、チェックAIが発見してくれた
+                        </p>
+                    </div>
+
+                    <h2>デザイン知識は要らなかった</h2>
+                    <p>
+                        率直に言って、今回の作業で私がデザインの知識を使った場面はゼロでした。
+                        問題の発見はAIがやり、修正コードもAIが書き、バグの検出もAIがやりました。
+                    </p>
+                    <p>
+                        私がやったのは「見た目を見直したい」と伝えることと、「このスクリプトを実行していいですか」への確認だけです。
+                    </p>
+                    <p>
+                        「デザインが苦手だからサイトの改善に手をつけられない」という感覚は、
+                        AIと組み合わせると意外と解消できます。
+                        問題の発見から修正まで、「仕組み」として流れを作れるかどうかが大事だと感じました。
+                    </p>
+
+                    <p>
+                        ただ一点——AIが書いたコードにもバグはあります。
+                        今回は <code>&lt;/nav&gt;</code> の消失がそれでした。
+                        だからレビューを別のAIにやらせる、という体制にしていて、それが実際に機能しました。
+                        「AIに任せる＝ノーチェックでいい」ではなく、<strong>チェック機能も仕組みに組み込む</strong>ことが大事だと改めて思いました。
+                    </p>
+
+                </div>
+
+                <!-- Amazon アフィリエイト -->
+                <div class="mt-12 p-6 bg-amber-50 border border-amber-200 rounded-xl">
+                    <h3 class="text-lg font-bold text-amber-800 mb-3">この記事に関連するおすすめ本</h3>
+                    <a href="https://www.amazon.co.jp/s?k=Claude+Code+AI活用+自動化&tag=otitukanaihit-22" target="_blank" rel="nofollow noopener noreferrer" class="flex items-start gap-4 hover:bg-amber-100 rounded-lg p-3 transition-colors">
+                        <div>
+                            <p class="font-semibold text-gray-800">Claude Code・AI活用・サイト自動化の書籍をAmazonで探す</p>
+                            <p class="text-sm text-gray-600 mt-1">AIを使ったWebサイト管理・改善・自動化に関する書籍を探せます。プログラミング不要でAIと仕事を進めたい方に。</p>
+                            <p class="text-amber-600 text-sm mt-2 font-medium">Amazonで見る →</p>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- SNS Share Buttons -->
+                <div class="mt-8 pt-8 border-t border-gray-200">
+                    <p class="text-sm font-semibold text-gray-600 mb-4 text-center">この記事をシェアする</p>
+                    <div class="flex justify-center gap-4">
+                        <a id="share-twitter" href="#" target="_blank" rel="noopener noreferrer"
+                            class="flex items-center gap-2 bg-black text-white px-5 py-2 rounded-lg hover:bg-gray-800 transition-colors text-sm font-semibold">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.748l7.73-8.835L1.254 2.25H8.08l4.253 5.622 5.91-5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                            X でシェア
+                        </a>
+                        <a id="share-hatena" href="#" target="_blank" rel="noopener noreferrer"
+                            class="flex items-center gap-2 bg-blue-600 text-white px-5 py-2 rounded-lg hover:bg-blue-700 transition-colors text-sm font-semibold">
+                            <span class="font-bold mr-1">B!</span>はてブ
+                        </a>
+                    </div>
+                </div>
+                <script>
+                (function() {
+                    var title = encodeURIComponent(document.title.replace(/ - オチつかないカンパニー.*/, ''));
+                    var url = encodeURIComponent(window.location.href);
+                    document.getElementById('share-twitter').href = 'https://twitter.com/intent/tweet?text=' + title + '&url=' + url + '&hashtags=ClaudeCode,AI活用,ブログ改善';
+                    document.getElementById('share-hatena').href = 'https://b.hatena.ne.jp/add?mode=confirm&title=' + title + '&url=' + url;
+                })();
+                </script>
+
+                <!-- Related Articles -->
+                <div class="mt-12 pt-8 border-t border-gray-200">
+                    <h3 class="text-xl font-bold text-gray-900 mb-6">関連記事</h3>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <a href="harness-engineering-2026-04-20.html" class="block group">
+                            <div class="bg-gray-50 rounded-lg p-4 group-hover:bg-gray-100 transition-colors">
+                                <h4 class="font-semibold text-gray-900 group-hover:text-indigo-600">
+                                    ハーネスエンジニアリングを調べたら自分がやっていたことに名前がついていた話</h4>
+                                <p class="text-sm text-gray-600 mt-2">CLAUDE.mdは「手綱」だった。AIエージェント制御の仕組みを個人開発の視点で解説。</p>
+                            </div>
+                        </a>
+                        <a href="ai-relay-2026-04-13.html" class="block group">
+                            <div class="bg-gray-50 rounded-lg p-4 group-hover:bg-gray-100 transition-colors">
+                                <h4 class="font-semibold text-gray-900 group-hover:text-indigo-600">
+                                    AIツール同士のリレープレー〜1つのAIが止まっても完走できる仕組みの作り方〜</h4>
+                                <p class="text-sm text-gray-600 mt-2">Claude Code・AntiGravity・ChatGPTのリレー設計術と引き継ぎのコツ</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </main>
+
+    <!-- フッター -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">OCHITSUKANAI COMPANY</h3>
+                    <p class="text-gray-400">福祉の現場で働く4児の父が、業務効率化と個人の成長について発信するブログです。</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">メニュー</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="../index.html#blog" class="hover:text-white transition-colors duration-300">ブログ</a></li>
+                        <li><a href="../index.html#affiliate" class="hover:text-white transition-colors duration-300">おすすめツール</a></li>
+                        <li><a href="../index.html#services" class="hover:text-white transition-colors duration-300">サービス</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">リンク</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="../index.html" class="hover:text-white transition-colors duration-300">ホーム</a></li>
+                        <li><a href="../privacy-policy.html" class="hover:text-white transition-colors duration-300">プライバシーポリシー</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2026 OCHITSUKANAI COMPANY. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../back-home.js"></script>
+    <script>
+    function toggleMenu() {
+        var menu = document.getElementById('mobile-menu');
+        var btn = document.getElementById('hamburger-btn');
+        var isOpen = menu.classList.contains('open');
+        if (isOpen) {
+            menu.classList.remove('open');
+            btn.setAttribute('aria-expanded', 'false');
+            btn.setAttribute('aria-label', 'メニューを開く');
+        } else {
+            menu.classList.add('open');
+            btn.setAttribute('aria-expanded', 'true');
+            btn.setAttribute('aria-label', 'メニューを閉じる');
+        }
+    }
+    </script>
+</body>
+</html>
