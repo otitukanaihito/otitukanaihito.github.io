@@ -29,7 +29,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add blog/ sitemap.xml
+          git add blog/ drafts/ sitemap.xml scripts/articles.json index.html categories.html
           if git diff --cached --quiet; then
             echo "公開対象の記事がありませんでした。"
           else

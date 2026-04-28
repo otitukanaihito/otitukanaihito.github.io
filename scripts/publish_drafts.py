@@ -12,7 +12,7 @@ import re
 import shutil
 import subprocess
 import sys
-from datetime import date
+from datetime import date, datetime, timezone, timedelta
 
 REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DRAFTS_DIR = os.path.join(REPO_ROOT, "drafts")
@@ -137,8 +137,9 @@ def update_sitemap(published_files):
 
 
 def main():
-    today = date.today()
-    print(f"実行日: {today}")
+    JST = timezone(timedelta(hours=9))
+    today = datetime.now(JST).date()
+    print(f"実行日: {today} (JST)")
 
     if not os.path.exists(DRAFTS_DIR):
         print("drafts/ フォルダが存在しません。スキップします。")
