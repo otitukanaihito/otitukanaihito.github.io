@@ -61,25 +61,34 @@ def image_tag(image_path, alt, extra_class=""):
         )
 
 
-def make_index_card(article):
-    """index.html 用のカードHTMLを生成する。"""
-    color = CATEGORY_META.get(article["category"], {}).get("color", "indigo")
-    img = image_tag(article["image"], article["title"])
+def get_article_description(slug):
+    """blog/{slug}.html の <meta name="description"> を抽出する。"""
+    filepath = os.path.join(BLOG_DIR, f"{slug}.html")
+    if not os.path.exists(filepath):
+        return ""
+    with open(filepath, encoding="utf-8") as f:
+        content = f.read()
+    m = re.search(r'<meta name="description"[^>]*content="(.*?)"', content, re.DOTALL)
+    if not m:
+        m = re.search(r'<meta name="description"\s+content="(.*?)"', content, re.DOTALL)
+    return m.group(1) if m else ""
+
+
+def make_index_card(article, description=""):
+    """index.html 用のカードHTMLを生成する（brutalistデザイン対応）。"""
     return (
-        f'                    <div class="bg-white rounded-2xl shadow-xl overflow-hidden group transform hover:-translate-y-2 transition-transform duration-300">\n'
-        f'                        <div class="overflow-hidden h-48">\n'
-        f'                            {img}\n'
-        f'                        </div>\n'
-        f'                        <div class="p-6">\n'
-        f'                            <div class="flex items-center mb-3">\n'
-        f'                                <span class="text-sm font-semibold text-{color}-600 bg-{color}-100 px-3 py-1 rounded-full">{article["category"]}</span>\n'
-        f'                                <span class="text-sm text-gray-500 ml-auto">{article["date"]}</span>\n'
-        f'                            </div>\n'
-        f'                            <h3 class="text-lg font-bold text-gray-800 hover:text-indigo-600 transition-colors">\n'
-        f'                                <a href="blog/{article["slug"]}.html">{article["title"]}</a>\n'
-        f'                            </h3>\n'
-        f'                        </div>\n'
-        f'                    </div>'
+        f'          <!-- {article["slug"]} -->\n'
+        f'          <a href="blog/{article["slug"]}.html" class="article-card">\n'
+        f'            <img src="{article["image"]}" alt="{article["title"]}" class="article-card-img" loading="lazy">\n'
+        f'            <div class="article-card-body">\n'
+        f'              <div class="article-card-meta">\n'
+        f'                <span class="article-card-tag">{article["category"]}</span>\n'
+        f'                <span>{article["date"]}</span>\n'
+        f'              </div>\n'
+        f'              <h3>{article["title"]}</h3>\n'
+        f'              <p>{description}</p>\n'
+        f'            </div>\n'
+        f'          </a>'
     )
 
 
@@ -99,8 +108,8 @@ def make_category_card(article):
 
 
 def generate_index_cards(articles):
-    cards = [make_index_card(a) for a in articles]
-    return "\n".join(cards)
+    cards = [make_index_card(a, get_article_description(a["slug"])) for a in articles]
+    return "\n\n".join(cards)
 
 
 def generate_category_sections(articles):
@@ -156,7 +165,7 @@ def replace_between(content, start_marker, end_marker, new_content):
         re.escape(start_marker) + r".*?" + re.escape(end_marker),
         re.DOTALL
     )
-    replacement = f"{start_marker}\n{new_content}\n                {end_marker}"
+    replacement = f"{start_marker}\n\n{new_content}\n\n          {end_marker}"
     result, count = pattern.subn(replacement, content)
     if count == 0:
         raise ValueError(f"マーカーが見つかりません: {start_marker!r}")
