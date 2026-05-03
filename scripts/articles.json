@@ -1,5 +1,19 @@
 [
   {
+    "slug": "lighthouse-performance-improvement-2026-05-04",
+    "title": "GitHub PagesのLighthouseスコアをPerformance 65→77に改善した話",
+    "date": "2026-05-04",
+    "category": "AI活用",
+    "image": "images/blog_github_pages.webp"
+  },
+  {
+    "slug": "agent-team-names-2026-04-27",
+    "title": "Claude Codeのエージェントチームに名前をつけて運用する話〜ブロさん・リサさん・シス・ドウさん・歌詞さん・レビュさん〜",
+    "date": "2026-04-27",
+    "category": "AI活用",
+    "image": "images/eyecatch-agent-team.png"
+  },
+  {
     "slug": "harness-engineering-2026-04-20",
     "title": "ハーネスエンジニアリングを調べたら自分がやっていたことに名前がついていた話〜CLAUDE.mdは「手綱」だった〜",
     "date": "2026-04-20",
