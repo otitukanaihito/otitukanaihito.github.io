@@ -1,5 +1,12 @@
 [
   {
+    "slug": "site-visual-overhaul-2026-05-18",
+    "title": "AIと一緒にブログの見た目を全部見直した話〜スクリーンショット分析→一括修正の全記録〜",
+    "date": "2026-05-18",
+    "category": "AI活用",
+    "image": "images/blog_ai_thumbnail.png"
+  },
+  {
     "slug": "claude-code-skills-guide-2026-05-11",
     "title": "Claude Codeスキルの探し方・インストール方法〜自分に合ったスキルをネットから入れる〜",
     "date": "2026-05-11",
