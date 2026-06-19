@@ -43,12 +43,17 @@
         "dateModified": "2026-05-04",
         "publisher": {
             "@type": "Organization",
-            "name": "オチつかないカンパニー"
+            "name": "オチつかないカンパニー",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://otitukanaihito.github.io/images/blog_github_pages.webp"
+            }
         },
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https://otitukanaihito.github.io/blog/lighthouse-performance-improvement-2026-05-04.html"
-        }
+        },
+        "image": "https://otitukanaihito.github.io/images/blog_github_pages.webp"
     }
     </script>
     <style>
@@ -75,12 +80,17 @@
             font-size: inherit;
         }
     </style>
-<!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-MDWZM4DL');</script>
-<!-- End Google Tag Manager -->
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-MDWZM4DL');</script>
+    <!-- End Google Tag Manager -->
 </head>
 
 <body class="bg-gray-50">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MDWZM4DL"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
     <!-- ヘッダー -->
     <header class="bg-white shadow-sm sticky top-0 z-50">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
@@ -153,8 +163,8 @@
                         Performanceスコアが重要な理由は主に2つです。
                     </p>
                     <ul>
-                        <li><strong>検索順位への影響：</strong>Googleは「Core Web Vitals」をランキング要素として使用しており、表示速度が遅いと検索順位が下がる可能性がある</li>
-                        <li><strong>直帰率への影響：</strong>ページの表示に3秒以上かかると、スマホユーザーの53%が離脱するというデータもある</li>
+                        <li><strong>検索順位への影響：</strong>Googleはページ体験の指標としてCore Web Vitalsを案内しており、表示速度は無視しにくい要素になる</li>
+                        <li><strong>直帰率への影響：</strong>ページ表示が遅いほど、スマホユーザーが読む前に離脱しやすくなる</li>
                     </ul>
 
                     <p>
@@ -221,7 +231,7 @@
                     <h3>施策1：WebP変換（LCP改善に効果大）</h3>
                     <p>
                         すべての画像をPNG/JPGからWebP形式に変換しました。
-                        WebPはGoogleが開発した次世代画像フォーマットで、同等の品質でファイルサイズを <strong>40〜60%削減</strong>できます。
+                        WebPはGoogleが開発した次世代画像フォーマットで、同等の見た目を保ちながらファイルサイズを小さくできることがあります。
                     </p>
                     <p>
                         Windowsでは「<a href="https://squoosh.app/" target="_blank" rel="noopener noreferrer" class="text-indigo-600 hover:underline">Squoosh</a>」（無料ブラウザツール）を使って変換しました。
@@ -327,7 +337,7 @@
                         <div class="grid md:grid-cols-2 gap-4">
                             <div class="bg-white rounded-lg p-4 border border-green-200">
                                 <p class="font-semibold text-green-800 mb-1">LCP改善</p>
-                                <p class="text-sm text-gray-600">WebP変換で画像ファイルサイズ40〜60%削減。ページの最大要素が速く描画されるようになった。</p>
+                                <p class="text-sm text-gray-600">WebP変換で画像ファイルサイズを削減。ページの最大要素が速く描画されるようになった。</p>
                             </div>
                             <div class="bg-white rounded-lg p-4 border border-green-200">
                                 <p class="font-semibold text-green-800 mb-1">CLS改善</p>
