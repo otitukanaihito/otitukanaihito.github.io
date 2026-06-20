@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claude Codeでローカル文字起こしアプリを作った話〜faster-whisper×Flaskで完全オフライン・ハルシネーション対策まで〜 - オチつかないカンパニー</title>
+    <meta name="description"
+        content="faster-whisper＋FlaskでローカルWebアプリを自作。完全オフライン動作を実現したものの「次回もお楽しみに」が混入するハルシネーション問題に直面。試行錯誤した対策と、やらかした失敗体験の全記録。">
+    <meta name="keywords" content="faster-whisper,Whisper,文字起こし,ハルシネーション,Flask,オフライン,Python,Claude Code,音声認識">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://otitukanaihito.github.io/blog/whisper-transcribe-app-2026-05-09.html">
+    <meta property="og:title" content="Claude Codeでローカル文字起こしアプリを作った話〜faster-whisper×Flaskで完全オフライン・ハルシネーション対策まで〜">
+    <meta property="og:description"
+        content="完全オフラインの文字起こしアプリを自作したら、AIが勝手に「次回もお楽しみに！」と追記してくる問題が発生。ハルシネーションと戦った一日の記録。">
+    <meta property="og:image" content="https://otitukanaihito.github.io/images/blog_ai_thumbnail.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://otitukanaihito.github.io/blog/whisper-transcribe-app-2026-05-09.html">
+    <meta property="twitter:title" content="Claude Codeでローカル文字起こしアプリを作った話〜faster-whisper×Flaskで完全オフライン・ハルシネーション対策まで〜">
+    <meta property="twitter:description"
+        content="完全オフラインの文字起こしアプリを自作したら、AIが勝手に「次回もお楽しみに！」と追記してくる問題が。ハルシネーション対策の全記録。">
+    <meta property="twitter:image" content="https://otitukanaihito.github.io/images/blog_ai_thumbnail.png">
+    <link rel="canonical" href="https://otitukanaihito.github.io/blog/whisper-transcribe-app-2026-05-09.html">
+
+    <link rel="stylesheet" href="../style.css">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Claude Codeでローカル文字起こしアプリを作った話〜faster-whisper×Flaskで完全オフライン・ハルシネーション対策まで〜",
+        "description": "faster-whisper＋FlaskでローカルWebアプリを自作。完全オフライン動作を実現したものの「次回もお楽しみに」が混入するハルシネーション問題に直面。試行錯誤した対策と失敗体験の全記録。",
+        "author": {
+            "@type": "Person",
+            "name": "オチつかないヒト"
+        },
+        "datePublished": "2026-05-09",
+        "dateModified": "2026-06-20",
+        "publisher": {
+            "@type": "Organization",
+            "name": "オチつかないカンパニー",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://otitukanaihito.github.io/images/blog_ai_thumbnail.png"
+            }
+        },
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://otitukanaihito.github.io/blog/whisper-transcribe-app-2026-05-09.html"
+        },
+        "image": "https://otitukanaihito.github.io/images/blog_ai_thumbnail.png"
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "ホーム",
+                "item": "https://otitukanaihito.github.io/"
+            },
+            {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "AI活用",
+                "item": "https://otitukanaihito.github.io/categories.html#ai"
+            },
+            {
+                "@type": "ListItem",
+                "position": 3,
+                "name": "Claude Codeでローカル文字起こしアプリを作った話",
+                "item": "https://otitukanaihito.github.io/blog/whisper-transcribe-app-2026-05-09.html"
+            }
+        ]
+    }
+    </script>
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-MDWZM4DL');</script>
+<!-- End Google Tag Manager -->
+
+    <style>
+        pre {
+            background: #1e1e2e;
+            color: #cdd6f4;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            overflow-x: auto;
+            font-size: 0.875rem;
+            line-height: 1.6;
+        }
+        code {
+            background: #e8e8f0;
+            color: #5c5f77;
+            padding: 0.15em 0.4em;
+            border-radius: 0.25rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            background: transparent;
+            color: inherit;
+            padding: 0;
+            font-size: inherit;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MDWZM4DL"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <!-- ヘッダー -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="../index.html" class="text-2xl font-black tracking-wider text-gray-900 hover:text-indigo-600 transition-colors duration-300">
+                OCHITSUKANAI COMPANY
+            </a>
+            <nav class="hidden md:flex items-center space-x-6">
+                <a href="../index.html#blog" class="text-gray-700 hover:text-indigo-600 transition-colors duration-300">ブログ</a>
+                <a href="../index.html#affiliate" class="text-gray-700 hover:text-indigo-600 transition-colors duration-300">おすすめツール</a>
+                <a href="../index.html#services" class="text-gray-700 hover:text-indigo-600 transition-colors duration-300">サービス</a>
+                <a href="../index.html#about" class="text-gray-700 hover:text-indigo-600 transition-colors duration-300">プロフィール</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <article class="bg-white rounded-2xl shadow-xl overflow-hidden">
+            <!-- Article Header -->
+            <div class="relative h-64 md:h-96 bg-gradient-to-r from-green-700 via-teal-600 to-cyan-500">
+                <div class="absolute inset-0 bg-black bg-opacity-30"></div>
+                <div class="absolute bottom-0 left-0 right-0 p-8">
+                    <div class="flex items-center mb-4">
+                        <span class="text-sm font-semibold text-white bg-teal-600 px-3 py-1 rounded-full">AI活用</span>
+                        <span class="text-sm text-white ml-4">2026-05-09</span>
+                    </div>
+                    <h1 class="text-3xl md:text-4xl font-bold text-white mb-4">
+                        Claude Codeでローカル文字起こしアプリを作った話
+                    </h1>
+                    <p class="text-lg text-gray-200">
+                        〜faster-whisper×Flaskで完全オフライン・ハルシネーション対策まで〜
+                    </p>
+                </div>
+            </div>
+
+            <!-- Article Content -->
+            <div class="p-8">
+                <div class="prose prose-lg max-w-none">
+
+                    <h2>「文字起こし、オフラインでできないかな」と思った</h2>
+                    <p>
+                        会議や日常会話を記録して、あとでテキストに起こしたい場面が増えてきました。
+                        クラウドサービスを使えば手軽にできるのですが、個人的な会話の録音をクラウドに送るのが少し気になっていました。
+                    </p>
+                    <p>
+                        そこで試してみたのが、<strong>完全ローカル動作の文字起こしアプリを自作する</strong>という方向です。
+                        Claude Codeに相談しながら、Flask + faster-whisper の構成でWebアプリを作りました。
+                    </p>
+
+                    <h2>1. 構成：BUZZのモデルをそのまま流用した</h2>
+                    <p>
+                        文字起こしエンジンには <strong>faster-whisper</strong>（OpenAIのWhisperを高速化したライブラリ）を使いました。
+                        モデルをダウンロードしようとしたところ、すでに別の文字起こしアプリ「BUZZ」がモデルをキャッシュしていることに気づきました。
+                    </p>
+                    <p>
+                        わざわざ再ダウンロードしなくても、BUZZのキャッシュフォルダを参照するだけで使えます。
+                        mediumモデル（1.45GB）とlarge-v3モデル（2.94GB）、両方を流用しました。
+                        容量を無駄にしないし、オフラインでも動く。一石二鳥でした。
+                    </p>
+
+                    <div class="bg-gray-50 border-l-4 border-gray-300 p-4 my-6">
+                        <p class="text-gray-700 text-sm font-semibold mb-1">アプリの構成</p>
+                        <ul class="text-gray-600 text-sm space-y-1 mt-2">
+                            <li>・バックエンド：Python / Flask</li>
+                            <li>・文字起こしエンジン：faster-whisper（BUZZのモデルを流用）</li>
+                            <li>・フロントエンド：ブラウザ（<code>http://localhost:5000</code>）</li>
+                            <li>・ファイル変換タブ + リアルタイムマイク録音タブの2機能</li>
+                            <li>・完全オフライン動作（インターネット接続不要）</li>
+                        </ul>
+                    </div>
+
+                    <h2>2. 動いた。でも「次回もお楽しみに！」が混入した</h2>
+                    <p>
+                        アプリは問題なく動きました。音声ファイルを放り込むと、数十秒でテキストが出てくる。
+                        リアルタイムマイク録音も10秒ごとに文字が追記されていく。動作は快適でした。
+                    </p>
+                    <p>
+                        そこで試しに、<strong>家族の日常会話をつけっぱなしで録音してテスト</strong>してみました。
+                        その結果が以下です（実際の出力の一部）。
+                    </p>
+
+                    <div class="bg-gray-900 rounded-lg p-5 my-6 font-mono text-sm">
+                        <p class="text-gray-400 text-xs mb-3">※ 実際の文字起こし出力（抜粋）</p>
+                        <p class="text-green-400">チーズ、チーズもある たまのチーズもある チーズじゃなくて、普通のチーズ</p>
+                        <p class="text-red-400 mt-2">次回もお楽しみに！</p>
+                        <p class="text-green-400 mt-2">スティッチも値上げるよ 4万 スティッチはまず誰も買わない</p>
+                        <p class="text-red-400 mt-2">ご覧いただき、ご利用ください。</p>
+                        <p class="text-green-400 mt-2">髪切り屋さんで来たらいい 髪切り屋さん、おじさんだよ</p>
+                        <p class="text-red-400 mt-2">子供たちと一緒に遊びに行くことができたら嬉しいです。</p>
+                        <p class="text-red-400 mt-1">あなたはどこに行ったのですか？私はあなたのことを知っていますが、あなたはあなたのことを知っています。</p>
+                        <p class="text-red-400 mt-1">はじめしゃちょー・まふまふ</p>
+                        <p class="text-red-400 mt-1">MAMENYAN</p>
+                        <p class="text-red-400 mt-1">1988 happens</p>
+                        <p class="text-gray-500 text-xs mt-4">緑：実際の会話　赤：ハルシネーション（実際には言っていない）</p>
+                    </div>
+
+                    <p>
+                        家族の会話（チーズの話、スティッチの値上げ話、髪切り屋の話）は拾えています。
+                        しかし<strong>実際には誰も言っていない文が大量に混入</strong>しています。
+                    </p>
+                    <p>
+                        「次回もお楽しみに！」はYouTube動画の締め台詞。「はじめしゃちょー・まふまふ」はYouTuberの名前。
+                        「あなたはどこに行ったのですか？」は英語教材的な文体。<strong>Whisperがこれらを「勝手に生成」してしまう現象</strong>を「ハルシネーション」と呼びます。
+                    </p>
+
+                    <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 my-6">
+                        <p class="text-yellow-800">
+                            <strong>なぜ起きるのか？</strong><br>
+                            Whisperは無音区間や聞き取りにくい音声に対して、「それっぽい言葉」を補完しようとします。
+                            大量の動画・音声で学習しているため、YouTube的な定型句が混入しやすいのです。
+                        </p>
+                    </div>
+
+                    <h2>3. ハルシネーション対策：4つのアプローチ</h2>
+                    <p>Claude Codeに分析してもらいながら、以下の対策を実施しました。</p>
+
+                    <h3>① VADフィルター（音声区間検出）</h3>
+                    <p>
+                        「Voice Activity Detection」の略。誰も喋っていない区間を自動でスキップする機能です。
+                        無音区間がハルシネーションの温床になるため、そもそもスキップしてしまうのが効果的です。
+                        <code>vad_filter=True</code> で有効化しました。
+                    </p>
+
+                    <h3>② no_speech_threshold（無音判定しきい値）</h3>
+                    <p>
+                        「このセグメントは音声じゃない確率がX%以上なら無視する」という設定です。
+                        デフォルト値の <code>0.6</code> に設定しました。
+                    </p>
+
+                    <h3>③ condition_on_previous_text=False</h3>
+                    <p>
+                        前のセグメントの内容を参照しながら次を予測する機能をオフにします。
+                        ハルシネーションが連鎖して広がるのを防げます。
+                    </p>
+
+                    <h3>④ ブラックリスト（特定フレーズを除去）</h3>
+                    <p>
+                        「次回もお楽しみに」「ご視聴ありがとうございました」「チャンネル登録」など、
+                        明らかにYouTube由来の定型句をリストアップして自動削除する仕組みです。
+                        アプリのUIからいつでも追加・削除できるようにしました。
+                    </p>
+
+                    <h2>4. やらかした：しきい値を上げすぎた</h2>
+                    <p>
+                        対策を施してもまだハルシネーションが残ったので、<strong>no_speech_threshold を 0.6 → 0.75 に上げてみました</strong>。
+                        「もっと厳しく無音判定すれば減るだろう」と思ったのです。
+                    </p>
+                    <p>
+                        結果、<strong>音声をほとんど拾わなくなりました</strong>。
+                    </p>
+                    <p>
+                        理由はシンプルで、家族の日常会話は遠距離・小声の場面が多く、音量が小さいのです。
+                        しきい値を上げると、本物の会話まで「無音」と判定されてしまいます。
+                        0.60 に戻しました。
+                    </p>
+
+                    <div class="bg-red-50 border-l-4 border-red-400 p-4 my-6">
+                        <p class="text-red-800">
+                            <strong>教訓：no_speech_threshold は上げすぎない</strong><br>
+                            この値を上げるほどハルシネーションは減りますが、実際の会話も消えます。
+                            特に日常会話・遠距離・複数人の環境では <strong>0.60 固定が正解</strong>でした。
+                            ハルシネーション対策はブラックリストと繰り返し除去しきい値で行うのが正しいアプローチです。
+                        </p>
+                    </div>
+
+                    <h2>5. 最終的な設定：ブラックリスト＋繰り返し除去が正解</h2>
+                    <p>試行錯誤の結果、落ち着いた設定がこちらです。</p>
+
+                    <div class="overflow-x-auto my-6">
+                        <table class="w-full border-collapse text-sm">
+                            <thead>
+                                <tr class="bg-teal-600 text-white">
+                                    <th class="border border-teal-500 px-4 py-3 text-left">パラメーター</th>
+                                    <th class="border border-teal-500 px-4 py-3 text-left">設定値</th>
+                                    <th class="border border-teal-500 px-4 py-3 text-left">役割</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="bg-white">
+                                    <td class="border border-gray-200 px-4 py-3"><code>vad_filter</code></td>
+                                    <td class="border border-gray-200 px-4 py-3">True</td>
+                                    <td class="border border-gray-200 px-4 py-3">無音区間をスキップ</td>
+                                </tr>
+                                <tr class="bg-gray-50">
+                                    <td class="border border-gray-200 px-4 py-3"><code>no_speech_threshold</code></td>
+                                    <td class="border border-gray-200 px-4 py-3"><strong>0.60（固定）</strong></td>
+                                    <td class="border border-gray-200 px-4 py-3">上げすぎ注意</td>
+                                </tr>
+                                <tr class="bg-white">
+                                    <td class="border border-gray-200 px-4 py-3"><code>compression_ratio_threshold</code></td>
+                                    <td class="border border-gray-200 px-4 py-3">2.0（デフォルト2.4から下げた）</td>
+                                    <td class="border border-gray-200 px-4 py-3">繰り返しフレーズを除去</td>
+                                </tr>
+                                <tr class="bg-gray-50">
+                                    <td class="border border-gray-200 px-4 py-3"><code>condition_on_previous_text</code></td>
+                                    <td class="border border-gray-200 px-4 py-3">False</td>
+                                    <td class="border border-gray-200 px-4 py-3">ハルシネーション連鎖を防止</td>
+                                </tr>
+                                <tr class="bg-white">
+                                    <td class="border border-gray-200 px-4 py-3">ブラックリスト</td>
+                                    <td class="border border-gray-200 px-4 py-3">blacklist.txt</td>
+                                    <td class="border border-gray-200 px-4 py-3">定型句をピンポイント除去</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h2>6. 設定UIを追加した</h2>
+                    <p>
+                        パラメーターをコードを開かずに調整できるよう、<strong>ブラウザの「設定」タブでスライダー操作</strong>できるUIを追加しました。
+                        調整した値は自動で保存されるので、アプリを再起動しても設定が維持されます。
+                    </p>
+                    <p>
+                        ブラックリストも画面から追加・削除できます。
+                        「この言葉が混入したな」と思ったらその場で登録できるのが地味に便利です。
+                    </p>
+
+                    <h2>現時点の正直な評価</h2>
+                    <p>
+                        対策後の精度は「日常会話として読める部分が多くなった」という感触です。
+                        ただし完璧ではありません。
+                    </p>
+                    <ul>
+                        <li>遠くで小さく話している声は拾いにくい</li>
+                        <li>複数人が同時に話すと混乱する</li>
+                        <li>ブラックリストをすり抜けるハルシネーションは残る</li>
+                    </ul>
+                    <p>
+                        「プライベートな会話をクラウドに送りたくない」「オフラインで動けばいい」という用途なら十分使えます。
+                        完全な議事録が必要な場面には、もう少し改善が必要そうです。
+                    </p>
+
+                    <div class="bg-teal-50 border-l-4 border-teal-400 p-4 my-6">
+                        <p class="text-teal-800">
+                            <strong>まとめ</strong><br><br>
+                            1. <strong>faster-whisper + Flask でローカル文字起こしアプリは作れる</strong><br>
+                            2. <strong>BUZZのモデルキャッシュを流用すれば再ダウンロード不要</strong><br>
+                            3. <strong>ハルシネーションは必ず発生する</strong>（特に無音区間・遠距離・小声）<br>
+                            4. <strong>no_speech_threshold は上げすぎると本物の音声が消える</strong><br>
+                            5. <strong>ブラックリスト＋compression_ratio_threshold で対策するのが正解</strong>
+                        </p>
+                    </div>
+
+                </div>
+
+                <!-- SNS Share Buttons -->
+                <div class="mt-8 pt-8 border-t border-gray-200">
+                    <p class="text-sm font-semibold text-gray-600 mb-4 text-center">この記事をシェアする</p>
+                    <div class="flex justify-center gap-4">
+                        <a id="share-twitter" href="#" target="_blank" rel="noopener noreferrer"
+                            class="flex items-center gap-2 bg-black text-white px-5 py-2 rounded-lg hover:bg-gray-800 transition-colors text-sm font-semibold">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.748l7.73-8.835L1.254 2.25H8.08l4.253 5.622 5.91-5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                            X でシェア
+                        </a>
+                        <a id="share-hatena" href="#" target="_blank" rel="noopener noreferrer"
+                            class="flex items-center gap-2 bg-blue-600 text-white px-5 py-2 rounded-lg hover:bg-blue-700 transition-colors text-sm font-semibold">
+                            <span class="font-bold mr-1">B!</span>はてブ
+                        </a>
+                    </div>
+                </div>
+                <script>
+                (function() {
+                    var title = encodeURIComponent(document.title.replace(/ - オチつかないカンパニー.*/, ''));
+                    var url = encodeURIComponent(window.location.href);
+                    document.getElementById('share-twitter').href = 'https://twitter.com/intent/tweet?text=' + title + '&url=' + url + '&hashtags=WhisperAI,文字起こし,ClaudeCode,Python';
+                    document.getElementById('share-hatena').href = 'https://b.hatena.ne.jp/add?mode=confirm&title=' + title + '&url=' + url;
+                })();
+                </script>
+
+                <!-- Related Articles -->
+                <div class="mt-12 pt-8 border-t border-gray-200">
+                    <h3 class="text-xl font-bold text-gray-900 mb-6">関連記事</h3>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <a href="harness-engineering-2026-04-20.html" class="block group">
+                            <div class="bg-gray-50 rounded-lg p-4 group-hover:bg-gray-100 transition-colors">
+                                <h4 class="font-semibold text-gray-900 group-hover:text-indigo-600">
+                                    ハーネスエンジニアリングを調べたら自分がやっていたことに名前がついていた話</h4>
+                                <p class="text-sm text-gray-600 mt-2">CLAUDE.mdは「手綱」だった。AIエージェント制御の環境設計術。</p>
+                            </div>
+                        </a>
+                        <a href="ai-cli-skill-management-2026-04-04.html" class="block group">
+                            <div class="bg-gray-50 rounded-lg p-4 group-hover:bg-gray-100 transition-colors">
+                                <h4 class="font-semibold text-gray-900 group-hover:text-indigo-600">
+                                    AI CLIツールのスキル管理術</h4>
+                                <p class="text-sm text-gray-600 mt-2">Claude CodeとAntiGravityのスキルを整理・運用する方法。</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </main>
+
+    <!-- フッター -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">OCHITSUKANAI COMPANY</h3>
+                    <p class="text-gray-400">福祉の現場で働く4児の父が、業務効率化と個人の成長について発信するブログです。</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">メニュー</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="../index.html#blog" class="hover:text-white transition-colors duration-300">ブログ</a></li>
+                        <li><a href="../index.html#affiliate" class="hover:text-white transition-colors duration-300">おすすめツール</a></li>
+                        <li><a href="../index.html#services" class="hover:text-white transition-colors duration-300">サービス</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">リンク</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="../index.html" class="hover:text-white transition-colors duration-300">ホーム</a></li>
+                        <li><a href="../privacy-policy.html" class="hover:text-white transition-colors duration-300">プライバシーポリシー</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2026 OCHITSUKANAI COMPANY. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../back-home.js"></script>
+</body>
+</html>
