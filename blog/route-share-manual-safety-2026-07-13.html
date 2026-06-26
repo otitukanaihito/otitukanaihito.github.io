@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>送迎ルート共有をAIで自動化しようとして、最後は手動が一番安全だとわかった話 - オチつかないカンパニー</title>
+  <meta name="description" content="待ち合わせ地点の共有をAIで自動化しようとした実践記録。住所から地図URLを作るところは自動化できたが、LINE送信まで任せると確認工程が重くなる。最後は人間が送る設計にした理由。">
+  <meta name="keywords" content="AI自動化,業務効率化,LINE,Googleマップ,送迎ルート,Computer Use,福祉テック,クリップボード,安全設計">
+  <link rel="canonical" href="https://otitukanaihito.github.io/blog/route-share-manual-safety-2026-07-13.html">
+
+  <!-- OGP -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://otitukanaihito.github.io/blog/route-share-manual-safety-2026-07-13.html">
+  <meta property="og:title" content="送迎ルート共有をAIで自動化しようとして、最後は手動が一番安全だとわかった話">
+  <meta property="og:description" content="AIでLINE送信まで自動化しようとしたら、誤送信を防ぐ確認工程の方が重くなった。地点共有で学んだ、任せる部分と人間が確認する部分の切り分け。">
+  <meta property="og:image" content="https://otitukanaihito.github.io/images/blog_ai_thumbnail.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://otitukanaihito.github.io/blog/route-share-manual-safety-2026-07-13.html">
+  <meta name="twitter:title" content="送迎ルート共有をAIで自動化しようとして、最後は手動が一番安全だとわかった話">
+  <meta name="twitter:description" content="全部自動化すればよいわけではない。待ち合わせ地点共有で学んだ、AIに任せる部分と人間が確認する部分の境界線。">
+  <meta name="twitter:image" content="https://otitukanaihito.github.io/images/blog_ai_thumbnail.png">
+
+  <!-- Structured Data: BlogPosting -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "送迎ルート共有をAIで自動化しようとして、最後は手動が一番安全だとわかった話",
+    "description": "待ち合わせ地点の共有をAIで自動化しようとした実践記録。住所から地図URLを作るところは自動化できたが、LINE送信まで任せると確認工程が重くなる。最後は人間が送る設計にした理由。",
+    "author": {"@type": "Person", "name": "オチつかないヒト"},
+    "datePublished": "2026-07-13",
+    "dateModified": "2026-06-27",
+    "publisher": {
+      "@type": "Organization",
+      "name": "オチつかないカンパニー",
+      "logo": {"@type": "ImageObject", "url": "https://otitukanaihito.github.io/images/blog_ai_thumbnail.png"}
+    },
+    "mainEntityOfPage": {"@type": "WebPage", "@id": "https://otitukanaihito.github.io/blog/route-share-manual-safety-2026-07-13.html"},
+    "image": "https://otitukanaihito.github.io/images/blog_ai_thumbnail.png"
+  }
+  </script>
+
+  <!-- Structured Data: BreadcrumbList -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {"@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://otitukanaihito.github.io/"},
+      {"@type": "ListItem", "position": 2, "name": "福祉×テック", "item": "https://otitukanaihito.github.io/categories.html#welfare-tech"},
+      {"@type": "ListItem", "position": 3, "name": "送迎ルート共有をAIで自動化しようとして、最後は手動が一番安全だとわかった話", "item": "https://otitukanaihito.github.io/blog/route-share-manual-safety-2026-07-13.html"}
+    ]
+  }
+  </script>
+
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-MDWZM4DL');</script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@400;700;800&family=IBM+Plex+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@400;700;800&family=IBM+Plex+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;500;700&display=swap"></noscript>
+
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="../brutalist.css">
+</head>
+
+<body>
+  <!-- GTM noscript -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MDWZM4DL" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a href="../index.html" class="site-logo">オチつかないカンパニー</a>
+      <nav id="desktop-nav" aria-label="メインナビゲーション">
+        <ul class="site-nav-list">
+          <li><a href="../index.html#blog">ブログ</a></li>
+          <li><a href="../categories.html">カテゴリー</a></li>
+          <li><a href="../index.html#affiliate">おすすめツール</a></li>
+          <li><a href="../index.html#about">プロフィール</a></li>
+          <li><a href="../index.html#contact">お問い合わせ</a></li>
+        </ul>
+      </nav>
+      <button id="hamburger-btn" aria-label="メニューを開く" aria-expanded="false" aria-controls="mobile-menu">
+        <svg id="menu-icon" width="18" height="13" viewBox="0 0 18 13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square">
+          <line x1="0" y1="1.5" x2="18" y2="1.5"/>
+          <line x1="0" y1="6.5" x2="18" y2="6.5"/>
+          <line x1="0" y1="11.5" x2="18" y2="11.5"/>
+        </svg>
+        <svg id="close-icon" width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square" style="display:none;">
+          <line x1="0" y1="0" x2="14" y2="14"/>
+          <line x1="14" y1="0" x2="0" y2="14"/>
+        </svg>
+      </button>
+    </div>
+    <div id="mobile-menu" role="navigation" aria-label="モバイルメニュー">
+      <ul class="mobile-nav-list">
+        <li><a href="../index.html#blog">ブログ</a></li>
+        <li><a href="../categories.html">カテゴリー</a></li>
+        <li><a href="../index.html#affiliate">おすすめツール</a></li>
+        <li><a href="../index.html#about">プロフィール</a></li>
+        <li><a href="../index.html#contact">お問い合わせ</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main>
+    <div class="article-wrap">
+      <div class="article-header">
+        <div class="article-meta">
+          <span class="category-tag">福祉×テック</span>
+          <span class="article-date">2026-07-13</span>
+        </div>
+        <h1 class="article-title">送迎ルート共有をAIで自動化しようとして、最後は手動が一番安全だとわかった話</h1>
+        <p class="article-lead">全部自動化すればいいわけではない。待ち合わせ地点の共有で、AIに任せる部分と人間が確認する部分を切り分けた記録。</p>
+      </div>
+
+      <div class="article-body">
+        <h2>はじめに</h2>
+        <p>新規利用の契約が決まったとき、関係者へ待ち合わせ地点をすばやく共有したい。</p>
+        <p>最初は「住所を入力したら、AIがGoogleマップURLを作って、そのままLINEへ送ってくれたら楽では？」と考えました。</p>
+        <p>実際に試してみると、住所から地図URLを作るところまでは簡単でした。しかし、LINE送信まで自動化しようとすると、送信先の確認、本文の確認、誤送信防止の確認が必要になります。</p>
+        <p>結論として、地点共有のように正確な場所情報を扱う作業では、最後の送信だけは人間がやる方が速くて安全だとわかりました。</p>
+
+        <h2>きっかけ</h2>
+        <p>業務では、待ち合わせ場所を地点登録しておき、必要なタイミングで関係者に共有する場面があります。</p>
+        <p>毎回Googleマップを開いて、住所を検索して、URLをコピーして、LINEに貼る。この流れ自体は難しくありません。</p>
+        <p>ただ、何度もやると地味に手間です。</p>
+        <p>そこで、AIとスキルを使って次のような流れを考えました。</p>
+        <ul>
+          <li>住所を入力する</li>
+          <li>GoogleマップURLを自動生成する</li>
+          <li>自分専用の確認ルームに送る</li>
+          <li>内容を確認してから必要な相手へ転送する</li>
+        </ul>
+        <p>最初は、かなり便利そうに見えました。</p>
+
+        <h2>住所から地図URLを作るところまでは簡単だった</h2>
+        <p>まず、住所からGoogleマップURLを作るスクリプトを用意しました。</p>
+        <p>これは問題なく動きました。住所を入れると、次のような2行の共有文ができます。</p>
+        <pre><code>待ち合わせ地点の住所
+GoogleマップURL</code></pre>
+        <p>ここまでは、AIを使わなくても十分に自動化できます。</p>
+        <p>次に考えたのが、LINEへの送信です。</p>
+        <p>Computer Use（コンピューター操作機能）を使えば、AIがWindows上のLINEアプリを開き、指定したルームを検索し、本文を入力して送信することもできます。</p>
+        <p>この送信までを安全に行うための専用スキルと手順は用意できました。</p>
+
+        <h2>ただし、LINE送信まで自動化すると重くなる</h2>
+        <p>LINEへ送る作業は、一見すると単純です。</p>
+        <p>しかし、安全にやろうとすると確認すべきことが増えます。</p>
+        <ul>
+          <li>送信先ルームが本当に正しいか</li>
+          <li>似た名前のルームを選んでいないか</li>
+          <li>本文に余計な情報が入っていないか</li>
+          <li>実住所や個人情報を誤って追加していないか</li>
+          <li>送信ボタンを押す前に内容を確認できるか</li>
+        </ul>
+        <p>特に地点情報は、precise location（正確な位置情報）です。</p>
+        <p>間違った相手に送ってしまうと、ただの誤字より影響が大きくなります。</p>
+        <p>そのため、AIに送信まで任せるなら、AI自身にも画面を確認させる必要があります。</p>
+        <p>すると、今度はスクリーンショット確認や画面状態の読み取りが増えます。結果として、token（トークン）消費も増え、手順も重くなります。</p>
+
+        <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 my-6">
+          <p class="text-yellow-800"><strong>ここが落とし穴：</strong><br>自動化したい作業より、自動化を安全にするための確認作業の方が重くなる場面があります。</p>
+        </div>
+
+        <h2>自動化したい作業より、確認作業の方が重くなる</h2>
+        <p>ここで気づいたのは、自動化の目的がずれてきていることでした。</p>
+        <p>本来減らしたかったのは、GoogleマップURLを作る手間です。</p>
+        <p>しかし、LINE送信まで自動化しようとすると、誤送信を防ぐための確認作業が増えます。</p>
+        <p>つまり、楽をするための自動化なのに、安全にするための確認でかえって面倒になるわけです。</p>
+        <p>これは、業務効率化ではよくある落とし穴だと思います。</p>
+
+        <h2>最終的に良さそうな運用</h2>
+        <p>今回の結論はシンプルです。</p>
+        <p><strong>自動化するのは、共有文を作るところまで。送信は、人間がLINEを開いて行う。</strong></p>
+        <p>具体的には、次の流れが一番現実的だと感じました。</p>
+        <pre><code>住所を入力
+↓
+GoogleマップURLを自動生成
+↓
+共有文をclipboard（クリップボード）へコピー
+↓
+人間がLINEを開く
+↓
+送信先を目で確認する
+↓
+貼り付けて送信する</code></pre>
+        <p>これなら、面倒なURL生成は自動化できます。</p>
+        <p>一方で、誤送信のリスクが高い最後の部分は人間が確認できます。</p>
+
+        <h2>全部自動化しない方がいい作業もある</h2>
+        <p>AIや自動化を使っていると、つい「全部自動化できないか」と考えがちです。</p>
+        <p>でも、実際の業務では、全部を自動化しない方が安全で速い場面があります。</p>
+        <p>特に、住所、個人情報、外部送信が絡む作業では、最後の確認を人間に残す設計が大事です。</p>
+        <p>今回の学びは、「AIに任せる部分」と「人間が責任を持つ部分」を分けることでした。</p>
+
+        <div class="bg-indigo-50 border-l-4 border-indigo-400 p-4 my-6">
+          <p class="text-indigo-800"><strong>まとめ：</strong><br><br>住所からGoogleマップURLを作るところまでは、自動化する価値があります。<br><br>一方で、LINE送信までAIに任せると、誤送信を防ぐための確認が増えて、かえって重くなりました。<br><br>危ないところを人間に残し、面倒なところだけ機械に任せる。この切り分けが、実務ではかなり大事だと思います。</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer" id="contact">
+    <div class="site-footer-inner">
+      <a href="../index.html" class="footer-logo">オチつかないカンパニー</a>
+      <div class="footer-tagline">福祉 × IT × 試行錯誤の記録</div>
+      <nav class="footer-nav" aria-label="フッターナビゲーション">
+        <a href="../index.html#blog">ブログ</a>
+        <a href="../categories.html">カテゴリー</a>
+        <a href="../index.html#affiliate">おすすめツール</a>
+        <a href="../index.html#about">プロフィール</a>
+        <a href="../privacy-policy.html">プライバシーポリシー</a>
+      </nav>
+      <div class="footer-copy">© 2026 OCHITSUKANAI COMPANY. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var btn = document.getElementById('hamburger-btn');
+      var menu = document.getElementById('mobile-menu');
+      var menuIcon = document.getElementById('menu-icon');
+      var closeIcon = document.getElementById('close-icon');
+
+      btn.addEventListener('click', function () {
+        var isOpen = menu.classList.toggle('open');
+        menuIcon.style.display = isOpen ? 'none' : 'block';
+        closeIcon.style.display = isOpen ? 'block' : 'none';
+        btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        btn.setAttribute('aria-label', isOpen ? 'メニューを閉じる' : 'メニューを開く');
+      });
+    })();
+  </script>
+  <script src="../back-home.js"></script>
+</body>
+</html>
